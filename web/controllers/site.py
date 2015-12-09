@@ -11,16 +11,12 @@ from PIL import Image
 from coverage.html import STATIC_PATH
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
-from wechat_sdk import WechatBasic
-from weshop import csrf
-from weshop.utils.account import signin_user, signout_user
+from web import csrf
+from web.utils.account import signin_user, signout_user
 from ..models import db, User, Discount, Brand, MyFavoriteBrand, Shop, Profile, GetTicketRecord
 from ..forms import SigninForm
 from ..utils.permissions import require_user, require_visitor
 from ..utils.uploadsets import images, random_filename, process_question, avatars
-from weshop.utils.helper import get_url_data
-from weshop.wechat import WeixinHelper
-from weshop.wechat.backends.flask_interface import wechat_login
 
 bp = Blueprint('site', __name__)
 

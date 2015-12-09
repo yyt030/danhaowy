@@ -1,0 +1,3639 @@
+* {
+	list-style: none; margin: 0px; padding: 0px; word-break: break-all;
+}
+a {
+	color: rgb(51, 114, 162); text-decoration: none;
+}
+a:hover {
+	color: rgb(255, 85, 0);
+}
+.clearer {
+	margin: 0px; padding: 0px; height: 0px; line-height: 1px; clear: both; font-size: 1px; display: block;
+}
+a.vip {
+	color: rgb(255, 102, 0); font-weight: bold;
+}
+.mrt10 {
+	margin-top: 10px;
+}
+.mrb10 {
+	margin-bottom: 10px;
+}
+a {
+	
+}
+img {
+	border: 0px currentColor; width: auto; height: auto; vertical-align: middle; -ms-interpolation-mode: bicubic; max-width: 100%;
+}
+area {
+	
+}
+:focus {
+	
+}
+em {
+	font-style: normal;
+}
+i {
+	font-style: normal;
+}
+.main {
+	margin: 5px auto 0px; width: 910px; text-align: left; overflow: hidden; clear: both;
+}
+.main .onlineCount {
+	padding-bottom: 10px;
+}
+.main .onlineCount a {
+	color: rgb(33, 59, 74); text-decoration: none;
+}
+.main .onlineCount a:hover {
+	color: rgb(33, 59, 74); text-decoration: underline;
+}
+.main .onlineCount a span {
+	color: red; font-weight: bold;
+}
+.main .part1 {
+	height: 235px; overflow: hidden; margin-bottom: 10px;
+}
+.main .part1 .gonggaa {
+	border: 1px solid rgb(227, 227, 227); width: 204px; height: 233px; overflow: hidden; float: left;
+}
+.main .part1 .gonggaa h5 span {
+	background: url("../images/sy_tb01.gif") no-repeat 8px 7px; color: rgb(61, 61, 61); line-height: 25px; padding-left: 25px; font-size: 12px; font-weight: bold; display: block;
+}
+.main .part1 .gonggaa h5 {
+	height: 25px; border-bottom-color: rgb(227, 227, 227); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.main .part1 .gonggaa ul .tubiaoaa {
+	background: url("../images/tubiaoaa.gif") no-repeat left;
+}
+.main .part1 .gonggaa ul {
+	padding-top: 7px; padding-left: 10px;
+}
+.main .part1 .gonggaa ul li {
+	height: 24px; line-height: 24px;
+}
+.main .part1 .gonggaa ul li a {
+	margin-left: 10px;
+}
+.main .part1 .hero {
+	width: 486px; height: 235px; margin-left: 10px; float: left;
+}
+.way {
+	height: 20px; line-height: 20px;
+}
+.heroCtrl {
+	width: 704px; height: 25px; margin-top: 251px; margin-left: -704px; position: absolute;
+}
+*:lang(en) .heroCtrl {
+	margin-left: 0px;
+}
+.heroCtrl .padder {
+	height: 25px; padding-right: 4px; float: right;
+}
+.heroCtrl .bgLeft {
+	background: url("../images/hero_ctrl_bg_left.gif") no-repeat left top; width: 3px; height: 25px; overflow: hidden; float: left;
+}
+.heroCtrl .bgMiddle {
+	background: url("../images/hero_ctrl_bg_middle.gif") repeat-x left top; height: 25px; float: left;
+}
+.heroCtrl .bgRight {
+	background: url("../images/hero_ctrl_bg_right.gif") no-repeat left top; width: 3px; height: 25px; overflow: hidden; float: left;
+}
+.heroCtrl a {
+	width: 20px; height: 19px; text-align: center; line-height: 19px; font-weight: bold; margin-top: 3px; margin-right: 4px; float: left;
+}
+.heroCtrl a.unselect:link {
+	background: white; color: rgb(73, 112, 140); text-decoration: none;
+}
+.heroCtrl a.unselect:visited {
+	background: white; color: rgb(73, 112, 140); text-decoration: none;
+}
+.heroCtrl a.unselect:active {
+	background: white; color: rgb(73, 112, 140); text-decoration: none;
+}
+.heroCtrl a.unselect:hover {
+	background: url("../images/hero_ctrl_btn_bg.gif") no-repeat left -19px; color: rgb(73, 112, 140); text-decoration: none;
+}
+.heroCtrl a.select:link {
+	background: url("../images/hero_ctrl_btn_bg.gif") no-repeat left top; color: white; text-decoration: none;
+}
+.heroCtrl a.select:visited {
+	background: url("../images/hero_ctrl_btn_bg.gif") no-repeat left top; color: white; text-decoration: none;
+}
+.heroCtrl a.select:active {
+	background: url("../images/hero_ctrl_btn_bg.gif") no-repeat left top; color: white; text-decoration: none;
+}
+.heroCtrl a.select:hover {
+	background: url("../images/hero_ctrl_btn_bg.gif") no-repeat left top; color: white; text-decoration: none;
+}
+.heroCtrl a.lastone {
+	margin-right: 0px;
+}
+.main .part1 .login {
+	width: 198px; height: 235px; color: rgb(33, 59, 74); float: right;
+}
+.main .part1 .login .padder {
+	background: rgb(255, 244, 221); border: 1px solid rgb(244, 140, 35); height: 165px; overflow: hidden;
+}
+.main .part1 .login .padder dl {
+	padding-left: 10px;
+}
+.main .part1 .login .padder .littlePadder {
+	height: 81px; overflow: hidden; margin-bottom: 2px;
+}
+.main .part1 .login .normal {
+	background: rgb(255, 249, 239); height: 27px; line-height: 27px; border-bottom-color: rgb(216, 216, 216); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.main .part1 .login .normal em {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -18px; padding-left: 22px; font-size: 12px; display: block;
+}
+.main .part1 .login h3.active {
+	background: rgb(153, 201, 227);
+}
+.main .part1 .login h3 div {
+	margin: 1px 1px 0px; padding: 1px 1px 0px; width: 138px; overflow: hidden; position: absolute; z-index: 10; cursor: pointer;
+}
+.main .part1 .login h3.normal div {
+	
+}
+.main .part1 .login h3.active div {
+	background: white;
+}
+.main .part1 .login h3 {
+	padding: 0px 9px; height: 26px;
+}
+.main .part1 .login h3.normal span {
+	
+}
+.main .part1 .login p .reg_j {
+	background: url("../images/admin_an.gif") no-repeat 0px -1336px; width: 118px; height: 26px; display: inline-block;
+}
+.main .part1 .login p {
+	height: 12px; line-height: 14px;
+}
+.main .part1 .login h3.active span {
+	background: url("../images/more_soft.gif") repeat-x left top;
+}
+.main .softList {
+	background: white; padding: 5px 10px; border: 1px solid rgb(153, 201, 227); width: 165px; display: none; position: absolute; z-index: 9;
+}
+.main .softList .drawingPin {
+	background: url("../images/drawing_pin.gif") no-repeat 0px 0px; border: 1px solid white; width: 15px; height: 15px; display: block; position: absolute;
+}
+.main .softList .drawingPin:hover {
+	border: 1px solid rgb(224, 237, 244);
+}
+.main .softList .drawingPin_2 {
+	background: url("../images/drawing_pin.gif") no-repeat 0px -15px; border: 1px solid white; width: 15px; height: 15px; display: block; position: absolute;
+}
+.main .softList .drawingPin_2:hover {
+	border: 1px solid rgb(224, 237, 244);
+}
+.main .softList .others .left {
+	width: 50%; float: left;
+}
+.main .softList .others .right {
+	width: 50%; float: right;
+}
+.main .softList h3 {
+	margin: 0px; padding: 0px; color: rgb(204, 102, 0);
+}
+.main .login .softList ul {
+	margin: 0px; padding: 0px 0px 20px;
+}
+.main .login .softList ul.last {
+	padding: 0px;
+}
+.main .login .softList ul li {
+	height: auto; line-height: 18px;
+}
+.main .login .softList ul li a {
+	font-size: 12px;
+}
+.julia {
+	clear: both; margin-top: 10px; _margin-top: 0px;
+}
+.middleBar {
+	margin: 0px auto; width: 910px; height: 130px; clear: both;
+}
+.middleBar .left {
+	background: url("../images/middle_bar_holiday.gif") no-repeat 0px 0px; width: 4px; height: 130px; margin-right: -4px; float: left;
+}
+.middleBar .middle {
+	background: url("../images/middle_bar_holiday.gif") repeat-x 0px -130px; margin: 0px 4px; height: 130px; line-height: 24px;
+}
+.middleBar .right {
+	background: url("../images/middle_bar_holiday.gif") no-repeat 0px -260px; width: 4px; height: 130px; margin-left: -4px; float: right;
+}
+.middleBar .middle .news {
+	background: url("/images/index3/middle_bar.gif") no-repeat right -102px; width: 584px; float: left;
+}
+.middleBar .middle .news a {
+	margin-left: 20px;
+}
+.middleBar .middle .other {
+	width: 194px; float: left;
+}
+.middleBar .middle .other a {
+	height: 34px; margin-left: 27px; display: block;
+}
+.main .part2 .left {
+	float: left;
+}
+.main .part2 .personal {
+	float: left;
+}
+.main .part2 .left {
+	padding: 1px; border: 1px solid rgb(224, 237, 244); width: 677px; height: 345px; float: left; _height: 330px;
+}
+.main .part2 .left .title {
+	background: url("../images/gg006.jpg") no-repeat left top; width: 677px; height: 34px; line-height: 30px; padding-bottom: 1px; border-bottom-color: rgb(224, 237, 244); border-bottom-width: 1px; border-bottom-style: solid; _line-height: 33px;
+}
+.main .part2 .left h2 {
+	margin: 0px 0px 0px 20px; color: rgb(45, 45, 45); padding-left: 10px; font-size: 14px; _margin-left: 10px;
+}
+.main .part2 .left em a {
+	color: rgb(217, 40, 30);
+}
+.main .part2 .personal {
+	background: url("../images/bgs_holiday.gif") no-repeat -458px 0px; width: 320px; height: 220px; margin-right: 6px;
+}
+.main .part2 .personal .padder {
+	padding: 6px 0px 0px 25px;
+}
+.main .part2 .personal h2 {
+	margin: 0px 0px 0px 25px; padding: 2px 0px; color: rgb(33, 59, 74); line-height: 29px; font-size: 14px;
+}
+.main .part2 .personal h3 {
+	margin: 0px; padding: 0px 0px 0px 25px; font-size: 14px; font-weight: normal;
+}
+.main .part2 .personal div {
+	padding: 2px 0px 6px 25px;
+}
+.main .part2 .personal div a {
+	line-height: 18px; margin-right: 12px; display: inline-block;
+}
+.main .part2 .personal div a.new {
+	background: url("../images/label.gif") no-repeat right -29px; padding-right: 20px;
+}
+.main .part2 .personal div a.hot {
+	background: url("../images/label.gif") no-repeat right 2px; padding-right: 20px;
+}
+.main .part2 .personal h3.skin {
+	background: url("../images/personal_icon.gif") no-repeat 0px 0px;
+}
+.main .part2 .personal h3.face {
+	background: url("../images/personal_icon.gif") no-repeat 0px -43px;
+}
+.main .part2 .personal h3.desktop {
+	background: url("../images/personal_icon.gif") no-repeat 0px -86px;
+}
+.main .part2 .personal h3.theme {
+	background: url("../images/personal_icon.gif") no-repeat 0px -129px;
+}
+.main .part2 .personal h3 a {
+	font-size: 14px;
+}
+.main .part2 .right {
+	margin: 0px; width: 218px; height: 347px; overflow: hidden; padding-left: 0px; float: left;
+}
+.main .part2 .right .title {
+	background: url("../images/gg005.jpg") no-repeat left top; width: 218px; height: 29px; overflow: hidden;
+}
+.main .part2 .right .title h3 {
+	margin: 0px 0px 0px 20px; width: 106px; text-align: center; color: rgb(255, 255, 255); line-height: 29px; font-size: 14px; float: left; display: inline;
+}
+.main .part2 .right .title em a {
+	color: rgb(176, 13, 1); padding-top: 4px; display: block;
+}
+.main .part2 .right .cont {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(221, 221, 221) rgb(221, 221, 221); padding: 10px 0px 10px 15px;
+}
+body {
+	overflow-x: hidden; min-height: 553px; _height: 553px;
+}
+h2 {
+	font-size: 14px;
+}
+.top {
+	background: url("../images/repeat-x-bg.jpg") repeat-x 0px -36px; height: 28px; line-height: 28px;
+}
+.topin {
+	margin: 0px auto; width: 910px; zoom: 1;
+}
+.topin::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.top .ann {
+	width: 50%; float: left;
+}
+.top .ann li {
+	background: url("../images/msg_bg.gif") no-repeat 0px -292px; height: 28px; line-height: 28px; text-indent: 20px; overflow: hidden;
+}
+.top .ann li a {
+	color: rgb(255, 85, 0);
+}
+.top .ann li span {
+	color: rgb(153, 153, 153); font-size: 11px; margin-left: 10px;
+}
+.top .smallhelp {
+	width: 50%; text-align: right; color: rgb(102, 102, 102); float: right;
+}
+.top .smallhelp p {
+	background: url("../images/msg_bg.gif") no-repeat 0px -196px; text-indent: 25px; float: right;
+}
+.pageno {
+	clear: both; zoom: 1;
+}
+.pageno::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.pageno a {
+	background: rgb(255, 255, 255); margin: 0px 3px 0px 0px; border: 1px solid rgb(204, 204, 204); width: 20px; height: 20px; text-align: center; line-height: 20px; overflow: hidden; vertical-align: middle; float: left; white-space: nowrap;
+}
+.pageno span {
+	width: 22px; height: 22px; color: rgb(64, 64, 64); font-family: SimSun; float: left;
+}
+.pageno a.on {
+	border: 0px currentColor; color: rgb(255, 85, 0); font-weight: 700; cursor: default;
+}
+.pageno a.on:hover {
+	color: rgb(255, 85, 0); text-decoration: none;
+}
+.pageno a:hover {
+	background: rgb(107, 176, 227); color: rgb(255, 255, 255); text-decoration: none;
+}
+.pageno a.page-prev {
+	background: url("../images/group_pagination.gif") no-repeat 6px 6px; text-indent: -20000px; overflow: hidden;
+}
+.pageno a.page-next {
+	background: url("../images/group_pagination.gif") no-repeat -52px 5px; padding: 0px 12px 0px 5px; width: auto;
+}
+.pageno a.page-prev:hover {
+	background: url("../images/group_pagination.gif") no-repeat 6px 6px;
+}
+.pageno a.page-next:hover {
+	background: url("../images/group_pagination.gif") no-repeat -52px 5px; color: rgb(51, 114, 162);
+}
+.login .padder dl {
+	height: 158px; overflow: hidden; margin-top: 8px; zoom: 1; _height: 160px;
+}
+.login ul {
+	height: 158px; overflow: hidden; margin-top: 8px; zoom: 1; _height: 160px;
+}
+.login .padder ul {
+	height: 196px; overflow: hidden; margin-top: 8px; zoom: 1; _height: 194px;
+}
+.login .padder dl::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.login ul::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.login .padder dl dt {
+	width: 50px; overflow: hidden; margin-top: 12px; float: left;
+}
+.login .padder dl dd {
+	width: 122px; overflow: hidden; margin-top: 9px; float: left; _margin-top: 8px;
+}
+.login .padder dl dd input.txt {
+	padding: 3px 3px 2px; border: 1px solid rgb(255, 153, 132); width: 109px;
+}
+.login .checoxa {
+	padding-left: 52px; _padding-left: 48px;
+}
+.login .checoxa em {
+	width: 90px; float: left; display: block; _padding-top: 3px;
+}
+.login .checoxa em a {
+	color: rgb(115, 115, 115);
+}
+.login .checoxa input {
+	margin-top: 2px; margin-right: 5px; float: left; _margin-top: 0px; _margin-right: 2px;
+}
+.login .checoxb {
+	padding-left: 52px; _padding-left: 48px;
+}
+.login .checoxb .btnn_a {
+	background: url("../images/index_btn01.gif") no-repeat 0px 0px; width: 50px; height: 25px; text-align: center; color: rgb(255, 255, 255); line-height: 23px; margin-right: 8px; float: left; display: block;
+}
+.login .checoxb .btnn_a:hover {
+	background: url("../images/index_btn01.gif") no-repeat 0px -34px; width: 50px; height: 25px; text-decoration: none; display: block;
+}
+.login .checoxb .wez {
+	width: 60px; color: rgb(114, 114, 114); margin-top: 8px; float: left; display: block;
+}
+.zhuche {
+	background: rgb(255, 244, 221); border: 1px solid rgb(244, 140, 35); width: 186px; height: 51px; padding-top: 5px; padding-left: 10px; clear: both; margin-top: 10px;
+}
+.zhuche dl dt {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -50px; height: 23px; color: rgb(146, 146, 146); padding-left: 20px; display: block;
+}
+.zhuche .btn_aa {
+	background: url("../images/index_btn01.gif") no-repeat 0px -71px; width: 65px; height: 26px; text-align: center; color: rgb(217, 40, 30); line-height: 26px; float: left; display: block;
+}
+.zhuche .btn_aa:hover {
+	background: url("../images/index_btn01.gif") no-repeat 0px -112px; width: 65px; height: 26px; text-decoration: none;
+}
+.zhuche dl dd i {
+	height: 26px; color: rgb(146, 146, 146); line-height: 26px; padding-left: 5px; float: left; display: block;
+}
+.login dt.dd {
+	width: 122px; clear: both; margin-left: 50px; float: left; display: inline;
+}
+.login dt input {
+	background: url("../images/button.jpg") no-repeat; border: 0px currentColor; width: 70px; height: 20px; color: rgb(255, 255, 255); font-size: 12px;
+}
+.login p {
+	margin: 23px 0px 12px; text-align: center; padding-left: 10px; _margin: 20px 0 10px 0;
+}
+.login p a {
+	color: rgb(217, 40, 30);
+}
+.login p.esp {
+	text-align: left;
+}
+.login p.esp a {
+	margin: 0px 10px 0px 5px; color: rgb(51, 114, 162);
+}
+.login p.esp2 {
+	color: rgb(153, 153, 153);
+}
+.login ul li {
+	height: 20px; color: rgb(102, 102, 102); line-height: 20px; text-indent: 10px; overflow: hidden;
+}
+.login ul li.esp1 {
+	color: rgb(51, 51, 51);
+}
+.login ul li.esp1 a {
+	font-weight: 700; margin-left: 5px;
+}
+.login ul li.esp2 {
+	color: rgb(153, 153, 153); margin-top: 13px;
+}
+.login ul li em {
+	color: rgb(221, 84, 0); font-style: normal;
+}
+.login ul li.esp3 {
+	margin-top: 46px; _margin-top: 44px;
+}
+.howTo {
+	padding: 8px 0px 0px 15px;
+}
+.howTo .title h2 {
+	color: rgb(217, 40, 30); margin-right: 20px; float: left;
+}
+.howTo .title em {
+	color: rgb(153, 153, 153); font-style: normal;
+}
+.howTo .cont {
+	background: url("../images/liucheng.gif") no-repeat; margin: 15px 0px 0px 20px; width: 833px; height: 54px; overflow: hidden;
+}
+.howTo ol li {
+	color: rgb(217, 40, 30); margin-top: 6px; float: left;
+}
+.howTo ol li a {
+	color: rgb(217, 40, 30);
+}
+.howTo ol li span a {
+	color: rgb(33, 64, 9);
+}
+.howTo .step1 {
+	width: 99px; height: 41px; line-height: 41px; text-indent: 38px;
+}
+.howTo .step2 {
+	width: 99px; height: 41px; line-height: 41px; text-indent: 38px; margin-left: 20px;
+}
+.howTo .step3 {
+	width: 76px; height: 53px; text-align: center; line-height: 24px; margin-top: 0px; margin-left: 20px; _line-height: 23px;
+}
+.howTo .step3 span {
+	color: rgb(33, 64, 9); margin-top: 8px; display: block;
+}
+.howTo .step4 {
+	width: 168px; height: 53px; text-align: center; line-height: 24px; margin-top: 0px; margin-left: 20px; _line-height: 23px;
+}
+.howTo .step4 span {
+	color: rgb(33, 64, 9); margin-top: 8px; display: block;
+}
+.howTo .step5 {
+	width: 159px; height: 41px; line-height: 41px; text-indent: 44px; margin-left: 20px;
+}
+.howTo .step6 {
+	width: 128px; height: 41px; line-height: 41px; text-indent: 44px; margin-left: 20px;
+}
+.course {
+	padding: 15px 10px 3px; width: 659px; overflow: hidden; clear: both; zoom: 1; _width: 656px;
+}
+.course .hot {
+	background: url("../images/bg.gif") no-repeat 0px 0px; width: 170px; height: 80px; padding-left: 90px; margin-bottom: 15px;
+}
+.course .hot b a {
+	line-height: 180%; font-size: 14px;
+}
+.course .hota b a {
+	line-height: 180%; font-size: 14px;
+}
+.course .hot p {
+	color: rgb(107, 107, 106); margin-top: 5px;
+}
+.course .hota p {
+	color: rgb(107, 107, 106); margin-top: 5px;
+}
+.course .area1 {
+	background: rgb(252, 251, 251); padding: 10px 7px 10px 20px; width: 270px; height: 270px; margin-left: 10px; float: left; display: block;
+}
+.course .area3 {
+	background: rgb(252, 251, 251); padding: 10px 7px 10px 20px; width: 270px; height: 270px; margin-left: 10px; float: left; display: block;
+}
+.course .area2 {
+	background: rgb(252, 251, 251); padding: 10px 10px 10px 20px; width: 270px; height: 270px; margin-left: 45px; float: left; display: inline;
+}
+.course .area4 {
+	background: rgb(252, 251, 251); padding: 10px 10px 10px 20px; width: 270px; height: 270px; margin-left: 45px; float: left; display: inline;
+}
+.course .area2 .hot {
+	background-position: 0px -100px;
+}
+.course .area2 .hot b a {
+	color: rgb(255, 85, 0);
+}
+.course .area4 .hota b a {
+	color: rgb(255, 85, 0);
+}
+.course ul li {
+	background: url("../images/icons_holiday.gif") no-repeat 0px -255px; height: 24px; line-height: 24px; text-indent: 14px; overflow: hidden;
+}
+.course ul li.esp {
+	text-align: right; padding-top: 10px; padding-right: 20px;
+}
+.course ul li.esp strong {
+	font-weight: normal;
+}
+.course .hota {
+	background: url("../images/bgdd.gif") no-repeat; width: 170px; height: 80px; padding-left: 90px; margin-bottom: 15px;
+}
+.course .area4 .hota {
+	background-position: 0px -100px;
+}
+.safeExp {
+	padding: 8px 0px 0px 15px; width: 188px; float: left;
+}
+.safeExp .title h2 {
+	color: rgb(217, 40, 30);
+}
+.main .part2 {
+	width: 910px; height: 351px; overflow: hidden;
+}
+.main .part2 .left .title h2 {
+	margin-right: 20px; float: left;
+}
+.main .part2 .left .title em {
+	margin: 0px 20px 0px 0px; color: rgb(153, 153, 153); font-style: normal; float: right; display: inline;
+}
+.main .part2 .left .title em strong {
+	font-weight: normal;
+}
+.main .part2 .right {
+	float: right;
+}
+.main .part2 .right .title em {
+	margin: 8px 20px 0px 0px; color: rgb(176, 13, 1); font-style: normal; float: right; display: inline;
+}
+.main .part2 .right .title em strong {
+	font-weight: normal;
+}
+.main .part2 .bbs .cont {
+	padding: 10px 20px; height: 297px; clear: both; _height: 307px;
+}
+.bbs ul {
+	padding-top: 10px;
+}
+.bbs ul li {
+	background: url("../images/icons_holiday.gif") no-repeat 0px -255px; height: 24px; line-height: 24px; text-indent: 14px; overflow: hidden;
+}
+.bbs .hot a {
+	color: rgb(217, 40, 30);
+}
+.part3 {
+	background: url("../images/gg007.jpg") no-repeat left top; width: 917px; height: 174px; margin-top: 8px;
+}
+.part3 .left {
+	width: 220px; overflow: hidden; margin-right: 10px; float: left; display: inline;
+}
+.part3 .left h3 {
+	margin: 0px 20px; padding: 10px 0px 8px; color: rgb(33, 59, 74); font-size: 14px; border-bottom-color: rgb(208, 231, 246); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.part3 .newKo {
+	margin-right: 0px;
+}
+.part3 .left .cont {
+	padding: 8px 0px 0px 20px;
+}
+.part3 .left .t1 {
+	color: rgb(183, 183, 183);
+}
+.part3 .left .t2 {
+	color: rgb(183, 183, 183);
+}
+.part3 .left .t3 {
+	color: rgb(183, 183, 183);
+}
+.part3 .left dt {
+	height: 20px; color: rgb(102, 102, 102); line-height: 20px; float: left;
+}
+.part3 .left dd {
+	height: 20px; color: rgb(102, 102, 102); line-height: 20px; float: left;
+}
+.part3 .left dt {
+	clear: left;
+}
+.postKo dt {
+	width: 100px;
+}
+.postKo dt.t1 {
+	text-indent: 18px;
+}
+.postKo dd {
+	width: 84px; text-align: center;
+}
+.postKo dt a {
+	margin-left: 5px;
+}
+.part3 .left dd.color {
+	color: rgb(255, 85, 0);
+}
+.color a {
+	color: rgb(255, 85, 0);
+}
+.part3 .left dd.color2 {
+	color: rgb(106, 178, 34);
+}
+.color2 a {
+	color: rgb(106, 178, 34);
+}
+.urlKo dt {
+	width: 67px;
+}
+.urlKo dd {
+	width: 65px; text-align: center;
+}
+.newKo dt {
+	width: 100px;
+}
+.newKo dd {
+	width: 84px; text-align: center;
+}
+.part4 {
+	height: 30px; margin-bottom: 5px;
+}
+.part4 .left {
+	margin: 5px 0px; width: 735px; color: rgb(51, 51, 51); float: left; display: inline;
+}
+.part4 .right_a {
+	width: 127px; float: right;
+}
+.part4 .right_a a.button {
+	background: url("../images/button.jpg") no-repeat 0px -25px; width: 127px; height: 32px; text-indent: -20000px; overflow: hidden; display: block;
+}
+.link {
+	width: 910px; overflow: hidden; margin-top: 10px;
+}
+.link ul {
+	width: 1000px;
+}
+.link ul li {
+	width: 125px; margin-right: 6px; float: left;
+}
+.link ul li.esp {
+	margin-right: 0px; margin-left: -1px;
+}
+.footer {
+	margin: 15px auto 0px; width: 910px; height: 73px; text-align: center; clear: both; border-top-color: rgb(209, 209, 209); border-top-width: 1px; border-top-style: solid;
+}
+.footer .padder {
+	color: rgb(158, 158, 158); line-height: 20px; padding-top: 15px;
+}
+.footer .padder a {
+	color: rgb(158, 158, 158);
+}
+body {
+	position: relative;
+}
+.service {
+	top: 110px; right: 0px; position: absolute;
+}
+.service-open {
+	background: url("../images/service-open.png") no-repeat; width: 143px; height: 418px;
+}
+.service-close {
+	background: url("../images/service-open.png") no-repeat; width: 31px; height: 121px; overflow: hidden;
+}
+.service-button {
+	width: 34px; height: 121px; float: left;
+}
+.service-inside {
+	width: 103px; height: 418px; float: right;
+}
+.service-inside dl {
+	padding: 10px 0px;
+}
+.service-inside dl dt {
+	background: url("../images/dttitle.jpg") no-repeat; width: 100px; height: 18px; text-align: center; color: rgb(255, 255, 255); line-height: 18px; margin-bottom: 8px;
+}
+.service-inside dl dd {
+	background: url("../images/qq_online.gif") no-repeat 3px 4px; height: 27px; line-height: 27px; text-indent: 35px;
+}
+.service-inside dl dd.esp_1 a {
+	color: rgb(255, 85, 0);
+}
+.service-inside dl dd.esp_2 {
+	height: 20px; text-align: center; color: rgb(153, 153, 153); line-height: 20px; text-indent: 0px;
+}
+.service-inside dl dd.esp_3 {
+	height: 20px; text-align: center; color: rgb(255, 85, 0); line-height: 20px; text-indent: 0px;
+}
+.service-inside dl dd.esp_4 {
+	margin: 0px; height: 16px; text-align: center; color: rgb(0, 153, 0); line-height: 16px; text-indent: 0px;
+}
+.service-inside dl dd.esp_5 {
+	margin: 0px; text-align: center; text-indent: 0px;
+}
+.service-inside dl dd.esp_5 a {
+	text-decoration: underline;
+}
+.part5 {
+	border: 1px solid rgb(172, 204, 229); width: 747px; margin-bottom: 10px; float: right;
+}
+.part5 .title {
+	background: url("../images/login05.jpg") repeat-x; height: 34px; color: rgb(153, 153, 153); line-height: 28px;
+}
+.part5 .title .puta {
+	width: 500px; overflow: hidden; float: left;
+}
+.part5 .title .puta a {
+	width: 75px; height: 34px; text-align: center; color: rgb(54, 122, 175); font-weight: bold; margin-left: 15px; float: left; display: block;
+}
+.part5 .title .puta a:hover {
+	text-decoration: none;
+}
+.part5 .title .puta .jlbtna:hover {
+	background: url("../images/index_btn01.gif") no-repeat 0px -594px;
+}
+.part5 .title .puta .jlbtna {
+	background: url("../images/index_btn01.gif") no-repeat 0px -536px; color: rgb(255, 255, 255);
+}
+.part5 .title .putb {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -357px; padding-left: 18px; margin-right: 25px; float: right; _margin-right: 12px;
+}
+.part5 .title .putb a {
+	color: rgb(1, 1, 1);
+}
+.part5 .title .put1 {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 2px; height: 16px; color: rgb(255, 85, 0); line-height: 16px; font-size: 12px; font-weight: 700; margin-top: 2px;
+}
+.part5 .title .put2 {
+	width: 50px; height: 22px;
+}
+.part5 .bbscont {
+	border: 1px solid rgb(172, 204, 229); width: 725px; margin-top: 10px; margin-bottom: 48px; margin-left: 10px; zoom: 1;
+}
+.bbscont dl.listtitle {
+	background: rgb(219, 232, 238); color: rgb(153, 153, 153); margin-bottom: 10px; border-bottom-color: rgb(172, 204, 229); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.bbscont dl.listtitle dt {
+	padding: 0px; height: 24px; line-height: 24px; text-indent: 30px;
+}
+.bbscont dl.listtitle dd {
+	padding: 0px; height: 24px; line-height: 24px;
+}
+.bbscont dl {
+	background: url("../images/bbs_bg.gif") no-repeat 10px -70px; clear: both; zoom: 1;
+}
+.bbscont dl::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.bbscont dt {
+	width: 340px; height: 40px; line-height: 40px; overflow: hidden; padding-left: 18px; float: left; _height: 30px; _padding-top: 10px;
+}
+.bbscont dt a {
+	font-size: 14px; margin-left: 8px;
+}
+.bbscont dt img {
+	margin-bottom: -2px;
+}
+.bbscont dt em {
+	color: rgb(196, 13, 4); font-size: 14px; font-style: normal; margin-left: 8px;
+}
+.bbscont dd {
+	float: right;
+}
+.bbscont dd.last {
+	width: 90px; height: 40px; text-align: right; line-height: 40px; overflow: hidden; margin-right: 15px; _margin-right: 8px;
+}
+.bbscont dd.Num {
+	width: 124px; height: 40px; text-align: center; line-height: 40px; overflow: hidden;
+}
+.bbscont dd.which {
+	width: 107px; height: 40px; text-align: center; line-height: 40px; overflow: hidden;
+}
+.bbscont dd.who {
+	padding: 5px 0px; width: 90px; height: 30px; text-align: left; line-height: 15px; overflow: hidden; margin-right: 15px;
+}
+.bbscont dd.Num em {
+	color: rgb(255, 85, 0); font-size: 11px; font-style: normal;
+}
+.bbscont dd.last em {
+	text-align: right; color: rgb(171, 171, 167); font-size: 11px; font-style: normal; display: block;
+}
+.bbscont dd.who em {
+	text-align: left; color: rgb(171, 171, 167); font-size: 11px; font-style: normal; display: block;
+}
+.bbscont .kongbai {
+	width: 8px; height: 16px; float: left; display: block; _width: 0px;
+}
+.part5 .pageno {
+	margin: 10px 10px 26px 0px; float: right;
+}
+.part5 .bottom {
+	background: url("../images/bbs_bg.gif") no-repeat 0px -29px; height: 31px; line-height: 31px;
+}
+.partjiaoliu {
+	width: 910px; margin-bottom: 10px;
+}
+.partjiaoliu .title {
+	background: url("../images/bbs_bg.gif") no-repeat; height: 29px; color: rgb(153, 153, 153); line-height: 29px;
+}
+.partjiaoliu .title h1 {
+	margin: 0px 15px; color: rgb(0, 0, 0); font-size: 14px; float: left;
+}
+.partjiaoliu .title strong {
+	color: rgb(233, 125, 27);
+}
+.partjiaoliu .title a {
+	color: rgb(102, 102, 102);
+}
+.partjiaoliu .title .puta {
+	width: 500px; overflow: hidden; float: left;
+}
+.partjiaoliu .title .putb {
+	margin-right: 6px; float: right;
+}
+.partjiaoliu .title .put1 {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 2px; height: 16px; color: rgb(255, 85, 0); line-height: 16px; font-size: 12px; font-weight: 700; margin-top: 2px;
+}
+.partjiaoliu .title .put2 {
+	width: 50px; height: 22px;
+}
+.partjiaoliu .bbscontjiaoliu {
+	border-width: 0px 1px; border-style: none solid; border-color: currentColor rgb(170, 203, 228); zoom: 1;
+}
+.bbscontjiaoliu dl.listtitlea {
+	background: rgb(244, 244, 241); border: 1px solid rgb(222, 222, 220); color: rgb(153, 153, 153);
+}
+.bbscontjiaoliu dl.listtitlea dt {
+	padding: 0px; height: 24px; line-height: 24px; text-indent: 30px;
+}
+.bbscontjiaoliu dl.listtitlea dd {
+	padding: 0px; height: 24px; line-height: 24px;
+}
+.bbscontjiaoliu dl {
+	background: url("../images/bbs_bg.gif") no-repeat 10px -370px; zoom: 1;
+}
+.bbscontjiaoliu dl::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.bbscontjiaoliu dt {
+	width: 527px; height: 40px; line-height: 40px; overflow: hidden; padding-left: 18px; float: left; _height: 30px; _padding-top: 10px;
+}
+.bbscontjiaoliu dt a {
+	font-size: 14px; margin-left: 8px;
+}
+.bbscontjiaoliu dt img {
+	margin-bottom: -2px;
+}
+.bbscontjiaoliu dt em {
+	color: rgb(196, 13, 4); font-size: 14px; font-style: normal; margin-left: 8px;
+}
+.bbscontjiaoliu dd {
+	float: right;
+}
+.bbscontjiaoliu dd.last {
+	padding: 5px 0px; width: 90px; height: 30px; text-align: right; line-height: 15px; overflow: hidden; margin-right: 15px;
+}
+.bbscontjiaoliu dd.Num {
+	width: 124px; height: 40px; text-align: center; line-height: 40px; overflow: hidden; font-size: 11px;
+}
+.bbscontjiaoliu dd.which {
+	width: 107px; height: 40px; text-align: left; line-height: 40px; overflow: hidden;
+}
+.bbscontjiaoliu dd.who {
+	padding: 5px 0px; width: 90px; height: 30px; text-align: left; line-height: 15px; overflow: hidden; margin-right: 15px;
+}
+.bbscontjiaoliu dd.Num em {
+	color: rgb(255, 85, 0); font-size: 11px; font-style: normal;
+}
+.bbscontjiaoliu dd.last em {
+	text-align: right; color: rgb(171, 171, 167); font-size: 11px; font-style: normal; display: block;
+}
+.bbscontjiaoliu dd.who em {
+	text-align: left; color: rgb(171, 171, 167); font-size: 11px; font-style: normal; display: block;
+}
+.partjiaoliu .pageno {
+	margin: 30px 10px 10px 0px; float: right;
+}
+.partjiaoliu .bottom {
+	background: url("../images/bbs_bg.gif") no-repeat 0px -29px; height: 31px; line-height: 31px;
+}
+.part6 {
+	margin: 10px 0px 20px; zoom: 1;
+}
+.part6::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.part6 .left {
+	width: 710px; overflow: hidden; float: left;
+}
+.part6 .right {
+	width: 190px; overflow: hidden; padding-top: 41px; float: right;
+}
+.part6 .right1 {
+	width: 190px; overflow: hidden; float: right;
+}
+.btnNo .buttona {
+	background: url("../images/button.jpg") no-repeat 0px -65px; width: 96px; height: 30px; text-indent: -20000px; overflow: hidden; float: left;
+}
+.btnNo .buttonb {
+	background: url("../images/button.jpg") no-repeat 0px -100px; width: 98px; height: 30px; text-indent: -20000px; overflow: hidden; margin-left: 10px; float: left;
+}
+.part6 .pageno {
+	clear: both; margin-top: 5px; float: right;
+}
+.topiclist {
+	margin: 10px 0px;
+}
+.topiclist .title {
+	background: url("images/bbs_bg.gif") no-repeat 0px -133px; height: 38px; line-height: 38px; padding-left: 15px; _height: 28px; _padding-top: 10px;
+}
+.topiclist .title h1 {
+	font-size: 14px; display: inline;
+}
+.topiclist .title img {
+	margin-bottom: -2px;
+}
+.topiclist .title em {
+	color: rgb(153, 153, 153); font-size: 14px; font-style: normal; margin-right: 5px;
+}
+.topiclist .title b {
+	color: rgb(196, 13, 4); font-size: 11px; font-weight: normal; margin-left: 20px;
+}
+.topiclist .cont {
+	background: rgb(217, 239, 249); padding: 5px 5px 0px; border: 1px solid rgb(170, 203, 228);
+}
+.topiclist .cont .one {
+	background: rgb(255, 255, 255); margin-bottom: 6px;
+}
+.onetitle {
+	padding: 10px; height: 42px; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: dashed;
+}
+.onetitle .uesr {
+	color: rgb(102, 102, 102); float: left;
+}
+.onetitle .uesr img {
+	padding: 1px; border: 1px solid rgb(204, 204, 204); margin-right: 10px; float: left;
+}
+.onetitle .uesr a {
+	
+}
+.onetitle .uesr b {
+	width: 250px; font-weight: normal; margin-top: 16px; display: block;
+}
+.onetitle .uptimes {
+	text-align: right; float: right;
+}
+.onetitle .uptimes em {
+	color: rgb(153, 153, 153); font-style: normal; margin-top: 12px; display: block;
+}
+.topiclist .one .page {
+	padding: 20px 40px 20px 30px; font-size: 14px; min-height: 80px; _height: 80px;
+}
+.topiclist .one .page p {
+	color: rgb(64, 64, 64); line-height: 1.5; text-indent: 2em; font-size: 14px; margin-bottom: 1em;
+}
+.topiclist .one .do {
+	height: 50px; text-align: right; color: rgb(204, 204, 204); line-height: 50px; padding-right: 30px;
+}
+.topiclist .one .do a {
+	margin: 0px 5px;
+}
+.retopic .title {
+	background-position: 0px -173px; _height: 38px; _padding-top: 0;
+}
+.retopic .title h3 {
+	font-size: 14px; display: inline;
+}
+.retopic .cont {
+	background: rgb(238, 238, 238); border: 1px solid rgb(201, 201, 197);
+}
+.retopic .one {
+	padding: 15px;
+}
+.retopic tr td.postl {
+	padding: 10px 10px 0px 0px; width: 65px; text-align: right; color: rgb(51, 51, 51); vertical-align: top;
+}
+.retopic tr td.esp img {
+	margin: 0px 5px -6px 2px;
+}
+.retopic table tr td {
+	padding: 5px 0px;
+}
+.retopic table tr td textarea {
+	padding: 3px; border: 1px solid rgb(197, 197, 197); width: 570px; height: 100px; line-height: 1.5; font-size: 14px; overflow-x: hidden;
+}
+.retopic table tr td input {
+	padding: 1px 3px 0px; border: 1px solid rgb(197, 197, 197); height: 19px;
+}
+.retopic tr td.esp input {
+	font-size: 14px; font-weight: bold;
+}
+.retopic table tr td input.button1 {
+	background: url("../images/button.jpg") no-repeat 0px -133px; padding: 0px; border: 0px currentColor; width: 96px; height: 30px; margin-top: 10px;
+}
+.retopic table tr td input.button2 {
+	background: url("../images/button.jpg") no-repeat 0px -100px; padding: 0px; border: 0px currentColor; width: 98px; height: 30px; margin-top: 10px;
+}
+.boxBbs1 {
+	
+}
+.boxBbs1 .title {
+	background: url("../images/toppiccont_boxbg.jpg") no-repeat; height: 30px; line-height: 30px; overflow: hidden; padding-left: 20px; position: relative;
+}
+.boxBbs1 .title span {
+	top: 0px; right: 10px; position: absolute;
+}
+.boxBbs1 .cont {
+	padding: 10px; border-right-color: rgb(255, 217, 209); border-left-color: rgb(255, 217, 209); border-right-width: 1px; border-left-width: 1px; border-right-style: solid; border-left-style: solid;
+}
+.boxBbs1 .bottom {
+	background: url("../images/toppiccont_boxbg.jpg") no-repeat 0px -30px rgb(0, 153, 255); height: 7px; overflow: hidden; font-size: 7px;
+}
+.boxBbs1 .cont ul {
+	width: 100%;
+}
+.boxBbs1 .cont ul li {
+	background: url("../images/icons_holiday.gif") no-repeat 0px -255px; height: 24px; line-height: 24px; text-indent: 12px; overflow: hidden;
+}
+.boxBbs1 .orangecolor a {
+	color: rgb(255, 85, 0);
+}
+.part7 {
+	
+}
+.part7 .left {
+	width: 308px; overflow: hidden; float: left;
+}
+.loationaa {
+	border-right-color: rgb(220, 220, 220); border-bottom-color: rgb(220, 220, 220); border-right-width: 1px; border-bottom-width: 1px; border-right-style: solid; border-bottom-style: solid;
+}
+.loginarea {
+	background: rgb(255, 254, 191); border: 1px solid rgb(244, 140, 35); width: 305px; height: 231px; overflow: hidden;
+}
+.loginarea .titlea {
+	padding: 1px 1px 0px; width: 306px; border-bottom-color: rgb(244, 140, 35); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.loginarea h2 {
+	background: rgb(255, 230, 179); width: 303px; height: 42px; color: rgb(46, 45, 45); line-height: 42px; overflow: hidden; font-size: 14px;
+}
+.loginarea h2 span {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -129px; height: 42px; padding-left: 29px; margin-left: 10px; display: block;
+}
+.loginarea .longdl {
+	padding-top: 23px; padding-left: 29px; clear: both; zoom: 1;
+}
+.loginarea longdl::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.loginarea .longdl .checkboxb span {
+	width: 58px; height: 23px; color: rgb(9, 9, 9); line-height: 23px; clear: both; font-size: 14px; margin-bottom: 15px; float: left;
+}
+.loginarea .longdl .checkboxb {
+	padding-left: 2px; float: left; _margin-bottom: 7px;
+}
+.loginarea .longdl .checkboxb input {
+	background: url("../images/login01.jpg") repeat-x; border: 1px solid rgb(244, 140, 35); width: 115px; height: 26px; line-height: 26px; padding-right: 5px; padding-left: 5px;
+}
+.loginarea .longdl .checkboxb a {
+	color: rgb(51, 114, 162); margin-left: 10px;
+}
+.loginarea .longdl .checkboxa {
+	clear: both; margin-left: 60px;
+}
+.loginarea .longdl .checkboxa input {
+	margin-right: 5px; float: left; display: block; _margin-right: 2px;
+}
+.loginarea .longdl .checkboxa i {
+	width: 100px; font-size: 12px; margin-top: -2px; float: left; display: block; _margin-top: 2px;
+}
+.loginarea .longdl .btn input {
+	background: url("../images/index_btn01.gif") no-repeat 0px -162px; border: 0px currentColor; width: 125px; height: 40px; color: rgb(255, 255, 255); clear: both; font-size: 14px; margin-top: 14px; margin-left: 48px; float: left;
+}
+.loginarea .longdl .btn input:hover {
+	background: url("../images/index_btn01.gif") no-repeat 0px -227px; width: 125px; height: 40px;
+}
+.espreg {
+	background: rgb(255, 254, 191); padding: 10px 0px 0px 20px; border: 1px solid rgb(244, 140, 35); height: 64px; color: rgb(31, 31, 31); clear: both; margin-top: 10px;
+}
+.espreg h3 {
+	width: 214px; height: 17px; color: rgb(31, 31, 31); font-size: 14px; font-weight: normal; margin-bottom: 15px;
+}
+.espreg i {
+	float: left;
+}
+.espreg a {
+	background: url("../images/index_btn01.gif") no-repeat 0px -286px; width: 36px; height: 17px; color: rgb(255, 255, 255); padding-left: 10px; margin-left: 5px; float: left; display: block; _padding-top: 0px;
+}
+.espreg a:hover {
+	background: url("../images/index_btn01.gif") no-repeat 0px -313px; width: 36px; height: 17px; color: rgb(255, 255, 255); text-decoration: none;
+}
+.part7 .right {
+	background: url("../images/login02.jpg") no-repeat; width: 589px; height: 320px; margin-left: 10px; float: left;
+}
+.siteinfo {
+	padding: 10px 0px 0px 48px; color: rgb(131, 133, 134);
+}
+.siteinfo h3 {
+	width: 118px; height: 20px; color: rgb(69, 69, 69); overflow: hidden; font-size: 12px; margin-bottom: 10px;
+}
+.siteinfo span {
+	color: rgb(63, 63, 63);
+}
+.siteinfo ul {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -190px; height: 148px; padding-left: 40px; margin-top: 15px;
+}
+.siteinfo ul li {
+	height: 35px; color: rgb(63, 63, 63); line-height: 30px;
+}
+.siteinfo ul li strong {
+	color: rgb(255, 85, 0); font-weight: normal;
+}
+.siteinfo .login_btna a {
+	background: rgb(239, 245, 250); border: 1px solid rgb(210, 213, 217); width: 106px; height: 30px; color: rgb(1, 7, 52); line-height: 30px; padding-left: 5px; margin-top: 4px; display: block;
+}
+.siteinfo .login_btna a span {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -330px; padding-left: 20px; display: block;
+}
+.siteinfo .login_btna a:hover {
+	background: rgb(227, 239, 246); border: 1px solid rgb(113, 113, 114); width: 106px; height: 30px; text-decoration: none;
+}
+.ppxinxi {
+	margin: 10px auto 0px; padding: 1px; border: 1px solid rgb(206, 228, 250); width: 907px; height: 480px;
+}
+.ppxinxibg {
+	background: url("../images/denglu01.jpg") repeat-x; width: 907px; height: 478px; padding-top: 5px; display: inline-block;
+}
+.ppxinxibg .ppxinxi_a {
+	width: 431px; height: 177px; overflow: hidden;
+}
+.ppxinxibg .pubica {
+	margin-left: 7px; float: left; _margin-left: 4px;
+}
+.ppxinxibg .pubica h5 {
+	height: 28px; color: rgb(0, 113, 194); line-height: 28px; font-size: 14px; margin-bottom: 3px;
+}
+.ppxinxibg .pubica h5 span {
+	background: url("../images/sy_tb01.gif") no-repeat; display: block;
+}
+.ppxinxibg .pubica .tubiaobb {
+	background-position: 0px -762px; padding-left: 25px;
+}
+.ppxinxibg .pubica .tubiaocc {
+	background-position: 0px -791px; padding-left: 25px; _background-position: 0 -792px;
+}
+.ppxinxibg .pubica .tubiaodd {
+	background-position: 0px -823px; padding-left: 25px; _background-position: 0 -824px;
+}
+.ppxinxibg .writinga {
+	color: rgb(63, 63, 63); line-height: 21px; text-indent: 2em;
+}
+.ppxinxibg ul li {
+	line-height: 21px; clear: both;
+}
+.ppxinxibg .writingb li span {
+	width: 10px; color: rgb(63, 63, 63); float: left; display: block;
+}
+.ppxinxibg .writingb li a {
+	width: 375px; color: rgb(63, 63, 63); float: left; display: block;
+}
+.ppxinxibg .writingc li span {
+	width: 10px; color: rgb(0, 113, 194); float: left; display: block;
+}
+.ppxinxibg .writingc li a {
+	width: 31em; color: rgb(0, 113, 194); overflow: hidden; float: left; display: block; white-space: nowrap; word-break: keep-all; text-overflow: ellipsis;
+}
+.ppxinxibg .ppxinxi_b {
+	width: 407px; height: 177px; overflow: hidden; padding-left: 23px; margin-left: 28px; border-left-color: rgb(167, 167, 167); border-left-width: 1px; border-left-style: dashed;
+}
+.ppxinxibg .ppxinxi_c {
+	width: 455px; margin-top: 22px;
+}
+.ppxinxibg .ppxinxi_d {
+	width: 423px; margin-top: 22px; margin-right: 13px; float: right; _margin-right: 6px;
+}
+.ppxinxibg .ppxinxi_d .morea {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -856px; height: 28px; line-height: 28px; padding-left: 22px; float: right;
+}
+.ppxinxibg .ppxinxi_d .morea a {
+	display: block;
+}
+.paipai {
+	margin: 0px auto; width: 911px; padding-top: 10px;
+}
+.paipai .paipai_01 {
+	width: 674px; float: left;
+}
+.paipai .paipai_01 .tbbg1 {
+	padding: 1px; border: 1px solid rgb(221, 221, 221); width: 674px; height: 409px; overflow: hidden;
+}
+.paipai .paipai_01 .left {
+	background: url("../images/sy_bg001.jpg") repeat-x left top;
+}
+.paipai .paipai_01 .left h2 {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -70px; margin: 0px 0px 0px 20px; padding: 2px 0px 2px 20px; color: rgb(45, 45, 45); line-height: 29px; font-size: 14px;
+}
+.paipai .paipai_01 .left .title {
+	height: 30px;
+}
+.paipai .paipai_01 .left .title h2 {
+	margin-right: 20px; float: left; display: inline;
+}
+.paipai .paipai_01 .left .title em {
+	margin: 8px 20px 0px 0px; color: rgb(153, 153, 153); font-style: normal; float: right; display: inline;
+}
+.paipai .paipai_01 .left .cont {
+	padding: 10px;
+}
+.paipai .paipai_02 {
+	width: 226px; float: right;
+}
+.paipai .paipai_02_a {
+	height: 169px; overflow: hidden;
+}
+.paipai .paipai_02_b {
+	height: 236px; margin-top: 10px;
+}
+.paipai .paipaigy .herghta {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(221, 221, 221) rgb(221, 221, 221); width: 224px; overflow: hidden; padding-top: 10px; padding-bottom: 10px;
+}
+.paipaigy h6 {
+	background: url("../images/login040.jpg") no-repeat; width: 167px; height: 28px; padding-left: 59px;
+}
+.paipaigy h6 span {
+	width: 107px; text-align: center; color: rgb(255, 255, 255); line-height: 24px; font-size: 14px; display: block; _line-height: 26px;
+}
+.paipaigy .herghta a {
+	color: rgb(51, 114, 185);
+}
+.paipaigy .herghta .color2 a {
+	color: rgb(106, 178, 34);
+}
+.paipaigy .herghta dl {
+	width: 191px; line-height: 20px; margin-left: 23px;
+}
+.paipaigy .herghta dl .t1 {
+	color: rgb(183, 183, 183);
+}
+.paipai_02_a .herghta dl .t2 {
+	color: rgb(183, 183, 183);
+}
+.paipaigy .herghta dt {
+	width: 105px; float: left;
+}
+.paipaigy .herghta dd {
+	width: 84px; text-align: center; color: rgb(102, 102, 102); float: left;
+}
+.paipaigy .herghta ul {
+	width: 191px; margin-left: 13px;
+}
+.paipaigy .herghta ul li {
+	background: url("../images/login041.jpg") no-repeat left; line-height: 20px; padding-left: 8px;
+}
+.paipaigy .herghta ul li i {
+	color: rgb(255, 85, 0);
+}
+.paipai .paipai_02_b .herghta {
+	height: 185px;
+}
+.part8 {
+	
+}
+.part8 .left {
+	width: 627px; float: left;
+}
+.regarea {
+	background: rgb(250, 250, 250); padding: 40px 0px 30px 32px; overflow: hidden;
+}
+.flow-steps {
+	margin: 0px; overflow: hidden;
+}
+.flow-steps .num3 li {
+	width: 194px;
+}
+.flow-steps .num4 li {
+	width: 222px;
+}
+.flow-steps .num5 li {
+	width: 175px;
+}
+.flow-steps .num6 li {
+	width: 143px;
+}
+.flow-steps li {
+	background: url("../images/flow_steps_bg.png") no-repeat 100% 0px rgb(228, 228, 228); padding: 0px 15px 0px 0px; height: 23px; text-align: center; color: rgb(64, 64, 64); line-height: 23px; overflow: hidden; font-size: 14px; font-weight: bold; float: left;
+}
+.flow-steps li span {
+	display: block;
+}
+.flow-steps li strong {
+	display: block;
+}
+.flow-steps li .first {
+	background: url("../images/flow_steps_bg.png") no-repeat -12px -69px rgb(228, 228, 228);
+}
+.flow-steps li.last {
+	background-position: 100% -138px;
+}
+.flow-steps li.current {
+	color: rgb(255, 255, 255); background-color: rgb(255, 102, 0);
+}
+.flow-steps li.current .first {
+	background-position: -12px -92px; background-color: rgb(255, 102, 0);
+}
+.flow-steps li.current-prev {
+	background-position: 100% -23px !important;
+}
+.flow-steps li.done {
+	background-position: 100% -46px; color: rgb(255, 102, 0); background-color: rgb(255, 230, 186);
+}
+.flow-steps li.done .first {
+	background-position: -12px -115px; background-color: rgb(255, 230, 186);
+}
+.flow-steps li.last-current {
+	background-position: 100% -161px; color: rgb(255, 255, 255); background-color: rgb(255, 102, 0);
+}
+.regarea h2 {
+	background: url("../images/login_bg.gif") no-repeat 0px -191px; margin: 0px 0px 30px 40px; width: 306px; height: 40px; text-indent: -20000px; overflow: hidden;
+}
+.regarea li {
+	margin-bottom: 22px; zoom: 1;
+}
+.regarea li::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.regarea strong {
+	width: 70px; height: 25px; text-align: right; color: rgb(33, 59, 74); line-height: 25px; font-size: 14px; font-weight: normal; float: left; display: block;
+}
+.regarea .input {
+	padding: 0px 10px 0px 25px; color: rgb(152, 152, 152); float: left;
+}
+.regarea li.select .input {
+	padding-top: 4px; _padding-top: 1px;
+}
+.regarea li.select .input input {
+	margin-right: 3px;
+}
+.regarea .exp {
+	float: left;
+}
+.regarea .exp em {
+	background: url("../images/msg_bg.gif") no-repeat; height: 25px; line-height: 28px; text-indent: 25px; display: block;
+}
+.regarea .exp .dui {
+	background-position: 0px -245px;
+}
+.regarea .exp .cuo {
+	background-position: 0px 5px; color: rgb(254, 60, 0); font-style: normal;
+}
+.regarea .exp input {
+	width: auto; font-size: 12px; margin-top: 2px; _width: 190px;
+}
+.regarea .input input.nml {
+	background: url("../images/inputbg.gif") repeat-x; padding: 3px 2px 0px 3px; border: 1px solid rgb(167, 166, 170); height: 19px; color: rgb(0, 0, 0); font-size: 14px; font-weight: 700; margin-bottom: 5px;
+}
+.nm3 {
+	background: url("../images/inputbg.gif") repeat-x; padding: 3px 2px 0px 3px; border: 1px solid rgb(167, 166, 170); height: 19px; color: rgb(0, 0, 0); font-size: 14px; font-weight: 700; margin-bottom: 5px;
+}
+.regarea .input span {
+	
+}
+.regarea .input b {
+	background: url("../images/msg_bg.gif") no-repeat 5px -197px rgb(255, 255, 229); padding: 0px 15px 0px 25px; border: 1px solid rgb(255, 204, 127); height: 22px; color: rgb(51, 51, 51); line-height: 22px; font-weight: normal; display: block;
+}
+.regarea .mobil {
+	margin-bottom: 5px;
+}
+.regarea .mobil .input input.nml {
+	color: rgb(225, 46, 34);
+}
+.regarea .btn input {
+	background: url("../images/login_bg.gif") 0px -440px; margin: 30px 0px 0px 95px; border: 0px currentColor; width: 222px; height: 35px;
+}
+.regarea .xieyi {
+	margin-top: 50px;
+}
+.regarea .xieyi dt {
+	font-size: 14px; font-weight: bold;
+}
+.regarea .xieyi dd {
+	background: rgb(255, 255, 255); padding: 5px; border: 1px solid rgb(233, 233, 233); width: 562px; height: 80px; color: rgb(64, 64, 64); line-height: 150%; overflow: auto; margin-top: 5px;
+}
+.regarea .xieyi dd p {
+	text-indent: 2em; margin-bottom: 1em;
+}
+.regsucess {
+	margin: 0px auto 60px; width: 700px; zoom: 1;
+}
+.regsucess::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.regsucess .title {
+	background: url("../images/msg_bg.gif") no-repeat 0px -600px; height: 32px; color: rgb(51, 51, 51); line-height: 32px; text-indent: 40px; font-family: "Microsoft YaHei",tahoma,arial,sans-serif; font-size: 18px; font-weight: 500;
+}
+.regsucess .title strong {
+	margin: 0px 5px 0px 10px; color: rgb(236, 56, 41);
+}
+.regsucess .titleErr {
+	background: url("../images/msg_bg.gif") no-repeat 0px -400px; height: 32px; color: rgb(51, 51, 51); line-height: 32px; text-indent: 40px; font-family: "Microsoft YaHei",tahoma,arial,sans-serif; font-size: 18px; font-weight: 500;
+}
+.regsucess .titleErr strong {
+	margin: 0px 5px 0px 10px; color: rgb(236, 56, 41);
+}
+.regsucess .cont {
+	background: rgb(246, 251, 254); margin: 20px 0px 0px; padding: 20px 20px 10px; border: 1px solid rgb(168, 215, 249);
+}
+.regsucess .cont::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.regsucess .cont ul li {
+	width: 50%; height: 18px; color: rgb(102, 102, 102); margin-bottom: 10px; float: left;
+}
+.regsucess .cont em {
+	color: rgb(255, 85, 0); font-weight: 700;
+}
+.regsucess .title2 {
+	background: url("../images/msg_bg.gif") no-repeat 0px -700px; height: 32px; color: rgb(102, 102, 102); line-height: 32px; text-indent: 40px; font-family: "Microsoft YaHei",tahoma,arial,sans-serif; font-size: 18px; font-weight: 500; margin-top: 30px;
+}
+.regsucess .sub_title {
+	background: url("../images/msg_bg.gif") no-repeat 5px -197px rgb(255, 255, 229); margin: 15px 0px 30px; padding: 0px 15px 0px 40px; border: 1px solid rgb(255, 204, 127); width: 327px; height: 22px; color: rgb(51, 51, 51); line-height: 22px; display: block;
+}
+.regsucess .button5 {
+	background: url("../images/login_bg.gif") no-repeat 0px -575px; width: 161px; height: 35px; text-indent: -2000px; overflow: hidden; float: left; display: block;
+}
+.regsucess .button6 {
+	background: rgb(247, 247, 247); border: 1px solid rgb(224, 224, 224); width: 350px; height: 33px; line-height: 33px; padding-left: 20px; margin-left: 15px; float: left; display: block;
+}
+.regsucess .button6:hover {
+	text-decoration: none;
+}
+.regsucess a.button_all {
+	background: url("../images/login_bg.gif") no-repeat 0px -617px; width: 161px; height: 35px; text-align: center; color: rgb(0, 0, 0); line-height: 35px; overflow: hidden; font-size: 14px; font-weight: bold; margin-right: 30px; float: left; display: block;
+}
+.part8 .right {
+	width: 242px; margin-left: 10px; float: left;
+}
+.loginlink {
+	background: url("../images/login_bg3.jpg"); padding: 45px 0px 0px 18px; width: 224px; height: 32px;
+}
+.regsucess .button7 {
+	background: url("../images/login_bg.gif") no-repeat 0px -699px; width: 161px; height: 35px; text-indent: -2000px; overflow: hidden; margin-top: 10px; float: left; display: block;
+}
+.regsucess .button8 {
+	background: rgb(247, 247, 247); border: 1px solid rgb(224, 224, 224); width: 350px; height: 33px; line-height: 33px; padding-left: 20px; margin-top: 10px; margin-left: 15px; float: left; display: block;
+}
+.regsucess .button8:hover {
+	text-decoration: none;
+}
+#xdating .othernav {
+	width: 670px; margin-left: 145px;
+}
+#xdating .other {
+	width: 670px; margin-left: 250px;
+}
+.other {
+	margin: auto; width: 910px; height: 24px; color: rgb(51, 51, 51); line-height: 24px;
+}
+.other a {
+	margin: 8px;
+}
+.part9 {
+	width: 910px; margin-bottom: 10px; zoom: 1;
+}
+.part9 em {
+	color: rgb(217, 40, 30); font-weight: 700;
+}
+.part9 .left {
+	width: 234px; height: 133px; overflow: hidden; float: left;
+}
+.userinfo {
+	background: rgb(251, 251, 251); padding: 5px 15px; border: 1px solid rgb(225, 225, 225); height: 121px; color: rgb(153, 153, 153);
+}
+.userinfo dt {
+	margin-bottom: 8px;
+}
+.userinfo dt a {
+	margin-right: 5px;
+}
+.userinfo dd {
+	height: 24px; color: rgb(102, 102, 102); line-height: 24px;
+}
+.userinfo dd em {
+	margin: 0px 6px 0px 2px; font-style: normal;
+}
+.userinfo dd img {
+	margin-bottom: -2px; margin-left: 10px;
+}
+.part9 .middle {
+	width: 244px; height: 133px; overflow: hidden; margin-left: 8px; float: left; display: inline;
+}
+.buybox {
+	
+}
+.buybox .title {
+	width: 248px; height: 20px; border-bottom-color: rgb(210, 210, 210); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.buybox .title::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.buybox .title li {
+	border: 1px solid rgb(210, 210, 210); width: 57px; text-align: center; margin-right: 3px; margin-bottom: -1px; float: left;
+}
+.buybox .title li.last {
+	margin-right: 0px;
+}
+.buybox .title li a {
+	background: rgb(237, 237, 237); border-width: 1px 1px 0px; border-style: solid solid none; border-color: rgb(255, 255, 255) rgb(255, 255, 255) currentColor; height: 18px; color: rgb(77, 77, 77); line-height: 18px; display: block; _line-height: 16px;
+}
+.buybox .title li a:hover {
+	text-decoration: none;
+}
+.buybox .title li.current {
+	background: rgb(255, 255, 255); height: 20px; color: rgb(77, 77, 77); line-height: 20px; font-weight: bold; border-bottom-color: currentColor; border-bottom-width: 0px; border-bottom-style: none; _line-height: 18px;
+}
+.buybox .cont {
+	border-width: 0px 1px 1px; border-style: none solid solid; border-color: currentColor rgb(210, 210, 210) rgb(210, 210, 210); padding: 5px 10px 0px; height: 106px; overflow: hidden;
+}
+.buybox .cont input.txt {
+	background: url("../images/inputbg.gif") repeat-x; padding: 2px 3px 1px; border: 1px solid rgb(167, 166, 170); width: 106px; font-weight: 700;
+}
+.buybox .cont table {
+	margin-top: 10px;
+}
+.buybox .cont table td {
+	padding: 3px 0px; text-align: left;
+}
+.buybox select {
+	font-size: 12px; margin-right: 5px;
+}
+body a.button1_a {
+	background: rgb(253, 233, 213); padding: 2px 5px 0px; border: 1px solid rgb(249, 172, 58); height: 15px; text-align: center; color: rgb(255, 85, 0); display: inline-block;
+}
+a.button1_a:hover {
+	border: 1px solid rgb(255, 85, 0); text-decoration: none;
+}
+body a.button4_a {
+	background: url("../images/repeat-x-bg.jpg") repeat-x 0px -20px; padding: 0px 20px; border: 1px solid rgb(249, 172, 58); height: 15px; text-align: center; color: rgb(255, 85, 0); line-height: 17px; vertical-align: middle; display: inline-block;
+}
+a.button4_a:hover {
+	border: 1px solid rgb(255, 85, 0); text-decoration: none;
+}
+.part9 .right {
+	width: 410px; height: 133px; overflow: hidden; float: right;
+}
+.part9 .notice {
+	background: rgb(251, 251, 251); padding: 7px 15px 0px; border: 1px solid rgb(225, 225, 225); height: 124px;
+}
+.part9 .notice li {
+	background: url("../images/msg_bg.gif") no-repeat 0px -1370px; color: rgb(51, 51, 51); line-height: 20px; text-indent: 20px; margin-top: 6px;
+}
+.part9 .notice ul a {
+	margin-left: 30px;
+}
+.part9 .notice p a {
+	background: rgb(248, 233, 202); padding: 5px; border: 1px solid rgb(249, 172, 58); color: rgb(255, 85, 0); font-size: 14px; float: right;
+}
+.dating {
+	margin-bottom: 10px;
+}
+.dating .title {
+	background: url("../images/bbs_bg.gif") no-repeat; height: 27px;
+}
+.dating .title h1 {
+	height: 27px; line-height: 27px; font-size: 14px; margin-right: 20px; margin-left: 15px; display: inline;
+}
+.dating .title b {
+	color: rgb(102, 102, 102); font-weight: normal;
+}
+.dating .title b a {
+	margin-left: 15px;
+}
+.dating .subtitle {
+	background: url("../images/bbs_bg.gif") no-repeat 0px -221px; height: 61px;
+}
+.dating .subnav {
+	height: 41px; padding-top: 20px; margin-left: 15px; float: left; display: inline;
+}
+.subnav input {
+	margin-top: 3px; margin-right: 5px; float: left; _margin-top: -2px; _margin-right: 0px;
+}
+.subnav strong {
+	color: rgb(255, 85, 0);
+}
+.subnav a {
+	color: rgb(102, 102, 102);
+}
+.subnav span {
+	margin: 0px 10px; color: rgb(153, 153, 153); font-size: 10px;
+}
+.dating .subtitle .button {
+	float: right;
+}
+.dating .subtitle .button a.button2_a {
+	background: url("../images/button.jpg") no-repeat 0px -165px; width: 130px; height: 35px; text-indent: -200000px; overflow: hidden; margin-top: 12px; display: inline-block;
+}
+.dating .subtitle .button a.button3_a {
+	background: url("../images/button.jpg") no-repeat 0px -202px; margin: 12px 5px 0px; width: 96px; height: 35px; text-indent: -200000px; overflow: hidden; display: inline-block;
+}
+.dating .subtitle .subbutton a.bbtton6_a {
+	background: url("../images/button.jpg") no-repeat 0px -202px; margin: 12px 5px 0px; width: 96px; height: 35px; text-indent: -200000px; overflow: hidden; display: inline-block;
+}
+.reListTitle {
+	
+}
+.reListTitle table {
+	width: 100%;
+}
+.reListTitle table thead td {
+	border: 1px solid rgb(192, 219, 248); overflow: hidden;
+}
+.reListTitle table thead.esp td {
+	background: rgb(241, 248, 254); padding: 8px 15px; height: 25px; line-height: 25px; vertical-align: middle; border-top-color: currentColor; border-top-width: 0px; border-top-style: none;
+}
+.reListTitle table thead.esp td .left {
+	width: 430px; color: rgb(153, 153, 153);
+}
+.reListTitle table thead.esp td .left b {
+	color: rgb(255, 85, 0);
+}
+.reListTitle table thead.esp td .right {
+	width: 430px; color: rgb(153, 153, 153); line-height: 150%;
+}
+.reListTitle table thead.esp td .right b {
+	color: rgb(255, 85, 0);
+}
+.reListTitle table thead td ul {
+	background: url("../images/repeat-x-bg.jpg") repeat-x; border: 1px solid rgb(255, 255, 255); height: 20px; line-height: 20px;
+}
+.reListTitle table thead td ul::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.reListTitle table thead td ul li {
+	text-align: center; color: rgb(153, 153, 153); float: left;
+}
+.reListTitle .id {
+	width: 115px; text-align: left; padding-left: 5px;
+}
+.reListTitle .poster {
+	width: 97px; text-align: left; padding-left: 10px;
+}
+.reListTitle .poster em {
+	background: url("../images/personal_icon.gif") no-repeat; height: 14px; line-height: 14px; text-indent: -200000px; overflow: hidden; margin-top: 2px; float: left; display: block;
+}
+.reListTitle .poster em.vip1 {
+	background-position: 0px -872px; width: 24px;
+}
+.reListTitle .poster em.vip2 {
+	background-position: 0px -894px; width: 40px;
+}
+.reListTitle .poster em.vip3 {
+	background-position: 0px -917px; width: 40px;
+}
+.reListTitle .time {
+	width: 100px;
+}
+.reListTitle .price {
+	width: 103px; text-align: left; text-indent: 18px; padding-left: 10px;
+}
+.reListTitle .oktime {
+	width: 145px; color: rgb(153, 153, 153);
+}
+.reListTitle .oktime p.d0 {
+	color: rgb(255, 85, 0);
+}
+.reListTitle .oktime p.d24 {
+	color: rgb(0, 153, 0);
+}
+.reListTitle .oktime p.d48 {
+	color: rgb(0, 153, 0);
+}
+.reListTitle .oktime p.d72 {
+	color: rgb(0, 153, 0);
+}
+.reListTitle .oktime em {
+	background: url("../images/personal_icon.gif") no-repeat; line-height: 17px; margin-right: 4px; display: inline-block;
+}
+.reListTitle .oktime em.sh {
+	background-position: 0px -823px; width: 17px;
+}
+.reListTitle .oktime em.wang {
+	background-position: 0px -843px; width: 40px;
+}
+.reListTitle .oktime em.anping {
+	background-position: 0px -939px; width: 16px;
+}
+.reListTitle .oktime em.duoping {
+	background-position: 0px -961px; width: 29px;
+}
+.reListTitle .oktime em.gai {
+	background-position: 0px -984px; width: 40px;
+}
+.reListTitle .oktime em.hpimage {
+	background-position: 0px -1412px; width: 29px;
+}
+.reListTitle .oktime em.balevel1 {
+	background-position: 0px -1463px; width: 29px;
+}
+.reListTitle .oktime em.balevel2 {
+	background-position: 0px -1503px; width: 29px;
+}
+.reListTitle .oktime em.balevel3 {
+	background-position: 0px -1543px; width: 29px;
+}
+.reListTitle .oktime em.balevel4 {
+	background-position: 0px -1583px; width: 29px;
+}
+.reListTitle .oktime em.balevel5 {
+	background-position: 0px -1622px; width: 29px;
+}
+.reListTitle .oktime em.balevel6 {
+	background-position: 0px -1442px; width: 29px;
+}
+.reListTitle .oktime em.balevel7 {
+	background-position: 0px -1483px; width: 29px;
+}
+.reListTitle .oktime em.balevel8 {
+	background-position: 0px -1523px; width: 29px;
+}
+.reListTitle .oktime em.balevel9 {
+	background-position: 0px -1563px; width: 29px;
+}
+.reListTitle .oktime em.balevel10 {
+	background-position: 0px -1602px; width: 29px;
+}
+.reListTitle .oktime em.chata {
+	background-position: 0px -1679px; width: 42px;
+}
+.reListTitle .oktime em.golda {
+	background-position: 0px -1707px; width: 31px;
+}
+.reListTitle .gold {
+	padding: 0px 0px 0px 30px; width: 220px; text-align: left;
+}
+.reListTitle .do {
+	text-align: right; padding-right: 10px; float: right;
+}
+.reListTitle td.gold {
+	color: rgb(153, 153, 153); font-weight: 200;
+}
+.reListTitle td.gold em {
+	color: rgb(214, 24, 16); font-weight: 700; margin-bottom: 3px; display: block;
+}
+.reListTitle td.gold em.tie {
+	background: url("../images/personal_icon.gif") no-repeat 40px -887px; padding-bottom: 20px; display: block;
+}
+.reListTitle td.gold b {
+	color: rgb(255, 85, 0); font-weight: normal;
+}
+.reListTitle table tbody td {
+	 height: 70px; text-align: center; color: rgb(102, 102, 102);
+}
+.reListTitle table tbody .tcolor td {
+	background-color: rgb(249, 249, 249);
+}
+.reListTitle td.id {
+	padding-left: 5px;
+}
+.reListTitle td.id p {
+	background: url("../images/personal_icon.gif") no-repeat; height: 20px; line-height: 20px; text-indent: 17px; font-weight: 700;
+}
+.reListTitle td.id em {
+	font-size: 11px;
+}
+.reListTitle td.id em i {
+	float: left; display: block;
+}
+.reListTitle td.id em i.comma {
+	background: url("../images/personal_icon.gif") no-repeat 0px -1738px; width: 32px; height: 14px; margin-right: 6px;
+}
+.reListTitle td.id p.x {
+	background-position: 0px -535px;
+}
+.reListTitle td.id p.s {
+	background-position: 0px -577px;
+}
+.reListTitle td.id p.l {
+	background-position: 0px -1062px;
+}
+.reListTitle td.id p.c {
+	background: url("../images/che.gif") no-repeat;
+}
+.reListTitle td.id p.t {
+	background-position: 0px -1378px;
+}
+.reListTitle td.id p.m {
+	background-position: 0px -1644px;
+}
+.reListTitle td.poster a {
+	height: 15px; line-height: 15px; overflow: hidden; display: block;
+}
+.reListTitle td.poster a:hover {
+	text-decoration: none;
+}
+.reListTitle td.price p {
+	background: url("../images/personal_icon.gif") no-repeat 0px -407px; height: 28px; color: rgb(255, 85, 0); text-indent: 0px; padding-left: 25px; font-weight: 700; display: block;
+}
+.reListTitle td.price p.edit {
+	background-position: 0px -771px;
+}
+.reListTitle td.do p {
+	margin-bottom: 5px;
+}
+.reListTitle td.do p.s_1 {
+	text-align: right; color: rgb(96, 170, 16); padding-left: 2px; font-weight: 100;
+}
+.reListTitle td.do p.s_2 {
+	text-align: right; color: rgb(255, 85, 0); padding-right: 2px;
+}
+.reListTitle td.do p.s_3 {
+	text-align: right; color: rgb(153, 153, 153); padding-right: 2px;
+}
+.reListTitle td.do p em {
+	margin: 0px 5px; color: rgb(255, 85, 0); font-weight: 700;
+}
+.reListTitle td.do {
+	float: none;
+}
+.dating_admin .reListTitle td {
+	border-bottom-color: rgb(192, 219, 248); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.dating_admin .reListTitle td.id {
+	border-left-color: rgb(192, 219, 248); border-left-width: 1px; border-left-style: solid;
+}
+.dating_admin .reListTitle td.do {
+	border-right-color: rgb(192, 219, 248); border-right-width: 1px; border-right-style: solid;
+}
+.dating_admin .reListTitle td.do .button4_a {
+	margin-bottom: 5px;
+}
+.dating_admin .reListTitle table {
+	margin-top: 10px;
+}
+.dating_admin .reListTitle table .left {
+	width: 430px; float: left;
+}
+.dating_admin .reListTitle table .left img {
+	margin-right: 5px;
+}
+.dating_admin .reListTitle table .left img {
+	float: left;
+}
+.dating_admin .reListTitle table .left b {
+	float: left;
+}
+.dating_admin .reListTitle table .left b {
+	width: 290px;
+}
+.dating_admin .reListTitle table .left .duo {
+	background: rgb(254, 237, 202); padding: 5px; border: 1px solid rgb(254, 191, 144); color: rgb(255, 85, 0); line-height: 32px; margin-left: 10px;
+}
+.dating_admin .reListTitle table .right2 {
+	color: rgb(153, 153, 153); float: right;
+}
+.dating_admin .reListTitle table .right2 em {
+	background: url("../images/personal_icon.gif") no-repeat 0px -457px; margin: 0px 0px 0px 20px; height: 22px; color: rgb(102, 102, 102); line-height: 20px; text-indent: 22px; display: inline-block;
+}
+.dating_admin .reListTitle table .right2 a {
+	text-decoration: underline; margin-left: 20px;
+}
+.dating_admin .reListTitle table .right2 b {
+	width: 290px; color: rgb(255, 85, 0);
+}
+.dating_admin .reListTitle table .right2 b {
+	float: left;
+}
+.dating_admin .reListTitle table .right2 img {
+	float: left;
+}
+.reListTitle table .right2 img {
+	margin-right: 5px;
+}
+.dating_admin .doexp {
+	color: rgb(153, 153, 153);
+}
+.dating_admin .doexp a {
+	margin: 0px 3px;
+}
+.dating_admin .doexp a.qq {
+	margin: 0px;
+}
+.dating_admin .doexp a.qq img {
+	margin: 0px 5px -4px 0px;
+}
+.dating_admin .doexp a.esp {
+	color: rgb(170, 170, 170);
+}
+.dating_admin .doexp a.esp:hover {
+	text-decoration: none;
+}
+.dating_admin .do {
+	width: 280px;
+}
+.dating_admin .do .shiwutime {
+	background: url("../images/personal_icon.gif") no-repeat 0px -490px; text-align: left; padding-left: 20px; margin-bottom: 3px; margin-left: 15px;
+}
+.dating_admin .do .shiwutime span {
+	color: rgb(255, 85, 0);
+}
+.dating_admin .reListTitle .price {
+	width: 83px;
+}
+.dating_admin .reListTitle .gold {
+	padding: 0px 10px; width: 60px; text-align: center;
+}
+.dating_admin .reListTitle td.state {
+	width: 130px; text-align: left;
+}
+.dating_admin .reListTitle td.state p.s_1 {
+	width: 130px; text-align: left; color: rgb(96, 170, 16); padding-left: 2px; font-weight: 700;
+}
+.dating_admin .reListTitle td.state p.s_2 {
+	width: 265px; text-align: left; color: rgb(255, 85, 0); padding-left: 2px;
+}
+.dating_admin .reListTitle td.state p.s_3 {
+	width: 265px; text-align: left; color: rgb(153, 153, 153); padding-left: 2px;
+}
+.dating_admin .reListTitle td.state p em {
+	margin: 0px 5px; color: rgb(255, 85, 0); font-weight: 700;
+}
+.dating_admin .reListTitle {
+	
+}
+.newhelp {
+	margin-top: 30px;
+}
+.newhelp .area1 {
+	background: url("../images/newhelpbg.gif") no-repeat; padding: 30px 23px 0px; height: 357px; overflow: hidden;
+}
+.newhelp .area1 p {
+	line-height: 180%; text-indent: 2em; font-size: 14px;
+}
+.newhelp .area2 {
+	background: url("../images/newhelpbg.gif") no-repeat 0px -434px; padding: 30px 23px 0px; height: 107px; overflow: hidden; margin-top: 30px;
+}
+.newhelp .area2 ul {
+	zoom: 1;
+}
+.newhelp .area2 ul::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.newhelp .area2 ul li {
+	width: 430px; margin-top: 10px; float: left;
+}
+.newhelp .area3 {
+	margin: 30px 0px 50px; zoom: 1;
+}
+.newhelp .area3::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.newhelp .area3 h3 {
+	background: url("../images/newhelpbg.gif") no-repeat; height: 85px; text-indent: -200000px; overflow: hidden;
+}
+.newhelp .area3 .cont {
+	
+}
+.newhelp .area3 ul li {
+	margin-top: 8px;
+}
+.newhelp .area3 ul li .title {
+	background: url("../images/newhelpbg.gif") no-repeat 10px -780px rgb(245, 245, 245); border: 1px solid rgb(230, 230, 230); height: 32px; line-height: 32px; text-indent: 35px; overflow: hidden; cursor: pointer;
+}
+.newhelp .area3 ul li .title em {
+	color: rgb(153, 153, 153); margin-left: 5px;
+}
+.newhelp .area3 ul li .exp {
+	border-width: 0px 1px 1px; border-style: none solid solid; border-color: currentColor rgb(230, 230, 230) rgb(230, 230, 230); padding: 15px;
+}
+.newhelp .area3 ul li .exp p {
+	line-height: 180%; text-indent: 2em; font-size: 14px; margin-bottom: 20px;
+}
+.newhelp .area3 ul li .exp p.esp {
+	color: rgb(255, 85, 0);
+}
+.newhelp .area3 ul li .exp span {
+	text-align: right; padding-right: 20px; display: block;
+}
+.newhelp .area3 .left {
+	width: 450px; float: left;
+}
+.newhelp .area3 .left h3 {
+	background-position: 0px -582px;
+}
+.newhelp .area3 .left .cont {
+	margin-right: 5px;
+}
+.newhelp .area3 .left .cont strong {
+	color: rgb(0, 102, 0);
+}
+.newhelp .area3 .right_r {
+	width: 450px; float: right;
+}
+.newhelp .area3 .right_r h3 {
+	background-position: 0px -679px;
+}
+.newhelp .area3 .right_r .cont {
+	margin-left: 5px;
+}
+.newhelp .area3 .right_r .cont strong {
+	color: rgb(255, 85, 0);
+}
+.divin {
+	background: rgb(255, 255, 255); width: 600px;
+}
+.divin .cont {
+	font-size: 12px;
+}
+.divin .cont table.namelist {
+	margin: 30px 10px 0px 50px; width: 100%;
+}
+.divin .cont table.namelist td {
+	padding: 3px 0px; color: rgb(153, 153, 153);
+}
+.divin .cont table.namelist td.name {
+	width: 140px; color: rgb(255, 85, 0); font-weight: 700;
+}
+.divin .cont table.namelist td.name input {
+	margin-right: 5px;
+}
+.divin .cont p {
+	margin: 30px 20px 0px; color: rgb(153, 153, 153); line-height: 150%;
+}
+.pwdiv {
+	padding: 0px 10px 10px 30px; zoom: 1;
+}
+.pwdiv dd {
+	font-size: 12px; margin-bottom: 10px;
+}
+.pwdiv dd input {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); margin: 10px 15px 0px 0px; padding: 2px 3px 0px; width: 120px; line-height: 20px; heigth: 20px;
+}
+.pwdiv dd span {
+	color: rgb(255, 0, 0);
+}
+.send_2 {
+	padding: 15px; width: 330px; zoom: 1;
+}
+.send_2 em {
+	color: rgb(255, 85, 0); font-family: Tahoma, Geneva, sans-serif; font-weight: bold;
+}
+.send_2 textarea {
+	background: url("images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); margin: 10px 0px 5px; padding: 2px 3px 0px; width: 85%; height: 60px; line-height: 20px;
+}
+.box1 {
+	margin-bottom: 10px;
+}
+.box1 .title {
+	background: url("../images/boxbg.gif") no-repeat; height: 35px;
+}
+.box1 .title h2 {
+	height: 30px; line-height: 30px; font-size: 14px; margin-right: 20px; margin-left: 15px; display: inline;
+}
+.box1 .cont {
+	background: rgb(255, 255, 204);
+}
+.box1 .cont ul {
+	padding: 15px 30px;
+}
+.box1 .cont ul li {
+	background: url("../images/msg_bg.gif") no-repeat 0px -1376px; line-height: 120%; text-indent: 23px; margin-bottom: 10px;
+}
+.box1 .cont ul li.esp {
+	color: rgb(255, 85, 0);
+}
+.box2 {
+	margin-bottom: 10px;
+}
+.box2 .title {
+	background: url("../images/boxbg.gif") no-repeat 0px -43px; height: 30px;
+}
+.box2 .title h1 {
+	height: 30px; line-height: 30px; font-size: 14px; margin-right: 20px; margin-left: 15px; display: inline;
+}
+.box2 .title_a h1 {
+	height: 30px; line-height: 30px; font-size: 14px; margin-right: 20px; margin-left: 15px; display: inline;
+}
+.box2 .title_a {
+	background: url("../images/boxbg.gif") no-repeat 0px -89px; width: 620px; height: 30px; position: relative;
+}
+.posttask .cont {
+	padding: 10px 10px 25px; line-height: 150%;
+}
+.posttask .cont01 {
+	line-height: 24px;
+}
+.posttask .cont li {
+	padding: 10px; border: 1px solid rgb(255, 255, 255); margin-bottom: 5px; zoom: 1;
+}
+.posttask .cont01 li {
+	border: 1px solid rgb(255, 255, 255); margin-top: 5px; margin-bottom: 5px; zoom: 1;
+}
+.posttask .cont li:hover {
+	background: rgb(244, 252, 254); border: 1px solid rgb(212, 232, 252);
+}
+.posttask .cont01 li:hover {
+	background: rgb(244, 252, 254); border: 1px solid rgb(212, 232, 252);
+}
+.posttask .cont li.add:hover {
+	background: rgb(255, 255, 255); border: 1px solid rgb(255, 255, 255);
+}
+.posttask .cont01 li.add:hover {
+	background: rgb(255, 255, 255); border: 1px solid rgb(255, 255, 255);
+}
+.posttask .cont li.hover {
+	_border: 1px solid #D4E8FC; _background: #F4FCFE;
+}
+.posttask .cont01 li.hover {
+	_border: 1px solid #D4E8FC; _background: #F4FCFE;
+}
+.posttask .cont li::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.posttask .cont01 li::after {
+	height: 0px; clear: both; display: block; visibility: hidden; content: ".";
+}
+.posttask .name {
+	width: 133px; text-align: right; overflow: hidden; font-size: 14px; float: left;
+}
+.posttask .name01 {
+	width: 223px; text-align: left; color: rgb(0, 0, 0); overflow: hidden; padding-left: 10px; float: left;
+}
+.posttask .value {
+	width: 214px; padding-left: 12px; margin-right: 20px; float: left;
+}
+.posttask .value01 {
+	width: 290px; color: rgb(0, 0, 0); margin-right: 20px; float: left;
+}
+.posttask .tvalue {
+	width: 380px; padding-left: 12px; font-size: 14px; float: left;
+}
+.posttask .tvalue span {
+	color: rgb(0, 0, 0); margin-left: 45px;
+}
+.posttask .long {
+	width: 328px;
+}
+.posttask .longest {
+	width: 688px; color: rgb(153, 153, 153);
+}
+.posttask .longest strong {
+	margin: 0px 10px 0px 5px; color: rgb(0, 0, 0); font-weight: 200;
+}
+.posttask .longest p {
+	margin-top: 20px;
+}
+.posttask .longest p input {
+	margin: 0px 5px;
+}
+.posttask .value b {
+	font-size: 14px; font-weight: 700;
+}
+.posttask .value em {
+	margin: 0px 5px; color: rgb(255, 85, 0);
+}
+.posttask .value input.txt {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; height: 17px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.posttask .tvalue input.txt {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; height: 17px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.posttask .value textarea {
+	background: url("../images/inputbg.gif") repeat-x rgb(255, 255, 255); border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; color: rgb(255, 85, 0); font-size: 14px; font-weight: 700;
+}
+.posttask .value input.esp {
+	margin: 0px 0px -2px -2px; padding: 0px; border: 0px currentColor; height: auto;
+}
+.posttask .value input.esp2 {
+	margin: 0px 0px -2px -2px; padding: 0px; height: auto;
+}
+.posttask .value p {
+	margin: 5px 0px; color: rgb(153, 153, 153);
+}
+.posttask .value select {
+	width: 190px; font-size: 12px;
+}
+.posttask .exp {
+	color: rgb(153, 153, 153);
+}
+.posttask .exp01 {
+	width: 200px; color: rgb(255, 153, 0); float: left;
+}
+.posttask .exp em {
+	color: rgb(255, 85, 0);
+}
+.posttask .button {
+	margin: 20px 0px 20px 154px;
+}
+.posttask .button input {
+	background: url("../images/button.jpg") no-repeat 0px -242px; border: 0px currentColor; width: 161px; height: 35px; overflow: hidden;
+}
+.add .addvalue {
+	background: rgb(255, 255, 204); padding: 5px 10px; border: 1px solid red; width: 660px; overflow: hidden; margin-right: 30px; margin-left: 11px; float: left;
+}
+.add .addvalue .name {
+	width: 93px; font-size: 12px;
+}
+.posttask .cont li.add li {
+	border: 0px currentColor;
+}
+.posttask .cont li.add li:hover {
+	border: 0px currentColor;
+}
+.posttask .add .longest {
+	width: 500px;
+}
+.posttask .add .long {
+	margin-right: 15px;
+}
+.posttask .add .short {
+	width: 20px; height: 40px; padding-top: 3px; margin-right: 10px;
+}
+.posttask .add .value textarea {
+	background: url("../images/inputbg.gif") repeat-x rgb(255, 255, 255); border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; width: 280px; height: 95px; color: rgb(102, 102, 102); font-size: 12px; font-weight: 200; margin-left: 10px; vertical-align: top;
+}
+.posttask .cont li.add li {
+	padding: 10px 10px 5px; margin-bottom: 0px; zoom: 1;
+}
+.part10 {
+	width: 910px; margin-bottom: 7px;
+}
+.part10 .left {
+	background: url("../images/sy_bg001.jpg") repeat-x left top;
+}
+.part10 .tbbg1 {
+	padding: 1px; border: 1px solid rgb(224, 237, 244); width: 677px; height: 409px; overflow: hidden; float: left;
+}
+.part10 .left h2 {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -70px; margin: 0px 0px 0px 20px; padding: 2px 0px 2px 20px; color: rgb(45, 45, 45); line-height: 29px; font-size: 14px;
+}
+.part10 .left2 h2 {
+	background: url("../images/sy_tb01.gif") no-repeat 0px -98px; margin: 0px 0px 0px 20px; padding: 2px 0px 2px 25px; color: rgb(45, 45, 45); line-height: 29px; font-size: 14px;
+}
+.part10 h3 {
+	margin: 0px 0px 0px 20px; padding-top: 4px; font-size: 14px; _padding-top: 5px;
+}
+.main .part10 .left .title {
+	height: 30px;
+}
+.main .part10 .left .title h2 {
+	margin-right: 20px; float: left; display: inline;
+}
+.main .part10 .left .title em {
+	margin: 8px 20px 0px 0px; color: rgb(153, 153, 153); font-style: normal; float: right; display: inline;
+}
+.part10 .left .cont {
+	padding: 10px;
+}
+.part10 .partzuo {
+	width: 681px; overflow: hidden; float: left;
+}
+.part10 .right {
+	margin: 0px 0px 0px 11px; width: 218px; height: 724px; overflow: hidden; float: left;
+}
+.part10 .right .title {
+	background: url("../images/gg005.jpg") no-repeat left top; width: 218px; height: 29px; overflow: hidden;
+}
+.part10 .right .title h3 {
+	width: 106px; text-align: center; color: rgb(255, 255, 255);
+}
+.part10 .right .cont {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(221, 221, 221) rgb(221, 221, 221); padding: 10px 0px 10px 15px; height: 671px;
+}
+.part10 .now li {
+	color: rgb(102, 102, 102); padding-bottom: 5px; margin-top: 10px; _padding-bottom: 8px;
+}
+.part10 .now li img {
+	padding: 1px; border: 1px solid rgb(204, 204, 204); margin-right: 5px; float: left;
+}
+.part10 .now li a {
+	margin-right: 5px;
+}
+.part10 .now li p {
+	color: rgb(153, 153, 153); margin-top: 4px;
+}
+.part10 .now li p span {
+	margin: 0px 5px;
+}
+.main .part10 .left2 .title {
+	height: 41px;
+}
+.part10 .tbbg2 {
+	padding: 1px; border: 1px solid rgb(224, 237, 244); width: 677px; height: 294px; overflow: hidden; margin-top: 10px; float: left;
+}
+.part10 .left2 {
+	background: url("../images/sy_bg001.jpg") repeat-x left top;
+}
+.main .part10 .left2 .title h2 {
+	margin-right: 20px; float: left; display: inline;
+}
+.main .part10 .left2 .title em {
+	margin: 8px 20px 0px 0px; color: rgb(153, 153, 153); font-style: normal; float: right; display: inline;
+}
+.part10 .left2 .cont {
+	padding: 10px 18px; clear: both; _padding-top: 5px;
+}
+.part10 .left2 .reListTitle table tbody td {
+	 height: 28px; text-align: left; color: rgb(102, 102, 102); line-height: 28px;
+}
+.part10 .left2 .reListTitle table tbody td.do {
+	text-align: right;
+}
+.part10 .left2 .reListTitle table tbody .tcolor td {
+	background-color: rgb(246, 246, 246);
+}
+.part10 .left2 .id {
+	text-align: center;
+}
+.part10 .left2 .reListTitle table tbody td.id {
+	text-align: center;
+}
+.part10 .left2 .price {
+	text-align: center;
+}
+.part10 .left2 .reListTitle table tbody td.price {
+	text-align: center;
+}
+.part10 .left2 .smailltitle {
+	padding-left: 18px; clear: both;
+}
+.part10 .left2 .smailltitle a {
+	background: url("../images/button.jpg") no-repeat 0px -337px; border: 0px currentColor; width: 71px; height: 24px; text-align: center; color: rgb(51, 51, 51); line-height: 20px; font-size: 12px; margin-right: 10px; float: left; display: block;
+}
+.part10 .left2 .smailltitle a:hover {
+	text-decoration: none;
+}
+.part10 .left2 .smailltitle .czbtna {
+	background-position: 0px -313px; color: rgb(255, 255, 255);
+}
+.gou {
+	width: 911px; position: relative;
+}
+.gou a {
+	text-align: center; font-weight: bolder; margin-right: 10px; float: left; display: inline;
+}
+.gou .dan {
+	background: url("../images/table.gif") no-repeat 0px -145px; width: 100px; height: 24px; color: rgb(255, 255, 255); line-height: 26px; overflow: hidden; display: block;
+}
+.gou .dan01 {
+	background: url("../images/table.gif") no-repeat 0px -170px; width: 100px; height: 24px; color: rgb(51, 51, 51); line-height: 26px; overflow: hidden; display: block;
+}
+.gou .img {
+	left: 200px; top: -10px; position: absolute;
+}
+.gou .img_s {
+	left: 418px; top: -3px; position: absolute;
+}
+.gou p {
+	padding-top: 24px; border-bottom-color: rgb(1, 137, 255); border-bottom-width: 2px; border-bottom-style: solid;
+}
+.gou ul {
+	background: rgb(235, 248, 255); padding: 15px 0px 0px; border: 1px dashed rgb(180, 181, 183); width: 909px; overflow: hidden; margin-top: 13px;
+}
+.gou ul input {
+	padding: 0px 10px 10px 6px; float: left; display: inline;
+}
+.gou ul li {
+	width: 805px; line-height: 20px; float: left; display: inline;
+}
+.gou ul li span {
+	color: rgb(255, 0, 0);
+}
+.posttask .va {
+	width: 150px; float: left;
+}
+.posttask .va input.txt {
+	background: url("images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; height: 17px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.posttask .vb {
+	width: 78px; padding-left: 12px; margin-right: 20px; float: left;
+}
+.posttask .vb input.txt {
+	background: url("images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; height: 17px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.posttask .vc {
+	padding: 0px 0px 0px 140px; width: 590px; color: rgb(252, 87, 0); margin-right: 20px; float: left;
+}
+.posttask .vc img {
+	margin-right: 5px; margin-bottom: -4px;
+}
+.posttask .vc span {
+	color: rgb(255, 0, 0);
+}
+.posttask .ex a {
+	background: rgb(253, 233, 213); padding: 3px; border: 1px solid rgb(249, 172, 58); height: 18px; color: rgb(255, 85, 0); margin-right: 15px;
+}
+.posttask .exp .tp {
+	background: rgb(253, 233, 213); padding: 3px; border: 1px solid rgb(249, 172, 58); height: 18px; color: rgb(255, 85, 0); margin-left: 20px;
+}
+.posttask .nr {
+	width: 875px; margin-top: 10px;
+}
+.posttask .nr .ny {
+	float: left; display: inline;
+}
+.posttask .nr .nyy {
+	float: left; display: inline;
+}
+.posttask .nr .nyy01 {
+	float: left; display: inline;
+}
+.posttask .nr .nyy02 {
+	float: left; display: inline;
+}
+.posttask .nr .short {
+	float: left; display: inline;
+}
+.posttask .nr .ny {
+	width: 680px; height: 24px; overflow: hidden; padding-left: 6px;
+}
+.posttask .nr .ny em {
+	color: rgb(153, 153, 153); margin-left: 10px;
+}
+.posttask .nr .nyy {
+	margin-right: 10px; margin-left: 133px;
+}
+.posttask .nr .nyy #textarea {
+	padding: 3px; width: 290px; font-size: 12px;
+}
+.posttask .nr .short {
+	width: 20px; height: 20px; padding-top: 3px; margin-right: 5px; margin-left: 16px;
+}
+.posttask .nr .name01 {
+	width: 133px; text-align: right; overflow: hidden; font-size: 12px; float: left;
+}
+.posttask .nr .name01 {
+	margin-top: 5px;
+}
+.posttask .nr .va {
+	margin-top: 5px;
+}
+.posttask .nr .vaa {
+	margin-top: 5px;
+}
+.posttask .nr .va {
+	width: 156px;
+}
+.posttask .nr .vaa {
+	width: 550px; color: rgb(153, 153, 153); float: right; display: inline;
+}
+.posttask .nr .nyy01 {
+	width: 870px; display: none;
+}
+.posttask .nr .nyy02 {
+	width: 870px;
+}
+.posttask .vall {
+	margin-left: 35px;
+}
+.posttask .value textarea {
+	color: rgb(102, 102, 102); font-size: 12px; font-weight: normal;
+}
+.zheng .zheng_top {
+	background: url("../images/line_bg.gif") repeat-x rgb(255, 253, 233); margin: 15px auto auto; border: 1px solid rgb(255, 225, 166); width: 490px; color: rgb(255, 85, 0); line-height: 24px;
+}
+.zheng .zheng_top p {
+	padding: 8px; text-indent: 10px;
+}
+.zheng .zheng_b {
+	margin: 5px auto auto; width: 492px;
+}
+.zheng .zheng_b h1 {
+	background: url("../images/personal_icon.gif") no-repeat 0px -1015px; width: 400px; height: 27px; line-height: 35px; text-indent: 35px; overflow: hidden; font-size: 12px; margin-left: 5px;
+}
+.zheng .zheng_b .u {
+	border: 1px solid rgb(255, 221, 152); width: 490px; margin-top: 5px;
+}
+.zheng .zheng_b .u ul {
+	padding: 10px 10px 5px 20px; width: 460px;
+}
+.zheng .zheng_b .u ul li {
+	width: 450px; line-height: 24px; margin-bottom: 5px;
+}
+.zheng .zheng_b .u .step {
+	width: 60px; float: left; display: block;
+}
+.zheng .zheng_b .u .exp {
+	width: 385px; float: left; display: block;
+}
+.zheng .zheng_b .u ul li span {
+	color: rgb(255, 85, 0); font-weight: bolder;
+}
+.zheng .zheng_b .u ul li em {
+	color: rgb(64, 143, 203); font-weight: bolder;
+}
+.zheng .zheng_b .u ul li b {
+	color: rgb(228, 7, 118);
+}
+.zheng .zheng_b .u ul li a {
+	background: rgb(220, 239, 255); padding: 1px 10px; border: 1px solid rgb(95, 186, 255); margin-right: 6px; margin-left: 5px;
+}
+.zheng .zheng_b .u ul .sa a {
+	background: url("../images/admin_an.gif") no-repeat 0px -648px; border: currentColor; width: 50px; height: 20px; color: rgb(0, 0, 0); line-height: 20px; padding-left: 20px; font-weight: bolder; float: left; display: inline;
+}
+.zheng .zheng_b .u ul .sa input {
+	width: 280px; margin-right: 10px; margin-left: 50px; float: left; display: inline;
+}
+.zheng .zheng_b .u ul .sa .p01 {
+	background: url("../images/msg_bg.gif") no-repeat; color: rgb(255, 85, 0); text-indent: 20px; margin-left: 50px;
+}
+.zheng .zheng_b .u ul .sa .p02 {
+	background: url("../images/msg_bg.gif") no-repeat 0px -250px; color: rgb(64, 143, 203); text-indent: 20px; margin-left: 50px;
+}
+.zheng .zheng_b .u ul li .stay {
+	background: url("../images/admin_an.gif") no-repeat 0px -648px; border: currentColor; width: 60px; height: 20px; text-align: center; color: rgb(0, 0, 0); line-height: 20px; overflow: hidden; font-weight: bolder; margin-left: 150px; display: block;
+}
+.zheng .zheng_b .u p {
+	width: 460px; color: rgb(255, 0, 0); line-height: 20px; margin-bottom: 10px; margin-left: 10px;
+}
+.zheng {
+	margin: auto; width: 508px;
+}
+.zheng .ti {
+	background: rgb(245, 250, 255); padding: 12px 0px 25px 22px; width: 486px; overflow: hidden;
+}
+.zheng .ti img {
+	float: left; display: inline;
+}
+.zheng .ti p {
+	float: left; display: inline;
+}
+.zheng .ti p {
+	width: 400px; line-height: 20px; margin-left: 20px;
+}
+.zheng .ti p span {
+	color: rgb(238, 62, 1);
+}
+.zheng .biao h1 img {
+	margin-bottom: 5px; margin-left: 12px;
+}
+.zheng .biao .nr {
+	margin: auto; width: 466px;
+}
+.zheng .biao .nr .t {
+	background: url("../images/biao_mid.gif") repeat-y; width: 466px; font-size: 14px; font-weight: bolder;
+}
+.zheng .biao .nr .t table {
+	width: 456px; margin-right: 10px; margin-bottom: 10px; margin-left: 5px;
+}
+.zheng .biao .nr .t table .tcolor td {
+	background-color: rgb(247, 247, 247);
+}
+.zheng .biao .nr .t table td {
+	line-height: 30px;
+}
+.zheng .biao .nr .t .t01 {
+	background: url("../images/liwuhe.gif") no-repeat 0px 5px; text-indent: 30px;
+}
+.zheng .biao .nr .t .t01 span {
+	color: rgb(64, 143, 203); font-size: 12px;
+}
+.zheng .biao .nr .t .t02 {
+	width: 330px; text-indent: 30px;
+}
+.zheng .biao .nr .t .t02 span {
+	color: rgb(255, 0, 0);
+}
+.zheng .biao .nr .t .t03 {
+	width: 65px;
+}
+.zheng .biao .nr .t .t04 {
+	width: 65px;
+}
+.zheng .biao .nr .t .t03 a {
+	color: rgb(1, 135, 238);
+}
+.zheng .biao .nr .t .t04 a {
+	color: rgb(255, 0, 0);
+}
+.zheng .biao .nr .t .t05 {
+	background: url("../images/icon/ping_gou.gif") no-repeat; font-size: 12px; font-weight: normal; display: inline-block;
+}
+.zheng .biao .nr .t .t05 span {
+	color: rgb(255, 85, 0); padding-left: 93px;
+}
+.zheng .biao .nr .t ul {
+	width: 456px; font-weight: normal; margin-top: 10px; margin-left: 10px;
+}
+.zheng .biao .nr .t ul li {
+	width: 456px; height: 26px; line-height: 26px; overflow: hidden;
+}
+.zheng .biao .nr .t ul li span {
+	color: rgb(255, 0, 0); font-weight: bolder;
+}
+.box2 .regarea table {
+	vertical-align: middle;
+}
+.box2 .regarea table td {
+	line-height: 32px;
+}
+.box2 .regarea table .regaa a {
+	background: rgb(229, 243, 255); padding: 1px 10px 0px; border: 1px solid rgb(72, 169, 238); color: rgb(63, 143, 202);
+}
+.box2 .regarea table .textinput {
+	padding: 1px 2px 0px 0px; height: 16px; color: rgb(63, 143, 202);
+}
+.box2 .regarea table .h1 {
+	background: url("../images/msg_bg.gif") no-repeat 0px -601px; color: rgb(60, 145, 200); line-height: 40px; text-indent: 45px; font-size: 14px; font-weight: bolder;
+}
+.box2 .regarea table .h11 {
+	background: url("../images/msg_bg.gif") no-repeat 0px -401px; color: rgb(60, 145, 200); line-height: 40px; text-indent: 45px; font-size: 14px; font-weight: bolder;
+}
+.box2 .regarea table span {
+	color: rgb(255, 0, 0); margin-right: 5px; margin-left: 2px;
+}
+.box2 .ge {
+	background: rgb(246, 247, 247); padding: 38px 0px 50px 30px; width: 590px; position: relative;
+}
+.box2 .ge .ziliao_a img {
+	border: 1px solid rgb(204, 204, 204);
+}
+.box2 .ge .ziliao_a {
+	float: left; display: inline;
+}
+.box2 .ge ul {
+	float: left; display: inline;
+}
+.box2 .ge ul {
+	margin-left: 42px;
+}
+.box2 .ge ul li {
+	height: 43px; line-height: 43px;
+}
+.box2 .ge ul span {
+	color: rgb(254, 110, 5); font-weight: bolder;
+}
+.box2 .regarea .regarea_table {
+	width: 820px; text-align: center;
+}
+.box2 .tiezi {
+	background: url("../images/bgs_holiday.gif") no-repeat -820px 0px; left: 675px; top: 175px; width: 280px; height: 330px; position: absolute;
+}
+.box2 .tiezi .hhot h1 {
+	padding: 0px 0px 0px 20px; height: 35px; line-height: 35px; font-size: 14px; float: left; display: inline;
+}
+.box2 .tiezi .hhot em {
+	padding: 10px 15px 0px 0px; float: right; display: inline;
+}
+.box2 .tiezi ul {
+	padding: 8px 0px 0px 20px;
+}
+.box2 .tiezi ul li {
+	background: url("../images/icons_holiday.gif") no-repeat 0px -255px; height: 24px; line-height: 24px; text-indent: 14px; overflow: hidden;
+}
+.bbs_tie {
+	background: rgb(239, 246, 254); border: 1px solid rgb(170, 219, 252); width: 910px;
+}
+.bbs_tie table {
+	margin-top: 20px; margin-bottom: 30px;
+}
+.bbs_tie table td {
+	line-height: 35px;
+}
+.bbs_tie table .textinputa {
+	width: 600px; height: 200px;
+}
+.bbs_tie table img {
+	margin-right: 5px; margin-bottom: -5px;
+}
+.regarea_b table {
+	width: 700px; text-align: center; margin-left: 50px;
+}
+.regarea_b table .regarea_left {
+	text-align: left; padding-top: 10px; padding-left: 10px;
+}
+.regarea_b table .regarea_right {
+	color: rgb(62, 142, 203);
+}
+.regarea_b table .regarea_left .tpsc {
+	width: 70px; margin-right: 20px; margin-left: 30px; float: left;
+}
+.regarea_b table .regarea_left .tpsc p {
+	border: 1px solid rgb(204, 204, 204); width: 68px; height: 68px; text-align: center;
+}
+.regarea_b table .regarea_left .tpsc a {
+	background: url("../images/admin_an.gif") no-repeat 0px -1014px; width: 70px; height: 20px; margin-top: 8px; display: block;
+}
+.regarea_b table .regarea_left .tti {
+	width: 510px; margin-top: 10px; margin-bottom: 10px;
+}
+.regarea_b table .regarea_left .tti p {
+	background: url("../images/msg1_bg.gif") no-repeat 0px -60px rgb(255, 255, 229); padding: 0px 5px; border: 1px solid rgb(255, 204, 127); color: rgb(85, 85, 85); line-height: 20px; text-indent: 15px;
+}
+.regarea_b table .regarea_left .tti p a {
+	color: rgb(255, 85, 0);
+}
+.main .mid_t {
+	width: 910px; margin-top: 10px;
+}
+.main .mid_t h1 {
+	background: url("../images/bbs_bg.gif") no-repeat; height: 28px; line-height: 28px; text-indent: 15px; font-size: 14px;
+}
+.main .mid_t h1 span {
+	float: left;
+}
+.main .mid_t h1 a {
+	color: rgb(255, 85, 0); margin-right: 10px; float: right;
+}
+.main .mid_t .center {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(170, 203, 228) rgb(170, 203, 228); padding: 20px 50px; width: 808px;
+}
+.main .mid_t .center .ul {
+	
+}
+.main .mid_t .center .ul li {
+	width: 265px; height: 24px; line-height: 24px; overflow: hidden; float: left;
+}
+.main .mid_t .center .ul a {
+	color: rgb(255, 85, 0); font-weight: bolder; margin-left: 18px;
+}
+.main .mid_t .center .ul span {
+	color: rgb(62, 142, 203);
+}
+.main .mid_t .center .ul .e em {
+	color: rgb(255, 85, 0); padding-left: 10px;
+}
+.main .mid_t .center .ul .e span {
+	padding-left: 10px;
+}
+.main .mid_t .center .ul em {
+	color: rgb(255, 0, 0); padding-left: 10px;
+}
+.main .mid_t .center .talk {
+	width: 735px; margin-top: 50px;
+}
+.main .mid_t .center .talk .l {
+	float: left;
+}
+.main .mid_t .center .talk .r {
+	float: left;
+}
+.main .mid_t .center .talk .l {
+	width: 190px;
+}
+.main .mid_t .center .talk .l ul {
+	float: left;
+}
+.main .mid_t .center .talk .l p img {
+	float: left;
+}
+.main .mid_t .center .talk .l p img {
+	border: 1px solid rgb(204, 204, 204);
+}
+.main .mid_t .center .talk .l ul {
+	margin-left: 15px;
+}
+.main .mid_t .center .talk .l ul .jibie {
+	color: rgb(102, 102, 102); margin-top: 18px;
+}
+.main .mid_t .center .talk .l ul .jibie em {
+	color: rgb(255, 0, 0);
+}
+.main .mid_t .center .talk .l ul li span {
+	color: rgb(51, 114, 162);
+}
+.main .mid_t .center .talk .r {
+	width: 520px;
+}
+.main .mid_t .center .talk .r .toubu {
+	background: url("../images/bbs_bg.gif") no-repeat 0px -288px; height: 45px;
+}
+.main .mid_t .center .talk .r .toubu em {
+	color: rgb(255, 0, 0); line-height: 33px; padding-left: 35px; float: left;
+}
+.main .mid_t .center .talk .r .toubu span {
+	color: rgb(153, 153, 153); line-height: 33px; padding-right: 15px; float: right;
+}
+.main .mid_t .center .talk .r .dibu {
+	background: url("../images/bbs_bg.gif") no-repeat 0px -333px; height: 8px;
+}
+.main .mid_t .center .talk .r .infor {
+	background: url("../images/bbs/bbs_bg_02.gif") repeat-y; margin-left: 19px;
+}
+.main .mid_t .center .talk .r .infor ul {
+	width: 460px; color: rgb(102, 102, 102); overflow: hidden; padding-left: 20px;
+}
+.main .mid_t .center .talk .r .infor ul li {
+	line-height: 20px;
+}
+.main .talk .r .infor ul li .fol {
+	margin-top: 20px; float: left;
+}
+.main .talk .r .infor ul li .fol a {
+	margin-right: 8px;
+}
+.main .talk .r .infor ul li .for {
+	margin-top: 20px; float: right;
+}
+.main .talk .r .infor ul li .for input {
+	margin-bottom: -3px;
+}
+.main .mid_t .center .Do {
+	width: 735px; margin-top: 50px; margin-left: 30px;
+}
+.main .mid_t .center .Do .daohang {
+	height: 28px; overflow: hidden;
+}
+.main .mid_t .center .Do .daohang a {
+	background: url("../images/table.gif") no-repeat 0px -235px; width: 92px; height: 28px; text-align: center; color: rgb(0, 0, 0); line-height: 28px; overflow: hidden; font-weight: bolder; margin-right: 10px; display: inline-block;
+}
+.main .mid_t .center .Do .daohang .d_a {
+	background: url("../images/table.gif") no-repeat 0px -198px; width: 101px; height: 33px; color: rgb(255, 255, 255); line-height: 33px; font-size: 14px;
+}
+.main .mid_t .center .Do .nr {
+	background: rgb(255, 255, 229); border: 1px solid rgb(255, 85, 0); width: 720px;
+}
+.main .mid_t .center .Do .nr ul {
+	padding: 30px;
+}
+.main .mid_t .center .Do .nr .ming {
+	margin-top: 15px; margin-bottom: 5px; float: left;
+}
+.main .mid_t .center .Do .nr .ty {
+	margin-top: 15px; margin-bottom: 5px; float: left;
+}
+.main .mid_t .center .Do .nr .etp {
+	margin-top: 15px; margin-bottom: 5px; float: left;
+}
+.main .mid_t .center .Do .nr .ming {
+	width: 100px; text-align: right; font-size: 14px; margin-right: 10px;
+}
+.main .mid_t .center .Do .nr .ty {
+	width: 550px;
+}
+.main .mid_t .center .Do .nr .tb {
+	width: 260px; margin-right: 25px; margin-bottom: 20px; float: left;
+}
+.main .mid_t .center .Do .nr .ty .txt {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; width: 240px; height: 17px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700; float: left;
+}
+.main .mid_t .center .Do .nr .tb .tx {
+	padding: 3px 3px 0px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.main .mid_t .center .Do .nr .ty a {
+	margin-left: 12px; float: left;
+}
+.main .mid_t .center .Do .nr .ty a.botome1 {
+	background: url("../images/admin_an.gif") no-repeat 0px -1073px; width: 70px; height: 20px; text-indent: -10000px; display: inline-block;
+}
+.main .mid_t .center .Do .nr .ty a.botome2 {
+	background: rgb(253, 233, 213); padding: 3px 3px 2px; border: 1px solid rgb(249, 172, 58); color: rgb(255, 85, 0);
+}
+.main .mid_t .center .Do .nr .etp {
+	width: 240px; color: rgb(153, 153, 153); line-height: 24px; margin-left: 10px;
+}
+.main .mid_t .center .Do .nr .ture {
+	height: 20px; line-height: 20px; text-indent: 20px; margin-left: 110px;
+}
+.main .mid_t .center .Do .nr .flase {
+	height: 20px; line-height: 20px; text-indent: 20px; margin-left: 110px;
+}
+.main .mid_t .center .Do .nr .yan {
+	height: 20px; line-height: 20px; text-indent: 20px; margin-left: 110px;
+}
+.main .mid_t .center .Do .nr .ture {
+	background: url("../images/msg_bg.gif") no-repeat 0px -250px; color: rgb(255, 85, 0);
+}
+.main .mid_t .center .Do .nr .flase {
+	background: url("../images/msg_bg.gif") no-repeat; color: rgb(255, 0, 0);
+}
+.main .mid_t .center .Do .nr .yan {
+	background: url("../images/msg_bg.gif") no-repeat 0px -150px; color: rgb(85, 85, 85);
+}
+.main .mid_t .center .cz {
+	padding: 30px;
+}
+.main .mid_t .center .cz strong {
+	font-size: 14px;
+}
+.main .mid_t .center .cz table {
+	line-height: 30px; font-size: 14px; margin-top: 10px;
+}
+.main .mid_t .center .cz table .history em {
+	color: rgb(255, 85, 0); padding-left: 10px; float: left;
+}
+.main .mid_t .center .cz table .history a {
+	float: right;
+}
+.main .mid_t .center .cz table .bian {
+	width: 120px; text-align: right; padding-right: 10px;
+}
+.main .mid_t .center .cz table .fan .txt {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; width: 80px; height: 15px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.main .mid_t .center .cz table .fan {
+	height: 36px; line-height: 36px;
+}
+.main .mid_t .center .cz table input {
+	margin-right: 2px; margin-left: 10px;
+}
+.main .mid_t .center .justnow {
+	width: 540px; margin-bottom: 30px; margin-left: 115px;
+}
+.main .mid_t .center .justnow a {
+	height: 35px; text-align: center; color: rgb(0, 0, 0); line-height: 35px; overflow: hidden; font-size: 14px; font-weight: bolder; margin-right: 10px; float: left;
+}
+.main .mid_t .center .justnow a.botome3 {
+	background: url("../images/admin_an.gif") no-repeat 0px -1102px; width: 163px; height: 35px; display: block;
+}
+.main .mid_t .center .justnow a.botome4 {
+	background: url("../images/admin_an.gif") no-repeat 0px -1290px; width: 112px; height: 35px; display: block;
+}
+.midmess .tou {
+	width: 747px; margin-top: 10px;
+}
+.midmess .tou .dh {
+	
+}
+.midmess .tou .dh a {
+	background: url("../images/qiehuan.jpg") no-repeat 0px -95px; width: 129px; height: 26px; text-align: center; color: rgb(0, 0, 0); line-height: 26px; overflow: hidden; font-weight: bolder; margin-left: 3px; display: inline-block;
+}
+.midmess .tou .dh .fq {
+	background: url("../images/qiehuan.jpg") no-repeat 0px -127px; width: 129px; height: 26px; color: rgb(255, 255, 255); line-height: 26px; display: inline-block;
+}
+.midmess .tou .t_nr {
+	background: rgb(255, 249, 249); border: 1px solid rgb(254, 159, 180); width: 747px; padding-top: 8px; padding-bottom: 8px;
+}
+.midmess .tou .t_nr ul {
+	line-height: 30px;
+}
+.midmess .tou .t_nr ul .ts_a {
+	text-align: center; overflow: hidden; font-weight: bolder; float: left;
+}
+.midmess .tou .t_nr ul .ts_b {
+	text-align: center; overflow: hidden; font-weight: bolder; float: left;
+}
+.midmess .tou .t_nr ul .ts_c {
+	text-align: center; overflow: hidden; font-weight: bolder; float: left;
+}
+.midmess .tou .t_nr ul .ts_d {
+	text-align: center; overflow: hidden; font-weight: bolder; float: left;
+}
+.midmess .tou .t_nr ul .ts_e {
+	text-align: center; overflow: hidden; font-weight: bolder; float: left;
+}
+.midmess .tou .t_nr ul .ts_a1 {
+	text-align: center; overflow: hidden; float: left;
+}
+.midmess .tou .t_nr ul .ts_b1 {
+	text-align: center; overflow: hidden; float: left;
+}
+.midmess .tou .t_nr ul .ts_c1 {
+	text-align: center; overflow: hidden; float: left;
+}
+.midmess .tou .t_nr ul .ts_d1 {
+	text-align: center; overflow: hidden; float: left;
+}
+.midmess .tou .t_nr ul .ts_e1 {
+	text-align: center; overflow: hidden; float: left;
+}
+.midmess .tou .t_nr ul .ts_a {
+	width: 110px;
+}
+.midmess .tou .t_nr ul .ts_b {
+	width: 250px; text-align: left; padding-left: 50px;
+}
+.midmess .tou .t_nr ul .ts_c {
+	width: 120px;
+}
+.midmess .tou .t_nr ul .ts_d {
+	width: 110px;
+}
+.midmess .tou .t_nr ul .ts_e {
+	width: 100px;
+}
+.midmess .tou .t_nr ul .ts_a1 {
+	width: 110px; color: rgb(64, 143, 203);
+}
+.midmess .tou .t_nr ul .ts_a1 a {
+	color: rgb(64, 143, 203);
+}
+.midmess .tou .t_nr ul .ts_b1 {
+	width: 300px; text-align: left;
+}
+.midmess .tou .t_nr ul .ts_c1 {
+	width: 120px; color: rgb(85, 85, 85);
+}
+.midmess .tou .t_nr ul .ts_d1 {
+	width: 110px; color: rgb(255, 0, 0);
+}
+.midmess .tou .t_nr ul .ts_e1 {
+	width: 100px;
+}
+.midmess .tou .t_nr ul .ts_e1 a.look {
+	background: url("../images/admin_an.gif") no-repeat 0px -1044px; width: 72px; height: 20px; display: inline-block;
+}
+.main_left {
+	width: 695px; float: left; display: inline;
+}
+.main_left .jindu {
+	
+}
+.main_left .jindu .jindu_mid {
+	background: rgb(216, 239, 255); border: 1px solid rgb(112, 199, 253); width: 693px; height: 30px; overflow: hidden;
+}
+.main_left .jindu .jindu_mid ol {
+	width: 53px; height: 30px; text-align: center; color: rgb(51, 114, 162); line-height: 30px; font-weight: bolder; float: left; display: inline;
+}
+.main_left .jindu .jindu_mid .on {
+	background: url("../images/on_bg.gif") repeat-x; color: rgb(255, 85, 0);
+}
+.main_left .jindu .jindu_mid img {
+	
+}
+.main_left .jua_nr {
+	margin-top: 10px;
+}
+.main_left .jua_nr h1 {
+	background: url("../images/jua_biao.gif") no-repeat 0px -85px; height: 22px; line-height: 22px; text-indent: 35px; font-size: 12px; font-weight: normal;
+}
+.main_left .jua_nr h1 span {
+	color: rgb(254, 110, 5); font-weight: bolder; margin-right: 3px; margin-left: 3px;
+}
+.main_left .jua_nr .jua_wen {
+	margin-top: 8px;
+}
+.main_left .jua_nr .jua_wen .jua_wenpa {
+	background: url("../images/bg_jua.jpg") no-repeat 0px -8px; height: 5px; overflow: hidden;
+}
+.main_left .jua_nr .jua_wen .jua_wenpb {
+	background: url("../images/bg_jua.jpg") no-repeat 0px -18px; height: 6px; overflow: hidden;
+}
+.main_left .jua_nr .jua_wen ul {
+	background: url("../images/bg_jua_04.gif") repeat-y; padding: 15px 0px 0px 40px; width: 655px;
+}
+.main_left .jua_nr .jua_wen ul li {
+	width: 635px; line-height: 24px; overflow: hidden;
+}
+.main_left .jua_nr .jua_wen ul li span {
+	color: rgb(254, 110, 5); font-weight: bolder; margin-right: 15px; margin-left: 5px;
+}
+.main_left .jua_nr .jua_wen ul .esp {
+	margin-bottom: 10px;
+}
+.main_left .jua_nr .jua_wen ul p {
+	padding-bottom: 30px; margin-top: 40px;
+}
+.main_left .jua_nr .jua_wen ul .esp01 {
+	background: url("../images/login_bg.gif") no-repeat 0px -617px; width: 161px; height: 35px; text-align: center; line-height: 35px; overflow: hidden; margin-left: 185px;
+}
+.main_left .jua_nr .jua_wen ul .esp01 a {
+	color: rgb(0, 0, 0); font-size: 14px; font-weight: bolder;
+}
+.main_left .jua_ti {
+	background: url("../images/jua_tibg.gif") repeat-x rgb(237, 246, 255); padding: 0px 0px 10px; border: 1px solid rgb(196, 230, 255); width: 695px; color: rgb(43, 130, 197); overflow: hidden; margin-top: 15px;
+}
+.main_left .jua_ti h1 {
+	color: rgb(51, 115, 163); text-indent: 75px; font-size: 12px; margin-top: 10px; margin-bottom: 8px;
+}
+.main_left .jua_ti p {
+	float: left; display: inline;
+}
+.main_left .jua_ti ul {
+	float: left; display: inline;
+}
+.main_left .jua_ti p {
+	background: url("../images/jua_biao.gif") no-repeat; width: 89px; height: 73px;
+}
+.main_left .jua_ti ul {
+	width: 575px;
+}
+.main_left .jua_ti ul li {
+	width: 575px; line-height: 22px;
+}
+.main_left .jua_ti ul li span {
+	color: rgb(255, 0, 0); font-weight: bolder;
+}
+.main_left .succee {
+	width: 910px; padding-left: 100px;
+}
+.main_left .succee p {
+	background: url("../images/msg_bg.gif") no-repeat 0px -600px; width: 695px; height: 32px; text-indent: 40px; font-size: 14px;
+}
+.main_left .succee p a {
+	height: 32px; color: rgb(255, 0, 0); line-height: 32px; font-weight: bolder; margin-right: 5px; margin-left: 5px;
+}
+.main_left .succee ul {
+	background: rgb(245, 250, 255); padding: 20px 10px; border: 1px solid rgb(186, 225, 254); width: 673px; overflow: hidden; margin-top: 10px;
+}
+.main_left .succee ul li {
+	width: 330px; height: 24px; color: rgb(101, 100, 98); line-height: 24px; overflow: hidden; float: left; display: inline;
+}
+.main_left .succee ul li span {
+	color: rgb(255, 110, 5); font-weight: bolder;
+}
+.main_left .succee ul li a {
+	color: rgb(52, 114, 161);
+}
+.main_left .cont {
+	width: 910px; margin-top: 37px;
+}
+.main_left .cont a {
+	background: url("../images/login_bg.gif") no-repeat 0px -617px; width: 161px; height: 35px; text-align: center; color: rgb(0, 0, 0); line-height: 35px; font-size: 14px; font-weight: bold; margin-right: 30px; float: left; display: block;
+}
+.main_right {
+	width: 200px; float: right; display: inline;
+}
+.main_right .padder {
+	background: url("../images/bgs_holiday.gif") no-repeat; height: 280px;
+}
+.main_right .padder h1 {
+	padding: 8px 0px 0px 16px; font-size: 12px;
+}
+.main_right .padder ul {
+	width: 182px; margin-top: 12px; margin-left: 17px;
+}
+.main_right .padder ul li {
+	width: 182px; height: 20px; color: rgb(102, 102, 102); line-height: 20px; overflow: hidden;
+}
+.main_right .padder ul .esp1 {
+	color: rgb(51, 51, 51);
+}
+.main_right .padder ul .esp1 a {
+	font-weight: bolder;
+}
+.main_right .padder ul .esp2 {
+	color: rgb(153, 153, 153); padding-top: 13px;
+}
+.main_right .padder ul .esp3 {
+	margin-top: 46px;
+}
+.main_right .padder .esp {
+	margin-top: 20px; margin-left: 17px;
+}
+.main_right .padder .esp a {
+	margin-right: 10px; margin-left: 5px;
+}
+.main_right .padder ul li em {
+	color: rgb(221, 84, 0);
+}
+.main_right .gonggao {
+	margin-top: 15px;
+}
+.post_number {
+	width: 746px; float: left; display: inline;
+}
+.post_number .post_nr {
+	padding: 0px 0px 30px; border: 1px solid rgb(154, 227, 255); width: 364px; color: rgb(64, 143, 203); overflow: hidden; float: left; display: inline;
+}
+.post_number .post_nr h1 {
+	background: url("../images/post_dao.gif") no-repeat; height: 35px; line-height: 30px; overflow: hidden; padding-left: 30px; font-size: 14px;
+}
+.post_number .post_nr ul {
+	width: 330px; margin-left: 15px;
+}
+.post_number .post_nr ul li {
+	background: url("../images/msg_bg.gif") no-repeat 0px -1368px; width: 330px; line-height: 24px; overflow: hidden; padding-left: 20px;
+}
+.post_number .post_nr table {
+	width: 320px; margin-top: 20px; margin-left: 40px;
+}
+.post_number .post_nr table a {
+	background: url("../images/post_an.gif") no-repeat; width: 32px; height: 21px; color: rgb(255, 255, 255); line-height: 21px; padding-left: 8px; display: block;
+}
+.post_number #nr {
+	margin-left: 14px;
+}
+.post_number .post_nt {
+	background: rgb(236, 247, 255); padding: 8px 0px 10px 10px; border: 1px solid rgb(160, 216, 255); width: 734px; margin-top: 10px;
+}
+.post_number .post_nt p {
+	background: url("../images/msg_bg.gif") no-repeat 0px -250px; height: 16px; padding-left: 30px; font-weight: bolder; margin-bottom: 10px;
+}
+.post_number .post_nt p span {
+	color: rgb(255, 85, 0);
+}
+.post_number .post_nt .nt {
+	background: url("../images/msg_bg.gif") no-repeat; height: 16px; padding-left: 30px; font-weight: bolder; margin-bottom: 10px;
+}
+.post_number .post_nt ul {
+	width: 700px; margin-left: 10px;
+}
+.post_number .post_nt ul strong {
+	color: rgb(64, 143, 203); margin-right: 10px;
+}
+.post_number .post_nt ul li {
+	width: 700px; height: 24px; line-height: 24px; overflow: hidden;
+}
+.post_number .post_nt ul li span {
+	color: rgb(102, 102, 102); margin-left: 20px;
+}
+.midmess .moban {
+	width: 747px; overflow: hidden; padding-top: 10px;
+}
+.midmess .moban .title h1 {
+	background: url("../images/dao_blue.gif") no-repeat 0px -168px; width: 745px; height: 28px; color: rgb(255, 255, 255); line-height: 28px; text-indent: 10px; padding-left: 7px; font-size: 14px;
+}
+.midmess .moban .title h1 span {
+	width: 145px; text-align: center; display: block;
+}
+.midmess .moban .title .mo_nr {
+	border-width: medium 1px 1px; border-style: none solid solid; border-color: currentColor rgb(209, 209, 209) rgb(209, 209, 209); padding: 15px 10px 15px 20px; overflow: hidden;
+}
+.midmess .moban .title .mo_nr select {
+	height: 21px; margin-right: 20px; float: left; display: inline;
+}
+.midmess .moban .title .mo_nr a {
+	background: url("../images/admin_an.gif") no-repeat 0px -812px; width: 55px; height: 22px; float: left; display: block;
+}
+.midmess .moban .title .mo_nr em {
+	height: 22px; color: rgb(102, 102, 102); line-height: 22px; margin-left: 20px; float: left; display: inline;
+}
+.midmess .moban .lie {
+	width: 747px; padding-top: 10px;
+}
+.moban .lie table {
+	width: 747px; color: rgb(153, 153, 153); line-height: 30px; overflow: hidden;
+}
+.moban .lie table thead td {
+	border: 1px solid rgb(192, 219, 248); overflow: hidden;
+}
+.moban .lie table thead ul {
+	background: url("../images/repeat-x-bg.jpg") repeat-x; border: 1px solid rgb(255, 255, 255); height: 20px; line-height: 20px;
+}
+.midmess .moban .lie table thead ul li {
+	text-align: center; float: left;
+}
+.midmess .moban .lie table .name {
+	width: 204px;
+}
+.midmess .moban .lie table .type {
+	width: 105px; text-align: center;
+}
+.midmess .moban .lie table .gui {
+	width: 140px; text-align: center;
+}
+.midmess .moban .lie table .bao {
+	width: 93px; text-align: center;
+}
+.midmess .moban .lie table .shen {
+	width: 88px; text-align: center;
+}
+.midmess .moban .lie table .do {
+	width: 112px;
+}
+.midmess .moban .lie table .tcolor {
+	background: rgb(248, 248, 248);
+}
+.midmess .moban .lie table tbody td {
+	padding: 15px 5px;
+}
+.midmess .moban .lie table tbody .name {
+	color: rgb(119, 119, 119);
+}
+.midmess .moban .lie table .name p {
+	background: url("../images/personal_icon.gif") no-repeat; height: 22px; line-height: 22px; text-indent: 20px; overflow: hidden; padding-right: 0px;
+}
+.midmess .moban .lie table .name p.na {
+	background-position: 0px -1239px;
+}
+.midmess .moban .lie table .name p.nb {
+	background-position: 0px -1283px;
+}
+.midmess .moban .lie table .type span {
+	color: rgb(9, 99, 167);
+}
+.midmess .moban .lie table .bao p.edit {
+	background: url("../images/personal_icon.gif") no-repeat 0px -400px; height: 35px; color: rgb(255, 85, 0); font-weight: bolder;
+}
+.midmess .moban .lie table .shen p.yes {
+	color: rgb(255, 85, 0); font-weight: bolder;
+}
+.midmess .moban .lie table .shen p.no {
+	color: rgb(64, 143, 203); font-weight: bolder;
+}
+.dating .subtitle {
+	width: 895px; height: 61px; overflow: hidden; padding-left: 15px;
+}
+.dating .subtitle .sub {
+	width: 510px; height: 61px; line-height: 61px; overflow: hidden; float: left; _padding-top: 7px;
+}
+.dating .subtitle .sub p {
+	padding: 12px 0px; width: 550px; height: 36px; line-height: 36px; overflow: hidden;
+}
+.dating .subtitle .sub p span {
+	color: rgb(255, 85, 0); font-weight: bolder; margin-right: 5px; margin-left: 5px;
+}
+.dating .subtitle .sub p a.suban01 {
+	background: url("../images/admin_an.gif") no-repeat 0px -884px; margin: 0px 5px; width: 42px; height: 22px; line-height: 22px; text-indent: -200000px; display: inline-block;
+}
+.dating .subtitle .sub p a.suban02 {
+	background: url("../images/admin_an.gif") no-repeat 0px -945px; margin: 0px 5px; width: 42px; height: 22px; line-height: 22px; text-indent: -200000px; display: inline-block;
+}
+.dating .subtitle .subbutton {
+	width: 352px; height: 61px; text-align: right; padding-right: 8px; float: right; display: block;
+}
+.dating .subtitle .subbutton a.bbtton1_a {
+	background: url("../images/button.jpg") no-repeat 0px -439px; width: 96px; height: 35px; text-indent: -200000px; overflow: hidden; margin-top: 12px; display: inline-block;
+}
+.dating .subtitle .subbutton a.bbtton2_a {
+	background: url("../images/button.jpg") no-repeat 0px -366px; margin: 12px 5px 0px; width: 130px; height: 35px; text-indent: -200000px; overflow: hidden; display: inline-block;
+}
+.dating .subtitle .subbutton a.bbtton3_a {
+	background: url("../images/button.jpg") no-repeat 0px -403px; width: 108px; height: 35px; text-indent: -200000px; overflow: hidden; margin-top: 12px; display: inline-block;
+}
+.dating .subtitle .subbutton a.bbtton4_a {
+	background: url("../images/button.jpg") no-repeat 0px -527px; margin: 12px 5px 0px; width: 130px; height: 35px; text-indent: -200000px; overflow: hidden; display: inline-block;
+}
+.dating .subtitle .subbutton a.bbtton5_a {
+	background: url("../images/button.jpg") no-repeat 0px -563px; width: 108px; height: 35px; text-indent: -200000px; overflow: hidden; margin-top: 12px; display: inline-block;
+}
+.reltist {
+	clear: both;
+}
+.reltist table {
+	width: 100%;
+}
+.reltist table .tcolor {
+	background: rgb(249, 249, 249);
+}
+.reltist table tbody td {
+	padding: 15px;
+}
+.reltist table thead td {
+	border: 1px solid rgb(192, 219, 248); overflow: hidden;
+}
+.reltist table thead td ul {
+	background: url("../images/repeat-x-bg.jpg") repeat-x; border: 1px solid rgb(255, 255, 255); height: 20px; line-height: 20px;
+}
+.reltist table thead td ul li {
+	text-align: center; color: rgb(153, 153, 153); float: left;
+}
+.reltist table .n {
+	width: 220px; text-align: left; padding-left: 10px;
+}
+.reltist table .f {
+	width: 117px; text-align: left;
+}
+.reltist table thead .f {
+	padding-left: 10px;
+}
+.reltist table tbody .f {
+	color: rgb(102, 102, 102);
+}
+.reltist table .ade {
+	width: 110px; text-align: left;
+}
+.reltist table thead .ade {
+	padding-left: 28px;
+}
+.reltist table .ade_a {
+	width: 105px; text-align: left;
+}
+.reltist table .ade_b {
+	width: 105px;
+}
+.reltist table .see {
+	width: 155px;
+}
+.reltist table thead .do {
+	width: 100px; text-align: center; float: right;
+}
+.reltist table .n p {
+	background: url("../images/personal_icon.gif") no-repeat; height: 20px; color: rgb(102, 102, 102); line-height: 20px; text-indent: 17px; font-weight: 700;
+}
+.reltist table .n p.s {
+	background-position: 0px -1330px;
+}
+.reltist table .n em {
+	color: rgb(102, 102, 102); padding-left: 30px; font-size: 11px;
+}
+.reltist .f a {
+	height: 15px; line-height: 15px; display: block;
+}
+.reltist .f em {
+	background: url("../images/personal_icon.gif") no-repeat; height: 14px; line-height: 14px; text-indent: -200000px; overflow: hidden; margin-top: 2px; float: left; display: block;
+}
+.reltist .f em.vip1 {
+	background-position: 0px -872px; width: 24px;
+}
+.reltist .f em.vip2 {
+	background-position: 0px -894px; width: 40px;
+}
+.reltist .f em.vip3 {
+	background-position: 0px -917px; width: 40px;
+}
+.reltist .ade p {
+	background: url("../images/personal_icon.gif") no-repeat 0px -407px; height: 28px; color: rgb(255, 85, 0); text-indent: 0px; padding-left: 25px; font-weight: 700; display: block;
+}
+.reltist .ade_a p {
+	
+}
+.reltist table .see p.star {
+	color: rgb(255, 85, 0);
+}
+.reltist table .see p.over {
+	color: rgb(153, 153, 153);
+}
+.reltist table .do a {
+	width: 90px; text-align: center; padding-top: 5px; display: block;
+}
+.moban .ruan {
+	width: 747px; padding-top: 10px;
+}
+.moban .ruan table .tcolor {
+	background: rgb(251, 251, 251);
+}
+.moban .ruan table thead ul {
+	background: url("../images/repeat-x-bg.jpg") repeat-x; border: 1px solid rgb(255, 255, 255); width: 743px; height: 20px; color: rgb(153, 153, 153); line-height: 20px; overflow: hidden;
+}
+.moban .ruan table thead ul li {
+	text-align: center; float: left;
+}
+.moban .ruan table thead td {
+	border: 1px solid rgb(192, 219, 248); overflow: hidden;
+}
+.moban .ruan table {
+	text-align: center; line-height: 20px;
+}
+.moban .ruan table tbody td {
+	padding: 20px 0px; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: dashed;
+}
+.moban .ruan table .ru_a {
+	width: 150px; padding-left: 30px;
+}
+.moban .ruan table tbody .ru_a {
+	overflow: hidden; padding-left: 10px;
+}
+.moban .ruan table .ru_b {
+	width: 350px;
+}
+.moban .ruan table .ru_b p {
+	color: rgb(102, 102, 102);
+}
+.moban .ruan table tbody .ru_b {
+	width: 350px; text-align: left;
+}
+.moban .ruan table .ru_c {
+	width: 130px;
+}
+.moban .ruan table thead .ru_c {
+	width: 110px; margin-left: 15px;
+}
+.moban .ruan table .ru_c span {
+	color: rgb(255, 85, 0);
+}
+.moban .ruan table .ru_d {
+	width: 75px; margin-right: 6px;
+}
+.moban .ruan table thead .ru_d {
+	float: right;
+}
+.lady {
+	width: 500px; margin-top: 50px; margin-right: auto; margin-left: auto;
+}
+.lady .ps1 {
+	background: url("../images/cz_bg.gif") no-repeat 0px -436px; width: 500px; height: 38px;
+}
+.lady .lady_nr {
+	border-width: medium 3px 3px; border-style: none solid solid; border-color: currentColor rgb(248, 135, 132) rgb(248, 135, 132); margin: auto; width: 474px;
+}
+.lady .lady_nr p {
+	height: 28px; line-height: 28px; padding-top: 5px; padding-left: 20px; font-size: 14px; font-weight: bolder; border-bottom-color: rgb(221, 221, 221); border-bottom-width: 1px; border-bottom-style: dashed;
+}
+.lady .lady_nr p span {
+	color: rgb(255, 85, 0); font-size: 12px; margin-right: 20px; margin-left: 10px;
+}
+.lady .lady_nr ul {
+	width: 450px; line-height: 38px; overflow: hidden; padding-top: 10px; padding-left: 20px;
+}
+.lady .lady_nr ul li {
+	height: 38px; line-height: 38px;
+}
+.lady .lady_nr ul .la11 img {
+	margin-right: 6px; margin-bottom: -3px;
+}
+.lady .lady_nr ul .la11 em {
+	color: rgb(102, 102, 102); margin-left: 20px;
+}
+.lady .lady_nr ul li b {
+	width: 80px; color: rgb(102, 102, 102); font-weight: normal; display: inline-block;
+}
+.lady .lady_nr ul .ltxt {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; height: 40px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700;
+}
+.lady .lady_nr ul .ltxt_a {
+	background: url("../images/inputbg.gif") repeat-x; border-width: 1px; border-style: solid; border-color: rgb(124, 124, 124) rgb(195, 195, 195) rgb(195, 195, 195) rgb(154, 154, 154); padding: 3px 3px 0px; width: 70px; height: 16px; color: rgb(255, 85, 0); font-size: 12px; font-weight: 700; margin-right: 6px;
+}
+.lady .lady_nr ul .left {
+	float: left;
+}
+.lady .lady_nr ul span {
+	float: left;
+}
+.lady .lady_nr ul li span {
+	width: 235px; height: 38px; color: rgb(255, 85, 0); line-height: 38px; overflow: hidden; margin-left: 6px; display: inline-block;
+}
+.lady .lady_nr ul .smrile {
+	padding-top: 10px;
+}
+.lady .lady_nr ul .smrile input {
+	margin-right: 5px; margin-left: 5px;
+}
+.lady .lady_nr ul .lady_an {
+	background: rgb(247, 120, 177); width: 66px; height: 22px; text-align: center; color: rgb(255, 255, 255); line-height: 22px; font-weight: bolder; margin-left: 130px; display: inline-block;
+}
+.guanggaoa {
+	height: 72px; overflow: hidden; margin-top: 10px; margin-bottom: 10px;
+}
+.banneraa {
+	margin-bottom: 8px; margin-left: 3px; float: left;
+}
+.main .Banner_1 {
+	width: 910px; height: 210px; color: rgb(255, 255, 255); overflow: hidden; background-image: url("../images/video_guanggao.jpg");
+}
+.Banner_1 .Banner_1a {
+	width: 910px; height: 50px;
+}
+.Banner_1 .Banner_1a .h3_a {
+	margin: 15px 0px 0px 74px; width: 250px; height: 20px; font-size: 16px; font-weight: bold; float: left; _margin: 15px 0px 0px 35px;
+}
+.Banner_1 .Banner_1a .h3_b {
+	margin: 7px 0px 0px 74px; width: auto; height: 20px; font-size: 12px; float: left;
+}
+.Banner_1 .h3_c {
+	width: 108px; height: 100px; color: rgb(194, 222, 255); line-height: 23px; margin-top: 15px; margin-left: 65px; float: left; _margin-left: 33px;
+}
+.Banner_1 .h3_d {
+	font-size: 12px; font-weight: bold; margin-top: 15px; margin-left: 687px; _margin-top: 13px;
+}
+.leirong_a {
+	width: 910px; height: 369px; padding-top: 10px; background-image: url("../images/video_01bj.gif");
+}
+.main .leirong_a .tab_home {
+	width: 365px; height: 33px; background-image: url("../images/video_tabbj.jpg");
+}
+.main .leirong_a .tab_home h4 {
+	color: rgb(255, 255, 255); font-size: 14px; margin-top: 8px; margin-left: 38px; float: left; display: block; _margin-left: 20px;
+}
+.main .leirong_a .tab_home p {
+	color: rgb(255, 255, 255); font-size: 12px; margin-top: 10px; margin-left: 46px; float: left; display: block;
+}
+.main .leirong_a .leirong_a_01 {
+	width: 910px; height: 300px; margin-top: 32px;
+}
+.leirong_a_01a_h4 {
+	color: rgb(255, 0, 0); font-size: 14px; float: left;
+}
+.leirong_a_01a_p {
+	width: 280px; height: 70px; color: rgb(34, 34, 34); line-height: 18px; font-size: 12px; margin-top: 7px; float: left;
+}
+.main .leirong_a .leirong_a_01 .leirong_a_01a {
+	width: 380px; height: 120px; margin-left: 41px; float: left;
+}
+.leirong_a_01a .ico_a_01a {
+	width: 87px; height: 86px; margin-right: 10px; float: left; display: block; background-image: url("../images/video_ico01.jpg");
+}
+.main .leirong_a .leirong_a_01 .leirong_a_01b {
+	width: 370px; height: 120px; margin-left: 60px; float: left;
+}
+.leirong_a_01b .ico_a_01b {
+	width: 72px; height: 86px; margin-right: 10px; float: left; display: block; background-image: url("../images/video_ico02.jpg");
+}
+.main .leirong_a .leirong_a_01 .leirong_a_01c {
+	width: 380px; height: 120px; margin-top: 26px; margin-left: 41px; float: left;
+}
+.leirong_a_01c .ico_a_01c {
+	width: 71px; height: 82px; margin-right: 10px; float: left; display: block; background-image: url("../images/video_ico03.jpg");
+}
+.main .leirong_a .leirong_a_01 .leirong_a_01d {
+	width: 370px; height: 120px; margin-top: 26px; margin-left: 60px; float: left;
+}
+.leirong_a_01d .ico_a_01d {
+	width: 69px; height: 73px; margin-right: 10px; float: left; display: block; background-image: url("../images/video_ico04.jpg");
+}
+.leirong_link_a1 a:link {
+	width: 130px; height: 15px; color: rgb(0, 66, 255); padding-left: 15px; font-size: 14px; margin-top: 10px; margin-left: 80px; float: left; display: block; background-image: url("../images/video_xiazai.gif"); background-repeat: no-repeat; _margin-left: 40px;
+}
+.leirong_link_a1 a:visited {
+	width: 130px; height: 15px; color: rgb(0, 66, 255); padding-left: 15px; font-size: 14px; margin-top: 10px; margin-left: 80px; float: left; display: block; background-image: url("../images/video_xiazai.gif"); background-repeat: no-repeat; _margin-left: 40px;
+}
+.leirong_link_a1 a:hover {
+	width: 130px; height: 15px; color: rgb(255, 0, 0); padding-left: 15px; font-size: 14px; margin-top: 10px; margin-left: 80px; float: left; display: block; background-image: url("../images/video_xiazai.gif"); background-repeat: no-repeat; _margin-left: 40px;
+}

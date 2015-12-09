@@ -1,0 +1,74 @@
+a{ color:Black;}
+.Menutext{
+	color: #171717;
+	font-weight: bold;
+	font-size: 13px;
+	text-decoration:none;	
+	padding-bottom:1px;
+}
+.indextext{
+	color: #171717;
+	font-weight: bold;
+	font-size: 13px;
+	text-decoration:none;	
+	padding-bottom:5px;
+}
+.Menutext a{
+	color: #171717;
+	text-decoration:none;	
+}
+.Menutext a:hover
+{
+ color: #39a301;
+}
+.FootText {color: #666666}
+.QQun {color: #fe5500}
+.Logintxt { 
+	color: #171717;
+	font-weight: bold;
+	font-size: 13px;
+}
+.txt3 {color: #FF0000}
+.txt7 {
+	color: #CC3300;
+	font-size: 16px;
+}
+.txt8 {font-size: 13px; word-spacing:-1;}
+.Stxt7 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #333333;
+}
+.Stxt8 {color: #666666}
+.Stxt9 {
+	color: #FF0000;
+	font-size: 14px;
+	font-weight: bold;
+}
+.txt10 {color: #678E17}
+.Stxt10 {font-size: 14px}
+.txt11 {color: #165AAF}
+.Stxt11 {color: #0033FF}
+.Stxt12 {color: #CC0000}
+.Stxt13 {color: #0066FF}
+.txt14 {
+	font-family: "ËÎÌו";
+	color: #666666;
+}
+.Stxt14 {	
+	font-size: 15px;
+	font-weight: bold;
+}
+.txt114 {	font-size: 15px;
+	font-weight: bold;
+}
+.txt15 {color: #CC0000}
+.txt24 {color: #CC0000; font-size: 13px; }
+.txt26 {color: #666666}
+.ST7 {
+	color: #996600;
+	font-weight: bold;
+}
+.inputnew {
+	border: 1px solid rgb(204, 204, 204); width: 100px; height: 22px; line-height: 22px;
+}

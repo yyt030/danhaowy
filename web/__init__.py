@@ -205,7 +205,7 @@ def register_logger(app):
         logger.setLevel(logging.DEBUG)
 
         # 创建一个handler，用于写入日志文件
-        rfh = RotatingFileHandler('%s/jeepsk.log' % app.config.get('PROJECT_PATH'), 'a',
+        rfh = RotatingFileHandler('%s/web.log' % app.config.get('PROJECT_PATH'), 'a',
                                   1 * 1024 * 1024, 10)
         rfh.setLevel(logging.DEBUG)
 
@@ -231,14 +231,11 @@ def register_db(app):
 
 def register_routes(app):
     """注册路由"""
-    from controllers import account, site, admin, shop, brand, discount
+    from controllers import account, site, admin
 
     app.register_blueprint(site.bp, url_prefix='')
     app.register_blueprint(account.bp, url_prefix='/account')
     app.register_blueprint(admin.bp, url_prefix='/admin')
-    app.register_blueprint(shop.bp, url_prefix='/shop')
-    app.register_blueprint(brand.bp, url_prefix='/brand')
-    app.register_blueprint(discount.bp, url_prefix='/discount')
 
 
 def register_error_handle(app):

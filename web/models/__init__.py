@@ -3,8 +3,3 @@
 from ._base import db
 from .user import *
 from .site import *
-
-
-from flask.ext.sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()

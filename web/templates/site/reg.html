@@ -46,7 +46,8 @@
                 </tr>
                 <tr>
                     <td height="500" align="left" valign="top">
-                        <form name="form1" method="post" action="RegOk.asp?action=ok" id="form1">
+                        <form name="form1" method="post" action="reg?action=ok" id="form1">
+                            {{ form.csrf_token }}
                             <div class="r_c_wp">
                                 <div class="r_c_box">
                                     <h3 class="pic">请填写注册信息</h3>

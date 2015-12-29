@@ -61,11 +61,32 @@ def GetPass():
 
 @bp.route('/reg', methods=['GET', 'POST'])
 def reg():
-    """注册"""
+    """注册ajax 校验
+        http://localhost:5000/ajax.asp?c=user&clientid=username
+        &rand=1451397827713&username=asfasf123123
+        &Email=@&QQ=&sj=&_=1451397819278
+        """
+    form = SigninForm()
     if g.user:
         error = "您已经登录，不能注册账号！当前登录账号:%s" % g.user.name
         return render_template('error.html', error=error, url="/")
-    return render_template('site/reg.html')
+    if request.method == 'GET':
+        clientid = request.args.get('clientid', '')
+        res = ''
+        if clientid == 'username':
+            res = User.query.filter(User.name == request.args.get(clientid)).first()
+        if clientid == 'email':
+            res = User.query.filter(User.email == request.args.get(clientid)).first()
+        if clientid == 'qq':
+            res = User.query.filter(User.qq == request.args.get(clientid)).first()
+        if clientid == 'sj':
+            res = User.query.filter(User.mobile == request.args.get(clientid)).first()
+        if res:
+            return '0'
+
+    if request.method == 'POST':
+        pass
+    return render_template('site/reg.html', form=form)
 
 
 @bp.route('/signout', methods=['GET', 'POST'])

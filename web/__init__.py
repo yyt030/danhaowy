@@ -14,6 +14,7 @@ from flask_wtf.csrf import CsrfProtect
 from flask.ext.uploads import configure_uploads
 from utils._redis import set_user_active_time
 from config import load_config
+from web.utils.account import get_current_user
 
 # convert python's encoding to utf8
 reload(sys)
@@ -47,11 +48,11 @@ def create_app():
     # before every request
     @app.before_request
     def before_request():
-        # """Do something before request"""
-        # # 记录用户的访问时间到redis
-        # g.user = get_current_user()
-        # if g.user:
-        #     set_user_active_time(g.user.id)
+        """Do something before request"""
+        # 记录用户的访问时间到redis
+        g.user = get_current_user()
+        if g.user:
+            set_user_active_time(g.user.id)
         pass
 
     from .utils.devices import Devices
@@ -192,12 +193,11 @@ def register_db(app):
 
 def register_routes(app):
     """注册路由"""
-    from controllers import account, site,login_user
+    from controllers import account, site, login_user
 
     app.register_blueprint(site.bp, url_prefix='')
     app.register_blueprint(login_user.bp, url_prefix='/login_user')
     app.register_blueprint(account.bp, url_prefix='/account')
-
 
 
 def register_error_handle(app):

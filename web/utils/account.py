@@ -76,4 +76,3 @@ class CheckName(Singleton):
                 ret = False
                 break
         return ret
-

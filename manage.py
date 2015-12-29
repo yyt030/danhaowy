@@ -5,7 +5,9 @@ from flask.ext.script import Manager
 import random
 from web import create_app
 from web.models import db, User
+from web import create_app
 from flask.ext.migrate import Migrate, MigrateCommand
+from web.models import db
 
 app = create_app()
 migrate = Migrate(app, db)
@@ -16,7 +18,7 @@ manager.add_command('db', MigrateCommand)
 @manager.command
 def run():
     """启动网站"""
-    app.run(host="localhost", port=5000)
+    app.run(host="localhost", port=5000, threaded=True)
 
 
 @manager.command
@@ -54,12 +56,6 @@ def reset_users_token():
             db.session.commit()
 
 
-@manager.command
-def clean_exercises():
-    """删除图片文件不存在的"""
-    with daemon.DaemonContext():
-        with app.app_context():
-            pass
 
 
 if __name__ == "__main__":

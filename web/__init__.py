@@ -9,15 +9,11 @@ from flask.ext.cache import Cache
 project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_path not in sys.path:
     sys.path.insert(0, project_path)
-import json
 from flask import Flask, request, url_for, g, render_template, session
 from flask_wtf.csrf import CsrfProtect
 from flask.ext.uploads import configure_uploads
-from flask_debugtoolbar import DebugToolbarExtension
-from utils.account import get_current_user
 from utils._redis import set_user_active_time
 from config import load_config
-
 
 # convert python's encoding to utf8
 reload(sys)
@@ -27,10 +23,11 @@ csrf = CsrfProtect()
 
 cache = Cache()
 
+
 def create_app():
     """创建Flask app"""
     app = Flask(__name__)
-    cache = Cache(app,config={'CACHE_TYPE': 'simple'})
+    cache = Cache(app, config={'CACHE_TYPE': 'simple'})
     cache.init_app(app)
     # Load config
     config = load_config()
@@ -38,13 +35,6 @@ def create_app():
 
     # CSRF protect
     csrf.init_app(app)
-
-    # if app.debug:
-    #     DebugToolbarExtension(app)
-
-
-    # from .mails import mail
-    # mail.init_app(app)
 
     # 注册组件
     register_db(app)
@@ -54,20 +44,15 @@ def create_app():
     register_logger(app)
     register_uploadsets(app)
 
-    # load chinese name dict from dict.txt once
-    # from utils.account import CheckName
-    #
-    # # 加载dict.txt
-    # CheckName(app)
-
     # before every request
     @app.before_request
     def before_request():
-        """Do something before request"""
-        # 记录用户的访问时间到redis
-        g.user = get_current_user()
-        if g.user:
-            set_user_active_time(g.user.id)
+        # """Do something before request"""
+        # # 记录用户的访问时间到redis
+        # g.user = get_current_user()
+        # if g.user:
+        #     set_user_active_time(g.user.id)
+        pass
 
     from .utils.devices import Devices
 
@@ -78,31 +63,9 @@ def create_app():
 
 def register_jinja(app):
     """注册filter，模板全局变量和全局函数"""
-    from .utils import filters
-    app.jinja_env.filters['timesince'] = filters.timesince
-    app.jinja_env.filters['get_date'] = filters.get_date
-    app.jinja_env.filters['get_page_name'] = filters.get_page_name
-    app.jinja_env.filters['striptags'] = filters.striptags
-    app.jinja_env.filters['get_num'] = filters.get_num
     from jinja2 import Markup
-    from .models import db, User
+    from .models import db
 
-    # @app.context_processor
-    # def override_url_for():
-    #     return dict(url_for=static_url_for)
-    #
-    # def static_url_for(endpoint, **values):
-    #     if endpoint == 'photos':
-    #         print "photos"
-    #         from config.default import UPLOADS_DEFAULT_DEST
-    #         filename = values.get('filename', None)
-    #         if filename:
-    #             file_path = UPLOADS_DEFAULT_DEST + filename
-    #             return file_path
-    #     else:
-    #         return url_for(endpoint, **values)
-
-    # inject vars into template context
     @app.context_processor
     def inject_vars():
 
@@ -120,10 +83,8 @@ def register_jinja(app):
             "email": "admin@admin.com",
         }
 
-        # uid = None if not g.user else g.user.id
-        # g.user = User.query.filter(User.id == 1).first()
         return dict(
-            website=g_site_info,
+                website=g_site_info,
 
         )
 
@@ -211,7 +172,7 @@ def register_logger(app):
 
         # 定义handler的输出格式
         formatter = logging.Formatter(
-            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+                '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
         rfh.setFormatter(formatter)
 
         # 给logger添加handler
@@ -231,12 +192,11 @@ def register_db(app):
 
 def register_routes(app):
     """注册路由"""
-    from controllers import account, site, admin,login_user
+    from controllers import account, site,login_user
 
     app.register_blueprint(site.bp, url_prefix='')
     app.register_blueprint(login_user.bp, url_prefix='/login_user')
     app.register_blueprint(account.bp, url_prefix='/account')
-    app.register_blueprint(admin.bp, url_prefix='/admin')
 
 
 

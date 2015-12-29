@@ -5,7 +5,7 @@ import random
 import hashlib
 import time
 from werkzeug import security
-from ._base import db
+from . import db
 from ..utils.uploadsets import avatars, id_images, student_images, teacher_images, honor_images
 from ..utils._redis import get_user_active_time
 
@@ -82,22 +82,3 @@ class Profile(db.Model):
     nickname = db.Column(db.String(50))
     province = db.Column(db.String(50))
     subscribe_time = db.Column(db.DateTime, default=datetime.datetime.now)
-
-
-class GetTicketRecord(db.Model):
-    """发放的优惠券记录"""
-    id = db.Column(db.Integer, primary_key=True)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('get_discounts', lazy='dynamic'))
-
-    discount_id = db.Column(db.Integer, db.ForeignKey('discount.id'))
-    discount = db.relationship('Discount', backref=db.backref('get_discounts', lazy='dynamic'))
-
-    status = db.Column(db.Enum('normal', 'verify', 'usedit', 'expire'), default='normal')
-
-    code =db.Column(db.Integer)
-    create_at = db.Column(db.DateTime, default=datetime.datetime.now)
-
-    def __repr__(self):
-        return '<GetDiscountRecord %s>' % self.id

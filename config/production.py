@@ -15,7 +15,7 @@ class Config(object):
     PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
     # Site domain
-    SITE_DOMAIN = "http://localhost:5000"
+    SITE_DOMAIN = "www.taochulu.com"
 
     # SQLAlchemy config
     # See:

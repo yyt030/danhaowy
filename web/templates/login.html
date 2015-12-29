@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN"
+        "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <TITLE>用户登录 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</TITLE>
+    <LINK href="/static/system/reset.css" rel="stylesheet" type="text/css" media="all">
+    <LINK href="/static/system/index.css" rel="stylesheet" type="text/css" media="all">
+    <SCRIPT src="/static/system/jquery-1.5.2.min.js" type="text/javascript"></SCRIPT>
+    <META name="GENERATOR" content="MSHTML 10.00.9200.16660">
+</HEAD>
+<style type="text/css">
+    .FootText {
+        color: #666666
+    }
+
+    .QQun {
+        color: #fe5500
+    }
+
+    A:hover {
+        color: #FF8000;
+        text-decoration: none
+    }
+
+    .ui-btn {
+        display: inline-block;
+        border: 0;
+        background: url("/static/images/ui-btn.gif") no-repeat;
+        cursor: pointer;
+        font-size: 0;
+        line-height: 0;
+        overflow: hidden;
+        zoom: 1;
+        vertical-align: middle
+    }
+
+    .ui-btn-login {
+        width: 111px;
+        height: 37px;
+        background-position: 0 0
+    }
+
+    .ui-btn-login:hover {
+        background-position: -120px 0
+    }
+
+    .ui-btn-login-disabled {
+        background-position: -240px 0 !important;
+        cursor: default
+    }
+</style>
+<BODY>
+<div id="top">
+    <div class="tbg">
+        <div class="t"><A class="logo fl" href="/">单号无忧网登录</A></div>
+        <div class="b"><A class="dl_s" href="/login">登录</A><A class="zc" href="/reg">注册</A></div>
+    </div>
+</div>
+<div id="wra">
+    <div class="wrabg">
+        <div class="left">
+            {% if not g.user %}
+                <I>可以选择哦</I>
+
+                <form name="form" method="post" action="">
+                {{ form.csrf_token }}
+                    <table width="100%">
+                        <tbody>
+                        <tr>
+                            <td width="100" class="tar pr10">
+                                <SELECT name="loginType" class="inputxt" id="loginType">
+                                    <OPTION value="uname">用户名</OPTION>
+                                    <OPTION value="mobile">手机号</OPTION>
+                                    <OPTION value="email">邮箱</OPTION>
+                                </SELECT>
+                            </td>
+                            <td><input name="username" class="inputxt" id="input" style="width: 200px;" type="text">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100" class="tar pr10">密　码</td>
+                            <td><input name="password" class="inputxt" id="password" style="width: 200px;"
+                                       type="password"
+                                       datatype="m"></td>
+                        </tr>
+                        <tr>
+                            <td width="100"></td>
+                            <td><A class="ml20 fblue" href="/get_pass">忘记密码？</A>&nbsp;<A class="ml20 fblue"
+                                                                                         href="/get_user">忘记帐号？</A>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="100">&nbsp;</td>
+                            <td><input class="ui-btn ui-btn-login" type="submit" value=""></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            {% else %}
+                <table width="100%" style="font-size:13px">
+                    <tbody>
+                    <tr>
+                        <td width="100" class="tar pr10">用户名：</td>
+                        <td>microhan</td>
+                    </tr>
+                    <tr>
+                        <td width="100" class="tar pr10">登录时间：</td>
+                        <td>2015/12/27 14:56:37</td>
+                    </tr>
+                    <tr>
+                        <td width="100" class="tar pr10">最近登陆Ip：</td>
+                        <td>116.25.67.15</td>
+                    </tr>
+                    <tr>
+                        <td width="100" class="tar pr10">当前等级：</td>
+                        <td>普通会员
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td width="100"></td>
+                        <td style="font-size:12px"><img src="/static/images/user.png" alt="[用户中心]" width="18" height="18"
+                                                        align="bottom"><a href="/login_user/user"><font
+                                color="#3399FF">[用户中心]</font></a>　
+                            <a href="/"><font color="#FF3300">返回首页</font></a>　
+                            <img src="/static/images/block.png" alt="用户退出" width="18" height="18" align="bottom"><a
+                                    href="/loginout"><font color="#3399FF">用户退出</font></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+        <div class="right">
+            <div>
+                <DL class="icon01">
+                    <DT><A>单号定制</A></DT>
+                    <DD>自行定制发收货订单号,人工时时匹配！</DD>
+                </DL>
+            </div>
+            <div>
+                <DL class="icon04">
+                    <DT><A>海量当天真实单号</A></DT>
+                    <DD>提供真实当天未扫描全国单号,单号唯一,不重复！</DD>
+                </DL>
+            </div>
+            <div>
+                <DL class="icon03">
+                    <DT><A>手机号码生成</A></DT>
+                    <DD>自动生成全国收货区域的手机号！</DD>
+                </DL>
+            </div>
+            <div>
+                <DL class="icon02">
+                    <DT><A>客服全天在线</A></DT>
+                    <DD>客服在线时间：早11:00 - 晚23:00</DD>
+                </DL>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom" style="font-size:13px">
+    <P>&nbsp;</P><BR>
+    单号无忧网_您值得信赖的快递单号网,保证单号真实有效,让您刷的放心,用的安心,全网单号永久免费！<BR>免费当天单号 真实快递单号 快递单号购买 单号出售<BR>Copyright @ 2012 - 2014
+    www.danhaowy.com All Rights Reserved.
+</div>
+</BODY>
+</HTML>
+

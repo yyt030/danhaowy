@@ -22,9 +22,6 @@ class SigninForm(Form):
         if not user:
             raise ValueError(u'账户或密码错误')
 
-        # if not user.is_active:
-        #     raise ValueError(u'该账户尚未激活，请前往您的邮箱点击验证链接激活此账户')
-
         if user.check_password(field.data):
             self.user = user
         else:

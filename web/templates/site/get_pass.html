@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+{% block page_title %}密码找回 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网{% endblock %}
+{% block content %}
+    <SCRIPT language=javascript>
+        <!--
+        function CheckForm1() {
+            if (document.form1.username.value.length < 5) {
+                alert("请输入正确的用户名");
+                document.form1.username.focus();
+                return false;
+            }
+
+        }
+
+
+        function open2() {
+            location.href = 'get_pass';
+
+        }
+
+        //-->
+
+
+    </SCRIPT>
+    <body>
+    <div id="mm">
+        {% include 'header_nav.html' %}
+        <DIV class=tdmiddle>
+            <TABLE width=950 height="138" border=0 align="center" cellPadding=0 cellSpacing=0>
+                <TBODY>
+                <TR>
+                    <TD height=41 vAlign=center colSpan=3 align=left>当前位置：<a href="index.asp">首页</a> &gt; 找回密码</TD>
+                </TR>
+                <TR>
+                    <TD vAlign=top>
+                        <DIV style="WIDTH: 910px; HEIGHT: 420px">
+                            <DIV style="LINE-HEIGHT: 28px; PADDING-LEFT: 10px; WIDTH: 970px; BACKGROUND: url(Images/bbs_bg.JPG) no-repeat left top; HEIGHT: 28px; FONT-SIZE: 14px; FONT-WEIGHT: bold; color: #F00;">
+                                找回密码
+                                (第一步填写用户名)
+                            </DIV>
+                            <DIV style="BACKGROUND-COLOR: #fafafa; border:1px #CCC solid; WIDTH: 908px; HEIGHT: 270px">
+                                <form name="form1" method="post" action="GetPasstwo.asp"
+                                      onkeydown="if(event.keyCode==13){return false;}">
+                                    <TABLE style="BORDER-BOTTOM: #f3f3f1 1px solid; BORDER-LEFT: #f3f3f1 1px solid; BACKGROUND-COLOR: #ffffff; MARGIN-TOP: 30px; BORDER-TOP: #f3f3f1 1px solid; BORDER-RIGHT: #f3f3f1 1px solid"
+                                           border=0 cellSpacing=0 cellPadding=0 width=500 align=center height=200>
+                                        <TBODY>
+                                        <TR>
+                                            <TD style="LINE-HEIGHT: 30px; PADDING-LEFT: 130px" height=41 vAlign=center
+                                                align=left><B style="COLOR: #002564">
+                                                请选择您要找回的登录密码方式：
+                                                <p><input type="radio" name="domain" checked="checked"><label
+                                                        for="renren">密保验证找回</label>
+                                                </p>
+                                            </B>
+
+                                                <p><B style="COLOR: #002564"> 输入您的用户名：</B>
+                                                    <INPUT name="username" class="textfield1" id="username">
+                                                </p>
+
+                                                <div align="center">
+                                                    <INPUT name="Submit" type="submit" class="btnsubmit" id="btnSubmit1"
+                                                           onClick="javascript:return CheckForm1();" value="下一步"></div>
+                                                </p>
+                                            </TD>
+                                        </TR>
+                                        </TBODY>
+                                    </TABLE>
+                                </form>
+                            </DIV>
+                        </DIV>
+                        <SPAN id=js1></SPAN>
+
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+
+        <br/><br/><br/><br/>
+
+
+
+    </div>
+
+    </body>
+{% endblock %}

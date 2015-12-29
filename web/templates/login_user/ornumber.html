@@ -1,0 +1,246 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <link href="/static/css/Qiindex.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/style/public.css">
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <link rel="/static/stylesheet" href="/static/js/css/ui-dialog.css">
+    <script src="/static/js/dialog-min.js"></script>
+    <script src="/static/js/ornumber.js?20150930S"></script>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .zdybutton {
+            height: 20px;
+            line-height: 20px;
+            padding: 0 4px;
+            border: 1px solid #06F;
+            background: #09C;
+            color: #FFF;
+        }
+    </style>
+
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 单号大厅{% endblock %}
+{% block content %}
+    <td valign="top" width="800">
+        <div id="Notice" class="notice" style="color:red;font-size:18px">
+            (韵达快递)即日起,继续停单,恢复时间请留意网站,等待恢复期间,建议购买空包,或者购买卖家发布的单号,感谢继续支持。
+        </div>
+        <!--<div id="Notice"  class="notice">单号大厅（领取），必须在帐号激活后才可以享受每日免费领取权限。 单号每天11点30开始更新,晚18点结束更新。<a href="/News.asp?id=48" style="color: #F00">>点击查看帮助<</a></div>-->
+
+        <div class="div_block" style="margin-bottom:10px;">
+            <div class="navbar-inner"><br>
+
+                <div class="input-prepend input-append">
+                    <span class="add-on">录单时间：</span>
+                    <input id="sja" class="Wdate input-medium" type="text" value="2015-12-27"
+                           onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})">
+
+                    {#                    WdatePicker({skin:'twoer',minDate:'%y-%M-%d',maxDate:'%y-%M-%d'})#}
+                    <span class="add-on">查询方式：</span> <span class="add-on" style="background:#FFF; font-size:12px">
+                      <label><input type="radio" id="sertype" name="sertype" value="1"
+                                    onclick="javascript:changesertype (1);" checked="checked">按省市查询<input type="radio"
+                                                                                                          id="sertype"
+                                                                                                          name="sertype"
+                                                                                                          value="2"
+                                                                                                          onclick="javascript:changesertype (2);">模糊查询</label>
+                      </span>
+                </div>
+                <div id="diz2" style="display:none">
+                    <div class="input-prepend input-append"><span class="add-on">发货地址：</span>
+                        <input id="shdz" name="shdz" class="input-medium" type="text" value="">
+                        <span class="add-on">收货地址：</span>
+                        <input id="fhdz" name="fhdz" class="input-medium" type="text" value=""> <span class="add-on">*请注意省市区中间加空格。</span>
+                    </div>
+                </div>
+                <div id="diz1">
+                    <div class="input-prepend input-append"><span class="add-on">发货地址：</span>
+                        <select name="shenglist" id="Select1" class="input-medium">
+                            <option value="">全部</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="天津">天津</option>
+                            <option value="重庆">重庆</option>
+                            <option value="四川省">四川省</option>
+                            <option value="贵州省">贵州省</option>
+                            <option value="云南省">云南省</option>
+                            <option value="河南省">河南省</option>
+                            <option value="湖北省">湖北省</option>
+                            <option value="湖南省">湖南省</option>
+                            <option value="广东省">广东省</option>
+                            <option value="陕西省">陕西省</option>
+                            <option value="甘肃省">甘肃省</option>
+                            <option value="河北省">河北省</option>
+                            <option value="山西省">山西省</option>
+                            <option value="江苏省">江苏省</option>
+                            <option value="浙江省">浙江省</option>
+                            <option value="安徽省">安徽省</option>
+                            <option value="福建省">福建省</option>
+                            <option value="江西省">江西省</option>
+                            <option value="山东省">山东省</option>
+                            <option value="辽宁省">辽宁省</option>
+                            <option value="吉林省">吉林省</option>
+                            <option value="黑龙江省">黑龙江省</option>
+                            <option value="青海省">青海省</option>
+                            <option value="海南省">海南省</option>
+                            <option value="广西壮族自治区">广西壮族自治区</option>
+                            <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                            <option value="宁夏回族自治区">宁夏回族自治区</option>
+                            <option value="内蒙古自治区">内蒙古自治区</option>
+                        </select>
+                        <select name="shilist" id="Select2" class="input-medium">
+                            <option value="">全部</option>
+                        </select>
+                        <select name="qulist" id="Select3" class="input-medium">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+
+
+                    <div class="input-prepend input-append"><span class="add-on">收货地址：</span>
+                        <select name="shenglist" id="Select4" class="input-medium">
+                            <option value="">全部</option>
+                            <option value="北京">北京</option>
+                            <option value="上海">上海</option>
+                            <option value="天津">天津</option>
+                            <option value="重庆">重庆</option>
+                            <option value="四川省">四川省</option>
+                            <option value="贵州省">贵州省</option>
+                            <option value="云南省">云南省</option>
+                            <option value="河南省">河南省</option>
+                            <option value="湖北省">湖北省</option>
+                            <option value="湖南省">湖南省</option>
+                            <option value="广东省">广东省</option>
+                            <option value="陕西省">陕西省</option>
+                            <option value="甘肃省">甘肃省</option>
+                            <option value="河北省">河北省</option>
+                            <option value="山西省">山西省</option>
+                            <option value="江苏省">江苏省</option>
+                            <option value="浙江省">浙江省</option>
+                            <option value="安徽省">安徽省</option>
+                            <option value="福建省">福建省</option>
+                            <option value="江西省">江西省</option>
+                            <option value="山东省">山东省</option>
+                            <option value="辽宁省">辽宁省</option>
+                            <option value="吉林省">吉林省</option>
+                            <option value="黑龙江省">黑龙江省</option>
+                            <option value="青海省">青海省</option>
+                            <option value="海南省">海南省</option>
+                            <option value="广西壮族自治区">广西壮族自治区</option>
+                            <option value="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                            <option value="宁夏回族自治区">宁夏回族自治区</option>
+                            <option value="内蒙古自治区">内蒙古自治区</option>
+                        </select>
+                        <select name="shilist" id="Select5" claqisoss="input-medium">
+                            <option value="">全部</option>
+                        </select>
+                        <select name="qulist" id="Select6" class="input-medium">
+                            <option value="">全部</option>
+                        </select>
+                    </div>
+                </div>
+                <script>
+                    document.write("<s" + "cript type='text/javascript' src='/static/js/fhjsAddress.js'></scr" + "ipt>");
+                </script>
+                <script type="text/javascript" src="/static/js/fhjsAddress.js"></script>
+                <script type="text/javascript">
+                    if (readCookie("s1") != "") {
+                        addressInit('Select1', 'Select2', 'Select3', readCookie("s1"), readCookie("s2"), readCookie("s3"));
+                        showre();
+                    } else {
+                        addressInit('Select1', 'Select2', 'Select3');
+                    }
+                </script>
+                <script>
+                    document.write("<s" + "cript type='text/javascript' src='/static/js/fhjsAddress.js'></scr" + "ipt>");
+                </script>
+                <script type="text/javascript" src="/static/js/fhjsAddress.js"></script>
+                <script type="text/javascript">
+                    if (readCookie("s4") != "") {
+                        addressInit('Select4', 'Select5', 'Select6', readCookie("s4"), readCookie("s5"), readCookie("s6"));
+                        showre();
+                    } else {
+                        addressInit('Select4', 'Select5', 'Select6');
+                    }
+                </script>
+
+                <div class="input-prepend input-append"><span class="add-on">快递类型：</span>
+                    <select id="com" class="input-small" name="com">
+                        <option value="0" selected="selected">全部</option>
+                        <option value="yunda">韵达</option>
+                        <option value="yuantong">圆通</option>
+                        <option value="shentong">申通</option>
+                        <option value="zhongtong">中通</option>
+                        <option value="quanfeng">全峰</option>
+                        <option value="huitong">汇通</option>
+                    </select>
+                    <span class="add-on">是否扫描：</span>
+                    <select id="sm" class="input-small">
+                        <option value="0">全部</option>
+                        <option value="1">是</option>
+                        <option value="2">否</option>
+                    </select>
+                </div>
+
+
+                <div class="input-prepend input-append" style="display:none;">
+                    <span class="add-on">验证码：</span>
+                    <input name="code" type="text" id="code" size="8" maxlength="5" style="border:1px solid #ccc;">
+                    <!--   <a href="#" onclick="getcode();return false;">
+                   <img id="icode" src="inc/node.asp" border="0" alt="看不清楚请点击刷新验证码" style="cursor : pointer;">
+                   </a> --></div>
+
+
+                <input type="button" class="btn btn-primary" id="select" onclick="showre()" value="提交查询"><br><br>
+
+            </div>
+        </div>
+
+
+        <div class="well">
+            <div class="nav">领取前请先看此教程：<a href="http://www.taodanwy.com/News.asp?id=759" style="color:#C30"
+                                          target="_blank"> http://www.taodanwy.com/News.asp?id=759</a> (检测功能实用教程)
+                <input class="btn btn-primary pull-right" type="submit" value="批量领取" onclick="Qiall()"></div>
+            <hr>
+
+            <span id="jhs"></span>
+
+            <div id="imglist">
+                <table class="table table-bordered table-condensed table-striped" style="font-size: 12px;">
+                    <thead>
+                    <tr>
+                        <th align="center">序号</th>
+                        <th align="center">快递单号</th>
+                        <th align="center">快递类型</th>
+                        <th align="center">发货地址/收货地址</th>
+                        <th align="center">扫描时间</th>
+                        <th align="center">操作</th>
+                        <th align="center">批量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+    </td>
+{% endblock %}

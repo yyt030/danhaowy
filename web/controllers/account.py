@@ -6,7 +6,7 @@ import json
 import os
 import datetime
 from flask_wtf.csrf import generate_csrf
-from weshop import csrf
+from web import csrf
 from flask import render_template, Blueprint, request, url_for, redirect, flash, abort, jsonify, \
     session, g
 from ..models import db, User

@@ -231,11 +231,13 @@ def register_db(app):
 
 def register_routes(app):
     """注册路由"""
-    from controllers import account, site, admin
+    from controllers import account, site, admin,login_user
 
     app.register_blueprint(site.bp, url_prefix='')
+    app.register_blueprint(login_user.bp, url_prefix='/login_user')
     app.register_blueprint(account.bp, url_prefix='/account')
     app.register_blueprint(admin.bp, url_prefix='/admin')
+
 
 
 def register_error_handle(app):

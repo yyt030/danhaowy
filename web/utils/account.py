@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 from flask import session
-from weshop.models import User
+from web.models import User
 import codecs
 
 

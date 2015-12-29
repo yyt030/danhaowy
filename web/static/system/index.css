@@ -1,0 +1,141 @@
+body {
+	color: rgb(51, 51, 51); text-decoration: none;
+}
+body a {
+	color: rgb(51, 51, 51); text-decoration: none;
+}
+a:hover {
+	color: rgb(0, 0, 0); text-decoration: underline;
+}
+#top {
+	background: url("../images/t_rebg.gif") repeat-x; height: 163px;
+}
+.tbg {
+	background: url("../images/t_bg.jpg") no-repeat; margin: 0px auto; width: 970px; height: 163px;
+}
+.tbg .t {
+	height: 97px;
+}
+.tbg .b {
+	padding: 0px 5px; height: 66px;
+}
+.tbg .logo {
+	width: 250px;
+	height: 97px;
+	text-indent: -9999px;
+	display: block;
+	background-image: url(../images/logo.png);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.tbg .t p {
+	color: rgb(255, 255, 255); padding-top: 65px;
+}
+.tbg .t p a {
+	margin: 0px 5px; color: rgb(255, 255, 255);
+}
+.tbg .b a.dl {
+	background: url("../images/tab.gif") no-repeat 0px -66px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+.tbg .b a.zc {
+	background: url("../images/tab.gif") no-repeat -153px 0px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+.tbg .b a.dl:hover {
+	background: url("../images/tab.gif") no-repeat 0px -132px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+.tbg .b a.zc:hover {
+	background: url("../images/tab.gif") no-repeat -153px -132px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+.tbg .b a.dl_s {
+	background: url("../images/tab.gif") no-repeat 0px 0px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+.tbg .b a.zc_s {
+	background: url("../images/tab.gif") no-repeat -153px -66px; width: 153px; height: 66px; text-indent: -9999px; float: left; display: block;
+}
+#wra {
+	background: url("../images/rey.gif") repeat-y; margin: 0px auto; width: 970px;
+}
+#wra .wrabg {
+	background: url("../images/wra_b.gif") no-repeat bottom; min-height: 350px; _height: 350px;
+}
+#wra .wrabg .left i {
+	background: url("../images/in_tip.gif") no-repeat; left: 85px; top: 16px; width: 118px; height: 56px; text-indent: -9999px; display: block; position: absolute;
+}
+#wra .wrabg .left {
+	background: url("../images/mline.gif") no-repeat right; width: 400px; padding-top: 50px; float: left; position: relative; min-height: 300px; _height: 300px;
+}
+#wra .wrabg .left table tr td {
+	padding-top: 20px;
+}
+#wra .wrabg .right {
+	padding: 0px 60px; width: 440px; float: left;
+}
+#wra .wrabg .right div {
+	background: url("../images/line.gif") repeat-x bottom; padding: 20px 0px; height: 35px;
+}
+#wra .wrabg .right div dl {
+	height: 50px; padding-left: 65px;
+}
+#wra .wrabg .right div dl dt {
+	color: rgb(65, 137, 203); line-height: 30px; font-size: 18px;
+}
+#wra .wrabg .right div dl dd {
+	color: rgb(153, 153, 153);
+}
+#wra .wrabg .right div dl.icon01 {
+	background: url("../images/icon01.gif") no-repeat 10px;
+}
+#wra .wrabg .right div dl.icon02 {
+	background: url("../images/icon02.gif") no-repeat 10px;
+}
+#wra .wrabg .right div dl.icon03 {
+	background: url("../images/icon03.gif") no-repeat 10px;
+}
+#wra .wrabg .right div dl.icon04 {
+	background: url("../images/icon04.gif") no-repeat 10px;
+}
+table {
+	border-collapse: collapse;
+}
+.login_btn {
+	background: url("../images/btn.gif") no-repeat 0px 0px; border: 0px currentColor; width: 111px; height: 45px; text-indent: -9999px; display: block; cursor: pointer;
+}
+.login_btn:hover {
+	background: url("../images/btn.gif") no-repeat 0px -45px;
+}
+.r_btn {
+	background: url("../images/btn.gif") no-repeat -111px 0px; border: 0px currentColor; width: 111px; height: 45px; text-indent: -9999px; display: block; cursor: pointer;
+}
+.r_btn:hover {
+	background: url("../images/btn.gif") no-repeat -111px -45px;
+}
+.cz_btn {
+	background: url("../images/btn.gif") no-repeat -222px 0px; border: 0px currentColor; width: 111px; height: 45px; text-indent: -9999px; display: block; cursor: pointer;
+}
+.cz_btn:hover {
+	background: url("../images/btn.gif") no-repeat -222px -45px;
+}
+#bottom {
+	margin: 0px auto; width: 100%; text-align: center; color: rgb(102, 102, 102); line-height: 35px;
+}
+#bottom p {
+	line-height: 40px; margin-bottom: 5px; border-bottom-color: rgb(235, 235, 235); border-bottom-width: 1px; border-bottom-style: solid;
+}
+#bottom p a {
+	margin: 0px 5px;
+}
+.register {
+	padding: 10px 30px 50px;
+}
+.register tr {
+	background: url("../images/line.gif") repeat-x bottom;
+}
+.register tr td {
+	padding: 10px 0px; height: 40px;
+}
+.inputxt {
+	background: url("../images/inputbg.gif") no-repeat left top; padding: 7px 5px; border: 1px solid rgb(203, 203, 203); line-height: 20px;
+}
+.i_o {
+	color: rgb(153, 153, 153);
+}

@@ -1,0 +1,45 @@
+.part10{width:540px; border-left: 1px solid #EBE9E9;border-right : 1px solid #EBE9E9;border-bottom : 1px solid #D7D7D7;}
+.part10 .left{background:url(../images/sy_bg001.jpg) repeat-x left top;}
+.part10 .tbbg1{float:left;width:677px;height:409px; overflow:hidden;  border:1px solid #e0edf4; padding:1px;}
+.part10 .left h2{
+	margin:0 0 0 20px; padding:2px 0 2px 0; color:#2d2d2d; line-height:29px; font-size:14px; background:url(../images/sy_tb01.gif) no-repeat 0 -70px; padding-left:20px;
+}
+.part10 .left2 h2{
+	margin:0 0 0 20px; padding:2px 0 2px 0; color:#2d2d2d; line-height:29px; font-size:14px; background:url(../images/sy_tb01.gif) no-repeat 0 -98px; padding-left:25px;
+}
+.part10 h3{
+	margin:0 0 0 20px;padding-top:4px;*padding-top:7px;_padding-top:5px; font-size:14px;
+}
+.main .part10 .left .title{ height:30px;}
+.main .part10 .left .title h2{float:left;margin-right:20px; display:inline;}
+.main .part10 .left .title em{font-style:normal;color:#999; display:inline; float:right;margin:8px 20px 0 0;}
+.part10 .left .cont{padding:10px;}
+.part10 .partzuo{ width:540px; float:left; overflow:hidden;}
+.part10 .right{ float:left;width:218px;height:724px; overflow:hidden; margin:0px; margin-left:11px;}
+.part10 .right .title{ background:url(../images/gg005.jpg) no-repeat left top; width:218px; height:29px; overflow:hidden;}
+.part10 .right .title h3{ width:106px;  text-align:center; color:#FFF;}
+.part10 .right .cont{padding:10px 0 10px 15px; height:671px; border:1px solid #dddddd; border-top:none;}
+.part10 .now li{color:#666;margin-top:10px;padding-bottom:5px;*padding-bottom:6px;_padding-bottom:8px;}
+.part10 .now li img{float:left;padding:1px;border:1px solid #ccc;margin-right:5px;}
+.part10 .now li a{margin-right:5px;}
+.part10 .now li p{color:#999;margin-top:4px;}
+.part10 .now li p span{margin:0 5px;}
+
+.main .part10 .left2 .title{ height:41px;}
+.part10 .tbbg2{float:left;width:677px;height:294px; overflow:hidden; margin-top:10px; border:1px solid #e0edf4; padding:1px;}
+.part10 .left2{ background:url(../images/sy_bg001.jpg) repeat-x left top;}
+.main .part10 .left2 .title h2{float:left;margin-right:20px; display:inline;}
+.main .part10 .left2 .title em{font-style:normal;color:#999; display:inline; float:right;margin:8px 20px 0 0;}
+.part10 .left2 .cont{padding:10px 18px; clear:both;*padding-top:5px;_padding-top:5px; }
+.part10 .left2 .reListTitle table tbody td{text-align:left;height:28px; line-height:28px;background:url(../images/dashline.gif) repeat-x 0 100%;color:#666;}
+.part10 .left2 .reListTitle table tbody td.do{ text-align:right;}
+.part10 .left2 .reListTitle table tbody .tcolor td{background-color:#F6F6F6;}
+.part10 .left2 .id,.part10 .left2 .reListTitle table tbody td.id,.part10 .left2 .price,.part10 .left2 .reListTitle table tbody td.price{ text-align:center;}
+
+.part10 .left2 .smailltitle{ clear:both;padding-left:18px;}
+.part10 .left2 .smailltitle a{ display:block; float:left;width:71px; height:24px;background:url(../images/button.jpg) no-repeat 0 -337px;font-size:12px;border:0;color:#fff;color:#333;margin-right:10px; text-align:center; line-height:20px;}
+.part10 .left2 .smailltitle a:hover{ text-decoration:none;}
+.part10 .left2 .smailltitle .czbtna{ background-position:0 -313px;color:#fff;}
+	.reListTitle table thead td ul{border:1px solid #fff; background:url(../images/repeatbg.jpg) repeat-x;height:20px;line-height:20px;}
+	.reListTitle table thead td ul:after{content:".";height:0;visibility:hidden;display:block;clear:both;}
+	.reListTitle table thead td ul li{float:left;color:#999;text-align:center;}

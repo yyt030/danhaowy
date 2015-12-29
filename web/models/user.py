@@ -11,10 +11,9 @@ from ..utils._redis import get_user_active_time
 
 
 class User(db.Model):
-    """用户：id，姓名，邮箱，密码，角色，性别，头像，创建时间，token
-    角色：　shopowner
-        　 common
-           saler
+    """用户：id，姓名，邮箱，密码，角色，创建时间，token
+    角色：　admin
+        　 member
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -23,7 +22,7 @@ class User(db.Model):
     mobile = db.Column(db.String(20))
     address = db.Column(db.String(20))
     password = db.Column(db.String(200))
-    role = db.Column(db.String(20), default='shopowner')
+    role = db.Column(db.String(20), default='member')
     create_time = db.Column(db.DateTime, default=datetime.datetime.now)
     is_active = db.Column(db.Boolean, default=False)
     token = db.Column(db.String(20), default='')
@@ -69,35 +68,5 @@ class User(db.Model):
         return '<User %s>' % self.name
 
 
-class Profile(db.Model):
-    """用户详细信息"""
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('profile', lazy='dynamic'))
-    openid = db.Column(db.String(50), default='')
-    city = db.Column(db.String(50), default='')
-    country = db.Column(db.String(50), default='cn')
-    headimgurl = db.Column(db.String(200), default='')
-    language = db.Column(db.String(20))
-    nickname = db.Column(db.String(50))
-    province = db.Column(db.String(50))
-    subscribe_time = db.Column(db.DateTime, default=datetime.datetime.now)
 
 
-class GetTicketRecord(db.Model):
-    """发放的优惠券记录"""
-    id = db.Column(db.Integer, primary_key=True)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('get_discounts', lazy='dynamic'))
-
-    discount_id = db.Column(db.Integer, db.ForeignKey('discount.id'))
-    discount = db.relationship('Discount', backref=db.backref('get_discounts', lazy='dynamic'))
-
-    status = db.Column(db.Enum('normal', 'verify', 'usedit', 'expire'), default='normal')
-
-    code =db.Column(db.Integer)
-    create_at = db.Column(db.DateTime, default=datetime.datetime.now)
-
-    def __repr__(self):
-        return '<GetDiscountRecord %s>' % self.id

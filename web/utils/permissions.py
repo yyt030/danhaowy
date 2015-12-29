@@ -11,7 +11,7 @@ def require_visitor(func):
     @wraps(func)
     def decorator(*args, **kwargs):
         if g.user:
-            return redirect(url_for('site.home'))
+            return redirect(url_for('site.login'))
         return func(*args, **kwargs)
 
     return decorator

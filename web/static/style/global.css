@@ -5,16 +5,16 @@ body
 	margin-right: 0px;
 	background-color: #F7F8FA;
 	font-size:12px;
-	font-family:Î¢ÈíÑÅºÚ; 	
+	font-family:å¾®è½¯é›…é»‘; 	
 }
-body,blockquote {margin:0;padding:0;font-size:12px;font-family:"Î¢ÈíÑÅºÚ",Verdana,Arial}
+body,blockquote {margin:0;padding:0;font-size:12px;font-family:"å¾®è½¯é›…é»‘",Verdana,Arial}
 *{ text-decoration:none;}
 blockquote {margin:10px 0;padding:0;}
 .act1 {width:50px;}
 pre {margin:0;padding:0;border:1px solid #ccc;margin-top:10px;padding-left:5px;}
 #container {width:900px;margin:0 auto;}
 ul li{ list-style:none; }
-/* Ê×Ò³  */
+/* é¦–é¡µ  */
 #tdtop {
 	background-image: url(../images/headbg_1.gif);
 	background-repeat: repeat-x;
@@ -91,16 +91,16 @@ ul li{ list-style:none; }
      text-decoration:none;
 }
 
-/* Ê×Ò³½áÊø */
+/* é¦–é¡µç»“æŸ */
 
-/* ×¢²á½áÊø */
+/* æ³¨å†Œç»“æŸ */
 .td_07 {
 	font-size: 14px;
 	padding-right: 10px;
 }
 .regtxt {color: #FF0000}
 .regtxt33 {color: #0033CC}
-/* ×¢²á½áÊø */
+/* æ³¨å†Œç»“æŸ */
 
 .membercen {
 	width: 950px;
@@ -240,7 +240,7 @@ ul li{ list-style:none; }
 .btnsubmit1 { cursor:pointer; color: #00599B; background: url(../images/pay_submit.gif) no-repeat 0 0; width:122px; line-height: 26px; height: 26px; border: 0px; padding: 0; }
 
 
-/*-------------------------·ÖÒ³*/
+/*-------------------------åˆ†é¡µ*/
 .TPages { width :100%; line-height:40px; margin:5px auto;}
 .TPages a{ text-decoration:none; color:Black;}
 .TPages a:hover {color: #D50000;}
@@ -256,14 +256,14 @@ ul li{ list-style:none; }
 margin: 10px auto 0 auto;
 width: 950px;
 border: 1px #DCDCDC solid;
-font: 9pt/20px "ËÎÌå";
+font: 9pt/20px "å®‹ä½“";
 color: #666;
 }
 
 #link1 {
 margin: 0 auto 0 auto;
 width: 935px;
-font: 9pt/20px "ËÎÌå";
+font: 9pt/20px "å®‹ä½“";
 color: #666;
 }
 
@@ -385,7 +385,7 @@ color: #00E5EE;
 }
 
 
-/*ĞÂÔö*/
+/*æ–°å¢*/
 #rawRecruit,#word ul{ padding:0 0 10px 10px}
 #rawRecruit li{
 text-indent: 10px;

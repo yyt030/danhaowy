@@ -7,7 +7,7 @@ from flask.ext.uploads import UploadSet, IMAGES, extension, ALL
 
 # 用户头像
 import time
-from weshop.utils.helper import random_str
+from web.utils.helper import random_str
 
 avatars = UploadSet('avatars', IMAGES)
 

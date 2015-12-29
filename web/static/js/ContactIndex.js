@@ -1,24 +1,24 @@
 var online = new Array();
 var qq = new Array();
 qq[0] = new Array(); 
-qq[0][0] = "ĞÂÀÏ»áÔ± - ×¢²á×ÉÑ¯";
+qq[0][0] = "æ–°è€ä¼šå‘˜ - æ³¨å†Œå’¨è¯¢";
 qq[0][1] = "800125177";
 
 
 qq[1] = new Array();
-qq[1][0] = "¿ìµİµ¥ºÅ - ÎÊÌâ×ÉÑ¯";
+qq[1][0] = "å¿«é€’å•å· - é—®é¢˜å’¨è¯¢";
 qq[1][1] = "2796304398";
 
 qq[2] = new Array();
-qq[2][0] = "ÌÔ±¦Î¬È¨ - µ×µ¥ÉêËß";
+qq[2][0] = "æ·˜å®ç»´æƒ - åº•å•ç”³è¯‰";
 qq[2][1] = "800125177";
 
 qq[3] = new Array();
-qq[3][0] = "Í¶ËßÓë½¨Òé/Âô¼Ò¹ÜÀí";
+qq[3][0] = "æŠ•è¯‰ä¸å»ºè®®/å–å®¶ç®¡ç†";
 qq[3][1] = "2796304398";
 
 qq[4] = new Array();
-qq[4][0] = "¿Í·şÔÚÏßÊ±¼ä£º</br>Ôç11:00 - Íí23:00";
+qq[4][0] = "å®¢æœåœ¨çº¿æ—¶é—´ï¼š</br>æ—©11:00 - æ™š23:00";
 
 
 var script_src = "http:\/\/webpresence.qq.com\/getonline?Type=1&"
@@ -58,13 +58,13 @@ function heartBeat()
 	ioc.style.top = ((isNaN(parseInt(ioc.style.top)) ? 0 :parseInt(ioc.style.top))  + percent).toString() + "px";
 	lastScrollY = lastScrollY+percent; 
 }
-function mClk(){ //×Ô
+function mClk(){ //è‡ª
 	event.srcElement.click();
 }
 
 var suspendcode;
 var contactHandler;
-contactHandler = setInterval("checkData()", 1000); //Ë¢ĞÂËÙ¶È£¬Ô­À´2000
+contactHandler = setInterval("checkData()", 1000); //åˆ·æ–°é€Ÿåº¦ï¼ŒåŸæ¥2000
 
 function definedData(varData){
 	if(varData == null && varData == undefined){
@@ -75,7 +75,7 @@ function definedData(varData){
 function checkData(){
 	if(definedData(online[0])){
 		clearInterval(contactHandler);
-		suspendcode="<div id=\"full\" style='right:3px; top:130px; position:absolute;z-index:1000;text-align:center;'>\n"  //top Àë¶¥¶Ë¾àÀë
+		suspendcode="<div id=\"full\" style='right:3px; top:130px; position:absolute;z-index:1000;text-align:center;'>\n"  //top ç¦»é¡¶ç«¯è·ç¦»
 		+ "<div id='con'>\n"
 		+ "<div class='list'>\n";
 		var onlineP = 0;
@@ -84,7 +84,7 @@ function checkData(){
 			suspendcode += "     <h3>" + qq[i][0] + "</h3>\n";
 			for(j=1;j<qq[i].length;j++){
 				suspendcode += "         <a href='tencent://message/?uin=" + qq[i][j] + "&Site=www.danhaowy.com&Menu=yes' class='qq'>\n";
-				suspendcode += "            <img  border='0' align='absmiddle' src='images/qqs_1.gif' title='µã»÷QQÓëÎÒÃÇ½»Á÷'/>µ¥ºÅÎŞÓÇ¿Í·ş" + "\n";  //srcºóqqÊÇÂ·¾¶
+				suspendcode += "            <img  border='0' align='absmiddle' src='/static/images/qqs_1.gif' title='ç‚¹å‡»QQä¸æˆ‘ä»¬äº¤æµ'/>å•å·æ— å¿§å®¢æœ" + "\n";  //srcåqqæ˜¯è·¯å¾„
 
 				
 				suspendcode += "         </a>\n";
@@ -94,7 +94,7 @@ function checkData(){
 		
 
 		suspendcode = suspendcode + "</div>\n"
-		+ "<a href='#' title='»Øµ½¶¥²¿' id='toTop' onfocus='this.blur()'><img src='images/con_bom.png' width='128' height='22' style='border:0px' /></a>\n"
+		+ "<a href='#' title='å›åˆ°é¡¶éƒ¨' id='toTop' onfocus='this.blur()'><img src='/static/images/con_bom.png' width='128' height='22' style='border:0px' /></a>\n"
 		+ "</div>\n"
 		+ "</div>\n";
 		document.getElementById("contactContanier").innerHTML = suspendcode;

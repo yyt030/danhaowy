@@ -4,89 +4,89 @@ var isyx=0;
 $(document).ready(function(){
 	$.formValidator.initConfig({theme:"baidu",submitOnce:true,formID:"form1",
 		onError:function(msg){alert(msg);},mode:'AutoTip',
-		submitAfterAjaxPrompt : 'ÓĞÊı¾İÕıÔÚÒì²½ÑéÖ¤£¬ÇëÉÔµÈ...'
+		submitAfterAjaxPrompt : 'æœ‰æ•°æ®æ­£åœ¨å¼‚æ­¥éªŒè¯ï¼Œè¯·ç¨ç­‰...'
 	});
 
-$("#username").formValidator({onShow:"ÇëÄúÊäÈëĞèÒª×¢²áµÄÓÃ»§Ãû£¡",onFocus:"ÇëÊ¹ÓÃÓ¢ÎÄ×ÖÄ¸»òÊı×Ö,³¤¶È5-16×Ö·û.",onShowText:"ÇëÊäÈëÓÃ»§Ãû",onCorrect:"¸ÃÓÃ»§Ãû¿ÉÒÔ×¢²á"}).inputValidator({min:5,max:16,onError:"ÄãÊäÈëµÄÓÃ»§³¤¶È²»ÕıÈ·,ÇëÈ·ÈÏ"}).regexValidator({regExp:"username",dataType:"enum",onError:"ÓÃ»§Ãû¸ñÊ½²»ÕıÈ·"}).ajaxValidator({		dataType : "html",
+$("#username").formValidator({onShow:"è¯·æ‚¨è¾“å…¥éœ€è¦æ³¨å†Œçš„ç”¨æˆ·åï¼",onFocus:"è¯·ä½¿ç”¨è‹±æ–‡å­—æ¯æˆ–æ•°å­—,é•¿åº¦5-16å­—ç¬¦.",onShowText:"è¯·è¾“å…¥ç”¨æˆ·å",onCorrect:"è¯¥ç”¨æˆ·åå¯ä»¥æ³¨å†Œ"}).inputValidator({min:5,max:16,onError:"ä½ è¾“å…¥çš„ç”¨æˆ·é•¿åº¦ä¸æ­£ç¡®,è¯·ç¡®è®¤"}).regexValidator({regExp:"username",dataType:"enum",onError:"ç”¨æˆ·åæ ¼å¼ä¸æ­£ç¡®"}).ajaxValidator({		dataType : "html",
 		async : true,
 		url : "ajax.asp?c=user",
 		success : function(data){
-           if( data == "Çë²»ÒªÌá½»·Ç·¨²ÎÊı³¢ÊÔGET×¢Èë£¡" ) {return "Çë²»ÒªÌá½»·Ç·¨²ÎÊı,Çë¸ü»»ÓÃ»§Ãû!";}else{
-if( data == "0" ){return "´ËÓÃ»§ÃûÒÑ´æÔÚ,ÇëÌîĞ´ÆäËüÓÃ»§Ãû!";}else{return true;}}
+           if( data == "è¯·ä¸è¦æäº¤éæ³•å‚æ•°å°è¯•GETæ³¨å…¥ï¼" ) {return "è¯·ä¸è¦æäº¤éæ³•å‚æ•°,è¯·æ›´æ¢ç”¨æˆ·å!";}else{
+if( data == "0" ){return "æ­¤ç”¨æˆ·åå·²å­˜åœ¨,è¯·å¡«å†™å…¶å®ƒç”¨æˆ·å!";}else{return true;}}
 		},
 		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ£¬¿ÉÄÜ·şÎñÆ÷Ã¦£¬ÇëÖØÊÔ"+errorThrown);},
-		onError : "¸ÃÓÃ»§Ãû²»¿ÉÓÃ£¬Çë¸ü»»ÓÃ»§Ãû",
-		onWait : "ÕıÔÚ¶ÔÓÃ»§Ãû½øĞĞºÏ·¨ĞÔĞ£Ñé£¬ÇëÉÔºò..."
+		error: function(jqXHR, textStatus, errorThrown){alert("æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®ï¼Œå¯èƒ½æœåŠ¡å™¨å¿™ï¼Œè¯·é‡è¯•"+errorThrown);},
+		onError : "è¯¥ç”¨æˆ·åä¸å¯ç”¨ï¼Œè¯·æ›´æ¢ç”¨æˆ·å",
+		onWait : "æ­£åœ¨å¯¹ç”¨æˆ·åè¿›è¡Œåˆæ³•æ€§æ ¡éªŒï¼Œè¯·ç¨å€™..."
 	});
 	
-	$("#password1").formValidator({onShowFixText:"6~16¸ö×Ö·û£¬°üÀ¨×ÖÄ¸¡¢Êı×Ö¡¢ÌØÊâ·ûºÅ£¬Çø·Ö´óĞ¡Ğ´",onShow:"ÇëÊäÈëÃÜÂë",onFocus:"ÖÁÉÙ1¸ö³¤¶È",onCorrect:"ÃÜÂëºÏ·¨"}).inputValidator({min:6,max:16,empty:{leftEmpty:false,rightEmpty:false,emptyError:"ÃÜÂëÁ½±ß²»ÄÜÓĞ¿Õ·ûºÅ"},onError:"ÃÜÂë³¤¶È´íÎó,ÇëÈ·ÈÏ"}).passwordValidator({compareID:"us"});
+	$("#password1").formValidator({onShowFixText:"6~16ä¸ªå­—ç¬¦ï¼ŒåŒ…æ‹¬å­—æ¯ã€æ•°å­—ã€ç‰¹æ®Šç¬¦å·ï¼ŒåŒºåˆ†å¤§å°å†™",onShow:"è¯·è¾“å…¥å¯†ç ",onFocus:"è‡³å°‘1ä¸ªé•¿åº¦",onCorrect:"å¯†ç åˆæ³•"}).inputValidator({min:6,max:16,empty:{leftEmpty:false,rightEmpty:false,emptyError:"å¯†ç ä¸¤è¾¹ä¸èƒ½æœ‰ç©ºç¬¦å·"},onError:"å¯†ç é•¿åº¦é”™è¯¯,è¯·ç¡®è®¤"}).passwordValidator({compareID:"us"});
 
 
-	$("#password2").formValidator({onShow:"ÇëÄúÔÙ´ÎÊäÈëµÇÂ¼ÃÜÂë£¡",onFocus:"ÃÜÂëÖ»ÄÜÊ¹ÓÃÓ¢ÎÄ×ÖÄ¸»òÊı×Ö£¬³¤¶È6-16×Ö·û",onCorrect:"ÃÜÂëÒ»ÖÂ"}).inputValidator({min:6,max:16,empty:{leftEmpty:false,rightEmpty:false,emptyError:"ÖØ¸´ÃÜÂëÁ½±ß²»ÄÜÓĞ¿Õ·ûºÅ"},onError:"ÄúÊäÈëµÄÃÜÂë³¤¶È²»ÕıÈ·,ÇëÄúºË¶Ô£¡"}).compareValidator({desID:"password1",operateor:"=",onError:"2´ÎÃÜÂë²»Ò»ÖÂ,ÇëÄúºË¶Ô£¡"});	
+	$("#password2").formValidator({onShow:"è¯·æ‚¨å†æ¬¡è¾“å…¥ç™»å½•å¯†ç ï¼",onFocus:"å¯†ç åªèƒ½ä½¿ç”¨è‹±æ–‡å­—æ¯æˆ–æ•°å­—ï¼Œé•¿åº¦6-16å­—ç¬¦",onCorrect:"å¯†ç ä¸€è‡´"}).inputValidator({min:6,max:16,empty:{leftEmpty:false,rightEmpty:false,emptyError:"é‡å¤å¯†ç ä¸¤è¾¹ä¸èƒ½æœ‰ç©ºç¬¦å·"},onError:"æ‚¨è¾“å…¥çš„å¯†ç é•¿åº¦ä¸æ­£ç¡®,è¯·æ‚¨æ ¸å¯¹ï¼"}).compareValidator({desID:"password1",operateor:"=",onError:"2æ¬¡å¯†ç ä¸ä¸€è‡´,è¯·æ‚¨æ ¸å¯¹ï¼"});	
 
 
 
-	  $("#email").formValidator({onShowFixText:"±ØĞëÕıÈ·ÌîĞ´ÄúµÄÓÊÏä£¬ÓÃÓÚÕÒ»ØÃÜÂë",onShow:"ÇëÄúÊäÈëÕıÈ·µÄEmail£¡",onFocus:"EmailÓÃÓÚÕÒ»ØÃÜÂë,ÇëÄúÈÏÕæÌîĞ´",onCorrect:"ÕıÈ·",defaultValue:"@"}).inputValidator({min:6,max:100,onError:"ÄúÊäÈëµÄÓÊÏä³¤¶È·Ç·¨,ÇëÄúºË¶Ô£¡"}).regexValidator({regExp:"^([\\w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([\\w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$",onError:"ÄúÊäÈëµÄÓÊÏä¸ñÊ½²»ÕıÈ·"}).ajaxValidator({
+	  $("#email").formValidator({onShowFixText:"å¿…é¡»æ­£ç¡®å¡«å†™æ‚¨çš„é‚®ç®±ï¼Œç”¨äºæ‰¾å›å¯†ç ",onShow:"è¯·æ‚¨è¾“å…¥æ­£ç¡®çš„Emailï¼",onFocus:"Emailç”¨äºæ‰¾å›å¯†ç ,è¯·æ‚¨è®¤çœŸå¡«å†™",onCorrect:"æ­£ç¡®",defaultValue:"@"}).inputValidator({min:6,max:100,onError:"æ‚¨è¾“å…¥çš„é‚®ç®±é•¿åº¦éæ³•,è¯·æ‚¨æ ¸å¯¹ï¼"}).regexValidator({regExp:"^([\\w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([\\w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$",onError:"æ‚¨è¾“å…¥çš„é‚®ç®±æ ¼å¼ä¸æ­£ç¡®"}).ajaxValidator({
 		dataType : "html",
 		async : true,
 		url : "ajax.asp?c=mail",
 		success : function(data){
-           if( data == "Çë²»ÒªÌá½»·Ç·¨²ÎÊı³¢ÊÔGET×¢Èë£¡" ) {return "Çë²»ÒªÌá½»·Ç·¨²ÎÊı,Çë¸ü»»!";}else{
-if( data == "0" ){return "¸ÃÓÊÏä±»×¢²á,Çë¸ü»»";}else{return true;}}
+           if( data == "è¯·ä¸è¦æäº¤éæ³•å‚æ•°å°è¯•GETæ³¨å…¥ï¼" ) {return "è¯·ä¸è¦æäº¤éæ³•å‚æ•°,è¯·æ›´æ¢!";}else{
+if( data == "0" ){return "è¯¥é‚®ç®±è¢«æ³¨å†Œ,è¯·æ›´æ¢";}else{return true;}}
 		},
 		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ£¬¿ÉÄÜ·şÎñÆ÷Ã¦£¬ÇëÖØÊÔ"+errorThrown);},
-		onError : "EmailÓÊÏä²»¿ÉÓÃ£¬Çë¸ü»»",
-		onWait : "ÕıÔÚ¶ÔÓÊÏä½øĞĞºÏ·¨ĞÔĞ£Ñé£¬ÇëÉÔºò..."
+		error: function(jqXHR, textStatus, errorThrown){alert("æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®ï¼Œå¯èƒ½æœåŠ¡å™¨å¿™ï¼Œè¯·é‡è¯•"+errorThrown);},
+		onError : "Emailé‚®ç®±ä¸å¯ç”¨ï¼Œè¯·æ›´æ¢",
+		onWait : "æ­£åœ¨å¯¹é‚®ç®±è¿›è¡Œåˆæ³•æ€§æ ¡éªŒï¼Œè¯·ç¨å€™..."
 	});
 	
 	
-	$("#qq").formValidator({onShow:"ÇëÄúÊäÈëÕıÈ·µÄQQºÅÂë£¡",onCorrect:"ÕıÈ·"}).regexValidator({regExp:"qq",dataType:"enum",onError:"QQºÅÂë¸ñÊ½²»ÕıÈ·"}).ajaxValidator({
+	$("#qq").formValidator({onShow:"è¯·æ‚¨è¾“å…¥æ­£ç¡®çš„QQå·ç ï¼",onCorrect:"æ­£ç¡®"}).regexValidator({regExp:"qq",dataType:"enum",onError:"QQå·ç æ ¼å¼ä¸æ­£ç¡®"}).ajaxValidator({
 		dataType : "html",
 		async : true,
 		url : "ajax.asp?c=qq",
 		success : function(data){
-           if( data == "Çë²»ÒªÌá½»·Ç·¨²ÎÊı³¢ÊÔGET×¢Èë£¡" ) {return "Çë²»ÒªÌá½»·Ç·¨²ÎÊı,Çë¸ü»»!";}else{
-if( data == "0" ){return "QQºÅÂë±»×¢²á,Çë¸ü»»";}else{return true;}}
+           if( data == "è¯·ä¸è¦æäº¤éæ³•å‚æ•°å°è¯•GETæ³¨å…¥ï¼" ) {return "è¯·ä¸è¦æäº¤éæ³•å‚æ•°,è¯·æ›´æ¢!";}else{
+if( data == "0" ){return "QQå·ç è¢«æ³¨å†Œ,è¯·æ›´æ¢";}else{return true;}}
 		},
 		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ£¬¿ÉÄÜ·şÎñÆ÷Ã¦£¬ÇëÖØÊÔ"+errorThrown);},
-		onError : "¸ÃQQ²»¿ÉÓÃ£¬Çë¸ü»»",
-		onWait : "ÕıÔÚ¶ÔQQ½øĞĞºÏ·¨ĞÔĞ£Ñé£¬ÇëÉÔºò..."
+		error: function(jqXHR, textStatus, errorThrown){alert("æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®ï¼Œå¯èƒ½æœåŠ¡å™¨å¿™ï¼Œè¯·é‡è¯•"+errorThrown);},
+		onError : "è¯¥QQä¸å¯ç”¨ï¼Œè¯·æ›´æ¢",
+		onWait : "æ­£åœ¨å¯¹QQè¿›è¡Œåˆæ³•æ€§æ ¡éªŒï¼Œè¯·ç¨å€™..."
 	});
 	
-	$("#sj").formValidator({onShow:"ÇëÊäÈëÄúµÄÊÖ»úºÅÂë£¡",onfocus:"",onCorrect:"ÕıÈ·"}).inputValidator({min:11,max:11,onError:"ÊÖ»úºÅÂë±ØĞëÎª11Î»,ÇëÖØĞÂÊäÈë."}).regexValidator({regExp:"mobile",dataType:"enum",onError:"ÊÖ»úºÅÂë¸ñÊ½²»ÕıÈ·"}).ajaxValidator({
+	$("#sj").formValidator({onShow:"è¯·è¾“å…¥æ‚¨çš„æ‰‹æœºå·ç ï¼",onfocus:"",onCorrect:"æ­£ç¡®"}).inputValidator({min:11,max:11,onError:"æ‰‹æœºå·ç å¿…é¡»ä¸º11ä½,è¯·é‡æ–°è¾“å…¥."}).regexValidator({regExp:"mobile",dataType:"enum",onError:"æ‰‹æœºå·ç æ ¼å¼ä¸æ­£ç¡®"}).ajaxValidator({
 		dataType : "html",
 		async : true,
 		url : "ajax.asp?c=sj",
 		success : function(data){
-           if( data == "Çë²»ÒªÌá½»·Ç·¨²ÎÊı³¢ÊÔGET×¢Èë£¡" ) {return "Çë²»ÒªÌá½»·Ç·¨²ÎÊı,Çë¸ü»»!";}else{
-if( data == "0" ){return "ÊÖ»úºÅÂë±»×¢²á£¬Çë¸ü»»";}else{return true;}}
+           if( data == "è¯·ä¸è¦æäº¤éæ³•å‚æ•°å°è¯•GETæ³¨å…¥ï¼" ) {return "è¯·ä¸è¦æäº¤éæ³•å‚æ•°,è¯·æ›´æ¢!";}else{
+if( data == "0" ){return "æ‰‹æœºå·ç è¢«æ³¨å†Œï¼Œè¯·æ›´æ¢";}else{return true;}}
 		},
 		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ£¬¿ÉÄÜ·şÎñÆ÷Ã¦£¬ÇëÖØÊÔ"+errorThrown);},
-		onError : "¸ÃÊÖ»úºÅÂë²»¿ÉÓÃ£¬Çë¸ü»»",
-		onWait : "ÕıÔÚ¶ÔÊÖ»úºÅÂë½øĞĞºÏ·¨ĞÔĞ£Ñé£¬ÇëÉÔºò..."
+		error: function(jqXHR, textStatus, errorThrown){alert("æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®ï¼Œå¯èƒ½æœåŠ¡å™¨å¿™ï¼Œè¯·é‡è¯•"+errorThrown);},
+		onError : "è¯¥æ‰‹æœºå·ç ä¸å¯ç”¨ï¼Œè¯·æ›´æ¢",
+		onWait : "æ­£åœ¨å¯¹æ‰‹æœºå·ç è¿›è¡Œåˆæ³•æ€§æ ¡éªŒï¼Œè¯·ç¨å€™..."
 	});
 		
 	
 
     
 
-       	$("#tuiguang").formValidator({empty:true,onShow:"ÇëÊäÈëÍÆ¹ãÈËÍøÕ¾ÓÃ»§Ãû£¡",onFocus:"ÇëÊäÈëÍÆ¹ãÈËÍøÕ¾ÓÃ»§Ãû£¡",onCorrect:"ÕıÈ·",onEmpty:"Ã»ÓĞ¾ÍÁô¿Õ£¡"})
+       	$("#tuiguang").formValidator({empty:true,onShow:"è¯·è¾“å…¥æ¨å¹¿äººç½‘ç«™ç”¨æˆ·åï¼",onFocus:"è¯·è¾“å…¥æ¨å¹¿äººç½‘ç«™ç”¨æˆ·åï¼",onCorrect:"æ­£ç¡®",onEmpty:"æ²¡æœ‰å°±ç•™ç©ºï¼"})
              .ajaxValidator({
 		dataType : "html",
 		async : true,
 		url : "ajax.asp?c=tguang",
 		success : function(data){
-           if( data == "Çë²»ÒªÌá½»·Ç·¨²ÎÊı³¢ÊÔGET×¢Èë£¡" ) {return "Çë²»ÒªÌá½»·Ç·¨²ÎÊı,Çë¸ü»»!";}else{
-if( data == "0" ){return "ÍÆ¹ãÈË²»´æÔÚ,ÇëÄú×ĞÏ¸ºË¶Ô£¡";}else{return true;}}
+           if( data == "è¯·ä¸è¦æäº¤éæ³•å‚æ•°å°è¯•GETæ³¨å…¥ï¼" ) {return "è¯·ä¸è¦æäº¤éæ³•å‚æ•°,è¯·æ›´æ¢!";}else{
+if( data == "0" ){return "æ¨å¹¿äººä¸å­˜åœ¨,è¯·æ‚¨ä»”ç»†æ ¸å¯¹ï¼";}else{return true;}}
 		},
 		buttons: $("#button"),
-		error: function(jqXHR, textStatus, errorThrown){alert("·şÎñÆ÷Ã»ÓĞ·µ»ØÊı¾İ£¬¿ÉÄÜ·şÎñÆ÷Ã¦£¬ÇëÖØÊÔ"+errorThrown);},
-		onError : "ÍÆ¹ãÈË²»´æÔÚ,ÇëÄú×ĞÏ¸ºË¶Ô£¡",
-		onWait : "ÕıÔÚ¶ÔÍÆ¹ãÈË½øĞĞºÏ·¨ĞÔĞ£Ñé£¬ÇëÉÔºò..."
+		error: function(jqXHR, textStatus, errorThrown){alert("æœåŠ¡å™¨æ²¡æœ‰è¿”å›æ•°æ®ï¼Œå¯èƒ½æœåŠ¡å™¨å¿™ï¼Œè¯·é‡è¯•"+errorThrown);},
+		onError : "æ¨å¹¿äººä¸å­˜åœ¨,è¯·æ‚¨ä»”ç»†æ ¸å¯¹ï¼",
+		onWait : "æ­£åœ¨å¯¹æ¨å¹¿äººè¿›è¡Œåˆæ³•æ€§æ ¡éªŒï¼Œè¯·ç¨å€™..."
 	});
 	
 });

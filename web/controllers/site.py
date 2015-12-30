@@ -12,6 +12,7 @@ bp = Blueprint('site', __name__)
 
 
 @bp.route('/', methods=['GET'])
+@bp.route('/index', methods=['GET'])
 def index():
     form = SigninForm()
     return render_template('site/index.html', form=form)

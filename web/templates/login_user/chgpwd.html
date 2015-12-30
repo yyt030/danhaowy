@@ -1,0 +1,51 @@
+{% extends 'login_layout.html' %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> &gt; 会员中心{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <DIV class="midmess">
+            <DIV class="bt01">修改登录密码</DIV>
+            <DIV class="per_nraa">
+                <TABLE width="655" height="242" border="0" cellPadding="0" cellSpacing="0" style="width: 655px;">
+                    <td width="180">
+                        <form name="form1" method="post" action="chgpwd?action=ok" id="form1">
+                            {{ form.csrf_token }}
+                            <tr>
+                                <td height="40" align="right" valign="middle">用户名：</td>
+                                <TD colspan="2"><font color="#FF0000">{{ user.name }}</font><EM id=tipuser></EM></TD>
+                                <TD width="255"></TD>
+                            </TR>
+                            <TR>
+                                <td height="40" align="right" valign="middle">原密码：</td>
+                                <TD colspan="2"><INPUT class="bs" size=16 type="password" name="password"><EM
+                                        id=tipPass1></EM></TD>
+                                <TD class="fuwub_b"><em>提醒</em>
+                                    <p>为了确保您账号的安全，修改前需认证原密码是否正确！</p></TD>
+                            </TR>
+                            <TR>
+                                <td height="40" align="right" valign="middle">新密码：</td>
+                                <TD colspan="2"><INPUT class="bs" size="16" type="password" name="newpassword"><EM
+                                        id=tipPass2></EM></TD>
+                                <TD class="fuwub_b"><em>提醒</em>
+                                    <p>新密码只能使用英文字母或数字，长度6-16字符！</p></TD>
+                            </TR>
+                            <TR>
+                                <td height="40" align="right" valign="middle">确认新密码：</td>
+                                <TD colspan="2"><INPUT class="bs" size="16" type="password" name="newpassword2"><EM
+                                        id=tipPass3></EM></TD>
+                                <TD class="fuwub_b"><em>提醒</em>
+                                    <p>请您二次确认密码是否输入正确！</p></TD>
+                            </TR>
+                            <TR>
+                                <TD></TD>
+                                <TD width="144" align="center"><input name="submit" type="submit" class="btnumoff"
+                                                                      value="修改密码"/></TD>
+                                <TD width="76" align="left">&nbsp;</TD>
+                                <TD></TD>
+                            </TR>
+                        </form>
+                </TABLE>
+
+            </DIV>
+        </DIV>
+    <td width="38"></td>
+{% endblock %}

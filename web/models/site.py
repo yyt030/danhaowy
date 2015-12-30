@@ -5,7 +5,7 @@ import random
 import hashlib
 import time
 from werkzeug import security
-from ._base import db
+from . import db
 
 
 

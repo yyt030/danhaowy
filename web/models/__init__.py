@@ -1,5 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from ._base import db
+
+from flask.ext.sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
 from .user import *
 from .site import *

@@ -1,22 +1,12 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from datetime import datetime, timedelta
-import time
-import json
 import os
-import string
-import re, urllib2
-import random
-from PIL import Image
-from coverage.html import STATIC_PATH
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
-from web import csrf
 from web.utils.account import signin_user, signout_user
 from ..models import db, User
-from ..forms import SigninForm
+from ..forms import SigninForm, RegisterForm
 from ..utils.permissions import require_user, require_visitor
-from ..utils.uploadsets import images, random_filename, process_question, avatars
 
 bp = Blueprint('site', __name__)
 
@@ -36,15 +26,26 @@ def banner():
 def login():
     form = SigninForm()
     if request.method == 'POST':
-        name = form.username.data
+        value = form.username.data
         password = form.password.data
-        print name, password
         if form.validate_on_submit():
-            user = User.query.filter(User.name == name).first()
-            if user:
+            loginType = request.form.get('loginType')
+            if loginType == 'uname':
+                user = User.query.filter(User.name == value).first()
+            elif loginType == 'mobile':
+                user = User.query.filter(User.mobile == value).first()
+            elif loginType == 'email':
+                user = User.query.filter(User.email == value).first()
+            else:
+                user = User.query.filter(User.name == value).first()
+
+            if user is not None and user.check_password(password):
                 signin_user(user)
                 tip = "用户%s登录成功！" % user.name
                 return render_template('tip.html', tip=tip, error=False, url="")
+            else:
+                error = "用户名或密码错误"
+                return render_template('error.html', error=error, url="")
         else:
             return render_template('tip.html', error=True, tip="请仔细填写您的账号密码，如果忘记，请返回点击找回密码选项，或者联系客服！", url="login")
     else:
@@ -66,7 +67,7 @@ def reg():
         &rand=1451397827713&username=asfasf123123
         &Email=@&QQ=&sj=&_=1451397819278
         """
-    form = SigninForm()
+    form = RegisterForm()
     if g.user:
         error = "您已经登录，不能注册账号！当前登录账号:%s" % g.user.name
         return render_template('error.html', error=error, url="/")
@@ -85,13 +86,33 @@ def reg():
             return '0'
 
     if request.method == 'POST':
-        pass
+        user = User()
+        user.name = request.form.get('username')
+        user.email = request.form.get('Email')
+        user.qq = request.form.get('QQ')
+        user.password = request.form.get('password1')
+        user.hash_password()
+        user.mobile = request.form.get('sj')
+
+        if User.query.filter(User.name == user.name).first():
+            error = "用户名已存在:%s" % user.name
+            return render_template('error.html', error=error, url="/")
+
+        db.session.add(user)
+        db.session.commit()
+        return render_template('tip.html', tip="注册成功，请返回首页登录:%s" % user.name, error=False, url="/")
     return render_template('site/reg.html', form=form)
 
 
 @bp.route('/signout', methods=['GET', 'POST'])
 @require_visitor
 def signout():
+    signout_user()
+    return redirect(url_for('site.index'))
+
+
+@bp.route('/loginout')
+def loginout():
     signout_user()
     return redirect(url_for('site.index'))
 

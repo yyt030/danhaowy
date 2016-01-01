@@ -12,7 +12,7 @@ class Notice(db.Model):
     """
     __tablename__ = 'notices'
     id = db.Column(db.Integer, primary_key=True)
-    type = db.Column(db.Enum(['新手帮助', '网站新闻', '热门文章']), default='新手帮助')
+    type = db.Column(db.Enum('新手帮助', '网站新闻', '热门文章'), default='新手帮助')
     subtype = db.Column(db.String(10))
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)

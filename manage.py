@@ -27,14 +27,11 @@ def run_80():
     app.run(host="0.0.0.0", port=80)
 
 
-
-
-
 @manager.command
 def create_admin():
     """Create admin."""
 
-    user = User(role='admin', name="admin", email="admin@qq.com", mobile="18812345678")
+    user = User(name="admin", qq=123456789, email="admin@qq.com", mobile="18812345678", address='localhost')
     user.password = "admin"
     user.hash_password()
     user.gene_token()
@@ -47,6 +44,7 @@ def createdb():
     """Create database."""
     db.create_all()
 
+
 @manager.command
 def reset_users_token():
     with app.app_context():
@@ -54,8 +52,6 @@ def reset_users_token():
             u.gene_token()
             db.session.add(u)
             db.session.commit()
-
-
 
 
 if __name__ == "__main__":

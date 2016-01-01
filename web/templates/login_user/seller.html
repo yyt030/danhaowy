@@ -1,0 +1,479 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <script language="javascript" type="text/javascript" src="/static/js/bootstrap.js"></script>
+
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+    <script>
+        document.write("<s" + "cript type='text/javascript' src='/static/js/sellerress.js?" + Math.random() + "'></scr" + "ipt>");
+        var timer
+        var boll = 0
+        function noscan() {
+            if (boll == 1) {
+                alert("发布程序已经在为您工作了,请您耐心等待结果。");
+                return false;
+            }
+            else {
+                if (document.form.num.value.length < 10) {
+                    alert("请认真核对快递单号是否正确");
+                    document.form.num.focus();
+                    return false;
+                } else {
+                    if (document.form.send_date.value.length == 0) {
+                        alert("发货时间请选择");
+                        document.form.send_date.focus();
+                        return false;
+                    } else {
+                        if (confirm("您确定要发布此快递吗？\n快递单号：" + document.form.num.value + "\n恶意发布假单一经查实封号处理,我承诺本单为真实有效的!") == false) {
+                            return false;
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        function complete(data) {
+            boll = 0
+            $("#send_date").val('');
+            $('#result').html(data).show();
+        }
+
+
+        $(function () {
+
+            $("#plse").click(function () {
+                if (boll == 1) {
+                    alert("发布程序已经在为您工作了,请您耐心等待结果。");
+                    return false;
+                }
+                else {
+                    if ($("#textarea").val().split("\n").length >= 3000) {
+                        boll == 0
+                        alert("批量发布每次上限3000条,您已超过上限条数。\n本次发布请减少发布条数。");
+                        return false;
+                    } else {
+
+
+                        loading();
+
+                        $.ajax({
+                            type: "post",
+                            url: "seller?qi=xzseller",
+                            dataType: "text",
+                            data: {
+                                "send_date": $("#send_time").val(),
+                                "cshenglist": escape($("#Select7").val()),
+                                "cshilist": escape($("#Select8").val()),
+                                "cqulist": escape($("#Select9").val()),
+                                "com": $("#pcom").val(),
+                                "r": escape($("#textarea").val()),
+                                "scan": $("#scan").val()
+                            },
+                            success: complete,
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                alert("数据加载中，请稍等");
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        function loading() {
+            boll = 1
+            $('#result').html("<img src='images/wait.gif';/> 正在发布中,请耐心等待发布结果！").show();
+
+        }
+
+
+        function Qpost() {
+//alert("导入文件发布系统修复,预计15号之前恢复\n对此带来的不便请谅解。");
+//ifmxls("file")
+//return false;
+
+            var filename = document.getElementById("file").value;
+            var mime = filename.toLowerCase().substr(filename.lastIndexOf("."));
+            if (mime != ".xls" && mime != ".xlsx") {
+                ifmxls("file")
+                alert("请选择xls|xlsx格式的文件上传!");
+
+                return false;
+
+            }
+        }
+
+        $(function () {
+            $("#Import").click(function () {
+
+                if (boll == 1) {
+                    alert("发布程序已经在为您工作了,请您耐心等待结果。");
+                    return false;
+                }
+                else {
+                    if (document.getElementById("send_time1").value.length == 0) {
+                        alert("发货时间请选择");
+                        return false;
+                    } else {
+                        if (document.getElementById("file").value.length == 0) {
+                            alert("请选择导入文件");
+                            return false;
+                        } else {
+                            ifmclose("ifm");
+                            loading();
+                            timer = setInterval(GetBack, "1000");
+                        }
+                    }
+                }
+            });
+
+        });
+
+
+        function GetBack() {
+            var win = document.getElementById('ifm').contentWindow;
+            if (document.all) {
+                var str = win.document.body.innerText
+            }
+            else {
+                var str = win.document.body.textContent
+            }
+
+            if (str.indexOf("发布") != -1) {
+
+                if (document.all) {
+                    complete(win.document.body.innerText);
+                }
+                else {
+                    complete(win.document.body.textContent);
+                }
+                ifmxls("file")
+                clearInterval(timer);
+            }
+        }
+
+        function ifmclose(v) {
+            if (document.all) {
+                document.getElementById('' + v + '').contentWindow.document.body.innerText = "";
+            } else {
+                document.getElementById('' + v + '').contentWindow.document.body.textContent = "";
+            }
+        }
+
+
+        function ifmxls(s) {
+            var obj = document.getElementById('' + s + '');
+            obj.outerHTML = obj.outerHTML;
+        }
+    </script>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .div_block {
+            margin: 10px auto 10px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
+
+        .breadcrumb {
+            margin: 0;
+        }
+
+        footer span {
+            margin-right: 20px;;
+        }
+
+        .bs-docs-example {
+            margin: 5px 0 5px 0;
+        }
+
+    </style>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 发布单号{% endblock %}
+{% block content %}
+    <td valign="top" width="624">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>发布单号提示：</h1>
+                <ul>
+                    <li>已激活的会员,仅可单个发布,未激活的会员需先申请卖家,超级卖家的可批量发布！</li>
+                    <li>发布的单号被卖出,您将得到平台单号价格 <font Color=red>95%</font> 佣金, 例如：单价:"0.8" 佣金:"0.76"</li>
+                    <li>成功卖出的单号,站内信及时通知,可提现！</li>
+                    <li>批量发布禁止带详细地址,若带详细地址,本站有权利删除您所发布的单号！</li>
+                    <li style="color:#F00">提醒：如发布的单号快递类型与单号不符的,遭到大量投诉本站有权封停您的帐号！</li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+            <div class="div_block">
+                <div class="navbar-inner">
+                    <br>
+                    <div style="margin-bottom: 9px;" class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#1">单个发布(未扫描)</a></li>
+                            <li class=""><a data-toggle="tab" href="#2">批量发布(未扫描)</a></li>
+                            <li class=""><a data-toggle="tab" href="#3">导入文件发布(未扫描)</a></li>
+                        </ul>
+                        <div class="tab-content">
+
+                            <div id="1" class="tab-pane active">
+
+                                <form class="form-horizontal" name="form" method="post"
+                                      action="seller?type=noscan" onsubmit="return noscan()">
+                                    {{ form.csrf_token }}
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">快递单号</label>
+                                        <div class="controls">
+                                            <input class="input-medium" type="text" name="num" id="num2"
+                                                   autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">发货时间</label>
+                                        <div class="controls">
+                                            <input class="Wdate input-medium" style="cursor:pointer"
+                                                   type="text" name="send_date"
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',skin:'twoer',minDate:'%y-%M-%d 00:00:00',maxDate:'%y-%M-%d 23:59:59'})">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">发货地点</label>
+                                        <div class="controls">
+                                            <SELECT name='dshenglist' id="Select1"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='dshilist' id="Select2"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='dqulist' id="Select3"
+                                                    class="input-medium"></SELECT>
+                                            <script type="text/javascript">
+                                                addressInit('Select1', 'Select2', 'Select3', '浙江省', '杭州市', '余杭区')
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">收货地点</label>
+                                        <div class="controls">
+                                            <SELECT name='ashenglist' id="Select4"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='ashilist' id="Select5"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='aqulist' id="Select6"
+                                                    class="input-medium"></SELECT>
+                                            <script type="text/javascript">
+                                                addressInit('Select4', 'Select5', 'Select6')
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">快递类型</label>
+                                        <div class="controls">
+                                            <SELECT id="com" class="input-small" name="com"
+                                                    style="width:100px">
+                                                <option value="yunda">韵达</option>
+                                                <option value="yuantong">圆通</option>
+                                                <option value="shentong">申通</option>
+                                                <option value="zhongtong">中通</option>
+                                                <option value="quanfeng">全峰</option>
+                                                <option value="ems">EMS</option>
+                                                <option value="huitong">汇通</option>
+                                                <option value="shunfeng">顺丰</option>
+                                                <option value="bgpyghx">邮政包裹</option>
+                                                <option value="yousu">优速</option>
+                                                <option value="tiantian">天天</option>
+                                                <option value="ems2">EMS经济</option>
+                                                <option value="zjs">宅急送</option>
+                                                <option value="kuaijie">快捷</option>
+                                            </SELECT>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">是否扫描</label>
+                                        <div class="controls">
+                                            <select class="input-small" name="scan">
+                                                <option value="0">未扫描</option>
+                                                <option value="1">已扫描</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button class="btn btn-primary" type="submit" id="butn1">单个发布
+                                        </button>
+                                    </div>
+                                </form>
+                                <br/> <font color="#FF0000">提醒：发布前请核对 发货地点和 单号 收货地点 快递类型 是否吻合</font>
+                            </div>
+                            <div id="2" class="tab-pane">
+                                <Div class="form-horizontal">
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">发货时间</label>
+                                        <div class="controls">
+                                            <input class="Wdate input-medium" name="send_date"
+                                                   id="send_time" style="cursor:pointer" type="text"
+                                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',skin:'twoer',minDate:'%y-%M-%d 00:00:00',maxDate:'%y-%M-%d 23:59:59'})">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">发货地点</label>
+                                        <div class="controls">
+                                            <SELECT name='cshenglist' id="Select7"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='cshilist' id="Select8"
+                                                    class="input-medium"></SELECT>
+                                            <SELECT name='cqulist' id="Select9"
+                                                    class="input-medium"></SELECT>
+                                            <script type="text/javascript">
+                                                addressInit('Select7', 'Select8', 'Select9', '浙江省', '杭州市', '余杭区')
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">快递单号<br>
+                                            收货地点</label>
+                                        <div class="controls">
+                                                            <textarea rows="5" id="textarea" name="r"
+                                                                      class="input-xlarge"
+                                                                      style="width: 80%;"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">快递类型</label>
+                                        <div class="controls">
+                                            <SELECT id="pcom" class="input-small" name="com">
+                                                <option value="yunda">韵达</option>
+                                                <option value="yuantong">圆通</option>
+                                                <option value="shentong">申通</option>
+                                                <option value="zhongtong">中通</option>
+                                                <option value="quanfeng">全峰</option>
+                                                <option value="ems">EMS</option>
+                                                <option value="huitong">汇通</option>
+                                                <option value="shunfeng">顺丰</option>
+                                                <option value="bgpyghx">邮政包裹</option>
+                                                <option value="yousu">优速</option>
+                                                <option value="tiantian">天天</option>
+                                                <option value="ems2">EMS经济</option>
+                                                <option value="zjs">宅急送</option>
+                                                <option value="kuaijie">快捷</option>
+                                            </SELECT>
+
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="textarea" class="control-label">是否扫描</label>
+                                        <div class="controls">
+                                            <select class="input-small" name="scan" id="scan">
+                                                <option value="0">未扫描</option>
+                                                <option value="1">已扫描</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button class="btn btn-primary" id="plse" type="submit">批量发布
+                                        </button>
+                                    </div>
+                                </Div>
+                                <br/> <font color="#FF0000">提醒：发布前请核对 发货地点和 单号 收货地点 快递类型 是否吻合</font>
+                            </div>
+
+
+                            <div id="3" class="tab-pane">
+                                <Div class="form-horizontal">
+                                    <form action="inc/Import.asp" method="post"
+                                          enctype="multipart/form-data" target="ifm">
+
+                                        <div class="control-group">
+                                            <label for="textarea" class="control-label">发货时间</label>
+                                            <div class="controls">
+                                                <input class="Wdate input-medium" id="send_time1"
+                                                       name="send_time1" style="cursor:pointer"
+                                                       type="text"
+                                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',skin:'twoer',minDate:'%y-%M-%d 00:00:00',maxDate:'%y-%M-%d 23:59:59'})">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="textarea" class="control-label">选择文件</label>
+                                            <div class="controls">
+                                                <input type="file" id="file" name="file"
+                                                       onchange="Qpost();"
+                                                       style="float:left;height:25px;"/>
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="textarea" class="control-label">快递类型</label>
+                                            <div class="controls">
+                                                <SELECT id="pcom1" class="input-small" name="com1">
+                                                    <option value="yunda">韵达</option>
+                                                    <option value="yuantong">圆通</option>
+                                                    <option value="shentong">申通</option>
+                                                    <option value="zhongtong">中通</option>
+                                                    <option value="quanfeng">全峰</option>
+                                                    <option value="ems">EMS</option>
+                                                    <option value="huitong">汇通</option>
+                                                    <option value="shunfeng">顺丰</option>
+                                                    <option value="bgpyghx">邮政包裹</option>
+                                                    <option value="yousu">优速</option>
+                                                    <option value="tiantian">天天</option>
+                                                    <option value="ems2">EMS经济</option>
+                                                    <option value="zjs">宅急送</option>
+                                                    <option value="kuaijie">快捷</option>
+                                                </SELECT>
+
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="textarea" class="control-label">是否扫描</label>
+                                            <div class="controls">
+                                                <select class="input-small" name="scan">
+                                                    <option value="0">未扫描</option>
+                                                    <option value="1">已扫描</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button class="btn btn-primary" id="Import" type="submit">
+                                                导入发布
+                                            </button>
+                                        </div>
+                                    </form>
+                                </Div>
+                                <iframe id="ifm" name="ifm" style="display:none"/>
+                                </iframe><br>
+                                                <span style="color:#F00; margin-bottom:15px">使用文件导入请先下载导入模版。  <a
+                                                        href="导入模版.zip" target="_blank" style="color:#33C"><b>模版点我下载</b></a></span>
+                            </div>
+
+
+                            <div class="alert" id="result" style="display:none;">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="well">
+                <div class="nav" style="color:#F00"> 批量发布格式：单号|省 市 县（区）之间有空格 例子：1234567899|广东省 广州市
+                    越秀区。不允许发布带有详细地址的单号<br/>发布前请下载 卖家教程（条例）： <a href="卖家教程（条例）.docx"
+                                                               target="_blank">点我下载</a></div>
+                <hr/>
+            </div>
+        </div>
+    </td>
+    <td width="163"></td>
+{% endblock %}

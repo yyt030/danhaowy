@@ -17,7 +17,8 @@ class Notice(db.Model):
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    author = db.relationship('User', backref=db.backref('notices', lazy='dynamic'))
 
     def __repr__(self):
         print '<%r>' % self.__class__.__name__

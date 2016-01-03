@@ -131,3 +131,23 @@ def chgpwd():
         tip = "用户%s修改密码成功！" % user.name
         return render_template('error.html', error=tip, url="")
     return render_template('login_user/chgpwd.html', form=form, user=user)
+
+
+@bp.route('/sellerlist')
+def sellerlist():
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Order.query
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d'))
+
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    return render_template('login_user/sellerlist.html', orders=enumerate(orders), pagination=pagination)

@@ -9,7 +9,7 @@ from datetime import datetime
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
-    tracking_no = db.Column(db.String(100), index=True)
+    tracking_no = db.Column(db.String(100), unique=True, index=True)
     send_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     send_addr_province = db.Column(db.String(20))
     send_addr_city = db.Column(db.String(20))
@@ -22,4 +22,4 @@ class Order(db.Model):
     is_scan = db.Column(db.SmallInteger, default=0)
 
     def __repr__(self):
-        print '<Order %r>' % self.name
+        return '<Order %r>' % self.tracking_no

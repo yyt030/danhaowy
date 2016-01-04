@@ -195,3 +195,11 @@ def sellerout():
             error_out=False)
     orders = pagination.items
     return render_template('login_user/sellerout.html', orders=enumerate(orders), page=page, page_all=page_all)
+
+
+@bp.route('/sellerset', methods=['GET', 'POST'])
+@require_user
+def sellerset():
+    '''设置默认发货'''
+    form = RegisterForm()
+    return render_template('login_user/sellerset.html', form=form)

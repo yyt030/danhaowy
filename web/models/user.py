@@ -29,6 +29,10 @@ class User(db.Model):
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Integer, default=0)
 
+    default_send_province = db.Column(db.String(20))
+    default_send_city = db.Column(db.String(20))
+    default_send_county = db.Column(db.String(20))
+
     @property
     def active_time(self):
         """从Redis中获取用户最后活跃时间，若不存在，则返回当前时间"""

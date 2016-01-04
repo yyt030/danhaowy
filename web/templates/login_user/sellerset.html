@@ -1,0 +1,81 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script src="/static/js/bootstrap.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+
+    <script type="text/javascript">
+        document.write("<s" + "cript type='text/javascript' src='/static/js/sellerress.js?" + Math.random() + "'></scr" + "ipt>");
+    </script>
+    <script type="text/javascript">
+        function AutoScroll() {
+            $("#divPost:first").animate({
+                marginTop: "-28px"
+            }, 500, function () {
+                $(this).css({marginTop: "0px"}).find("li:first").appendTo(this);
+            });
+        }
+        setInterval('AutoScroll()', 5000);
+    </script>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 设置默认发货{% endblock %}
+{% block content %}
+    <td valign="top" width="100%">
+        <div style="width:100%; margin-left:5px">
+
+            <div class="midmess">
+                <!--温馨提示框-->
+                <div class="mess_all">
+                    <h1>温馨提示：</h1>
+                    <ul>
+                        <li>1、您可以设置默认发货地址。</li>
+                        <li>2、设置默认发货地址不限次数,可绑定默认发货地址</li>
+                    </ul>
+                </div>
+                <!--温馨提示框结束-->
+                <DIV class="hei">
+                    <H1>设置默认发货</H1>
+                    <DIV class="heiaa">
+                        <DIV class="tui">
+                            <form name="form1" method="post" action="sellerset?action=ok" id="form1">
+                                {{ form.csrf_token }}
+                                <p>默认发货地址：
+                                    <SELECT name='dshenglist' id="Select1" class="input-medium">
+                                    </SELECT>
+                                    <SELECT name='dshilist' id="Select2" class="input-medium">
+                                    </SELECT>
+                                    <SELECT name='dqulist' id="Select3" class="input-medium">
+                                    </SELECT>
+                                </p>
+                                <p style="text-align:center">
+                                    <button class="btn btn-primary" type="submit">设置默认发货</button>
+                                </p>
+                                <script type="text/javascript">
+                                    addressInit('Select1', 'Select2', 'Select3', '云南省', '昆明市', '')
+                                </script>
+                            </form>
+                        </DIV>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </div>
+
+    </td>
+    <td width="163"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

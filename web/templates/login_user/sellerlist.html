@@ -89,11 +89,21 @@
                 <DIV class="page_list">
                     <DIV class="p_l">
                         <DIV id="page_iwymb">
-                            {% if pagination %}
-                                <div class="pagination pagination-centered">
-                                    {{ pagination_widget(pagination, 'page') }}
-                                </div>
-                            {% endif %}
+                            <form method=Post action="?">
+                                <span class=pageinfo><u></u>{{ page }}/{{ page_all }}页</span>
+                                <a href=?page=1><u></u>首页</a>
+                                {% if page <= 1 %}
+                                    <a href=?page=1><u></u>上页</a>
+                                {% else %}
+                                    <a href=?page={{ page - 1 }}><u></u>上页</a>
+                                {% endif %}
+                                {% if page == page_all %}
+                                    <a href=?page={{ page_all }}><u></u>下页</a>
+                                {% else %}
+                                    <a href=?page={{ page + 1 }}><u></u>下页</a>
+                                {% endif %}
+                                <a href=?page={{ page_all }}><u></u>末页</a>
+                            </form>
                         </div>
                     </div>
                 </div>

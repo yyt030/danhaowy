@@ -8,3 +8,4 @@ db = SQLAlchemy()
 from .user import *
 from .notice import *
 from .order import *
+from .shoplog import *

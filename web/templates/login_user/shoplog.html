@@ -1,0 +1,207 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* __mainBody2----------------------------*/
+
+        .input {
+            border: 1px solid #ddd;
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .well {
+            padding: 19px;
+            border-radius: 4px;
+            border: 1px solid rgb(227, 227, 227);
+            margin-bottom: 20px;
+            min-height: 20px;
+            box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.05);
+            background-color: rgb(245, 245, 245);
+        }
+
+        .well .nav {
+            list-style: none;
+            margin-bottom: 10px;
+            margin-left: 0px;
+        }
+
+        #imglist {
+            margin-top: 10px;
+        }
+
+        .tablelist {
+            border: 1px solid #e7e7e7;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .tablelist td, .tablelist th {
+            border: 1px solid #e7e7e7;
+            border-left: none;
+            border-top: none;
+        }
+
+        .tablelist th {
+            line-height: 30px;
+        }
+
+        .tablelist td {
+            padding: 0 3px;
+            line-height: 30px;
+        }
+
+        .faaddress {
+            width: 145px;
+            height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .shouaddress {
+            width: 145px;
+            height: 30px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .btn {
+            display: inline-block;
+            outline: 0;
+            padding: 4px 12px;
+            margin-bottom: 0;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+            color: #333;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, .75);
+            background-color: #f5f5f5;
+            background-image: -moz-linear-gradient(top, #fff, #e6e6e6);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e6e6e6));
+            background-image: -webkit-linear-gradient(top, #fff, #e6e6e6);
+            background-image: -o-linear-gradient(top, #fff, #e6e6e6);
+            background-image: linear-gradient(to bottom, #fff, #e6e6e6);
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+            border: 1px solid #bbb;
+            border-bottom-color: #a2a2a2;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05)
+        }
+
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script src="/static/js/bootstrap.js" type="text/javascript"></script>
+    <script language="javasscript" type="text/javascript" src="/static/login_user/Qidate/WdatePicker.js"></script>
+    <script src="/static/js/totop.js"></script>
+    <script src="/static/js/ContactIndex.js"></script>
+
+    <script type="text/javascript">
+        function AutoScroll() {
+            $("#divPost:first").animate({
+                marginTop: "-28px"
+            }, 500, function () {
+                $(this).css({marginTop: "0px"}).find("li:first").appendTo(this);
+            });
+        }
+        setInterval('AutoScroll()', 5000);
+    </script>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 已发布单号列表{% endblock %}
+{% block content %}
+    <td valign="top" width="100%">
+        <div style="width:100%; margin-left:5px">
+
+
+            <span style=" margin-left:5px;">
+            <form method="GET" action="shoplog">
+                记录时间：
+
+                <input type="text" id="startdate" class="input" name="startdate" onClick="WdatePicker()"
+                       value="2015-12-5" style="width:105px">
+                到
+                <input type="text" id="enddate" class="input" name="enddate" onClick="WdatePicker()" value="2016-1-5"
+                       style="width:105px">
+
+
+                <button class="btn btn-primary" type="submit">查询</button>
+            </form></span>
+
+
+            <div class="expertinfo" id="expertinfo" style=" margin-top:10px">
+                <div class="well">
+                    <div class="nav"><i class="icon-th-large"></i> 我的佣金记录</div>
+                    <table class="tablelist" style="font-size: 12px;" width="100%">
+
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>类型</th>
+                            <th>备注</th>
+                            <th>金额</th>
+                            <th>佣金余额</th>
+                            <th>时间</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {% for count, shoplog in shoplogs %}
+                            <tr>
+                                <td align="center">{{ count + 1 }}</td>
+                                <td align="center">{{ shoplog.type }}</td>
+                                <td align="center">快递单号：{{ shoplog.order.tracking_no }} ,已成功售出。</td>
+                                <td align="center">+0.24</td>
+                                <td align="center">974.48</td>
+                                <td align="center">{{ shoplog.create_at }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <DIV class="page_list">
+                        <DIV class="p_l">
+                            <DIV id="page_iwymb">
+                                <form method=Post action="?">
+                                    <span class=pageinfo><u></u>{{ page }}/{{ page_all }}页</span>
+                                    <a href=?page=1><u></u>首页</a>
+                                    {% if page <= 1 %}
+                                        <a href=?page=1><u></u>上页</a>
+                                    {% else %}
+                                        <a href=?page={{ page - 1 }}><u></u>上页</a>
+                                    {% endif %}
+                                    {% if page == page_all %}
+                                        <a href=?page={{ page_all }}><u></u>下页</a>
+                                    {% else %}
+                                        <a href=?page={{ page + 1 }}><u></u>下页</a>
+                                    {% endif %}
+                                    <a href=?page={{ page_all }}><u></u>末页</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear">&nbsp;</div>
+    </td>
+    <td width="180"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

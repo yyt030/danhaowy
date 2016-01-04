@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
 from web.utils.account import signin_user, signout_user
-from ..models import db, User, Order
+from ..models import db, User, Order, ShopLog
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
 
@@ -134,6 +134,7 @@ def chgpwd():
 
 
 @bp.route('/sellerlist')
+@require_user
 def sellerlist():
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -145,9 +146,31 @@ def sellerlist():
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
                              Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d'))
 
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
             page, per_page=current_app.config['FLASKY_PER_PAGE'],
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/sellerlist.html', orders=enumerate(orders), pagination=pagination)
+    return render_template('login_user/sellerlist.html', orders=enumerate(orders), page=page, page_all=page_all)
+
+
+@bp.route('/shoplog', methods=['GET', 'POST'])
+@require_user
+def shoplog():
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = ShopLog.query
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= ShopLog.create_at,
+                             ShopLog.create_at <= datetime.strptime(enddate, '%Y-%m-%d'))
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(ShopLog.create_at.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    shoplogs = pagination.items
+
+    return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs), page=page, page_all=page_all)

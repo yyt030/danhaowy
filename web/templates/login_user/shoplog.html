@@ -121,79 +121,79 @@
     </script>
 
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 已发布单号列表{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 佣金记录{% endblock %}
 {% block content %}
     <td valign="top" width="100%">
         <div style="width:100%; margin-left:5px">
+            <div class="div_block">
+                <div class="navbar-inner">
+                    <form method="GET" action="shoplog">
+                        <div class="navbar-form pull-left"><span class="add-on">从：</span>
+
+                            <input type="text" id="startdate" class="input" name="startdate" onclick="WdatePicker()"
+                                   value="2015-12-30" style="width:105px">
+                            到
+                            <input type="text" id="enddate" class="input" name="enddate" onclick="WdatePicker()"
+                                   value="2016-1-3" style="width:105px">
+
+                            <input type="submit" class="btn" style="outline:none;" value="查询">
+                        </div>
+                    </form>
+                </div>
+            </div>
 
 
-            <span style=" margin-left:5px;">
-            <form method="GET" action="shoplog">
-                记录时间：
+            <div class="well" style="margin-top:12px;">
+                <div class="nav">我的佣金记录：</div>
+                <hr>
+                <table class="table table-bordered table-condensed" style="font-size:12px;">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>类型</th>
+                        <th>备注</th>
+                        <th>金额</th>
+                        <th>佣金余额</th>
+                        <th>时间</th>
+                    </tr>
 
-                <input type="text" id="startdate" class="input" name="startdate" onClick="WdatePicker()"
-                       value="2015-12-5" style="width:105px">
-                到
-                <input type="text" id="enddate" class="input" name="enddate" onClick="WdatePicker()" value="2016-1-5"
-                       style="width:105px">
-
-
-                <button class="btn btn-primary" type="submit">查询</button>
-            </form></span>
-
-
-            <div class="expertinfo" id="expertinfo" style=" margin-top:10px">
-                <div class="well">
-                    <div class="nav"><i class="icon-th-large"></i> 我的佣金记录</div>
-                    <table class="tablelist" style="font-size: 12px;" width="100%">
-
-                        <thead>
+                    </thead>
+                    <tbody>
+                    {% for count, shoplog in shoplogs %}
                         <tr>
-                            <th>编号</th>
-                            <th>类型</th>
-                            <th>备注</th>
-                            <th>金额</th>
-                            <th>佣金余额</th>
-                            <th>时间</th>
+                            <td align="center">{{ count + 1 }}</td>
+                            <td align="center">{{ shoplog.type }}</td>
+                            <td align="center">快递单号：{{ shoplog.order.tracking_no }} ,已成功售出。</td>
+                            <td align="center">+0.24</td>
+                            <td align="center">974.48</td>
+                            <td align="center">{{ shoplog.create_at }}</td>
                         </tr>
-
-                        </thead>
-                        <tbody>
-                        {% for count, shoplog in shoplogs %}
-                            <tr>
-                                <td align="center">{{ count + 1 }}</td>
-                                <td align="center">{{ shoplog.type }}</td>
-                                <td align="center">快递单号：{{ shoplog.order.tracking_no }} ,已成功售出。</td>
-                                <td align="center">+0.24</td>
-                                <td align="center">974.48</td>
-                                <td align="center">{{ shoplog.create_at }}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <DIV class="page_list">
-                        <DIV class="p_l">
-                            <DIV id="page_iwymb">
-                                <form method=Post action="?">
-                                    <span class=pageinfo><u></u>{{ page }}/{{ page_all }}页</span>
-                                    <a href=?page=1><u></u>首页</a>
-                                    {% if page <= 1 %}
-                                        <a href=?page=1><u></u>上页</a>
-                                    {% else %}
-                                        <a href=?page={{ page - 1 }}><u></u>上页</a>
-                                    {% endif %}
-                                    {% if page == page_all %}
-                                        <a href=?page={{ page_all }}><u></u>下页</a>
-                                    {% else %}
-                                        <a href=?page={{ page + 1 }}><u></u>下页</a>
-                                    {% endif %}
-                                    <a href=?page={{ page_all }}><u></u>末页</a>
-                                </form>
-                            </div>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <DIV class="page_list">
+                    <DIV class="p_l">
+                        <DIV id="page_iwymb">
+                            <form method=Post action="?">
+                                <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
+                                <a href=?page=1>首页</a>
+                                {% if page <= 1 %}
+                                    <a href=?page=1>上页</a>
+                                {% else %}
+                                    <a href=?page={{ page - 1 }}>上页</a>
+                                {% endif %}
+                                {% if page == page_all %}
+                                    <a href=?page={{ page_all }}>下页</a>
+                                {% else %}
+                                    <a href=?page={{ page + 1 }}>下页</a>
+                                {% endif %}
+                                <a href=?page={{ page_all }}>末页</a>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <div class="clear">&nbsp;</div>
     </td>

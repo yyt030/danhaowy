@@ -13,8 +13,11 @@ class ShopLog(db.Model):
     remark = db.Column(db.Text)
     create_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    tracking_no = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
     order = db.relationship('Order', backref=db.backref('shoplog', lazy='dynamic'))
+
+    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    buyer = db.relationship('User', backref=db.backref('shoplog', lazy='dynamic'))
 
     def __repr__(self):
         return '<ShopLog %r>' % self.id

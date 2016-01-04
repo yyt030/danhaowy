@@ -144,7 +144,7 @@ def sellerlist():
     query = Order.query
     if startdate and enddate:
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
-                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d'))
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
@@ -166,7 +166,7 @@ def shoplog():
     query = ShopLog.query
     if startdate and enddate:
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= ShopLog.create_at,
-                             ShopLog.create_at <= datetime.strptime(enddate, '%Y-%m-%d'))
+                             ShopLog.create_at <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(ShopLog.create_at.desc()).paginate(
             page, per_page=current_app.config['FLASKY_PER_PAGE'],
@@ -174,3 +174,24 @@ def shoplog():
     shoplogs = pagination.items
 
     return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs), page=page, page_all=page_all)
+
+
+@bp.route('/sellerout', methods=['GET', 'POST'])
+@require_user
+def sellerout():
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Order.query.filter(Order.is_sell == 1)
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+    return render_template('login_user/sellerout.html', orders=enumerate(orders), page=page, page_all=page_all)

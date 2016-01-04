@@ -15,13 +15,13 @@
     </script>
 
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 已发布单号列表{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 已售出的单号{% endblock %}
 {% block content %}
     <td valign="top" width="100%">
         <div style="width:100%; margin-left:5px">
             <div class="div_block">
                 <div class="navbar-inner">
-                    <form method="GET" action="sellerlist">
+                    <form method="GET" action="sellerout">
                         <div class="navbar-form pull-left"><span class="add-on">从：</span>
 
                             <input type="text" id="startdate" class="input" name="startdate" onclick="WdatePicker()"
@@ -38,7 +38,7 @@
 
 
             <div class="well" style="margin-top:12px;">
-                <div class="nav">已发布的快递单号：</div>
+                <div class="nav">已售出的快递单号：</div>
                 <hr>
                 <table class="table table-bordered table-condensed" style="font-size:12px;">
                     <thead>
@@ -48,9 +48,9 @@
                         <th>类型</th>
                         <th>发货地址</th>
                         <th>收货地址</th>
-                        <th>单价</th>
-                        <th>发布时间</th>
-                        <th style=" width:5%">操作</th>
+                        <th>卖出价</th>
+                        <th>佣金</th>
+                        <th>卖出时间</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,29 +59,16 @@
                             <td>{{ count + 1 }}</td>
                             <td>{{ order.tracking_no }}</td>
                             <td>{{ order.tracking_company }}</td>
-                            <td>
-                                {{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}</td>
+                            <td>{{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}</td>
                             <td>{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}</td>
-
                             <td>0.50</td>
-                            <td>{{ order.send_timestamp }}</td>
-                            <td><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd'
-                                                           value='75966213'></span>
-                            </td>
+                            <td>0.25</td>
+                            <td>{{ order.seller.create_at }}</td>
                         </tr>
 
                     {% endfor %}
-
                     </tbody>
                 </table>
-                <div style="float:right;display:inline; "><span style=" font-size:14px;"><input type='checkbox'
-                                                                                                id='chkAll'
-                                                                                                value='checkbox'
-                                                                                                style='border:0'
-                                                                                                onClick=checkAll()><input
-                        id='qindex' type='hidden' value='0'/>全选/取消　<input type="submit" value="批量删除" id="sunel"
-                                                                          class="btn" style="outline:none;"
-                                                                          onclick="delall()"></span></div>
                 <br/>
                 <DIV class="page_list">
                     <DIV class="p_l">

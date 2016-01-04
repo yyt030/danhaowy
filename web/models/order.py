@@ -4,6 +4,7 @@ __author__ = 'yueyt'
 
 from . import db
 from datetime import datetime
+from .shoplog import ShopLog
 
 
 class Order(db.Model):
@@ -20,6 +21,11 @@ class Order(db.Model):
     recv_desc = db.Column(db.Text)
     tracking_company = db.Column(db.String(20))
     is_scan = db.Column(db.SmallInteger, default=0)
+    is_sell = db.Column(db.SmallInteger, default=0)
+
+    @property
+    def seller(self):
+        return self.shoplog.order_by(ShopLog.create_at.desc()).first()
 
     def __repr__(self):
         return '<Order %r>' % self.tracking_no

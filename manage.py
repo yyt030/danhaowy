@@ -38,6 +38,17 @@ def create_admin():
     db.session.add(user)
     db.session.commit()
 
+@manager.command
+def update_pwd():
+    """reset admin pwd"""
+
+    user = User.query.first()
+    user.password = "admin"
+    user.hash_password()
+    user.gene_token()
+    db.session.add(user)
+    db.session.commit()
+
 
 @manager.command
 def createdb():

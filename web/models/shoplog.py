@@ -16,7 +16,7 @@ class ShopLog(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
     order = db.relationship('Order', backref=db.backref('shoplog', lazy='dynamic'))
 
-    buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     buyer = db.relationship('User', backref=db.backref('shoplog', lazy='dynamic'))
 
     def __repr__(self):

@@ -21,4 +21,4 @@ class Notice(db.Model):
     author = db.relationship('User', backref=db.backref('notices', lazy='dynamic'))
 
     def __repr__(self):
-        print '<%r>' % self.__class__.__name__
+        return '<Notice %r>' % self.id

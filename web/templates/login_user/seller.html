@@ -3,6 +3,7 @@
     <script language="javascript" type="text/javascript" src="/static/js/bootstrap.js"></script>
 
     <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+
     <script>
         document.write("<s" + "cript type='text/javascript' src='/static/js/sellerress.js?" + Math.random() + "'></scr" + "ipt>");
         var timer
@@ -61,6 +62,7 @@
                             type: "post",
                             url: "seller?qi=xzseller",
                             dataType: "text",
+
                             data: {
                                 "send_date": $("#send_time").val(),
                                 "cshenglist": escape($("#Select7").val()),

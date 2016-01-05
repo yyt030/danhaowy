@@ -1,27 +1,26 @@
 var online = new Array();
 var qq = new Array();
 qq[0] = new Array(); 
-qq[0][0] = "ÐÂÀÏ»áÔ± - ×¢²á×ÉÑ¯";
+qq[0][0] = "ï¿½ï¿½ï¿½Ï»ï¿½Ô± - ×¢ï¿½ï¿½ï¿½ï¿½Ñ¯";
 qq[0][1] = "800125177";
 
 
 qq[1] = new Array();
-qq[1][0] = "¿ìµÝµ¥ºÅ - ÎÊÌâ×ÉÑ¯";
+qq[1][0] = "ï¿½ï¿½Ýµï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯";
 qq[1][1] = "2796304398";
 
 qq[2] = new Array();
-qq[2][0] = "ÌÔ±¦Î¬È¨ - µ×µ¥ÉêËß";
+qq[2][0] = "ï¿½Ô±ï¿½Î¬È¨ - ï¿½×µï¿½ï¿½ï¿½ï¿½ï¿½";
 qq[2][1] = "800125177";
 
 qq[3] = new Array();
-qq[3][0] = "Í¶ËßÓë½¨Òé/Âô¼Ò¹ÜÀí";
+qq[3][0] = "Í¶ï¿½ï¿½ï¿½ë½¨ï¿½ï¿½/ï¿½ï¿½ï¿½Ò¹ï¿½ï¿½ï¿½";
 qq[3][1] = "2796304398";
 
 qq[4] = new Array();
-qq[4][0] = "¿Í·þÔÚÏßÊ±¼ä£º</br>Ôç11:00 - Íí23:00";
+qq[4][0] = "ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£º</br>ï¿½ï¿½11:00 - ï¿½ï¿½23:00";
 
-
-var script_src = "http:\/\/webpresence.qq.com\/getonline?Type=1&"
+// var script_src = "http:\/\/webpresence.qq.com\/getonline?Type=1&"
 // dynamic generate script src
 for(i=0;i<qq.length;i++){
 	for(j=1;j<qq[i].length;j++){
@@ -58,13 +57,13 @@ function heartBeat()
 	ioc.style.top = ((isNaN(parseInt(ioc.style.top)) ? 0 :parseInt(ioc.style.top))  + percent).toString() + "px";
 	lastScrollY = lastScrollY+percent; 
 }
-function mClk(){ //×Ô
+function mClk(){ //ï¿½ï¿½
 	event.srcElement.click();
 }
 
 var suspendcode;
 var contactHandler;
-contactHandler = setInterval("checkData()", 1000); //Ë¢ÐÂËÙ¶È£¬Ô­À´2000
+contactHandler = setInterval("checkData()", 1000); //Ë¢ï¿½ï¿½ï¿½Ù¶È£ï¿½Ô­ï¿½ï¿½2000
 
 function definedData(varData){
 	if(varData == null && varData == undefined){
@@ -75,7 +74,7 @@ function definedData(varData){
 function checkData(){
 	if(definedData(online[0])){
 		clearInterval(contactHandler);
-		suspendcode="<div id=\"full\" style='right:3px; top:130px; position:absolute;z-index:1000;text-align:center;'>\n"  //top Àë¶¥¶Ë¾àÀë
+		suspendcode="<div id=\"full\" style='right:3px; top:130px; position:absolute;z-index:1000;text-align:center;'>\n"  //top ï¿½ë¶¥ï¿½Ë¾ï¿½ï¿½ï¿½
 		+ "<div id='con'>\n"
 		+ "<div class='list'>\n";
 		var onlineP = 0;
@@ -84,7 +83,7 @@ function checkData(){
 			suspendcode += "     <h3>" + qq[i][0] + "</h3>\n";
 			for(j=1;j<qq[i].length;j++){
 				suspendcode += "         <a href='tencent://message/?uin=" + qq[i][j] + "&Site=www.danhaowy.com&Menu=yes' class='qq'>\n";
-				suspendcode += "            <img  border='0' align='absmiddle' src='images/qqs_1.gif' title='µã»÷QQÓëÎÒÃÇ½»Á÷'/>µ¥ºÅÎÞÓÇ¿Í·þ" + "\n";  //srcºóqqÊÇÂ·¾¶
+				suspendcode += "            <img  border='0' align='absmiddle' src='images/qqs_1.gif' title='ï¿½ï¿½ï¿½QQï¿½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½'/>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Í·ï¿½" + "\n";  //srcï¿½ï¿½qqï¿½ï¿½Â·ï¿½ï¿½
 
 				
 				suspendcode += "         </a>\n";
@@ -94,7 +93,7 @@ function checkData(){
 		
 
 		suspendcode = suspendcode + "</div>\n"
-		+ "<a href='#' title='»Øµ½¶¥²¿' id='toTop' onfocus='this.blur()'><img src='images/con_bom.png' width='128' height='22' style='border:0px' /></a>\n"
+		+ "<a href='#' title='ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½' id='toTop' onfocus='this.blur()'><img src='images/con_bom.png' width='128' height='22' style='border:0px' /></a>\n"
 		+ "</div>\n"
 		+ "</div>\n";
 		document.getElementById("contactContanier").innerHTML = suspendcode;

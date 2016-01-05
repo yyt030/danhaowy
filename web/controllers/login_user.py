@@ -47,25 +47,68 @@ def seller():
        ('num', u'123123123123213'),('send_date', u'2016-01-01 21:41:14'), ('com', u'yuantong')])
     """
     form = SigninForm()
-    print request.form
+    user = g.user
+    batch_flag = request.args.get('qi')
     if request.method == 'POST':
-        order = Order()
-        order.tracking_no = request.form.get('num')
-        order.send_timestamp = request.form.get('send_date')
+        seller_id = user.id
+        send_timestamp = request.form.get('send_date')
+        send_addr_province = request.form.get('ashenglist')
+        send_addr_city = request.form.get('ashilist')
+        send_addr_county = request.form.get('aqulist')
+        tracking_company = request.form.get('com')
+        is_scan = request.form.get('scan', 0, type=int)
 
-        order.send_addr_province = request.form.get('ashenglist')
-        order.send_addr_city = request.form.get('ashilist')
-        order.send_addr_county = request.form.get('aqulist')
+        tracking_no = request.form.get('num')
+        recv_addr_province = request.form.get('dshenglist')
+        recv_addr_city = request.form.get('dshilist')
+        recv_addr_county = request.form.get('dqulist')
 
-        order.recv_addr_province = request.form.get('dshenglist')
-        order.recv_addr_city = request.form.get('dshilist')
-        order.recv_addr_county = request.form.get('dqulist')
-        order.tracking_company = request.form.get('com')
-        order.is_scan = request.form.get('scan', 0, type=int)
-        db.session.add(order)
-        db.session.commit()
-        tip = "订单%s发布成功！" % order.tracking_no
-        return render_template('error.html', error=tip, url="")
+        if batch_flag:
+            send_addr_province = request.form.get('cshenglist')
+            send_addr_city = request.form.get('cshilist')
+            send_addr_county = request.form.get('cqulist')
+
+            order_list = []
+            success_count = 0
+            failed_count = 0
+            contents = request.form.get('r')
+            content_list = contents.split('%0A')
+            import re
+            for record in content_list:
+                order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
+                              send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                              tracking_company=tracking_company, is_scan=is_scan)
+
+                record = re.split(r'%7C|%20', record)
+                if len(record) < 4:
+                    failed_count += 1
+                    continue
+                order.tracking_no = record[0]
+
+                if Order.query.filter(Order.tracking_no == order.tracking_no).first():
+                    failed_count += 1
+                    continue
+
+                order.recv_addr_province = record[1]
+                order.recv_addr_city = record[2]
+                order.recv_addr_county = record[3]
+                order_list.append(order)
+                success_count += 1
+
+            db.session.add_all(order_list)
+            db.session.commit()
+            return '成功%d条，错误%d条' % (success_count, failed_count)
+        else:
+            order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
+                          send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                          tracking_company=tracking_company, is_scan=is_scan, tracking_no=tracking_no,
+                          recv_addr_province=recv_addr_province,
+                          recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county)
+
+            db.session.add(order)
+            db.session.commit()
+            tip = "订单%s发布成功！" % order.tracking_no
+            return render_template('error.html', error=tip, url="")
 
     return render_template('login_user/seller.html', form=form)
 

@@ -15,6 +15,7 @@ class User(db.Model):
     角色：　admin
         　 member
     """
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
     qq = db.Column(db.String(20))
@@ -76,7 +77,7 @@ class User(db.Model):
 class Profile(db.Model):
     """用户详细信息"""
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref=db.backref('profile', lazy='dynamic'))
     openid = db.Column(db.String(50), default='')
     city = db.Column(db.String(50), default='')

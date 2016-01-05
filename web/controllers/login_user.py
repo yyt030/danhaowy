@@ -84,6 +84,11 @@ def seller():
                     failed_count += 1
                     continue
                 order.tracking_no = record[0]
+
+                if Order.query.filter(Order.tracking_no == order.tracking_no).first():
+                    failed_count += 1
+                    continue
+
                 order.recv_addr_province = record[1]
                 order.recv_addr_city = record[2]
                 order.recv_addr_county = record[3]

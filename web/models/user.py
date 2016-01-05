@@ -17,17 +17,18 @@ class User(db.Model):
     """
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(50), unique=True)
     qq = db.Column(db.String(20))
-    email = db.Column(db.String(50))
-    mobile = db.Column(db.String(20))
+    email = db.Column(db.String(50), unique=True)
+    mobile = db.Column(db.String(20), unique=True)
     address = db.Column(db.String(20))
     password = db.Column(db.String(200))
     role = db.Column(db.String(20), default='member')
     create_time = db.Column(db.DateTime, default=datetime.datetime.now)
     is_active = db.Column(db.Boolean, default=False)
     token = db.Column(db.String(20), default='')
-    money = db.Column(db.Integer, default=0)
+    money = db.Column(db.Float(10, 2), default=0.0)
+    jifen = db.Column(db.Float(10, 2), default=0.0)
 
     default_send_province = db.Column(db.String(20))
     default_send_city = db.Column(db.String(20))
@@ -70,7 +71,7 @@ class User(db.Model):
         return ret
 
     def __repr__(self):
-        return '<User %s>' % self.name
+        return '<User %r>' % self.name
 
 
 class Profile(db.Model):

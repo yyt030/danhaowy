@@ -21,7 +21,7 @@ qq[4] = new Array();
 qq[4][0] = "客服在线时间：</br>早11:00 - 晚23:00";
 
 
-var script_src = "http:\/\/webpresence.qq.com\/getonline?Type=1&"
+//var script_src = "http:\/\/webpresence.qq.com\/getonline?Type=1&"
 // dynamic generate script src
 for(i=0;i<qq.length;i++){
 	for(j=1;j<qq[i].length;j++){

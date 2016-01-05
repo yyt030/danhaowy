@@ -203,3 +203,25 @@ def sellerset():
     '''设置默认发货'''
     form = RegisterForm()
     return render_template('login_user/sellerset.html', form=form)
+
+
+@bp.route('/sellerjf', methods=['GET', 'POST'])
+@require_user
+def sellerjf():
+    '''发布积分兑换'''
+    form = RegisterForm()
+    user = g.user
+    user = User.query.filter(User.id == user.id).first()
+
+    from decimal import Decimal
+    jifen = request.form.get('jifen', 0.0, type=Decimal)
+
+    print '>>>', user.money, user.jifen
+
+    if request.method == 'POST':
+        user.money += user.money * Decimal(0.00005)
+        user.jifen -= jifen
+        print jifen, user.money, user.jifen
+        db.session.add(user)
+        db.session.commit()
+    return render_template('login_user/sellerjf.html', form=form, user=user)

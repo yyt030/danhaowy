@@ -1,0 +1,199 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <link rel="stylesheet" type="text/css" href="/static/css/public.css"/>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+
+        a:focus {
+            outline: none;
+            -moz-outline: none;
+        }
+
+        .bs {
+            height: 20px;
+            width: 180px;
+            overflow: hidden;
+            border: 1px solid #CBCBCB;
+        }
+
+        .btnumoff {
+            background: url(./images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .btnumon {
+            background: url(./images/stkb1.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .submit {
+            cursor: pointer;
+            color: #FFFFFF;
+            background: url(./images/v.gif) no-repeat 0 0;
+            width: 47px;
+            line-height: 21px;
+            height: 21px;
+            border: 0px;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/static/js/totop.js"></script>
+    <script src="/static/js/ContactIndex.js"></script>
+    <script>function cop() {
+        var str = document.getElementById("jifen").value;
+        var fen =
+        {{ user.jifen|int }}
+        var re = /[^0-9]/;
+        if (!re.test(str) == true) {
+            if (str * 1 > fen * 1) {
+                document.getElementById("money").innerHTML = "输入积分已超过当前剩余发布积分！";
+                return false
+            }
+
+            var s = str / 20000
+            if (s >= 1) {
+                document.getElementById("money").innerHTML = str / 20000 + " 元";
+            } else {
+                document.getElementById("money").innerHTML = "兑换发布积分最低2万起！";
+            }
+        }
+    }
+
+    function cop1() {
+        var
+                str = document.getElementById("jifen").value;
+        var fen =
+        {{ user.jifen|int }}
+        if (str * 1 > fen * 1) {
+            alert("输入积分已超过当前剩余发布积分！");
+            return false
+        }
+        var s = str / 20000
+        if (s < 1) {
+            alert("兑换发布积分最低2万起！");
+            return false
+        }
+    }
+
+    </script>
+    <script type="text/javascript">
+        function AutoScroll() {
+            $("#divPost:first").animate({
+                marginTop: "-28px"
+            }, 500, function () {
+                $(this).css({marginTop: "0px"}).find("li:first").appendTo(this);
+            });
+        }
+        setInterval('AutoScroll()', 5000);
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 发布积分兑换{% endblock %}
+{% block content %}
+    <td valign="top" width="324">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>1. 发布积分兑换： 2万发布积分=1元佣金 ，发布积分最低2万积分起兑。</li>
+                    <li>2. 发布积分获得方式：卖家发布一条单号增加10发布积分，卖出一条单号增加10发布积分。</li>
+                    <li>3. 发布积分扣除方式：卖家删除单号时扣除发布积分,买家申诉通过时扣除发布积分。</li>
+                    <li>4. <font color="#FF0000">提醒：当发布积分达到1亿积分将不在增加发布积分,请及时兑换发布积分。</font></li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+
+            <div class="come">
+                <ul>
+                    <li class="c01">亲爱的 <span>mengjunz</span> 欢迎您！</li>
+                    <li class="c02">发布积分：<span>{{ user.jifen | float }}</span>提现佣金：<span>{{ user.money |float}}</span></li>
+                    <li class="c03">兑换无忧比例：<span>2万发布积分=1元佣金</span>，请在有足够的发布积分，完成兑换。</li>
+                </ul>
+            </div>
+            <div class="hei">
+                <H1>发布积分兑换</H1>
+            </div>
+            <div class="bdbox">
+                <ul>
+                    <li class="zy"><span class="bdl">注意</span>
+                          <span class="bdr">
+                         <font style="color: rgb(0, 115, 0);">兑换比例 ： 20000：1</font>
+                         </span>
+                    </li>
+
+                    <form name="thisForm" method="post" action="sellerjf?idkey=duihuan" accept-charset="gbk"
+                          onSubmit="document.charset='gbk';" onKeyDown="if(event.keyCode==13){return false;}">
+                        <!--订单编号-->
+                        {{ form.csrf_token }}
+                        <li><span class="bdl">发布积分</span>
+                            <span class="bdr"><font id="bmoney"
+                                                    color="#FF0000">{{ user.jifen |float }}</font>&nbsp;分</span>
+
+                        </li>
+
+                        <!--宝贝拍下时间-->
+                        <li><span class="bdl">兑换积分</span>
+                              <span class="bdr">
+                                <input id="jifen" name="jifen" type="text" class="bs"
+                                       style="width:100px;text-align:center;"
+                                       onKeyUp="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                       onpropertychange="cop()" oninput="cop()" maxlength="8"/>
+                                【请填写要兑换的发布积分】
+                              </span>
+                        </li>
+
+                        <!--快递类型--><!--数量-->
+                        <li><span class="bdl">佣金</span> <span class="bdr"><font id="money"
+                                                                                color="#FF0000"></font></span></li>
+                        <!--发货地址--><!--收货地址-->
+                        <li class="next">
+                            <input name="wfsubmit" type="submit" class="suba" value="兑换佣金" onclick="return cop1()"/>&nbsp;
+                            <input name="wfreset" class="subb" type="reset" value="重置"/>
+                        </li>
+                    </form>
+                </ul>
+            </div>
+        </div>
+    </td>
+    <td width="163"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

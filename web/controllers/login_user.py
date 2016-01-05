@@ -215,13 +215,14 @@ def sellerjf():
 
     from decimal import Decimal
     jifen = request.form.get('jifen', 0.0, type=Decimal)
-
-    print '>>>', user.money, user.jifen
-
     if request.method == 'POST':
-        user.money += user.money * Decimal(0.00005)
-        user.jifen -= jifen
-        print jifen, user.money, user.jifen
-        db.session.add(user)
-        db.session.commit()
+        if user.jifen >= jifen:
+            user.money += jifen * Decimal(.00005)
+            user.jifen -= jifen
+            db.session.add(user)
+            db.session.commit()
+            tip = "兑换积分成功！"
+        else:
+            tip = "兑换积分失败, 无足够积分!"
+        return render_template('error.html', error=tip, url="")
     return render_template('login_user/sellerjf.html', form=form, user=user)

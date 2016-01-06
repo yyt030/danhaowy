@@ -1,0 +1,130 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        #testButton {
+            color: rgb(0, 0, 0);
+            font-size: 12px;
+            box-shadow: rgb(209, 209, 209) 0px 1px 5px 0px;
+            border-width: 1px;
+            border-color: rgb(209, 209, 209);
+            border-style: ridge;
+            border-radius: 0px;
+            background-color: rgba(0, 0, 0, 0);
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffffff), to(#e6e6e6));
+        }
+
+        #testButton:hover {
+            color: #216afc;
+            background-color: #ffffff;
+            border-color: #bababa;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+
+    <script type="text/javascript">
+        function dels() {
+            if (confirm("您确定要删除全部消息吗？") == false) {
+                return false;
+            }
+        }
+    </script>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 站内信箱{% endblock %}
+{% block content %}
+    <td valign="top" width="793">
+        <DIV>
+            <DIV class="xzbt03">我的站内信箱</DIV>
+            <TABLE class=bk_01 border=0 cellSpacing=0 cellPadding=0 width=740 height=81>
+                <TBODY>
+                <tr>
+                    <td width="136" align="center"><br/>
+                        <form name="form" method="post" action="msg?nn=del" onsubmit="return dels()">
+                            {{ form.csrf_token }}
+                            <input
+                                    id="testButton" name="del"
+                                    style="padding-top:4px;padding-bottom:4px;padding-left:8px;padding-right:8px;width:90px;cursor:pointer;"
+                                    type="submit" value="全部删除"/></form>
+                    </td>
+                    <td width="609" align="left"><br/>
+                        <form name="form" method="post" action="msg?nn=yd">
+                            {{ form.csrf_token }}
+                            <input id="testButton" name="yd"
+                                   style="padding-top:4px;padding-bottom:4px;padding-left:20px;padding-right:20px;width:120px;cursor:pointer;"
+                                   type="submit" value="全部设置已读"/>
+                        </form>
+                    </td>
+                </tr>
+                <TR>
+                    <TD colspan="2" align=left>
+                        <DIV class="msgxx">
+                            <UL>
+                                <LI class="no01">主题</LI>
+                                <LI class="no02">发布人</LI>
+                                <LI class="no03">发布时间</LI>
+                                <LI class="no04">未读/已读</LI>
+                            </UL>
+                        </DIV>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD height=30 colspan="2" align=center bgColor=#f7f8fa>
+                        <DIV id=list>
+                            <p>&nbsp;</p>
+
+                            {% for msg in msgs %}
+                                <p>
+
+                                <UL style="PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-TOP: 0px">
+                                    <LI class=w400><a href="msg?id={{ msg.id }}" target=_top><font
+                                            color="#3300FF">{{ msg.title }}
+                                        已成功售出。</font></a></LI>
+                                    <LI class=w180>{{ msg.sender.name }}</LI>
+                                    <LI class=w200><font color="#FF0000">{{ msg.create_at }}</font></LI>
+                                    <LI class=w100><font color="#0066CC"> <font color="#3366CC">
+                                        {% if msg.is_read %}已读
+                                        {% else %}未读
+                                        {% endif %}
+                                    </font></font>
+                                    </LI>
+                                </UL>
+                                </p>
+                            {% endfor %}
+
+
+                            <CENTER STYLE="word-break:break-all;word-wrap:break-word;">
+                                </br>
+                                【共有记录 {{ count_all }} 条 | 第 <strong>{{ page }}</strong> 页 | 共 {{ page_all }} 页 | －
+                                <a href=?page=1>首页</a>
+                                {% if page > 1 %}
+                                    <a href=?page={{ page - 1 }}>上页</a>
+                                {% endif %}
+                                {% if page < page_all %}
+                                    <a href=?page={{ page + 1 }}>下页</a>
+                                {% endif %}
+                                <a href=?page={{ page_all }}>末页</a>
+                            </CENTER>
+                        </DIV>
+
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+
+
+
+    <td width="1"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

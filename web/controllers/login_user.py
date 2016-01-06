@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
 from web.utils.account import signin_user, signout_user
-from ..models import db, User, Order, ShopLog
+from ..models import db, User, Order, ShopLog, MailBox
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
 
@@ -269,3 +269,47 @@ def sellerjf():
             tip = "兑换积分失败, 无足够积分!"
         return render_template('error.html', error=tip, url="")
     return render_template('login_user/sellerjf.html', form=form, user=user)
+
+
+@bp.route('/msg', methods=['GET', 'POST'])
+@require_user
+def msg():
+    """站内信箱"""
+    form = RegisterForm()
+
+    user = g.user
+    msg_id = request.args.get('id', 0, type=int)
+    action = request.args.get('nn', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = MailBox.query.filter(MailBox.recver_id == user.id)
+
+    if msg_id:
+        msg = MailBox.query.get_or_404(msg_id)
+        msg.is_read = True
+        db.session.add(msg)
+        db.session.commit()
+        return render_template('login_user/msg_show.html', msg=msg)
+    if action:
+        if action == 'del':
+            msgs = query.all()
+            for msg in msgs:
+                db.session.delete(msg)
+        if action == 'yd':
+            msgs = query.all()
+            for msg in msgs:
+                msg.is_read = True
+            db.session.add_all(msgs)
+        db.session.commit()
+        return redirect(url_for('.msg'))
+
+    count_all = query.count()
+    page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(MailBox.create_at.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    msgs = pagination.items
+
+    return render_template('login_user/msg.html', form=form, msgs=msgs, page=page, page_all=page_all,
+                           count_all=count_all)

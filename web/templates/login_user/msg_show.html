@@ -1,0 +1,39 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+{% endblock %}
+{% block page_js %}
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 站内信箱{% endblock %}
+{% block content %}
+    <td valign="top" width="793">
+        <DIV>
+            <DIV class="xzbt03">查看站内信箱</DIV>
+
+            <TABLE class=bk_01 border=0 cellSpacing=0 cellPadding=0 width=747 height=81>
+                <TBODY>
+                <TR>
+                    <TD bgColor=#f7f8fa height=460 vAlign=top align=left>
+                        <DIV style="TEXT-ALIGN: center; LINE-HEIGHT: 35px; FONT-SIZE: 14px; FONT-WEIGHT: bold">
+                            {{ msg.title }}
+                        </DIV>
+                        <DIV style="TEXT-ALIGN: center; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px">
+                            发布人：<font color="#FF3300"> {{ msg.sender.name }}</font>
+                            | 发布时间：<font color=red>{{ msg.create_at }}</font>
+                        </DIV>
+                        <DIV style="PADDING-BOTTOM: 20px; LINE-HEIGHT: 25px; PADDING-LEFT: 20px; PADDING-RIGHT: 20px; PADDING-TOP: 20px">
+                            {{ msg.title }},佣金增加：0.48,请注意查收。<br/><br/><a href="msg" target="_top"><font
+                                color="#FF0000"><<< 返回上一步</font></a>
+                        </DIV>
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+
+    <td width="1"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

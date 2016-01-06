@@ -24,10 +24,26 @@ def index():
 def ornumber():
     """单号领取"""
     form = SigninForm()
-    return render_template('login_user/ornumber.html', form=form)
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Order.query
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
 
 
-@bp.route('/ornumber', methods=['GET'])
+@bp.route('/shopnumber', methods=['GET'])
 @require_user
 def shopnumber():
     """单号购买"""

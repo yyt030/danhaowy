@@ -6,90 +6,130 @@
     <link rel="/static/stylesheet" href="/static/js/css/ui-dialog.css">
     <script src="/static/js/dialog-min.js"></script>
     <script src="/static/js/ornumber.js?20150930S"></script>
-   <script type="text/javascript">
-function a(){
-	if(document.thisForm.QQ.value.length<1)
-	{
-	    alert("请填写联系您的QQ");
-        document.thisForm.QQ.focus();
-	    return false;
-	}else{
-		var temp = document.thisForm.Email.value;
-	  var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-		if (filter.test(temp)){
-        var checkbox = document.getElementById('ag1');
-		var checkbox1 = document.getElementById('ag2');
+    <script type="text/javascript">
+        function a() {
+            if (document.thisForm.QQ.value.length < 1) {
+                alert("请填写联系您的QQ");
+                document.thisForm.QQ.focus();
+                return false;
+            } else {
+                var temp = document.thisForm.Email.value;
+                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (filter.test(temp)) {
+                    var checkbox = document.getElementById('ag1');
+                    var checkbox1 = document.getElementById('ag2');
 
-		  if(checkbox.checked){
-    			if(checkbox1.checked == false){
-    			alert("请选择 承诺发布的单号均为唯一单号");
-				return false;
-				}else{
-					 if(confirm("您确定要申请加入卖家吗？\n申请加入后每日必须发布10条以上的单号\n发布的单号必须为真实有效单号\n连续7天停单将永久关闭卖家权限\n您确定考虑好了？")==false)
-   					{
-    				return false;
-   					}
+                    if (checkbox.checked) {
+                        if (checkbox1.checked == false) {
+                            alert("请选择 承诺发布的单号均为唯一单号");
+                            return false;
+                        } else {
+                            if (confirm("您确定要申请加入卖家吗？\n申请加入后每日必须发布10条以上的单号\n发布的单号必须为真实有效单号\n连续7天停单将永久关闭卖家权限\n您确定考虑好了？") == false) {
+                                return false;
+                            }
 
-					}
- 			 }else{
-    			alert("请选择 承诺发布的单号均为真实单号");
-				return false;
-  			}
-			}else{
+                        }
+                    } else {
+                        alert("请选择 承诺发布的单号均为真实单号");
+                        return false;
+                    }
+                } else {
 
-			alert('您的电子邮件格式不正确');
-			document.thisForm.Email.focus();
- 			return false;
+                    alert('您的电子邮件格式不正确');
+                    document.thisForm.Email.focus();
+                    return false;
 
-				}
+                }
 
-		}
+            }
 
 
-	}
-</script>
-<style type="text/css">
-ul{ margin:0 ; padding:0;}
-* {
-	margin: 0px; padding: 0px;
-}
+        }
+    </script>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
 
-<!--
-.kda{width:192px;}
-.kdb{width:300px;}
-.kdc{width:50px;text-align:center;}
-#wforder{
-	width:85%;
-	height:400px
-}
-.wftitle,.wforderr{border-color:#CCCCCC;}
-.bdbox li{
-	width:100%;
-}
-.bdbox li span.bdl{width:80px;}
-.bdbox li span.bdr{
-	width:82%;
-}
-.bdbox li.product{
-	height:32px;
-}
-.bdbox li.pay{height:90px;}
-.bdbox li.guest{
-	height:30px;
-}
-.bdbox li.guest2{height:200px;}
-.bdbox li span.bdr textarea.guest{height:80px;}
-#wffahuo{height:450px;}
-.bdbox li.hmf{height:50px;}
-.bdbox li.zy{
-	height:30px;
-}
--->
-</style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        <!--
+        .kda {
+            width: 192px;
+        }
+
+        .kdb {
+            width: 300px;
+        }
+
+        .kdc {
+            width: 50px;
+            text-align: center;
+        }
+
+        #wforder {
+            width: 85%;
+            height: 400px
+        }
+
+        .wftitle, .wforderr {
+            border-color: #CCCCCC;
+        }
+
+        .bdbox li {
+            width: 100%;
+        }
+
+        .bdbox li span.bdl {
+            width: 80px;
+        }
+
+        .bdbox li span.bdr {
+            width: 82%;
+        }
+
+        .bdbox li.product {
+            height: 32px;
+        }
+
+        .bdbox li.pay {
+            height: 90px;
+        }
+
+        .bdbox li.guest {
+            height: 30px;
+        }
+
+        .bdbox li.guest2 {
+            height: 200px;
+        }
+
+        .bdbox li span.bdr textarea.guest {
+            height: 80px;
+        }
+
+        #wffahuo {
+            height: 450px;
+        }
+
+        .bdbox li.hmf {
+            height: 50px;
+        }
+
+        .bdbox li.zy {
+            height: 30px;
+        }
+
+        -->
+    </style>
 
 
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 单号大厅{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 申请卖家{% endblock %}
 {% block content %}
     <td valign="top" width="624">
         <div class="midmess">
@@ -117,34 +157,35 @@ ul{ margin:0 ; padding:0;}
  </span>
                     </li>
 
-                    <form name="thisForm" method="post" action="upseller.asp?type=sq" accept-charset="gbk"
+                    <form name="thisForm" method="post" action="upseller?type=sq" accept-charset="gbk"
                           onkeydown="if(event.keyCode==13){return false;}" onsubmit="return a()">
+                        {{ form.csrf_token }}
                         <li><span class="bdl">用户名：</span>
-  <span class="bdr">
-    <a style="color:#F00">microhan</a>
-  </span>
+                          <span class="bdr">
+                            <a style="color:#F00">{{ user.name }}</a>
+                          </span>
                         </li>
                         <li><span class="bdl">QQ：</span>
-  <span class="bdr">
-    <input name="QQ" type="text" class="bs" id="QQ" style="width:100px;" maxlength="12">
-    【请填写联系您的QQ】</span>
+                          <span class="bdr">
+                            <input name="QQ" type="text" class="bs" id="QQ" style="width:100px;" maxlength="12">
+                            【请填写联系您的QQ】</span>
                         </li>
                         <li><span class="bdl">Email：</span>
-  <span class="bdr">
-    <input name="Email" type="text" class="bs" id="Email" style="width:100px;">
-    【请填写联系您的邮箱】</span>
+                              <span class="bdr">
+                                <input name="Email" type="text" class="bs" id="Email" style="width:100px;">
+                                【请填写联系您的邮箱】</span>
                         </li>
 
                         <li><span class="bdl">每日供单：</span>
-  <span class="bdr"><select id="typ" name="typ" style="border: 1px solid #CBCBCB">
-      <option value="50">50</option>
-      <option value="100">100</option>
-      <option value="200">200</option>
-      <option value="500">500</option>
-      <option value="1000" selected="selected">1000</option>
-      <option value="3000">3000</option>
-      <option value="5000">5000</option>
-  </select><font color="red">（每日最低提供单号数）</font>
+                              <span class="bdr"><select id="typ" name="typ" style="border: 1px solid #CBCBCB">
+                                  <option value="50">50</option>
+                                  <option value="100">100</option>
+                                  <option value="200">200</option>
+                                  <option value="500">500</option>
+                                  <option value="1000" selected="selected">1000</option>
+                                  <option value="3000">3000</option>
+                                  <option value="5000">5000</option>
+                              </select><font color="red">（每日最低提供单号数）</font>
                       </span>
                         </li>
                         <li><span class="bdl"></span>

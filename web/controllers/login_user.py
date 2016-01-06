@@ -137,12 +137,23 @@ def paywyb():
     return render_template('site/index.html', form=form)
 
 
-@bp.route('/upseller', methods=['GET'])
+@bp.route('/upseller', methods=['GET', 'POST'])
 @require_user
 def upseller():
     """申请成为卖家"""
     form = SigninForm()
-    return render_template('login_user/upseller.html', form=form)
+    user = g.user
+
+    if request.method == 'POST':
+        # msg = MailBox(sender_id=user.id, recver_id=1)
+        # msg.title = 'QQ:%s mail:%s 申请卖家' % (request.form.get('QQ', ''), request.form.get('Email', ''))
+        # msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
+        # request.form.get('ag1', ''), request.form.get('ag2', ''), request.form.get('typ', ''))
+        # db.session.add(msg)
+        # db.session.commit()
+        tip = "申请已发送，请联系管理员处理！"
+        return render_template('error.html', error=tip, url="")
+    return render_template('login_user/upseller.html', form=form, user=user)
 
 
 @bp.route('/woyaojihuo', methods=['GET'])
@@ -161,7 +172,7 @@ def chgpwd():
         password = request.form.get('password')
         newpassword = request.form.get('newpassword')
         newpassword2 = request.form.get('newpassword2')
-        if user.check_password(password):
+        if not user.check_password(password):
             error = "用户名或密码错误"
             return render_template('error.html', error=error, url="")
         if newpassword != newpassword2:

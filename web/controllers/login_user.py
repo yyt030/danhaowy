@@ -1,9 +1,8 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 from datetime import datetime, timedelta
-from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
-    make_response, current_app, send_from_directory
-from web.utils.account import signin_user, signout_user
+from flask import render_template, Blueprint, redirect, url_for, g, request, \
+    current_app
 from ..models import db, User, Order, ShopLog, MailBox
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
@@ -41,6 +40,31 @@ def ornumber():
     orders = pagination.items
 
     return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
+
+
+@bp.route('/number')
+@require_user
+def number():
+    """领取次数增加"""
+    pass
+    return render_template('login_user/number.html')
+
+
+@bp.route('/wybjihuo', methods=['GET', 'POST'])
+@require_user
+def wybjihuo():
+    user = g.user
+    form = RegisterForm()
+    action = request.args.get('action', '')
+    if request.method == 'POST' and action == 'jihuo':
+        user.wuyoubi -= 50
+        user.is_active = True
+        db.session.add(user)
+        db.session.commit()
+        tip = "用户%s已激活！" % user.name
+        return render_template('error.html', error=tip, url="ornumber")
+
+    return render_template('login_user/wybjihuo.html', form=form, user=user)
 
 
 @bp.route('/shopnumber', methods=['GET'])

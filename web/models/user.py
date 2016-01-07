@@ -27,7 +27,11 @@ class User(db.Model):
     is_active = db.Column(db.Boolean, default=False)
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Float(10, 2), default=0.0)
+
     jifen = db.Column(db.Float(10, 2), default=0.0)
+
+    wuyoubi = db.Column(db.Integer, default=0)
+    wuyoujifen = db.Column(db.Integer, default=0)
 
     default_send_province = db.Column(db.String(20))
     default_send_city = db.Column(db.String(20))

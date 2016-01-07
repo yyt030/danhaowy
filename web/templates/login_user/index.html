@@ -16,14 +16,16 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">登录时间：<font color="#FF0000"> {{ user.login_time }}</font></td>
+                <td height="25" valign="center" align="left">登录时间：<font color="#FF0000"> {{ user.login_time }}</font>
+                </td>
                 <td height="25" valign="center" align="left">今日已领取单号：<font color="#FF0000">0</font>&nbsp;次
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
                 <td height="25" valign="center" align="left">登录Ip：{{ user.address }}</td>
-                <td height="25" valign="center" align="left">每日可领取单号：<font color="#FF0000">10</font>&nbsp;次
+                <td height="25" valign="center" align="left">每日可领取单号：<font
+                        color="#FF0000">{{ user.max_order_num }}</font>&nbsp;次
                 </td>
             </tr>
             <tr>
@@ -44,13 +46,15 @@
                 <td height="25" valign="center" align="left">当前等级：{{ user.role }}</td>
                 <td height="25" valign="center" align="left">会员激活状态：
                     {% if user.is_active == False %}
-                        <font color="#FF0000" style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号未激活</font>&nbsp;
+                        <font color="#FF0000"
+                              style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号未激活</font>&nbsp;
                         <a href="wybjihuo">
                             <img src="/static/images/jihuo.gif" border="0" align="top"
-                             title="点击此按钮激活帐号"/>
+                                 title="点击此按钮激活帐号"/>
                         </a>
                     {% else %}
-                        <font color="#FF0000" style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号已激活</font>&nbsp;
+                        <font color="#FF0000"
+                              style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号已激活</font>&nbsp;
                     {% endif %}
                 </td>
 

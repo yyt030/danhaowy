@@ -49,8 +49,36 @@ def number():
     """领取次数增加"""
     pass
     user = g.user
+    form = SigninForm()
 
-    return render_template('login_user/number.html', user=user)
+    return render_template('login_user/number.html', form=form, user=user)
+
+
+@bp.route('/file', methods=['GET', 'POST'])
+@require_user
+def file():
+    user = g.user
+    action = request.args.get('action', '')
+    if request.method == 'POST':
+        if action == 'cishu':
+            count = request.form.get('Count', 0, type=int)
+            pay = count * 5
+        if action == 'cishution':
+            count = request.form.get('hOutG', 0, type=int)
+            pay = request.form.get('hInMoney', 0, type=float)
+
+        if user.wuyoubi < pay:
+            tip = "用户%s 无忧币不足！" % user.name
+            return render_template('error.html', error=tip, url="number")
+
+        user.wuyoubi -= pay
+        user.max_order_num += count
+
+        db.session.add(user)
+        db.session.commit()
+
+    tip = "用户%s 增加次数成功！" % user.name
+    return render_template('error.html', error=tip, url="number")
 
 
 @bp.route('/wybjihuo', methods=['GET', 'POST'])

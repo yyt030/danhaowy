@@ -31,8 +31,13 @@
         }
 
         function CheckForm() {
-            if (document.orderform.Count.value.length < 1) {
+            if (document.orderform.Count.value.length >= 1) {
                 alert("购买的次数不能为空,请检查!");
+                document.orderform.Count.focus();
+                return false;
+            }
+            if (document.orderform.Count.value * 5 > {{ user.wuyoubi }}) {
+                alert("你的无忧币不足,请检查!");
                 document.orderform.Count.focus();
                 return false;
             }
@@ -72,10 +77,11 @@
                         <li class="c01">亲爱的 <span>{{ user.name }}</span> 欢迎您！</li>
                         <li class="c02">
                             无优积分：<span>{{ user.wuyoujifen }}</span>
-                            无优币：<span>{{ user.wuyoubi }}</span> 您当前等级：<a><font color="#FF0000">{{ user.role }}</font></a>
+                            无优币：<span>{{ user.wuyoubi }}</span> 您当前等级：<a><font
+                                color="#FF0000">{{ user.role }}</font></a>
                         </li>
                         <li class="c02">
-                            每日领取次数：<span>10</span>
+                            每日领取次数：<span>{{ user.max_order_num }}</span>
                             今日已领取次数：<span>0</span>
                         </li>
                         <li class="c03">购买每日领取次数价格：<span>增加1个次数=5元</span>，请在有足够的无优币，在进行购买。</li>
@@ -86,13 +92,15 @@
                 <div class="get">
                     <h1>领取次数增加</h1>
                     <div class="getaa">
-                        <form id="orderform" name="orderform" method="post" action="file.asp?action=cishu"
-                              onSubmit="return CheckForm();">
-                            <p>每日领取次数 5元加一次，1次起售。我要购买<input class="bs" onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                                            onafterpaste="this.value=this.value.replace(/\D/g,'')"
-                                                            style="width:30px;text-align:center;" name="Count"
-                                                            type="text"
-                                                            value="1" id="txtXGCount" class="gk"/>次
+                        <form id="orderform" name="orderform" method="post" action="file?action=cishu"
+                              onsubmit="return CheckForm();">
+                            {{ form.csrf_token }}
+                            <p>每日领取次数 5元加一次，1次起售。我要购买
+                                <input class="bs" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                                       style="width:30px;text-align:center;" name="Count"
+                                       type="text"
+                                       value="1" id="txtXGCount" class="gk"/>次
                                 <input type="image" name="btnKXGBuy" id="btnKXGBuy" class="an"
                                        src="/static/images/chongzhi.gif"
                                        border="0"/>
@@ -100,7 +108,8 @@
                         </form>
                         <div class="get_ka">
                             <img src="/static/images/ka01.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file.asp?action=cishution">
+                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                                {{ form.csrf_token }}
                                 <ul>
                                     <li>100次，4元/次，</li>
                                     <li>需要400元无优币（<span>节省100元</span>）</li>
@@ -116,7 +125,8 @@
 
                         <div class="get_ka">
                             <img src="/static/images/ka02.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file.asp?action=cishution">
+                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                                {{ form.csrf_token }}
                                 <ul>
                                     <li>50次，4.2元/次，</li>
                                     <li>需要210元无优币（<span>节省40元</span>）</li>
@@ -132,7 +142,8 @@
 
                         <div class="get_ka">
                             <img src="/static/images/ka03.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file.asp?action=cishution">
+                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                                {{ form.csrf_token }}
                                 <ul>
                                     <li>20次，4.5元/次，</li>
                                     <li>需要90元无优币（<span>节省10元</span>）</li>
@@ -148,7 +159,8 @@
 
                         <div class="get_ka">
                             <img src="/static/images/ka04.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file.asp?action=cishution">
+                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                                {{ form.csrf_token }}
                                 <ul>
                                     <li>10次，4.8元/次，</li>
                                     <li>需要48元无优币（<span>节省2元</span>）</li>

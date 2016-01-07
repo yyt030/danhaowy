@@ -6,7 +6,7 @@ import hashlib
 import time
 from werkzeug import security
 from . import db
-from ..utils.uploadsets import avatars, id_images, student_images, teacher_images, honor_images
+from datetime import datetime
 from ..utils._redis import get_user_active_time
 
 
@@ -14,6 +14,15 @@ class User(db.Model):
     """用户：id，姓名，邮箱，密码，角色，创建时间，token
     角色：　admin
         　 member
+        is_active 会员激活状态
+        money 提现佣金
+        address: 登录Ip
+        wuyoubi 无忧币
+        wuyoujifen 无忧积分
+        jifen 发布积分
+        role 当前等级
+        max_order_num 每日可领取单号
+        login_time 登录时间
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), unique=True)
@@ -23,7 +32,8 @@ class User(db.Model):
     address = db.Column(db.String(20))
     password = db.Column(db.String(200))
     role = db.Column(db.String(20), default='member')
-    create_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    create_time = db.Column(db.DateTime, default=datetime.now)
+
     is_active = db.Column(db.Boolean, default=False)
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Float(10, 2), default=0.0)
@@ -32,6 +42,8 @@ class User(db.Model):
 
     wuyoubi = db.Column(db.Integer, default=0)
     wuyoujifen = db.Column(db.Integer, default=0)
+    max_order_num = db.Column(db.Integer, nullable=False, default=10)
+    login_time = db.Column(db.DateTime, default=datetime.now)
 
     default_send_province = db.Column(db.String(20))
     default_send_city = db.Column(db.String(20))
@@ -89,4 +101,4 @@ class Profile(db.Model):
     language = db.Column(db.String(20))
     nickname = db.Column(db.String(50))
     province = db.Column(db.String(50))
-    subscribe_time = db.Column(db.DateTime, default=datetime.datetime.now)
+    subscribe_time = db.Column(db.DateTime, default=datetime.now)

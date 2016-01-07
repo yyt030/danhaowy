@@ -15,7 +15,8 @@ bp = Blueprint('login_user', __name__)
 @require_user
 def index():
     form = SigninForm()
-    return render_template('login_user/index.html', form=form)
+    user = g.user
+    return render_template('login_user/index.html', form=form, user=user)
 
 
 @bp.route('/ornumber', methods=['GET'])
@@ -47,7 +48,9 @@ def ornumber():
 def number():
     """领取次数增加"""
     pass
-    return render_template('login_user/number.html')
+    user = g.user
+
+    return render_template('login_user/number.html', user=user)
 
 
 @bp.route('/wybjihuo', methods=['GET', 'POST'])

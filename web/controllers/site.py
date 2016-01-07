@@ -7,6 +7,7 @@ from web.utils.account import signin_user, signout_user
 from ..models import db, User
 from ..forms import SigninForm, RegisterForm
 from ..utils.permissions import require_user, require_visitor
+from datetime import datetime
 
 bp = Blueprint('site', __name__)
 
@@ -42,6 +43,10 @@ def login():
 
             if user is not None and user.check_password(password):
                 signin_user(user)
+                user.address = 'localhost'  # TODO
+                user.login_time = datetime.now()
+                db.session.add(user)
+                db.session.commit()
                 tip = "用户%s登录成功！" % user.name
                 return render_template('tip.html', tip=tip, error=False, url="")
             else:

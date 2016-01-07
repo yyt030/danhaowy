@@ -1,0 +1,419 @@
+{% extends "admin/base.html" %}
+{% block title %}后台管理系统主页{% endblock %}
+{% block content %}
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <div id="wrapper">
+        {% include 'admin/admin_nav.html' %}
+        <div id="page-wrapper" class="gray-bg sidebar-content">
+            <div class="row border-bottom">
+                {% include 'admin/header_nav.html' %}
+            </div>
+
+            <div class="wrapper wrapper-content">
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                {#                            <span class="label label-primary pull-right">今天</span>#}
+                                <h5>注册用户数</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins"><a href="/admin/userlist">{{ 1 }}</a></h1>
+
+                                {#                            <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i>#}
+                                {#                            </div>#}
+                                {#                            <small>新增人数</small>#}
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../../static/admin/jquery-2.1.1.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.chart').easyPieChart({
+                barColor: '#f8ac59',
+                //                scaleColor: false,
+                scaleLength: 5,
+                lineWidth: 4,
+                size: 80
+            });
+
+            $('.chart2').easyPieChart({
+                barColor: '#1c84c6',
+                //                scaleColor: false,
+                scaleLength: 5,
+                lineWidth: 4,
+                size: 80
+            });
+
+            var d1 = [
+                [1262304000000, 1],
+                [1264982400000, 100],
+                [1267401600000, 1],
+                [1270080000000, 200],
+                [1272672000000, 1],
+                [1275350400000, 100],
+                [1277942400000, 1],
+                [1280620800000, 300]
+            ];
+            var d2 = [
+                [1262304000000, 100],
+                [1264982400000, 1],
+                [1267401600000, 150],
+                [1270080000000, 1],
+                [1272672000000, 230],
+                [1275350400000, 1],
+                [1277942400000, 150],
+                [1280620800000, 10]
+            ];
+
+            var data3 = [
+                {
+                    label: "Data 1",
+                    data: d1,
+                    color: '#23c6c8'
+                },
+                {
+                    label: "Data 2",
+                    data: d2,
+                    color: '#1ab394'
+                }
+            ];
+            $.plot($("#flot-chart3"), data3, {
+                xaxis: {
+                    tickDecimals: 0
+                },
+                series: {
+                    lines: {
+                        show: true,
+                        fill: true,
+                        fillColor: {
+                            colors: [{
+                                opacity: 1
+                            }, {
+                                opacity: 1
+                            }]
+                        },
+                    },
+                    curvedLines: {
+                        active: true,
+                        fit: true,
+                        apply: true
+                    },
+                    points: {
+                        width: 0.1,
+                        show: false
+                    },
+                },
+                grid: {
+                    show: false,
+                    borderWidth: 0
+                },
+                legend: {
+                    show: false,
+                }
+            });
+
+
+            var mapData = {
+                "US": 298,
+                "SA": 200,
+                "DE": 220,
+                "FR": 540,
+                "CN": 120,
+                "AU": 760,
+                "BR": 550,
+                "IN": 200,
+                "GB": 120,
+            };
+
+            $('#world-map').vectorMap({
+                map: 'world_mill_en',
+                backgroundColor: "transparent",
+                regionStyle: {
+                    initial: {
+                        fill: '#e4e4e4',
+                        "fill-opacity": 0.9,
+                        stroke: 'none',
+                        "stroke-width": 0,
+                        "stroke-opacity": 0
+                    }
+                },
+
+                series: {
+                    regions: [{
+                        values: mapData,
+                        scale: ["#1ab394", "#22d6b1"],
+                        normalizeFunction: 'polynomial'
+                    }]
+                },
+            });
+        });
+    </script>
+    <div class="theme-config">
+        <div class="theme-config-box">
+            <div class="spin-icon">
+                <i class="fa fa-cog fa-spin"></i>
+            </div>
+            <div class="skin-setttings">
+                <div class="title">主题设置</div>
+                <div class="setings-item">
+                <span>
+                        收起左侧菜单
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+                            <label class="onoffswitch-label" for="collapsemenu">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setings-item">
+                <span>
+                        固定侧边栏
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="fixedsidebar" class="onoffswitch-checkbox" id="fixedsidebar">
+                            <label class="onoffswitch-label" for="fixedsidebar">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setings-item">
+                <span>
+                        固定顶部
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
+                            <label class="onoffswitch-label" for="fixednavbar">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setings-item">
+                <span>
+                        固定宽度
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
+                            <label class="onoffswitch-label" for="boxedlayout">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setings-item">
+                <span>
+                        固定底部
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="fixedfooter" class="onoffswitch-checkbox" id="fixedfooter">
+                            <label class="onoffswitch-label" for="fixedfooter">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="setings-item">
+                <span>
+                        RTL模式
+                    </span>
+
+                    <div class="switch">
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="RTLmode" class="onoffswitch-checkbox" id="RTLmode">
+                            <label class="onoffswitch-label" for="RTLmode">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title">皮肤选择</div>
+                <div class="setings-item default-skin">
+                <span class="skin-name ">
+                         <a href="http://www.zi-han.net/theme/hplus/#" class="s-skin-0">
+                             默认皮肤
+                         </a>
+                    </span>
+                </div>
+                <div class="setings-item blue-skin">
+                <span class="skin-name ">
+                        <a href="http://www.zi-han.net/theme/hplus/#" class="s-skin-1">
+                            蓝色主题
+                        </a>
+                    </span>
+                </div>
+                <div class="setings-item yellow-skin">
+                <span class="skin-name ">
+                        <a href="http://www.zi-han.net/theme/hplus/#" class="s-skin-3">
+                            黄色/紫色主题
+                        </a>
+                    </span>
+                </div>
+                <div class="setings-item ultra-skin">
+                <span class="skin-name ">
+                        <a href="http://www.zi-han.net/theme/hplus/#" class="s-skin-2">
+                            灰色主题
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 顶部菜单固定
+        $('#fixednavbar').click(function () {
+            if ($('#fixednavbar').is(':checked')) {
+                $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
+                $("body").removeClass('boxed-layout');
+                $("body").addClass('fixed-nav');
+                $('#boxedlayout').prop('checked', false);
+            } else {
+                $(".navbar-fixed-top").removeClass('navbar-fixed-top').addClass('navbar-static-top');
+                $("body").removeClass('fixed-nav');
+            }
+        });
+
+        // 左侧菜单固定
+        $('#fixedsidebar').click(function () {
+            if ($('#fixedsidebar').is(':checked')) {
+                $("body").addClass('fixed-sidebar');
+                $('.sidebar-collapse').slimScroll({
+                    height: '100%',
+                    railOpacity: 0.9
+                });
+            } else {
+                $('.sidebar-collapse').slimscroll({
+                    destroy: true
+                });
+                $('.sidebar-collapse').attr('style', '');
+                $("body").removeClass('fixed-sidebar');
+            }
+        });
+
+        // 收起左侧菜单
+        $('#collapsemenu').click(function () {
+            if ($('#collapsemenu').is(':checked')) {
+                $("body").addClass('mini-navbar');
+                SmoothlyMenu();
+            } else {
+                $("body").removeClass('mini-navbar');
+                SmoothlyMenu();
+            }
+        });
+
+        // 自适应宽度
+        $('#boxedlayout').click(function () {
+            if ($('#boxedlayout').is(':checked')) {
+                $("body").addClass('boxed-layout');
+                $('#fixednavbar').prop('checked', false);
+                $(".navbar-fixed-top").removeClass('navbar-fixed-top').addClass('navbar-static-top');
+                $("body").removeClass('fixed-nav');
+                $(".footer").removeClass('fixed');
+                $('#fixedfooter').prop('checked', false);
+            } else {
+                $("body").removeClass('boxed-layout');
+            }
+        });
+
+        // 底部版权固定
+        $('#fixedfooter').click(function () {
+            if ($('#fixedfooter').is(':checked')) {
+                $('#boxedlayout').prop('checked', false);
+                $("body").removeClass('boxed-layout');
+                $(".footer").addClass('fixed');
+            } else {
+                $(".footer").removeClass('fixed');
+            }
+        });
+
+        // RTL模式
+        $('#RTLmode').click(function () {
+            if ($('#RTLmode').is(':checked')) {
+                $('head').append('<link href="css/bootstrap-rtl.css" id="rtl-mode" rel="stylesheet">');
+                $('body').addClass('rtls');
+            } else {
+                $('#rtl-mode').remove();
+                $('body').removeClass('rtls');
+            }
+        });
+
+        // 皮肤选择
+        $('.spin-icon').click(function () {
+            $(".theme-config-box").toggleClass("show");
+        });
+
+        // 默认主题
+        $('.s-skin-0').click(function () {
+            $("body").removeClass("skin-1");
+            $("body").removeClass("skin-2");
+            $("body").removeClass("skin-3");
+        });
+
+        // 蓝色主题
+        $('.s-skin-1').click(function () {
+            $("body").removeClass("skin-2");
+            $("body").removeClass("skin-3");
+            $("body").addClass("skin-1");
+        });
+
+        // 灰色主题
+        $('.s-skin-2').click(function () {
+            $("body").removeClass("skin-1");
+            $("body").removeClass("skin-3");
+            $("body").addClass("skin-2");
+        });
+
+        // 黄色主题
+        $('.s-skin-3').click(function () {
+            $("body").removeClass("skin-1");
+            $("body").removeClass("skin-2");
+            $("body").addClass("skin-3");
+        });
+    </script>
+
+    <style>
+        .fixed-nav .slimScrollDiv #side-menu {
+            padding-bottom: 60px;
+        }
+    </style>
+{% endblock %}

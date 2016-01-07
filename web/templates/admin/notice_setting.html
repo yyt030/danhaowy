@@ -1,0 +1,155 @@
+{% extends "admin/base.html" %}
+{% set news_type={"news":"网站公告","help":"新手帮助"} %}
+{% from 'macro/form.html' import form_field %}
+{% block title %}公告管理{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .hide {
+            display: none;
+        }
+    </style>
+    <script charset="utf-8" src="/static/kindeditor/kindeditor.js"></script>
+    <script charset="utf-8" src="/static/kindeditor/lang/zh_CN.js"></script>
+    <script>
+
+        var editor;
+        KindEditor.ready(function (K) {
+            editor = K.create('#desc', {
+                resizeType: 2,
+                allowFileManager: true,
+                fileManagerJson: '/file_manager_json',
+                uploadJson: '/upload_image' // 相对于当前页面的路径
+            });
+        });
+
+        html = editor.html();
+
+
+        editor.sync();
+
+        html = document.getElementById('c_contect').value; // 原生API
+
+        html = K('#c_contect').val(); // KindEditor Node API
+
+        html = $('#c_contect').val(); // jQuery
+
+
+        // 设置HTML内容
+
+        editor.html('');
+
+
+    </script>
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <div id="wrapper">
+        {% include 'admin/admin_nav.html' %}
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                {% include 'admin/header_nav.html' %}
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>数据表格</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin/">主页</a>
+                        </li>
+
+                        <li>
+                            <strong>公告管理</strong>
+                        </li>
+                    </ol>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>添加公告</h5>
+
+
+                                </div>
+                                <div class="ibox-content">
+                                    <form class="form-horizontal m-t" method="post" id="commentForm"
+                                          novalidate="novalidate">
+                                        {{ form.csrf_token }}
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">标题：</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input id="title" name="title" minlength="2" type="text"
+                                                       class="form-control" value="{{ form.title.data }}" required=""
+                                                       aria-required="true">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">详情：</label>
+
+                                            <div class="col-sm-8">
+
+                                                 <textarea id="desc" name="desc" cols="100" rows="5"
+                                                           style="width: 690px; height: 400px;  ">
+                                                            {{ form.desc.data |safe }}
+                                                 </textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-2 col-sm-offset-2">
+                                                <button class="btn btn-primary" type="submit">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{{ static('plupload/js/plupload.full.min.js') }}"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var uploader = new plupload.Uploader({
+                browse_button: 'index_image',
+                url: "/admin/upload_excel",
+                multipart_params: {
+                    'csrf_token': "{{ csrf_token() }}"
+                }
+            });
+
+            uploader.init();
+
+            // 文件添加后立即上传
+            uploader.bind('FilesAdded', function (up, files) {
+                plupload.each(files, function (file) {
+                    uploader.start();
+                });
+            });
+
+            // 上传项目图片
+            uploader.bind('FileUploaded', function (up, file, info) {
+                var response = $.parseJSON(info.response);
+                if (response.status == 'ok') {
+                    $(".fileview").removeClass("hide").text(response.name);
+                    $("#excel_file").val(response.name);
+                } else {
+                    $('.upload-error-info').text(response.error);
+                }
+            });
+        })
+
+    </script>
+{% endblock %}

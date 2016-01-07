@@ -1,0 +1,116 @@
+{% extends 'layout.html' %}
+{% block page_title %}单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网{% endblock %}
+{% block content %}
+    <body>
+
+    <div id="mm">
+
+        {% include 'header_nav.html' %}
+        <div class="tdmiddle">
+            <table width="950" height="138" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                <tr>
+                    <td height="41" colspan="2">当前位置：<a href="/index">网站首页</a> &gt; <a href="/news_list?type=news">网站公告</a>
+                        &gt; 【公告】{{ info.title }}。
+                    </td>
+                    <td width="200" rowspan="3" align="right" valign="top">
+                        <div style="height:41px; ">&nbsp; </div>
+                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">
+                            <tbody>
+                            <tr>
+                                <td width="126" height="40" align="left" valign="middle" background="/static/images/T1U.jpg"
+                                    class="td_08 Stxt14">热门新闻
+                                </td>
+                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg" class="td_08">
+                                    <a href="/news_list?type=1">更多</a></td>
+                            </tr>
+                             {# 热门新闻 #}
+                            <tr>
+                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a
+                                        href="/news_list?type=news" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告 -
+                                    网站已于12月1...</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <br>
+                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">
+                            <tbody>
+                            <tr>
+                                <td width="126" height="40" align="left" valign="middle" background="/static/images/T1U.jpg"
+                                    class="td_08 Stxt14">置顶新闻
+                                </td>
+                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg" class="td_08">
+                                    <a href="/news?id=49?type=0">更多</a></td>
+                            </tr>
+                            {# 置顶新闻 #}
+                             <tr>
+                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a
+                                        href="/news?id=49" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告 -
+                                    网站已于12月1...</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top">
+                        <table width="750" border="0" cellpadding="0" cellspacing="0" class="bk_03">
+                            <tbody>
+                            <tr>
+                                <td width="760" height="58" align="center" valign="middle" class="td_11">
+                                    <table width="740" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                        <tr>
+                                            <td width="311" align="left" valign="middle" class="td_13">
+                                                <p style="color: #336600">
+                                                    <img src="/static/images/ding.gif" alt="置顶" width="16" height="16">
+                                                    <img src="/static/images/post.png" width="16" alt="帖子" height="16">&nbsp;&nbsp;【公告】无忧积分兑换比例调整。
+                                                </p>
+                                            </td>
+                                            <td width="397" align="right" valign="middle" class="td_13">
+                                                <p>单号无忧</p>
+
+                                                <p style="color: #999">阅读量：{{ info.visit  or 0}}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left" valign="top" height="100" colspan="3" class="td_14">
+                                                <div style=" line-height:25px;">
+                                                    <div class="p0">
+                                                       {{ info.desc |safe }}
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <br/><br/><br/><br/>
+
+
+    </div>
+    <div id="link">
+        <h4><strong>友情链接</strong>LINK</h4>
+
+        <div id="link_bg">
+            <a href="http://www.aikuaidi.cn/" target="_blank">快递单号查询</a> |&nbsp;
+        </div>
+        <span></span>
+    </div>
+
+    </body>
+{% endblock %}

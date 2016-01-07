@@ -10,7 +10,7 @@ def require_visitor(func):
 
     @wraps(func)
     def decorator(*args, **kwargs):
-        if g.user:
+        if not g.user:
             return redirect(url_for('site.login'))
         return func(*args, **kwargs)
 
@@ -57,7 +57,7 @@ def require_admin(func):
         if not g.user:
             # flash('此操作需要登录账户')
             return redirect(url_for('admin.login'))
-        if g.user.name != 'admin' or g.user.email != 'admin@tuomeng.com':
+        if g.user.name != 'admin':
             abort(403)
         return func(*args, **kwargs)
 

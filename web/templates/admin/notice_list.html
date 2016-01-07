@@ -1,0 +1,152 @@
+{% extends "admin/base.html" %}
+{% set news_type={"news":"网站公告","help":"新手帮助"} %}
+{% block title %}{{ news_type.get(notice_type) }}列表{% endblock %}
+{% block content %}
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <div id="wrapper">
+        {% include 'admin/admin_nav.html' %}
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                {% include 'admin/header_nav.html' %}
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>{{ news_type.get(notice_type) }}</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin/home">主页</a>
+                        </li>
+
+                        <li>
+                            <strong>{{ news_type.get(notice_type) }}列表</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>基本
+                                    <small>分类，查找</small>
+                                </h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <style>
+                                    th:first-child,
+                                    .gradeX td:first-child {
+                                        width: 20px;
+                                        cursor: pointer;
+                                    }
+
+                                    th:first-child input,
+                                    .gradeX td:first-child input {
+                                        cursor: pointer;
+                                    }
+                                </style>
+
+                                <form action="javascript:;" method="post" name="login_form" id="login_form">
+
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th><input type="checkbox" class="i-checks" id="userListCheck"/></th>
+                                            <th>ID</th>
+                                            <th>标题</th>
+                                            <th>类型</th>
+                                            <th>时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for r in notices %}
+                                            <tr class="gradeX">
+                                                <td><input type="checkbox" class="i-checks"></td>
+                                                <td class="userListId">{{ r.id }}</td>
+                                                <td><a href="/notice/{{ r.id }}">{{ r.title }}</a></td>
+                                                <td>{{ news_type.get(r.type,'未知') }}</td>
+                                                <td>{{ r.create_at }}</td>
+                                                <td><a href="/admin/notice/add?id={{ r.id }}">修改</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <input type="button" class="btn btn-w-m btn-primary delete1" value="删除选中"
+                                           data-toggle="modal" data-target="#myModal5" disabled/>
+
+
+                                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span
+                                                            aria-hidden="true">&times;</span><span
+                                                            class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">删除公告</h4>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="delete1Content"></p>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white delete"
+                                                            data-dismiss="modal">确定
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        取消
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getCookie(name) {
+            var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return r ? r[1] : undefined;
+        }
+        $(function () {
+            var json1 = _alert('.btn.btn-w-m.delete1', '.modal-body .delete1Content', '您要删除的产品ID为');
+
+            $('.btn.btn-white.delete').click(function () {
+                $.ajax({
+                    url: '/admin/notice/delete',
+                    type: 'post',
+                    data: json1,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        //  alert('error');
+                    }
+                });
+            });
+        })
+    </script>
+
+{% endblock %}

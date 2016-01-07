@@ -4,7 +4,7 @@ import os
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
 from web.utils.account import signin_user, signout_user
-from ..models import db, User
+from ..models import db, User, Notice
 from ..forms import SigninForm, RegisterForm
 from ..utils.permissions import require_user, require_visitor
 from datetime import datetime
@@ -110,6 +110,30 @@ def reg():
     return render_template('site/reg.html', form=form)
 
 
+@bp.route('/news', methods=['GET', 'POST'])
+@require_visitor
+def news():
+    id = request.args.get("id", type=int)
+    type = request.args.get("type","news")
+    if id:
+        info = Notice.query.get_or_404(id)
+    else:
+        info = {}
+    return render_template('site/news_detail.html', info=info)
+
+
+
+@bp.route('/news_list', methods=['GET', 'POST'])
+@require_visitor
+def news_list():
+    type = request.args.get("type","news")
+    if type:
+        info = Notice.query.filter(Notice.type==type)
+    else:
+        info = {}
+    return render_template('site/news_list.html', info=info)
+
+
 @bp.route('/signout', methods=['GET', 'POST'])
 @require_visitor
 def signout():
@@ -121,18 +145,6 @@ def signout():
 def loginout():
     signout_user()
     return redirect(url_for('site.index'))
-
-
-@bp.route('/home', methods=['GET', 'POST'])
-@require_user
-def home():
-    return render_template('account/home.html')
-
-
-@bp.route('/user_data', methods=['GET', 'POST'])
-@require_user
-def user_data():
-    return render_template('account/user_data.html')
 
 
 @bp.route('/resource/<string:folder1>/<string:filename>', defaults={"folder2": "", "folder3": ""}, methods=['GET'])

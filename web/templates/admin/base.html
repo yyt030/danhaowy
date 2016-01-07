@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>{% block title %}后台管理系统 - 登录{% endblock %}</title>
+    <script src="../../static/admin/jquery-2.1.1.min.js"></script>
+
+    <link href="../../static/admin/bootstrap.min.css-v=3.4.0.css" rel="stylesheet">
+    <link href="../../static/font-awesome/css/font-awesome.css-v=4.3.0.css" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="http://www.zi-han.net/theme/hplus/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="http://www.zi-han.net/theme/hplus/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="../../static/admin/animate.css" rel="stylesheet">
+    <link href="../../static/admin/style.css-v=2.2.0.css" rel="stylesheet">
+    <link href="../../static/admin/custom.css" rel="stylesheet">
+    <script src="../../static/admin/admin.js"></script>
+    <script type="text/javascript" src="{{ static('WdatePicker/WdatePicker.js') }}"></script>
+    <script type="text/javascript">
+        var gLocals = {
+            'gUser': "{{ g.user }}",
+            'csrf': "{{ csrf_token() }}",
+        };
+
+    </script>
+</head>
+<body class="pace-done">
+
+{% block banner %}
+{% endblock %}
+
+{% block header %}
+    {% include 'admin/header.html' %}
+{% endblock %}
+{% block content %}
+
+{% endblock %}
+
+{% block common_js %}
+
+    <!-- Mainly scripts -->
+    <script src="../../static/admin/jquery-2.1.1.min.js"></script>
+    <script src="../../static/admin/bootstrap.min.js"></script>
+    <script src="../../static/admin/jquery.metisMenu.js"></script>
+    <script src="../../static/admin/jquery.slimscroll.min.js"></script>
+
+    <!-- Flot -->
+    <script src="../../static/admin/jquery.flot.js"></script>
+    <script src="../../static/admin/jquery.flot.tooltip.min.js"></script>
+    <script src="../../static/admin/jquery.flot.spline.js"></script>
+    <script src="../../static/admin/jquery.flot.resize.js"></script>
+    <script src="../../static/admin/jquery.flot.pie.js"></script>
+    <script src="../../static/admin/jquery.flot.symbol.js"></script>
+    <script src="../../static/admin/curvedLines.js"></script>
+
+    <!-- Peity -->
+    <script src="../../static/admin/jquery.peity.min.js"></script>
+    <script src="../../static/admin/peity-demo.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../../static/admin/hplus.js"></script>
+    <script src="../../static/admin/pace.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="../../static/admin/jquery-ui.min.js"></script>
+
+    <!-- Jvectormap -->
+    <script src="../../static/admin/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../../static/admin/jquery-jvectormap-world-mill-en.js"></script>
+
+    <!-- EayPIE -->
+    <script src="../../static/admin/jquery.easypiechart.js"></script>
+
+    <!-- Sparkline -->
+    <script src="../../static/admin/jquery.sparkline.min.js"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="../../static/admin/sparkline-demo.js"></script>
+
+{% endblock %}
+
+
+{% block footer %}
+
+    <!--footer-->
+
+    <!--end_footer-->
+{% endblock %}
+
+
+</body>
+</html>

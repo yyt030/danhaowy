@@ -1,0 +1,61 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+
+                             </span>
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                                    <span class="block m-t-xs"> <strong
+                                            class="font-bold">{{ g.user.name }}</strong>
+                             </span> <span class="text-muted text-xs block">超级管理员 <b class="caret"></b></span> </span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+
+                        <li><a href="/admin/loginout">安全退出</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    H+
+                </div>
+            </li>
+            <li class="{% if admin_nav==1 %}active{% endif %}">
+                <a href="#"><i class="fa fa-home"></i> <span class="nav-label">主页</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/site_info">站点设置</a></li>
+                </ul>
+            </li>
+            <li class="{% if admin_nav==2 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">网站公告</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/notice/add?type=news">添加公告</a></li>
+                    <li><a href="/admin/notices?type=news">公告列表</a></li>
+                </ul>
+            </li>
+            <li class="{% if admin_nav==3 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">新手帮助</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/notice/add?type=help">添加帮助</a></li>
+                    <li><a href="/admin/notices?type=help">帮助列表</a></li>
+                </ul>
+            </li>
+            <li class="{% if admin_nav==4 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">用户管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/userlist">用户列表</a></li>
+                    <li><a href="/admin/adduser">添加用户</a></li>
+                </ul>
+            </li>
+
+
+        </ul>
+
+    </div>
+</nav>

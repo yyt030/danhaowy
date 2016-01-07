@@ -10,31 +10,32 @@
                     <img src="/static/images/panel_icon_1.gif" alt="" width="75" height="50"/>
                 <td colspan="2" align="left">
 
-                    尊贵的：<font color="#FF0000"> microhan</font> ，欢迎来到的会员中心！
+                    尊贵的：<font color="#FF0000"> {{ user.name }}</font> ，欢迎来到的会员中心！
 
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">登录时间：<font color="#FF0000"> 2015/12/27
-                    16:14:17</font></td>
+                <td height="25" valign="center" align="left">登录时间：<font color="#FF0000"> {{ user.login_time }}</font>
+                </td>
                 <td height="25" valign="center" align="left">今日已领取单号：<font color="#FF0000">0</font>&nbsp;次
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">登录Ip：116.25.67.15</td>
-                <td height="25" valign="center" align="left">每日可领取单号：<font color="#FF0000">10</font>&nbsp;次
+                <td height="25" valign="center" align="left">登录Ip：{{ user.address }}</td>
+                <td height="25" valign="center" align="left">每日可领取单号：<font
+                        color="#FF0000">{{ user.max_order_num }}</font>&nbsp;次
                 </td>
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">无忧币：<font color="#FF3300">0</font>&nbsp;元&nbsp;<a
+                <td height="25" valign="center" align="left">无忧币：<font color="#FF3300">{{ user.wuyoubi }}</font>&nbsp;元&nbsp;<a
                         href="paywyb" target="_blank">
                     <img src="/static/images/chonz.gif" width="25px"
                          height="13px" align="absbottom"
                          alt="充值无忧币"/></a></td>
-                <td height="25" valign="center" align="left">无忧积分：<font color="#FF0000">0</font>&nbsp;分&nbsp;<a
+                <td height="25" valign="center" align="left">无忧积分：<font color="#FF0000">{{ user.wuyoujifen }}</font>&nbsp;分&nbsp;<a
                         href="jifen" target="_blank">
                     <img src="/static/images/dh01.gif" width="25px"
                          height="13px" align="absbottom"
@@ -42,12 +43,20 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">当前等级：普通会员</td>
-                <td height="25" valign="center" align="left">会员激活状态：<font color="#FF0000"
-                                                                          style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号未激活</font>&nbsp;<a
-                        href="wybjihuo">
-                    <img src="/static/images/jihuo.gif" border="0" align="top"
-                         title="点击此按钮激活帐号"/></a></td>
+                <td height="25" valign="center" align="left">当前等级：{{ user.role }}</td>
+                <td height="25" valign="center" align="left">会员激活状态：
+                    {% if user.is_active == False %}
+                        <font color="#FF0000"
+                              style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号未激活</font>&nbsp;
+                        <a href="wybjihuo">
+                            <img src="/static/images/jihuo.gif" border="0" align="top"
+                                 title="点击此按钮激活帐号"/>
+                        </a>
+                    {% else %}
+                        <font color="#FF0000"
+                              style="font-weight: bold;font-size: 12px;text-decoration:none;">帐号已激活</font>&nbsp;
+                    {% endif %}
+                </td>
 
             </tr>
             <tr>
@@ -63,7 +72,7 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">提现佣金：<font color="#FF0000">0.00
+                <td height="25" valign="center" align="left">提现佣金：<font color="#FF0000">{{ user.money |float }}
                     元 </font>
                     <a href="tx" target="_blank">
                         <img src="/static/images/tixian.gif" width="25px"

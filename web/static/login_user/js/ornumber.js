@@ -3,1125 +3,1144 @@ var addNew;
 var uu = "";
 var jc = "";
 function GetXmlHttpObject(handler) {
-	var objXmlHttp = null
-	if (navigator.userAgent.indexOf("MSIE") >= 0) {
-		var strName = "Msxml2.XMLHTTP"
-		if (navigator.appVersion.indexOf("MSIE 5.5") >= 0) {
-			strName = "Microsoft.XMLHTTP"
-		}
-		try {
-			objXmlHttp = new ActiveXObject(strName)
-			objXmlHttp.onreadystatechange = handler
-			return objXmlHttp
-		} catch (e) {
-			alert("Error. Scripting for ActiveX might be disabled")
-			return
-		}
-	} else {
-		objXmlHttp = new XMLHttpRequest()
-		objXmlHttp.onload = handler
-		objXmlHttp.onerror = handler
-		return objXmlHttp
-	}
+    var objXmlHttp = null
+    if (navigator.userAgent.indexOf("MSIE") >= 0) {
+        var strName = "Msxml2.XMLHTTP"
+        if (navigator.appVersion.indexOf("MSIE 5.5") >= 0) {
+            strName = "Microsoft.XMLHTTP"
+        }
+        try {
+            objXmlHttp = new ActiveXObject(strName)
+            objXmlHttp.onreadystatechange = handler
+            return objXmlHttp
+        } catch (e) {
+            alert("Error. Scripting for ActiveX might be disabled")
+            return
+        }
+    } else {
+        objXmlHttp = new XMLHttpRequest()
+        objXmlHttp.onload = handler
+        objXmlHttp.onerror = handler
+        return objXmlHttp
+    }
 }
-function showre(p,x) {
-	var p = p || 0;
-	var x = x || 0;
-	var code = get("code");
-	var sja = get("sja");
-	var s1 = get("Select1");
-	var s2 = get("Select2");
-	var s3 = get("Select3");
-	var s4 = get("Select4");
-	var s5 = get("Select5");
-	var s6 = get("Select6");
-	var com = get("com");
-	var sm = get("sm");
-	var shdz = get("shdz");
-	var fhdz = get("fhdz");
-	var isordz = $('input:radio[name="sertype"]:checked').val()
-	var sa = s1 + " " + s2 + " " + s3;
-	var sb = s4 + " " + s5 + " " + s6;
-	if (s1 == "") {
-		var sa = "";
-	}
-	if (s4 == "") {
-		var sb = "";
-	}
-	if (isordz == "2") {
-		var sa = shdz;
-		var sb = fhdz;
-	 var radios = 2
-	}else{
-	var radios = 1
-	}
-	 // if(p==0 && x==0 ){if(code==""){alert("ÇëÌîĞ´ÑéÖ¤Âë,ÑéÖ¤Âë²»ÄÜÎª¿Õ£¡");return false;}}
-	if (sa == "" && sb == "") {
-		alert("·¢»õµØÖ· ºÍ ÊÕ»õµØÖ· ²»ÄÜÍ¬Ê±Îª¿Õ£¡\n\n ÇëÄúÏÈÈÎÒâÑ¡ÔñÒ»ÏîÊÕ·¢»õµØÖ·£¡");
-		return false;
-	}
-	if (x==0){timer(3);}
-	var token = topip(true, 3, 32)
-	writeCookie("s1", s1, "30");
-	writeCookie("s2", s2, "30");
-	writeCookie("s3", s3, "30");
-	writeCookie("sja", sja, "30");
-	writeCookie("s4", s4, "30");
-	writeCookie("s5", s5, "30");
-	writeCookie("s6", s6, "30");
-	writeCookie("sja", sja, "30");
-	writeCookie("com", com, "30");
-	writeCookie("shdz", shdz, "30");
-	writeCookie("fhdz", fhdz, "30");
-	writeCookie("p", p, "30");
-	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>ÕıÔÚ²éÑ¯ÖĞ¡£¡£¡£</div>");
-	var url = "Qiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&x=" + x + "&p=" + p + "&token=" + token + "&radios=" + radios + "&code=" + code;
-	var lx = showhtml;
-	xmlHttp = GetXmlHttpObject(lx)
-	xmlHttp.open("GET", url, true)
-	xmlHttp.send(null)
+function showre(p, x) {
+    var p = p || 0;
+    var x = x || 0;
+    var code = get("code");
+    var sja = get("sja");
+    var s1 = get("Select1");
+    var s2 = get("Select2");
+    var s3 = get("Select3");
+    var s4 = get("Select4");
+    var s5 = get("Select5");
+    var s6 = get("Select6");
+    var com = get("com");
+    var sm = get("sm");
+    var shdz = get("shdz");
+    var fhdz = get("fhdz");
+    var isordz = $('input:radio[name="sertype"]:checked').val()
+    var sa = s1 + " " + s2 + " " + s3;
+    var sb = s4 + " " + s5 + " " + s6;
+    if (s1 == "") {
+        var sa = "";
+    }
+    if (s4 == "") {
+        var sb = "";
+    }
+    if (isordz == "2") {
+        var sa = shdz;
+        var sb = fhdz;
+        var radios = 2
+    } else {
+        var radios = 1
+    }
+    // if(p==0 && x==0 ){if(code==""){alert("è¯·å¡«å†™éªŒè¯ç ,éªŒè¯ç ä¸èƒ½ä¸ºç©ºï¼");return false;}}
+    if (sa == "" && sb == "") {
+        alert("å‘è´§åœ°å€ å’Œ æ”¶è´§åœ°å€ ä¸èƒ½åŒæ—¶ä¸ºç©ºï¼\n\n è¯·æ‚¨å…ˆä»»æ„é€‰æ‹©ä¸€é¡¹æ”¶å‘è´§åœ°å€ï¼");
+        return false;
+    }
+    if (x == 0) {
+        timer(3);
+    }
+    var token = topip(true, 3, 32)
+    writeCookie("s1", s1, "30");
+    writeCookie("s2", s2, "30");
+    writeCookie("s3", s3, "30");
+    writeCookie("sja", sja, "30");
+    writeCookie("s4", s4, "30");
+    writeCookie("s5", s5, "30");
+    writeCookie("s6", s6, "30");
+    writeCookie("sja", sja, "30");
+    writeCookie("com", com, "30");
+    writeCookie("shdz", shdz, "30");
+    writeCookie("fhdz", fhdz, "30");
+    writeCookie("p", p, "30");
+    gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>æ­£åœ¨æŸ¥è¯¢ä¸­ã€‚ã€‚ã€‚</div>");
+    var url = "Qiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&x=" + x + "&p=" + p + "&token=" + token + "&radios=" + radios + "&code=" + code;
+    var lx = showhtml;
+    xmlHttp = GetXmlHttpObject(lx)
+    xmlHttp.open("GET", url, true)
+    xmlHttp.send(null)
 }
 
 function showhtml() {
-	if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-		
-	
-		var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
-		xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
-		xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
-		xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
-		var imglist = "<TABLE class='table table-bordered table-condensed table-striped' style='font-size: 12px;'><THEAD><TR><TH align='center' style='text-align: center; width:7%;'>ĞòºÅ</TH><TH align='center' style='text-align: center; width:12%;'>¿ìµİµ¥ºÅ</TH><TH align='center' style='text-align: center; width:10%;'>¿ìµİÀàĞÍ</TH><TH align='center' style='text-align: center; width:41%;'>·¢»õµØÖ·/ÊÕ»õµØÖ·</TH><TH align='center' style='text-align: center; width:19%;'>É¨ÃèÊ±¼ä</TH><TH style='text-align: center; width:8%;'>ÁìÈ¡²Ù×÷</TH><TH align='center' style='text-align: center; width:3%;'><input type='checkbox' id='chkAll'  value='checkbox' style='border:0' onClick=checkAll()><input id='qindex' type='hidden' value='0'/></TH></TR></THEAD><TBODY>";
-		for (i = 0; i < xmltitle.length; i++) {
-			var title = xmltitle[i].firstChild.data;
-			var jh = xmltitle[i].getAttribute("jh");
-			if (title == "loginerror") {
-				gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>µÇÂ¼ÒÑ¾­Ê§Ğ§,ÇëÖØĞÂµÇÂ¼£¡</div>");
-			}
-			if (title == "tokenerror") {
-				gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>Ìá½»Ê§°Ü,ÇëÖØĞÂÌá½»²éÑ¯£¡</div>");
-			}
-			if (jh == 0) {
-				gethtml("jhs", "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'>ÄúºÃ£¬Äúµ±Ç°ÕÊºÅÃ»ÓĞ¼¤»î,²éÑ¯Ö»ÏÔÊ¾10Ìõµ¥ºÅ¡£ÕÊºÅ¼¤»îºó,²éÑ¯ÏÔÊ¾ËùÓĞµ¥ºÅ¡£<a href='wybjihuo.asp'><img src='images/jihuo.gif'  border='0' align='top' title='µã»÷´Ë°´Å¥¼¤»îÕÊºÅ' /></a></div>");
-			}
-			if (title == "Ã»ÓĞ") {
-				imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='images/error_01.png'/>Î´²éÕÒµ½,ÇëÀ©´ó²éÕÒ·¶Î§! <a href='/News.asp?id=48' target='_blank'>>>µã»÷²é¿´°ïÖú<</a> <br /><br />Î´²éÕÒµ½? ½¨ÒéÄú³¢ÊÔ·¢¿Õ°ü£¡<a href='buykongbao.asp' target='_blank' class='btn'>ÎÒÒª·¢¿Õ°ü</a></div>";
-				gethtml("imglist");
-			} else if (title == "timererror") {
-				imglist = "<div style='color:red;text-align:center;'><img src='face/018.gif'/>Ñ¹Á¦É½´ó£¬ÓÉÓÚÄú²éÑ¯¹ıÓÚÆµ·±,ÇëĞªĞª,Ô¤¼Æ3ÃëÄÚ¿ÉÔÙ´Î²éÑ¯£¡</div>";
-				gethtml("imglist");
-			} else if (title == "codeerror") {
-				imglist = "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>ÄúÊäÈëµÄÑéÖ¤Âë´íÎó,ÇëÖØĞÂÊäÈëºóÔÚÌá½»²éÑ¯!</div>";
-				$("#code").val("");getcode();
-				gethtml("imglist");
-			} else {
-				var fh = xmlfh[i].firstChild.data;
-				var sh = xmlsh[i].firstChild.data;
-				var Time = xmltitle[i].getAttribute("Time");
-				var htmlid = xmltitle[i].getAttribute("id");
-				var Qoi = xmltitle[i].getAttribute("Qoi");
-				var Qid = xmltitle[i].getAttribute("Qid");
-				var sm = xmltitle[i].getAttribute("sm");
-				var kda = xmltitle[i].getAttribute("kda");
-				var PerPage = xmltitle[i].getAttribute("PerPage");
-				var P_Nums = xmltitle[i].getAttribute("P_Nums");
-				var page = xmltitle[i].getAttribute("page");
-				var kda = xmltitle[i].getAttribute("kda");
-				var saomiaotxt = xmltitle[i].getAttribute("saomiaotxt");
-				var cc = xmltitle[i].getAttribute("cc");
-									
-				imglist += "<tr>";
-				imglist += "<td style='line-height: 40px;text-align:center;'>" + Qoi + "</td>";
-				if (cc==0){
-				imglist += "<td style='line-height: 40px;'>" + htmlid + " </td>";
-					}else{
-				imglist += "<td style='line-height: 40px;'>" + htmlid + " <input name=\"COSS\" type=\"button\" onclick=\"Coss("+Qid+",'"+cc+"',0);\" value=\"¼ì²â\" class=\"zdybutton\"></td>";
-						}				
-				imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
-				imglist += "<td style='text-align: center;'>·¢»õµØÖ·£º" + fh + "<br/><font color=#EE5C42>ÊÕ»õµØÖ·£º" + sh + "</font></td>";
-				if (sm == 0 || sm == 2) {
-					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>µã»÷²éÑ¯<a href='javascript:' title='µã»÷²éÑ¯×´Ì¬' onClick=Qikd('" + kda + "',1,'" + Qid + "','0')><img src='images/so.jpg'></a></td>"
-					imglist += "<td style='text-align: center;'><input type='button' id='fs" + Qid + "' class='btnumey' value='Áì  È¡' onClick=Qik('" + Qid + "','"+sm+"') style='cursor:hand;margin-top: 9px'></td>";
-				} else {
-					imglist += "<td style='line-height: 40px;'><font color='red'>" + sm + "</font><a href='javascript:' title='µã»÷²éÑ¯×´Ì¬' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
-					imglist += "<td style='text-align: center;'><input type='button' class='btnumey' value='Áì  È¡' onClick=Qik('" + Qid + "','"+ escape(sm) +"') style='cursor:hand;margin-top: 9px'></td>";
-				}
-				imglist += "<TD style='text-align:center;'><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd' value='" + Qid + "' style='margin-top: 12px'></span></TD>";
-				imglist += "</tr>";
-			}
-		}
-		if (P_Nums > 1) {
-			var Plist = "<tr><td colspan='9'><div id='page'><ul>";
-			if (page < 2) {
-				Plist += "<li><span>Ê×¡¡Ò³</span></li><li><span>ÉÏÒ»Ò³</span></li>"
-			} else {
-				Plist += "<li><a href='javascript:' onclick=showre(1,1) title='Ê×¡¡Ò³'>Ê×¡¡Ò³</a></li><li><a href='javascript:' onclick=showre(" + (page - 1) + ",1) title='ÉÏÒ»Ò³'>ÉÏÒ»Ò³</a></li>"
-			}
-			if (P_Nums > page * 1 + 9) {
-				var endpage = page * 1 + 9;
-			} else {
-				var endpage = P_Nums;
-			}
-			for (var i = page - 1; i <= endpage; i++) {
-				if (i > 0) {
-					Plist += (i == page) ? "<li><span>" + i + "</span></li>" : "<li><a href='javascript:' onclick=showre(" + i + ",1)>" + i + "</a></li>"
-				}
-			}
-			if (page == P_Nums) {
-				Plist += "<li><span>ÏÂÒ»Ò³</span></li><li><span>Ä©¡¡Ò³</span></li>"
-			} else {
-				Plist += "<li><a href='javascript:' onclick=showre(" + (page * 1 + 1) + ",1) title='ÏÂÒ»Ò³'>ÏÂÒ»Ò³</a></li><li><a href='javascript:' onclick=showre(" + P_Nums + ",1) title='Ä©¡¡Ò³'>Ä©¡¡Ò³</a></li>"
-			}
-			Plist += "</ul></div></td></tr></TBODY></TABLE>"
-		} else {
-			var Plist = "</TBODY></TABLE>";
-		}
-		gethtml("imglist", imglist + Plist)
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
 
-		//if (imglist.indexOf("²éÑ¯") > 0 ){$("#code").val("");getcode();}
-	}
+
+        var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
+        xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
+        xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
+        xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
+        var imglist = "<TABLE class='table table-bordered table-condensed table-striped' style='font-size: 12px;'><THEAD><TR><TH align='center' style='text-align: center; width:7%;'>åºå·</TH><TH align='center' style='text-align: center; width:12%;'>å¿«é€’å•å·</TH><TH align='center' style='text-align: center; width:10%;'>å¿«é€’ç±»å‹</TH><TH align='center' style='text-align: center; width:41%;'>å‘è´§åœ°å€/æ”¶è´§åœ°å€</TH><TH align='center' style='text-align: center; width:19%;'>æ‰«ææ—¶é—´</TH><TH style='text-align: center; width:8%;'>é¢†å–æ“ä½œ</TH><TH align='center' style='text-align: center; width:3%;'><input type='checkbox' id='chkAll'  value='checkbox' style='border:0' onClick=checkAll()><input id='qindex' type='hidden' value='0'/></TH></TR></THEAD><TBODY>";
+        for (i = 0; i < xmltitle.length; i++) {
+            var title = xmltitle[i].firstChild.data;
+            var jh = xmltitle[i].getAttribute("jh");
+            if (title == "loginerror") {
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>ç™»å½•å·²ç»å¤±æ•ˆ,è¯·é‡æ–°ç™»å½•ï¼</div>");
+            }
+            if (title == "tokenerror") {
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>æäº¤å¤±è´¥,è¯·é‡æ–°æäº¤æŸ¥è¯¢ï¼</div>");
+            }
+            if (jh == 0) {
+                gethtml("jhs", "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'>æ‚¨å¥½ï¼Œæ‚¨å½“å‰å¸å·æ²¡æœ‰æ¿€æ´»,æŸ¥è¯¢åªæ˜¾ç¤º10æ¡å•å·ã€‚å¸å·æ¿€æ´»å,æŸ¥è¯¢æ˜¾ç¤ºæ‰€æœ‰å•å·ã€‚<a href='wybjihuo.asp'><img src='images/jihuo.gif'  border='0' align='top' title='ç‚¹å‡»æ­¤æŒ‰é’®æ¿€æ´»å¸å·' /></a></div>");
+            }
+            if (title == "æ²¡æœ‰") {
+                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='images/error_01.png'/>æœªæŸ¥æ‰¾åˆ°,è¯·æ‰©å¤§æŸ¥æ‰¾èŒƒå›´! <a href='/News.asp?id=48' target='_blank'>>>ç‚¹å‡»æŸ¥çœ‹å¸®åŠ©<</a> <br /><br />æœªæŸ¥æ‰¾åˆ°? å»ºè®®æ‚¨å°è¯•å‘ç©ºåŒ…ï¼<a href='buykongbao.asp' target='_blank' class='btn'>æˆ‘è¦å‘ç©ºåŒ…</a></div>";
+                gethtml("imglist");
+            } else if (title == "timererror") {
+                imglist = "<div style='color:red;text-align:center;'><img src='face/018.gif'/>å‹åŠ›å±±å¤§ï¼Œç”±äºæ‚¨æŸ¥è¯¢è¿‡äºé¢‘ç¹,è¯·æ­‡æ­‡,é¢„è®¡3ç§’å†…å¯å†æ¬¡æŸ¥è¯¢ï¼</div>";
+                gethtml("imglist");
+            } else if (title == "codeerror") {
+                imglist = "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>æ‚¨è¾“å…¥çš„éªŒè¯ç é”™è¯¯,è¯·é‡æ–°è¾“å…¥ååœ¨æäº¤æŸ¥è¯¢!</div>";
+                $("#code").val("");
+                getcode();
+                gethtml("imglist");
+            } else {
+                var fh = xmlfh[i].firstChild.data;
+                var sh = xmlsh[i].firstChild.data;
+                var Time = xmltitle[i].getAttribute("Time");
+                var htmlid = xmltitle[i].getAttribute("id");
+                var Qoi = xmltitle[i].getAttribute("Qoi");
+                var Qid = xmltitle[i].getAttribute("Qid");
+                var sm = xmltitle[i].getAttribute("sm");
+                var kda = xmltitle[i].getAttribute("kda");
+                var PerPage = xmltitle[i].getAttribute("PerPage");
+                var P_Nums = xmltitle[i].getAttribute("P_Nums");
+                var page = xmltitle[i].getAttribute("page");
+                var kda = xmltitle[i].getAttribute("kda");
+                var saomiaotxt = xmltitle[i].getAttribute("saomiaotxt");
+                var cc = xmltitle[i].getAttribute("cc");
+
+                imglist += "<tr>";
+                imglist += "<td style='line-height: 40px;text-align:center;'>" + Qoi + "</td>";
+                if (cc == 0) {
+                    imglist += "<td style='line-height: 40px;'>" + htmlid + " </td>";
+                } else {
+                    imglist += "<td style='line-height: 40px;'>" + htmlid + " <input name=\"COSS\" type=\"button\" onclick=\"Coss(" + Qid + ",'" + cc + "',0);\" value=\"æ£€æµ‹\" class=\"zdybutton\"></td>";
+                }
+                imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
+                imglist += "<td style='text-align: center;'>å‘è´§åœ°å€ï¼š" + fh + "<br/><font color=#EE5C42>æ”¶è´§åœ°å€ï¼š" + sh + "</font></td>";
+                if (sm == 0 || sm == 2) {
+                    imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>ç‚¹å‡»æŸ¥è¯¢<a href='javascript:' title='ç‚¹å‡»æŸ¥è¯¢çŠ¶æ€' onClick=Qikd('" + kda + "',1,'" + Qid + "','0')><img src='images/so.jpg'></a></td>"
+                    imglist += "<td style='text-align: center;'><input type='button' id='fs" + Qid + "' class='btnumey' value='é¢†  å–' onClick=Qik('" + Qid + "','" + sm + "') style='cursor:hand;margin-top: 9px'></td>";
+                } else {
+                    imglist += "<td style='line-height: 40px;'><font color='red'>" + sm + "</font><a href='javascript:' title='ç‚¹å‡»æŸ¥è¯¢çŠ¶æ€' onClick=sncx('" + escape(sm) + "&nbsp;" + escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
+                    imglist += "<td style='text-align: center;'><input type='button' class='btnumey' value='é¢†  å–' onClick=Qik('" + Qid + "','" + escape(sm) + "') style='cursor:hand;margin-top: 9px'></td>";
+                }
+                imglist += "<TD style='text-align:center;'><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd' value='" + Qid + "' style='margin-top: 12px'></span></TD>";
+                imglist += "</tr>";
+            }
+        }
+        if (P_Nums > 1) {
+            var Plist = "<tr><td colspan='9'><div id='page'><ul>";
+            if (page < 2) {
+                Plist += "<li><span>é¦–ã€€é¡µ</span></li><li><span>ä¸Šä¸€é¡µ</span></li>"
+            } else {
+                Plist += "<li><a href='javascript:' onclick=showre(1,1) title='é¦–ã€€é¡µ'>é¦–ã€€é¡µ</a></li><li><a href='javascript:' onclick=showre(" + (page - 1) + ",1) title='ä¸Šä¸€é¡µ'>ä¸Šä¸€é¡µ</a></li>"
+            }
+            if (P_Nums > page * 1 + 9) {
+                var endpage = page * 1 + 9;
+            } else {
+                var endpage = P_Nums;
+            }
+            for (var i = page - 1; i <= endpage; i++) {
+                if (i > 0) {
+                    Plist += (i == page) ? "<li><span>" + i + "</span></li>" : "<li><a href='javascript:' onclick=showre(" + i + ",1)>" + i + "</a></li>"
+                }
+            }
+            if (page == P_Nums) {
+                Plist += "<li><span>ä¸‹ä¸€é¡µ</span></li><li><span>æœ«ã€€é¡µ</span></li>"
+            } else {
+                Plist += "<li><a href='javascript:' onclick=showre(" + (page * 1 + 1) + ",1) title='ä¸‹ä¸€é¡µ'>ä¸‹ä¸€é¡µ</a></li><li><a href='javascript:' onclick=showre(" + P_Nums + ",1) title='æœ«ã€€é¡µ'>æœ«ã€€é¡µ</a></li>"
+            }
+            Plist += "</ul></div></td></tr></TBODY></TABLE>"
+        } else {
+            var Plist = "</TBODY></TABLE>";
+        }
+        gethtml("imglist", imglist + Plist)
+
+        //if (imglist.indexOf("æŸ¥è¯¢") > 0 ){$("#code").val("");getcode();}
+    }
 }
 
 
-
-
-
-
-function shopshowre(p,x) {
-	var p = p || 0;
-	var x = x || 0;
-	var code = get("code");
-	var sja = get("sja");
-	var s1 = get("Select1");
-	var s2 = get("Select2");
-	var s3 = get("Select3");
-	var s4 = get("Select4");
-	var s5 = get("Select5");
-	var s6 = get("Select6");
-	var com = get("com");
-	var sm = get("sm");
-	var seller = get("seller");
-	var shdz = get("shdz");
-	var fhdz = get("fhdz");
-	var isordz = $('input:radio[name="sertype"]:checked').val()
-	var sa = s1 + " " + s2 + " " + s3;
-	var sb = s4 + " " + s5 + " " + s6;
-	if (s1 == "") {
-		var sa = "";
-	}
-	if (s4 == "") {
-		var sb = "";
-	}
-	if (isordz == "2") {
-		var sa = shdz;
-		var sb = fhdz;
-	 var radios = 2
-	}else{
-	var radios = 1
-	}
-	//if(p==0 && x==0 ){if(code==""){alert("ÇëÌîĞ´ÑéÖ¤Âë,ÑéÖ¤Âë²»ÄÜÎª¿Õ£¡");return false;}}
-	if (sa == "" && sb == "") {
-		alert("·¢»õµØÖ· ºÍ ÊÕ»õµØÖ· ²»ÄÜÍ¬Ê±Îª¿Õ£¡\n\n ÇëÄúÏÈÈÎÒâÑ¡ÔñÒ»ÏîÊÕ·¢»õµØÖ·£¡");
-		return false;
-	}
-	if (x==0){timer(3);}
-	var token = topip(true, 3, 32)
-	writeCookie("s1", s1, "30");
-	writeCookie("s2", s2, "30");
-	writeCookie("s3", s3, "30");
-	writeCookie("sja", sja, "30");
-	writeCookie("s4", s4, "30");
-	writeCookie("s5", s5, "30");
-	writeCookie("s6", s6, "30");
-	writeCookie("sja", sja, "30");
-	writeCookie("com", com, "30");
-	writeCookie("shdz", shdz, "30");
-	writeCookie("fhdz", fhdz, "30");
-	writeCookie("seller", seller, "30");
-	writeCookie("p", p, "30");
-	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>ÕıÔÚ²éÑ¯ÖĞ¡£¡£¡£</div>");
-	var url = "ShopQiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
-	var lx = shopshowhtml;
-	xmlHttp = GetXmlHttpObject(lx)
-	xmlHttp.open("GET", url, true)
-	xmlHttp.send(null)
+function shopshowre(p, x) {
+    var p = p || 0;
+    var x = x || 0;
+    var code = get("code");
+    var sja = get("sja");
+    var s1 = get("Select1");
+    var s2 = get("Select2");
+    var s3 = get("Select3");
+    var s4 = get("Select4");
+    var s5 = get("Select5");
+    var s6 = get("Select6");
+    var com = get("com");
+    var sm = get("sm");
+    var seller = get("seller");
+    var shdz = get("shdz");
+    var fhdz = get("fhdz");
+    var isordz = $('input:radio[name="sertype"]:checked').val()
+    var sa = s1 + " " + s2 + " " + s3;
+    var sb = s4 + " " + s5 + " " + s6;
+    if (s1 == "") {
+        var sa = "";
+    }
+    if (s4 == "") {
+        var sb = "";
+    }
+    if (isordz == "2") {
+        var sa = shdz;
+        var sb = fhdz;
+        var radios = 2
+    } else {
+        var radios = 1
+    }
+    //if(p==0 && x==0 ){if(code==""){alert("è¯·å¡«å†™éªŒè¯ç ,éªŒè¯ç ä¸èƒ½ä¸ºç©ºï¼");return false;}}
+    if (sa == "" && sb == "") {
+        alert("å‘è´§åœ°å€ å’Œ æ”¶è´§åœ°å€ ä¸èƒ½åŒæ—¶ä¸ºç©ºï¼\n\n è¯·æ‚¨å…ˆä»»æ„é€‰æ‹©ä¸€é¡¹æ”¶å‘è´§åœ°å€ï¼");
+        return false;
+    }
+    if (x == 0) {
+        timer(3);
+    }
+    var token = topip(true, 3, 32)
+    writeCookie("s1", s1, "30");
+    writeCookie("s2", s2, "30");
+    writeCookie("s3", s3, "30");
+    writeCookie("sja", sja, "30");
+    writeCookie("s4", s4, "30");
+    writeCookie("s5", s5, "30");
+    writeCookie("s6", s6, "30");
+    writeCookie("sja", sja, "30");
+    writeCookie("com", com, "30");
+    writeCookie("shdz", shdz, "30");
+    writeCookie("fhdz", fhdz, "30");
+    writeCookie("seller", seller, "30");
+    writeCookie("p", p, "30");
+    gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>æ­£åœ¨æŸ¥è¯¢ä¸­ã€‚ã€‚ã€‚</div>");
+    var url = "ShopQiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
+    var lx = shopshowhtml;
+    xmlHttp = GetXmlHttpObject(lx)
+    xmlHttp.open("GET", url, true)
+    xmlHttp.send(null)
 }
 
 function shopshowhtml() {
-	if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-		var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
-		xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
-		xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
-		xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
-		var imglist = "<TABLE class='table table-bordered table-condensed table-striped'style='font-size: 12px;'><THEAD><TR><TH align='center'style='text-align:center;'width='7%'>ĞòºÅ</TH><TH align='center'style='text-align:center;'width='12%'>¿ìµİµ¥ºÅ</TH><TH align='center'style='text-align:center;'width='9%'>¿ìµİÀàĞÍ</TH><TH align='center'style='text-align:center;'width='29%'>·¢»õµØÖ·/ÊÕ»õµØÖ·</TH><TH align='center'style='text-align:center;'width='8%'>µ¥¼Û</TH><TH align='center'style='text-align:center;'width='17%'>É¨ÃèÊ±¼ä</TH><TH align='center'style='text-align:center;'width='7%'>·¢²¼·½</TH><TH align='center'style='text-align:center;'width='12%'>È«Ñ¡/·´Ñ¡<input type='checkbox'id='chkAll'value='checkbox'style='border:0'onClick='shopcheckAll()'><input id='qindex'type='hidden'value='0'/></TH></TR></THEAD><TBODY>";
-		for (i = 0; i < xmltitle.length; i++) {
-			var title = xmltitle[i].firstChild.data;
-			var jh = xmltitle[i].getAttribute("jh");
-			if (title == "loginerror") {
-				gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>µÇÂ¼ÒÑ¾­Ê§Ğ§,ÇëÖØĞÂµÇÂ¼£¡</div>");
-			}
-			if (title == "tokenerror") {
-				gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>Ìá½»Ê§°Ü,ÇëÖØĞÂÌá½»²éÑ¯£¡</div>");
-			}
-			if (title == "Ã»ÓĞ") {
-				imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='images/error_01.png'/>Î´²éÕÒµ½,ÇëÀ©´ó²éÕÒ·¶Î§! <a href='/News.asp?id=48' target='_blank'>>>µã»÷²é¿´°ïÖú<</a> <br /><br />Î´²éÕÒµ½? ½¨ÒéÄú³¢ÊÔ·¢¿Õ°ü£¡<a href='buykongbao.asp' target='_blank' class='btn'>ÎÒÒª·¢¿Õ°ü</a></div>";
-				gethtml("imglist");
-			} else if (title == "timererror") {
-				imglist = "<div style='color:red;text-align:center;'><img src='face/018.gif'/>Ñ¹Á¦É½´ó£¬ÓÉÓÚÄú²éÑ¯¹ıÓÚÆµ·±,ÇëĞªĞª,Ô¤¼Æ3ÃëÄÚ¿ÉÔÙ´Î²éÑ¯£¡</div>";
-				gethtml("imglist");
-			} else if (title == "codeerror") {
-				imglist = "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>ÄúÊäÈëµÄÑéÖ¤Âë´íÎó,ÇëÖØĞÂÊäÈëºóÔÚÌá½»²éÑ¯!</div>";
-				gethtml("imglist");
-			} else {
-				var fh = xmlfh[i].firstChild.data;
-				var sh = xmlsh[i].firstChild.data;
-				var Time = xmltitle[i].getAttribute("Time");
-				var htmlid = xmltitle[i].getAttribute("id");
-				var Qoi = xmltitle[i].getAttribute("Qoi");
-				var Qid = xmltitle[i].getAttribute("Qid");
-				var sm = xmltitle[i].getAttribute("sm");
-				var kda = xmltitle[i].getAttribute("kda");
-				var PerPage = xmltitle[i].getAttribute("PerPage");
-				var P_Nums = xmltitle[i].getAttribute("P_Nums");
-				var page = xmltitle[i].getAttribute("page");
-				var kda = xmltitle[i].getAttribute("kda");
-				var shopmoney = xmltitle[i].getAttribute("Shopmoney");
-				var shopuser = xmltitle[i].getAttribute("shopuser");
-				var saomiaotxt = xmltitle[i].getAttribute("saomiaotxt");
-				var cc = xmltitle[i].getAttribute("cc");			
-										
-				imglist += "<tr id='yc"+Qid+"'>";
-				imglist += "<td style='line-height: 40px;text-align:center;'>" + Qoi + "</td>";
-				if (cc==0){
-				imglist += "<td style='line-height: 40px;'>" + htmlid + " </td>";
-					}else{
-				imglist += "<td style='line-height: 40px;'>" + htmlid + " <input name=\"COSS\" type=\"button\" onclick=\"Coss("+Qid+",'"+cc+"',1);\" value=\"¼ì²â\" class=\"zdybutton\"></td>";
-						}	
-				imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
-				imglist += "<td style='text-align: center;'>·¢»õµØÖ·£º" + fh + "<br/><font color=#EE5C42>ÊÕ»õµØÖ·£º" + sh + "</font></td>";
-				imglist += "<td style='color:#2E2EFE;line-height: 40px;text-align:center;' id='nn"+Qid+"'>" + shopmoney + "/Ôª</td>";
-				if (sm == 0 || sm == 2 ) {	
-					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>µã»÷²éÑ¯<a href='javascript:' title='Â¼ÈëÊ±¼ä£º"+Time+"' onClick=Qikd('" + kda + "',1,'" + Qid + "','1')><img src='images/so.jpg'></a></td>"
-				} else {
-					imglist += "<td style='line-height: 40px;text-align:center;'><font color='red'>" + sm + "</font><a href='javascript:' title='µã»÷²éÑ¯×´Ì¬' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
-				}
-				if (shopuser == 0){
-					imglist += "<td style='color:#603;line-height: 40px;text-align:center;'>¹ÜÀíÔ±</td>";	
-					}else {
-					imglist += "<td style='color:#ea00ff;line-height: 40px;text-align:center;'>"+shopuser+"</td>";	
-				
-				}
-		if (sm == 2 ) {
-				imglist += "<td style='line-height: 40px;text-align:center;'><a href='javascript:' id='gm"+Qid+"' onclick='shopQik("+Qid+","+shopmoney+",2)' style='cursor:hand;'>Á¢¼´¹ºÂò</a> <span class='qiall'><input id='id' type='checkbox' name='id' value='"+Qid+"'></span></td>";
-				} else {
-				imglist += "<td style='line-height: 40px;text-align:center;'><a href='javascript:' id='gm"+Qid+"' onclick='shopQik("+Qid+","+shopmoney+")' style='cursor:hand;'>Á¢¼´¹ºÂò</a> <span class='qiall'><input id='id' type='checkbox' name='id' value='"+Qid+"'></span></td>";					
-					}
-				
-				imglist += "</tr>";
-			}
-		}
-		if (P_Nums > 1) {
-			var Plist = "<tr><td colspan='9'><div id='page'><ul>";
-			if (page < 2) {
-				Plist += "<li><span>Ê×¡¡Ò³</span></li><li><span>ÉÏÒ»Ò³</span></li>"
-			} else {
-				Plist += "<li><a href='javascript:' onclick=shopshowre(1,1) title='Ê×¡¡Ò³'>Ê×¡¡Ò³</a></li><li><a href='javascript:' onclick=shopshowre(" + (page - 1) + ",1) title='ÉÏÒ»Ò³'>ÉÏÒ»Ò³</a></li>"
-			}
-			if (P_Nums > page * 1 + 9) {
-				var endpage = page * 1 + 9;
-			} else {
-				var endpage = P_Nums;
-			}
-			for (var i = page - 1; i <= endpage; i++) {
-				if (i > 0) {
-					Plist += (i == page) ? "<li><span>" + i + "</span></li>" : "<li><a href='javascript:' onclick=shopshowre(" + i + ",1)>" + i + "</a></li>"
-				}
-			}
-			if (page == P_Nums) {
-				Plist += "<li><span>ÏÂÒ»Ò³</span></li><li><span>Ä©¡¡Ò³</span></li>"
-			} else {
-				Plist += "<li><a href='javascript:' onclick=shopshowre(" + (page * 1 + 1) + ",1) title='ÏÂÒ»Ò³'>ÏÂÒ»Ò³</a></li><li><a href='javascript:' onclick=shopshowre(" + P_Nums + ",1) title='Ä©¡¡Ò³'>Ä©¡¡Ò³</a></li>"
-			}
-			Plist += "</ul></div></td></tr></TBODY></TABLE>"
-		} else {
-			var Plist = "</TBODY></TABLE>";
-		}
-		gethtml("imglist", imglist + Plist)
-		
-		//if (imglist.indexOf("²éÑ¯") > 0 ){$("#code").val("");getcode();}
+    if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+        var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
+        xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
+        xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
+        xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
+        var imglist = "<TABLE class='table table-bordered table-condensed table-striped'style='font-size: 12px;'><THEAD><TR><TH align='center'style='text-align:center;'width='7%'>åºå·</TH><TH align='center'style='text-align:center;'width='12%'>å¿«é€’å•å·</TH><TH align='center'style='text-align:center;'width='9%'>å¿«é€’ç±»å‹</TH><TH align='center'style='text-align:center;'width='29%'>å‘è´§åœ°å€/æ”¶è´§åœ°å€</TH><TH align='center'style='text-align:center;'width='8%'>å•ä»·</TH><TH align='center'style='text-align:center;'width='17%'>æ‰«ææ—¶é—´</TH><TH align='center'style='text-align:center;'width='7%'>å‘å¸ƒæ–¹</TH><TH align='center'style='text-align:center;'width='12%'>å…¨é€‰/åé€‰<input type='checkbox'id='chkAll'value='checkbox'style='border:0'onClick='shopcheckAll()'><input id='qindex'type='hidden'value='0'/></TH></TR></THEAD><TBODY>";
+        for (i = 0; i < xmltitle.length; i++) {
+            var title = xmltitle[i].firstChild.data;
+            var jh = xmltitle[i].getAttribute("jh");
+            if (title == "loginerror") {
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>ç™»å½•å·²ç»å¤±æ•ˆ,è¯·é‡æ–°ç™»å½•ï¼</div>");
+            }
+            if (title == "tokenerror") {
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>æäº¤å¤±è´¥,è¯·é‡æ–°æäº¤æŸ¥è¯¢ï¼</div>");
+            }
+            if (title == "æ²¡æœ‰") {
+                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='images/error_01.png'/>æœªæŸ¥æ‰¾åˆ°,è¯·æ‰©å¤§æŸ¥æ‰¾èŒƒå›´! <a href='/News.asp?id=48' target='_blank'>>>ç‚¹å‡»æŸ¥çœ‹å¸®åŠ©<</a> <br /><br />æœªæŸ¥æ‰¾åˆ°? å»ºè®®æ‚¨å°è¯•å‘ç©ºåŒ…ï¼<a href='buykongbao.asp' target='_blank' class='btn'>æˆ‘è¦å‘ç©ºåŒ…</a></div>";
+                gethtml("imglist");
+            } else if (title == "timererror") {
+                imglist = "<div style='color:red;text-align:center;'><img src='face/018.gif'/>å‹åŠ›å±±å¤§ï¼Œç”±äºæ‚¨æŸ¥è¯¢è¿‡äºé¢‘ç¹,è¯·æ­‡æ­‡,é¢„è®¡3ç§’å†…å¯å†æ¬¡æŸ¥è¯¢ï¼</div>";
+                gethtml("imglist");
+            } else if (title == "codeerror") {
+                imglist = "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>æ‚¨è¾“å…¥çš„éªŒè¯ç é”™è¯¯,è¯·é‡æ–°è¾“å…¥ååœ¨æäº¤æŸ¥è¯¢!</div>";
+                gethtml("imglist");
+            } else {
+                var fh = xmlfh[i].firstChild.data;
+                var sh = xmlsh[i].firstChild.data;
+                var Time = xmltitle[i].getAttribute("Time");
+                var htmlid = xmltitle[i].getAttribute("id");
+                var Qoi = xmltitle[i].getAttribute("Qoi");
+                var Qid = xmltitle[i].getAttribute("Qid");
+                var sm = xmltitle[i].getAttribute("sm");
+                var kda = xmltitle[i].getAttribute("kda");
+                var PerPage = xmltitle[i].getAttribute("PerPage");
+                var P_Nums = xmltitle[i].getAttribute("P_Nums");
+                var page = xmltitle[i].getAttribute("page");
+                var kda = xmltitle[i].getAttribute("kda");
+                var shopmoney = xmltitle[i].getAttribute("Shopmoney");
+                var shopuser = xmltitle[i].getAttribute("shopuser");
+                var saomiaotxt = xmltitle[i].getAttribute("saomiaotxt");
+                var cc = xmltitle[i].getAttribute("cc");
 
-	}
+                imglist += "<tr id='yc" + Qid + "'>";
+                imglist += "<td style='line-height: 40px;text-align:center;'>" + Qoi + "</td>";
+                if (cc == 0) {
+                    imglist += "<td style='line-height: 40px;'>" + htmlid + " </td>";
+                } else {
+                    imglist += "<td style='line-height: 40px;'>" + htmlid + " <input name=\"COSS\" type=\"button\" onclick=\"Coss(" + Qid + ",'" + cc + "',1);\" value=\"æ£€æµ‹\" class=\"zdybutton\"></td>";
+                }
+                imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
+                imglist += "<td style='text-align: center;'>å‘è´§åœ°å€ï¼š" + fh + "<br/><font color=#EE5C42>æ”¶è´§åœ°å€ï¼š" + sh + "</font></td>";
+                imglist += "<td style='color:#2E2EFE;line-height: 40px;text-align:center;' id='nn" + Qid + "'>" + shopmoney + "/å…ƒ</td>";
+                if (sm == 0 || sm == 2) {
+                    imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>ç‚¹å‡»æŸ¥è¯¢<a href='javascript:' title='å½•å…¥æ—¶é—´ï¼š" + Time + "' onClick=Qikd('" + kda + "',1,'" + Qid + "','1')><img src='images/so.jpg'></a></td>"
+                } else {
+                    imglist += "<td style='line-height: 40px;text-align:center;'><font color='red'>" + sm + "</font><a href='javascript:' title='ç‚¹å‡»æŸ¥è¯¢çŠ¶æ€' onClick=sncx('" + escape(sm) + "&nbsp;" + escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
+                }
+                if (shopuser == 0) {
+                    imglist += "<td style='color:#603;line-height: 40px;text-align:center;'>ç®¡ç†å‘˜</td>";
+                } else {
+                    imglist += "<td style='color:#ea00ff;line-height: 40px;text-align:center;'>" + shopuser + "</td>";
+
+                }
+                if (sm == 2) {
+                    imglist += "<td style='line-height: 40px;text-align:center;'><a href='javascript:' id='gm" + Qid + "' onclick='shopQik(" + Qid + "," + shopmoney + ",2)' style='cursor:hand;'>ç«‹å³è´­ä¹°</a> <span class='qiall'><input id='id' type='checkbox' name='id' value='" + Qid + "'></span></td>";
+                } else {
+                    imglist += "<td style='line-height: 40px;text-align:center;'><a href='javascript:' id='gm" + Qid + "' onclick='shopQik(" + Qid + "," + shopmoney + ")' style='cursor:hand;'>ç«‹å³è´­ä¹°</a> <span class='qiall'><input id='id' type='checkbox' name='id' value='" + Qid + "'></span></td>";
+                }
+
+                imglist += "</tr>";
+            }
+        }
+        if (P_Nums > 1) {
+            var Plist = "<tr><td colspan='9'><div id='page'><ul>";
+            if (page < 2) {
+                Plist += "<li><span>é¦–ã€€é¡µ</span></li><li><span>ä¸Šä¸€é¡µ</span></li>"
+            } else {
+                Plist += "<li><a href='javascript:' onclick=shopshowre(1,1) title='é¦–ã€€é¡µ'>é¦–ã€€é¡µ</a></li><li><a href='javascript:' onclick=shopshowre(" + (page - 1) + ",1) title='ä¸Šä¸€é¡µ'>ä¸Šä¸€é¡µ</a></li>"
+            }
+            if (P_Nums > page * 1 + 9) {
+                var endpage = page * 1 + 9;
+            } else {
+                var endpage = P_Nums;
+            }
+            for (var i = page - 1; i <= endpage; i++) {
+                if (i > 0) {
+                    Plist += (i == page) ? "<li><span>" + i + "</span></li>" : "<li><a href='javascript:' onclick=shopshowre(" + i + ",1)>" + i + "</a></li>"
+                }
+            }
+            if (page == P_Nums) {
+                Plist += "<li><span>ä¸‹ä¸€é¡µ</span></li><li><span>æœ«ã€€é¡µ</span></li>"
+            } else {
+                Plist += "<li><a href='javascript:' onclick=shopshowre(" + (page * 1 + 1) + ",1) title='ä¸‹ä¸€é¡µ'>ä¸‹ä¸€é¡µ</a></li><li><a href='javascript:' onclick=shopshowre(" + P_Nums + ",1) title='æœ«ã€€é¡µ'>æœ«ã€€é¡µ</a></li>"
+            }
+            Plist += "</ul></div></td></tr></TBODY></TABLE>"
+        } else {
+            var Plist = "</TBODY></TABLE>";
+        }
+        gethtml("imglist", imglist + Plist)
+
+        //if (imglist.indexOf("æŸ¥è¯¢") > 0 ){$("#code").val("");getcode();}
+
+    }
 }
 
-function topip(randomFlag, min, max){
+function topip(randomFlag, min, max) {
     var str = "",
         range = min,
         arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
- 
-    // Ëæ»ú²úÉú
-    if(randomFlag){
-        range = Math.round(Math.random() * (max-min)) + min;
+
+    // éšæœºäº§ç”Ÿ
+    if (randomFlag) {
+        range = Math.round(Math.random() * (max - min)) + min;
     }
-    for(var i=0; i<range; i++){
-        pos = Math.round(Math.random() * (arr.length-1));
+    for (var i = 0; i < range; i++) {
+        pos = Math.round(Math.random() * (arr.length - 1));
         str += arr[pos];
-    } 
-	  var date=new Date();
-          date.setTime(date.getTime()+10000);
-          document.cookie = "Tokenkey" + "=" + escape(str)  + "; expires=" + date.toGMTString() + "; path=/";
+    }
+    var date = new Date();
+    date.setTime(date.getTime() + 10000);
+    document.cookie = "Tokenkey" + "=" + escape(str) + "; expires=" + date.toGMTString() + "; path=/";
     return str;
 
 }
 
 
-
 function Qiall() {
-	var idx = document.getElementsByName("Qidd");
-	var idlen = 0;
-	var Qiids = "";
-	for (var i = 0; i < idx.length; i++) {
-		if (idx[i].checked) {
-			idlen = idlen + 1
-		}
-	}
-	if (idlen < 2) {
-		alert('ÅúÁ¿ÁìÈ¡ÖÁÉÙÑ¡Ôñ2µ¥,ÈçÄã»¹Ã»ÓĞ²éÑ¯,ÇëÏÈ²éÑ¯£¡');
-		return;
-	}
-	if (idlen > 20) {
-		alert('Ã¿´Î×î¶àÁìÈ¡20µ¥,ÁìÈ¡ºó¿ÉÖØĞÂ¹´Ñ¡ÁìÈ¡£¡');
-		return;
-	}
-	for (var i = 0; i < idx.length; i++) {
-		if (idx[i].checked) {
-			Qiids += "uid=" + idx[i].value + "&"
-		}
-	}
-	if (Qiids.charAt(Qiids.length - 1) == "&") {
-		Qiids = Qiids.substring(Qiids.length - 1, Qiids);
-	}
-	location = "BatchGetNumber.asp?" + Qiids + "";
+    var idx = document.getElementsByName("Qidd");
+    var idlen = 0;
+    var Qiids = "";
+    for (var i = 0; i < idx.length; i++) {
+        if (idx[i].checked) {
+            idlen = idlen + 1
+        }
+    }
+    if (idlen < 2) {
+        alert('æ‰¹é‡é¢†å–è‡³å°‘é€‰æ‹©2å•,å¦‚ä½ è¿˜æ²¡æœ‰æŸ¥è¯¢,è¯·å…ˆæŸ¥è¯¢ï¼');
+        return;
+    }
+    if (idlen > 20) {
+        alert('æ¯æ¬¡æœ€å¤šé¢†å–20å•,é¢†å–åå¯é‡æ–°å‹¾é€‰é¢†å–ï¼');
+        return;
+    }
+    for (var i = 0; i < idx.length; i++) {
+        if (idx[i].checked) {
+            Qiids += "uid=" + idx[i].value + "&"
+        }
+    }
+    if (Qiids.charAt(Qiids.length - 1) == "&") {
+        Qiids = Qiids.substring(Qiids.length - 1, Qiids);
+    }
+    location = "BatchGetNumber.asp?" + Qiids + "";
 }
 
-function Qik(uid,sm) {
-	if (sm == 2 ){
-var d = dialog({
-    title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-    content: '¸Ãµ¥ºÅÒÑÉ¨Ãè,µ«Î´²éÑ¯¹ıÎïÁ÷,Äã¿ÉÒÔÏÈ²éÑ¯ÎïÁ÷£¡<br/>ÄúÈ·¶¨ÒªÁìÈ¡Âğ,ÁìÈ¡ºó²»¿ÉÍËµ¥Å¶£¿',
-    okValue: 'È·¶¨',
-    ok: function () {
-	var url = "GetNumber.asp?uid=" + uid;
-	location = url;
-        return false;
-    },
-    cancelValue: 'È¡Ïû',
-    cancel: function () {}
-});
-d.show();
-		}else{
-		if (sm != 0){
-var sm = unescape(sm)	
-var d = dialog({
-    title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-    content: '¸Ãµ¥ºÅÒÑÉ¨Ãè,ÁìÈ¡Ç°ÇëÏÈ±È¶ÔÉ¨ÃèÊ±¼ä£¡<br/>É¨ÃèÊ±¼ä£º'+ sm +'<br/>ÄúÈ·¶¨ÒªÁìÈ¡Âğ,ÁìÈ¡ºó²»¿ÉÍËµ¥Å¶£¿',
-    okValue: 'È·¶¨',
-    ok: function () {
-	var url = "GetNumber.asp?uid=" + uid;
-	location = url;
-        return false;
-    },
-    cancelValue: 'È¡Ïû',
-    cancel: function () {}
-});
-d.show();
-			}
-		else{			
-	var url = "GetNumber.asp?uid=" + uid;
-	location = url;	
-	
-		}
-	}
+function Qik(uid, sm) {
+    if (sm == 2) {
+        var d = dialog({
+            title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+            content: 'è¯¥å•å·å·²æ‰«æ,ä½†æœªæŸ¥è¯¢è¿‡ç‰©æµ,ä½ å¯ä»¥å…ˆæŸ¥è¯¢ç‰©æµï¼<br/>æ‚¨ç¡®å®šè¦é¢†å–å—,é¢†å–åä¸å¯é€€å•å“¦ï¼Ÿ',
+            okValue: 'ç¡®å®š',
+            ok: function () {
+                var url = "GetNumber.asp?uid=" + uid;
+                location = url;
+                return false;
+            },
+            cancelValue: 'å–æ¶ˆ',
+            cancel: function () {
+            }
+        });
+        d.show();
+    } else {
+        if (sm != 0) {
+            var sm = unescape(sm)
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: 'è¯¥å•å·å·²æ‰«æ,é¢†å–å‰è¯·å…ˆæ¯”å¯¹æ‰«ææ—¶é—´ï¼<br/>æ‰«ææ—¶é—´ï¼š' + sm + '<br/>æ‚¨ç¡®å®šè¦é¢†å–å—,é¢†å–åä¸å¯é€€å•å“¦ï¼Ÿ',
+                okValue: 'ç¡®å®š',
+                ok: function () {
+                    var url = "GetNumber.asp?uid=" + uid;
+                    location = url;
+                    return false;
+                },
+                cancelValue: 'å–æ¶ˆ',
+                cancel: function () {
+                }
+            });
+            d.show();
+        }
+        else {
+            var url = "GetNumber.asp?uid=" + uid;
+            location = url;
+
+        }
+    }
 }
 
 function getcode() {
-	var randomnum = Math.random();
-	var img = document.getElementById("icode");
-	img.src = "inc/node.asp?r=" + randomnum;
+    var randomnum = Math.random();
+    var img = document.getElementById("icode");
+    img.src = "inc/node.asp?r=" + randomnum;
 }
 
 function changesertype(val) {
-	$("#diz1").hide()
-	$("#diz2").hide()
-	$("#diz" + val).show()
+    $("#diz1").hide()
+    $("#diz2").hide()
+    $("#diz" + val).show()
 }
 
 function checkAll() {
-	if ($("#chkAll").is(":checked")) {
-		var ids = $("input[name='Qidd']");¡¡¡¡
-		for (var i = 0; i < ids.length; i++) {
-			if (ids[i].checked == true) {
-				ids[i].checked = "";
-			} else {
-				ids[i].checked = "checked";
-			}¡¡
-		}
-	} else {
-		$(".qiall input").attr("checked", false);
-	}
+    if ($("#chkAll").is(":checked")) {
+        var ids = $("input[name='Qidd']");
+        for (var i = 0; i < ids.length; i++) {
+            if (ids[i].checked == true) {
+                ids[i].checked = "";
+            } else {
+                ids[i].checked = "checked";
+            }
+        }
+    } else {
+        $(".qiall input").attr("checked", false);
+    }
 }
 
 
-function shopcheckAll(){
-if($("#chkAll").is(":checked"))
-	{var ids=$("input[name='id']");
-¡¡¡¡ for(var i=0;i<ids.length;i++){  
-if(ids[i].checked==true){ids[i].checked="";   }else{   ids[i].checked="checked";  }  ¡¡}
-	}else{
-		$(".qiall input").attr("checked",false);
-	}
+function shopcheckAll() {
+    if ($("#chkAll").is(":checked")) {
+        var ids = $("input[name='id']");
+        for (var i = 0; i < ids.length; i++) {
+            if (ids[i].checked == true) {
+                ids[i].checked = "";
+            } else {
+                ids[i].checked = "checked";
+            }
+        }
+    } else {
+        $(".qiall input").attr("checked", false);
+    }
 }
-
 
 
 function gethtml(name, lx) {
-	document.getElementById(name).innerHTML = lx;
+    document.getElementById(name).innerHTML = lx;
 }
 
 function get(name) {
-	return document.getElementById(name).value;
+    return document.getElementById(name).value;
 }
 
-function Qikd(com, id, qid,i) {
-	if (id == "0") {
-		var q = 1;
-	} else {
-		var q = 0;
-	}
-	  if (i == "0"){
-		$.ajax({
-		type: 'post',
-		url: 'Qikd.asp',
-		dataType: 'text',
-		data: {
-			com: com,
-			id: id,
-			qid: qid,
-			q: q
-		},
-		timeout: 0,
-		cache: false,
-		error: err,
-		success: suc
-		
-	})
-  }else{
-		$.ajax({
-		type: 'post',
-		url: 'Qikd.asp',
-		dataType: 'text',
-		data: {
-			com: com,
-			id: id,
-			qid: qid,
-			q: q
-		},
-		timeout: 0,
-		cache: false,
-		error: err,
-		success: suv
-		
-	})	  
-	  
-	  
-	  
-	  }
- dialog({
-		id: 'ccx',
-		content: 'ÕıÔÚÅ¬Á¦²éÑ¯ÖĞ........'
-	}).showModal();
-      uu = dialog.get('ccx').title('ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú');
-	setInterval(function() {
-		if (DQCookie("qi" + qid)!= -1) {
-			uu.close().remove();
-			delCookie("qi" + qid,"1")
-			
-		}
-		
-	}, 100);	
+function Qikd(com, id, qid, i) {
+    if (id == "0") {
+        var q = 1;
+    } else {
+        var q = 0;
+    }
+    if (i == "0") {
+        $.ajax({
+            type: 'post',
+            url: 'Qikd.asp',
+            dataType: 'text',
+            data: {
+                com: com,
+                id: id,
+                qid: qid,
+                q: q
+            },
+            timeout: 0,
+            cache: false,
+            error: err,
+            success: suc
+
+        })
+    } else {
+        $.ajax({
+            type: 'post',
+            url: 'Qikd.asp',
+            dataType: 'text',
+            data: {
+                com: com,
+                id: id,
+                qid: qid,
+                q: q
+            },
+            timeout: 0,
+            cache: false,
+            error: err,
+            success: suv
+
+        })
 
 
-	function err() {
-		writeCookie("qi" + qid, "1", "1");
-		var s = dialog({
-			title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-			content: '²éÑ¯´íÎó£¡'
-		});
-		s.show();
-	}
+    }
+    dialog({
+        id: 'ccx',
+        content: 'æ­£åœ¨åŠªåŠ›æŸ¥è¯¢ä¸­........'
+    }).showModal();
+    uu = dialog.get('ccx').title('æ·˜å•æ— å¿§,æç¤ºæ‚¨');
+    setInterval(function () {
+        if (DQCookie("qi" + qid) != -1) {
+            uu.close().remove();
+            delCookie("qi" + qid, "1")
 
-	function suc(str) {
-		writeCookie("qi" + qid, "1", "1");
-		uu.close().remove();
-		if (q == "1") {
-			dialog({
-				title: 'ÎïÁ÷ĞÅÏ¢',
-				content: str
-			}).show();
-		} else {
-			if (str == 0) {
-				uu.close().remove();
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#006600\">Y(^_^)Y ¸Ãµ¥ºÅ°²È«ÔİÎ´É¨Ãè,Çë·ÅĞÄÊ¹ÓÃ¡£</font>',
-					ok: function() {}
-				});
-				d.showModal();
-			} else {
-				
-				if (str == 2){
-				uu.close().remove();
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#FF0000\">¸Ãµ¥ºÅÎ´ÔÚ¹æ¶¨µÄ32Ğ¡Ê±ÄÚÉ¨Ãè,ÇëÄú½÷É÷ÁìÈ¡¡£</font>',
-					ok: function() {}
-					
-				});
-				d.showModal();		
-					}else{
-				uu.close().remove();
-				var str = str.split(",")	
-				var d = dialog({	
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#FF0000\">-_-¡£sorry£¡ ¸Ãµ¥ºÅÒÑÉ¨Ãè,Çë×ĞÏ¸±È¶ÔÊ±¼ä¡£<br/>ÊÕ¼şÊ±¼ä£º<br/>'+str[0]+ ' '+str[1]+'</font>',
-					ok: function() {
-						$("#fs"+ qid ).attr("onclick","Qik('"+qid+"','"+escape(str[0])+"')");
-						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"µã»÷²éÑ¯×´Ì¬\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"images/so.jpg\"></a>");
+        }
+
+    }, 100);
 
 
-					}
-				});
-				d.showModal();
-				}
-			}
-		}
-	}
-	
-	
-	
-		function suv(str) {
-		writeCookie("qi" + qid, "1", "1");
-		uu.close().remove();
-		if (q == "1") {
-			dialog({
-				title: 'ÎïÁ÷ĞÅÏ¢',
-				content: str
-			}).show();
-		} else {
-			if (str == 0) {
-				uu.close().remove();
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#006600\">Y(^_^)Y ¸Ãµ¥ºÅ°²È«ÔİÎ´É¨Ãè,Çë·ÅĞÄÊ¹ÓÃ¡£</font>',
-					ok: function() {}
-				});
-				d.showModal();
-			} else {
-				
-				if (str == 2){
-				uu.close().remove();
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#FF0000\">¸Ãµ¥ºÅÎ´ÔÚ¹æ¶¨µÄ32Ğ¡Ê±ÄÚÉ¨Ãè,ÇëÄú½÷É÷ÁìÈ¡¡£</font>',
-					ok: function() {}
-					
-				});
-				d.showModal();		
-					}else{
-				uu.close().remove();
-				var str = str.split(",")	
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#FF0000\">-_-¡£sorry£¡ ¸Ãµ¥ºÅÒÑÉ¨Ãè,Çë×ĞÏ¸±È¶ÔÊ±¼ä¡£<br/>ÊÕ¼şÊ±¼ä£º<br/>'+str[0]+ ' '+str[1]+'</font>',
-					ok: function() {
-						
-						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"µã»÷²éÑ¯×´Ì¬\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"images/so.jpg\"></a>");
-						nus = $("#nn" + qid).html();
-						nus = nus.replace('/Ôª','')
-						if (nus != "0.25"){
-						nus = nus/2;
-						$("#nn" + qid).html(nus+'/Ôª');
-						}
-						$("#gm"+ qid ).attr("onclick","shopQik('"+qid+"','"+nus+"')");
+    function err() {
+        writeCookie("qi" + qid, "1", "1");
+        var s = dialog({
+            title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+            content: 'æŸ¥è¯¢é”™è¯¯ï¼'
+        });
+        s.show();
+    }
+
+    function suc(str) {
+        writeCookie("qi" + qid, "1", "1");
+        uu.close().remove();
+        if (q == "1") {
+            dialog({
+                title: 'ç‰©æµä¿¡æ¯',
+                content: str
+            }).show();
+        } else {
+            if (str == 0) {
+                uu.close().remove();
+                var d = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: '<font color=\"#006600\">Y(^_^)Y è¯¥å•å·å®‰å…¨æš‚æœªæ‰«æ,è¯·æ”¾å¿ƒä½¿ç”¨ã€‚</font>',
+                    ok: function () {
+                    }
+                });
+                d.showModal();
+            } else {
+
+                if (str == 2) {
+                    uu.close().remove();
+                    var d = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: '<font color=\"#FF0000\">è¯¥å•å·æœªåœ¨è§„å®šçš„32å°æ—¶å†…æ‰«æ,è¯·æ‚¨è°¨æ…é¢†å–ã€‚</font>',
+                        ok: function () {
+                        }
+
+                    });
+                    d.showModal();
+                } else {
+                    uu.close().remove();
+                    var str = str.split(",")
+                    var d = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: '<font color=\"#FF0000\">-_-ã€‚sorryï¼ è¯¥å•å·å·²æ‰«æ,è¯·ä»”ç»†æ¯”å¯¹æ—¶é—´ã€‚<br/>æ”¶ä»¶æ—¶é—´ï¼š<br/>' + str[0] + ' ' + str[1] + '</font>',
+                        ok: function () {
+                            $("#fs" + qid).attr("onclick", "Qik('" + qid + "','" + escape(str[0]) + "')");
+                            $("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"ç‚¹å‡»æŸ¥è¯¢çŠ¶æ€\" onclick=\"sncx('" + str[0] + " " + str[1] + "')\"><img src=\"images/so.jpg\"></a>");
 
 
-					}
-				});
-				d.showModal();
-				}
-			}
-		}
-	}
+                        }
+                    });
+                    d.showModal();
+                }
+            }
+        }
+    }
+
+
+    function suv(str) {
+        writeCookie("qi" + qid, "1", "1");
+        uu.close().remove();
+        if (q == "1") {
+            dialog({
+                title: 'ç‰©æµä¿¡æ¯',
+                content: str
+            }).show();
+        } else {
+            if (str == 0) {
+                uu.close().remove();
+                var d = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: '<font color=\"#006600\">Y(^_^)Y è¯¥å•å·å®‰å…¨æš‚æœªæ‰«æ,è¯·æ”¾å¿ƒä½¿ç”¨ã€‚</font>',
+                    ok: function () {
+                    }
+                });
+                d.showModal();
+            } else {
+
+                if (str == 2) {
+                    uu.close().remove();
+                    var d = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: '<font color=\"#FF0000\">è¯¥å•å·æœªåœ¨è§„å®šçš„32å°æ—¶å†…æ‰«æ,è¯·æ‚¨è°¨æ…é¢†å–ã€‚</font>',
+                        ok: function () {
+                        }
+
+                    });
+                    d.showModal();
+                } else {
+                    uu.close().remove();
+                    var str = str.split(",")
+                    var d = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: '<font color=\"#FF0000\">-_-ã€‚sorryï¼ è¯¥å•å·å·²æ‰«æ,è¯·ä»”ç»†æ¯”å¯¹æ—¶é—´ã€‚<br/>æ”¶ä»¶æ—¶é—´ï¼š<br/>' + str[0] + ' ' + str[1] + '</font>',
+                        ok: function () {
+
+                            $("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"ç‚¹å‡»æŸ¥è¯¢çŠ¶æ€\" onclick=\"sncx('" + str[0] + " " + str[1] + "')\"><img src=\"images/so.jpg\"></a>");
+                            nus = $("#nn" + qid).html();
+                            nus = nus.replace('/å…ƒ', '')
+                            if (nus != "0.25") {
+                                nus = nus / 2;
+                                $("#nn" + qid).html(nus + '/å…ƒ');
+                            }
+                            $("#gm" + qid).attr("onclick", "shopQik('" + qid + "','" + nus + "')");
+
+
+                        }
+                    });
+                    d.showModal();
+                }
+            }
+        }
+    }
 }
-
-
-
-
 
 
 function showadr(str) {
-	var divadr;
-	var btn;
-	divadr = document.getElementById("adr");
-	btn = btn ? btn : (window.event ? window.event : null);
-	//divadr.style.left=document.body.scrollWidth/2-225+"px";
-	//divadr.style.top="200px";
-	gethtml("Qistr", str);
-	divadr.style.display = "block";
+    var divadr;
+    var btn;
+    divadr = document.getElementById("adr");
+    btn = btn ? btn : (window.event ? window.event : null);
+    //divadr.style.left=document.body.scrollWidth/2-225+"px";
+    //divadr.style.top="200px";
+    gethtml("Qistr", str);
+    divadr.style.display = "block";
 }
 
 function guanbi(cstr) {
-	document.getElementById(cstr).style.display = "none";
+    document.getElementById(cstr).style.display = "none";
 }
 
 function getv(dd) {
-	return document.getElementById(dd);
+    return document.getElementById(dd);
 }
 
 function copyinfo() {
-	var info = getv("infotr");
-	var clipBoardContent = info.innerText;
-	window.clipboardData.setData("Text", clipBoardContent);
-	alert("¸´ÖÆ³É¹¦");
+    var info = getv("infotr");
+    var clipBoardContent = info.innerText;
+    window.clipboardData.setData("Text", clipBoardContent);
+    alert("å¤åˆ¶æˆåŠŸ");
 }
 
 function writeCookie(name, value, day) {
-	expire = "";
-	expire = new Date();
-	expire.setTime(expire.getTime() + day * 24 * 3600 * 1000);
-	expire = expire.toGMTString();
-	document.cookie = name + "=" + escape(value) + ";expires=" + expire;
+    expire = "";
+    expire = new Date();
+    expire.setTime(expire.getTime() + day * 24 * 3600 * 1000);
+    expire = expire.toGMTString();
+    document.cookie = name + "=" + escape(value) + ";expires=" + expire;
 }
 
 function readCookie(name) {
-	cookieValue = "";
-	search1 = name + "=";
-	if (document.cookie.length > 0) {
-		offset = document.cookie.indexOf(search1);
-		if (offset != -1) {
-			offset += search1.length;
-			end = document.cookie.indexOf(";", offset);
-			if (end == -1) end = document.cookie.length;
-			cookieValue = unescape(document.cookie.substring(offset, end));
-		}
-	}
-	return cookieValue;
+    cookieValue = "";
+    search1 = name + "=";
+    if (document.cookie.length > 0) {
+        offset = document.cookie.indexOf(search1);
+        if (offset != -1) {
+            offset += search1.length;
+            end = document.cookie.indexOf(";", offset);
+            if (end == -1) end = document.cookie.length;
+            cookieValue = unescape(document.cookie.substring(offset, end));
+        }
+    }
+    return cookieValue;
 }
 
 function DQCookie(name) {
- var  nn = "";
-	nn = document.cookie.indexOf(name)
-	return nn;
+    var nn = "";
+    nn = document.cookie.indexOf(name)
+    return nn;
 }
 
 
-function delCookie(name,value){
-	expire = "";
-	expire = new Date();
-	expire.setTime(expire.getTime() - 1000000);
-	expire = expire.toGMTString();
-	document.cookie = name + "=" + escape(value) + ";expires=" + expire;
-	
+function delCookie(name, value) {
+    expire = "";
+    expire = new Date();
+    expire.setTime(expire.getTime() - 1000000);
+    expire = expire.toGMTString();
+    document.cookie = name + "=" + escape(value) + ";expires=" + expire;
+
 }
 
-function shopQik(uid,mon,sm) {
-	if (sm ==  2){
-    dialog({
-        title: 'È·ÈÏ¿ò',
-        content: '<font color=\"#ff0000\">¸Ãµ¥ºÅ·¢²¼×´Ì¬ÎªÒÑÉ¨Ãè<br/>µ«Î´²éÑ¯¹ıÎïÁ÷,ÈçĞè²éÑ¯ÎïÁ÷ÇëÏÈ²éÑ¯£¡<br/>ÎŞĞè²éÑ¯ÎïÁ÷¿ÉÖ±½Óµã»÷È·¶¨¹ºÂò£¡</font>',
-        button: [{
-            value: 'È·¶¨',
-            callback: function() {
-				 if(confirm("Äú¹ºÂò´Ëµ¥ºÅĞèÒª"+mon+"Ôª£¬ÄúÈ·ÈÏÒª¹ºÂò£¿")==true)
-   					{
-    				gm(uid,mon);
-   					}
-                
-            },
-            autofocus: true
-        },
-        {
-            value: 'È¡Ïû'
-        }]
-    }).showModal();		
-		}else{
-    dialog({
-        title: 'È·ÈÏ¿ò',
-        content: 'Äú¹ºÂò´Ëµ¥ºÅĞèÒª'+mon+'Ôª£¬ÄúÈ·ÈÏÒª¹ºÂò£¿',
-        button: [{
-            value: 'È·¶¨',
-            callback: function() {
-                gm(uid,mon);
-            },
-            autofocus: true
-        },
-        {
-            value: 'È¡Ïû'
-        }]
-    }).showModal();
+function shopQik(uid, mon, sm) {
+    if (sm == 2) {
+        dialog({
+            title: 'ç¡®è®¤æ¡†',
+            content: '<font color=\"#ff0000\">è¯¥å•å·å‘å¸ƒçŠ¶æ€ä¸ºå·²æ‰«æ<br/>ä½†æœªæŸ¥è¯¢è¿‡ç‰©æµ,å¦‚éœ€æŸ¥è¯¢ç‰©æµè¯·å…ˆæŸ¥è¯¢ï¼<br/>æ— éœ€æŸ¥è¯¢ç‰©æµå¯ç›´æ¥ç‚¹å‡»ç¡®å®šè´­ä¹°ï¼</font>',
+            button: [{
+                value: 'ç¡®å®š',
+                callback: function () {
+                    if (confirm("æ‚¨è´­ä¹°æ­¤å•å·éœ€è¦" + mon + "å…ƒï¼Œæ‚¨ç¡®è®¤è¦è´­ä¹°ï¼Ÿ") == true) {
+                        gm(uid, mon);
+                    }
 
-    function gm(uid,mon) {
+                },
+                autofocus: true
+            },
+                {
+                    value: 'å–æ¶ˆ'
+                }]
+        }).showModal();
+    } else {
+        dialog({
+            title: 'ç¡®è®¤æ¡†',
+            content: 'æ‚¨è´­ä¹°æ­¤å•å·éœ€è¦' + mon + 'å…ƒï¼Œæ‚¨ç¡®è®¤è¦è´­ä¹°ï¼Ÿ',
+            button: [{
+                value: 'ç¡®å®š',
+                callback: function () {
+                    gm(uid, mon);
+                },
+                autofocus: true
+            },
+                {
+                    value: 'å–æ¶ˆ'
+                }]
+        }).showModal();
+
+        function gm(uid, mon) {
+            $.ajax({
+                type: 'post',
+                url: 'Refund.asp?qi=Shop',
+                dataType: 'html',
+                data: {"uid": uid, "mon": mon},
+                timeout: 0,
+                cache: false,
+                error: err,
+                success: suc
+            })
+            function err() {
+                var s = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: 'é”™è¯¯ï¼'
+                });
+                s.show();
+            }
+
+            function suc(str) {
+                if (str == "Success") {
+                    if ($("#qindex").val() == "1") {
+                        var s = dialog({
+                            title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                            content: "è´­ä¹°æˆåŠŸ,è¯·åˆ°ã€å·²è´­ä¹°å•å·ã€‘é¡µé¢æŸ¥çœ‹ï¼",
+                            cancel: function () {
+                                location.reload();
+                            },
+                            cancelDisplay: false
+                        });
+                        s.show();
+                        setTimeout(function () {
+                                location.reload();
+                                s.close().remove();
+                            },
+                            2000);
+
+                    } else {
+                        var s = dialog({
+                            title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                            content: 'è´­ä¹°æˆåŠŸ,è¯·åˆ°ã€å·²è´­ä¹°å•å·ã€‘é¡µé¢æŸ¥çœ‹ï¼',
+                            cancel: function () {
+                                shopshowre(readCookie("p"), 1);
+                            },
+                            cancelDisplay: false
+                        });
+                        s.show();
+                        setTimeout(function () {
+                                shopshowre(readCookie("p"), 1);
+                                s.close().remove();
+                            },
+                            2000);
+
+                    }
+
+                } else if (str == "moneyerror") {
+                    var s = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: 'æ— å¿§å¸ä¸è¶³ï¼Œè´­ä¹°è¯·å…ˆå……å€¼ã€‚'
+                    });
+                    s.show();
+                    setTimeout(function () {
+                            s.close().remove();
+                        },
+                        2000);
+
+                } else if (str == "Errorord") {
+                    var s = dialog({
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: 'æ­¤å•å·å·²è¢«å…¶ä»–ä¼šå‘˜è´­ä¹°ã€‚'
+                    });
+                    s.show();
+                    setTimeout(function () {
+                            s.close().remove();
+                        },
+                        2000);
+
+                } else if (str == "errorlogin") {
+                    alert('æ‚¨å½“å‰è¿˜æ²¡æœ‰ç™»å½•,è¯·æ‚¨å…ˆç™»å½•ï¼');
+                    location.href = '../login'
+                }
+
+            }
+
+        }
+    }
+}
+
+
+function qigm() {
+    var temp = document.getElementsByName("id");
+    var ii = 0;
+    for (i = 0; i < temp.length; i++) {
+        if (temp[i].checked) {
+            var ii = ii + 1;
+        }
+    }
+    dialog({
+        title: 'ç¡®è®¤æ¡†',
+        content: 'æ‚¨ç¡®è®¤æ‰¹é‡è´­ä¹°å·²é€‰æ‹©çš„ ' + ii + ' å•ï¼Ÿ',
+        button: [{
+            value: 'ç¡®å®š',
+            callback: function () {
+                gmm();
+            },
+            autofocus: true
+        }, {
+            value: 'å–æ¶ˆ'
+        }]
+    }).show();
+
+    function gmm() {
+
+        var temp = document.getElementsByName("id");
+        var ii = 0;
+        for (i = 0; i < temp.length; i++) {
+            if (temp[i].checked) {
+                var ii = ii + 1;
+            }
+        }
+        if (ii < 1) {
+            alert("è¯·é€‰æ‹©ï¼");
+            return;
+        }
+        var qiid = '';
+        for (i = 0; i < temp.length; i++) {
+            if (temp[i].checked) {
+                qiid += temp[i].value + '.';
+            }
+        }
+
         $.ajax({
             type: 'post',
-            url: 'Refund.asp?qi=Shop',
+            url: 'Refund.asp?qi=Shopism',
             dataType: 'html',
-            data: {"uid": uid,"mon": mon},
+            data: {
+                id: qiid,
+                ii: ii
+            },
             timeout: 0,
             cache: false,
             error: err,
             success: suc
         })
+
         function err() {
             var s = dialog({
-                title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-                content: '´íÎó£¡'
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: 'é”™è¯¯ï¼Œè¯·é‡è¯•ã€‚'
             });
             s.show();
+            setTimeout(function () {
+                s.close().remove();
+            }, 2000);
         }
+
         function suc(str) {
-            if (str == "Success") {
+
+            if (str == "no") {
+                var s = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: 'æ— å¿§å¸ä¸è¶³ï¼Œè´­ä¹°è¯·å…ˆå……å€¼ã€‚'
+                });
+                s.show();
+                setTimeout(function () {
+                    s.close().remove();
+                }, 2000);
+            } else if (str == "nn") {
+                var s = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: 'ä½ å‹¾é€‰çš„å•å·å·²è¢«è´­ä¹°, 2ç§’åè‡ªåŠ¨åˆ·æ–°ç½‘é¡µã€‚'
+                });
+                s.show();
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+            } else if (str == "ns") {
+                var s = dialog({
+                    title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                    content: 'æœªå‘ç°å‹¾é€‰è´­ä¹°çš„å•å·, 2ç§’åè‡ªåŠ¨åˆ·æ–°ç½‘é¡µã€‚'
+                });
+                s.show();
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+            } else {
                 if ($("#qindex").val() == "1") {
                     var s = dialog({
-                        title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-                        content: "¹ºÂò³É¹¦,Çëµ½¡¾ÒÑ¹ºÂòµ¥ºÅ¡¿Ò³Ãæ²é¿´£¡",
-                        cancel: function() {
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: str + "<br/> 2ç§’åè‡ªåŠ¨ä¸ºæ‚¨åˆ·æ–°ã€‚",
+                        cancel: function () {
                             location.reload();
                         },
                         cancelDisplay: false
                     });
                     s.show();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         location.reload();
                         s.close().remove();
-                    },
-                    2000);
-
+                    }, 2000);
                 } else {
                     var s = dialog({
-                        title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-                        content: '¹ºÂò³É¹¦,Çëµ½¡¾ÒÑ¹ºÂòµ¥ºÅ¡¿Ò³Ãæ²é¿´£¡',
-                        cancel: function() {
-                            shopshowre(readCookie("p"),1);
+                        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                        content: str + "<br/> 2ç§’åè‡ªåŠ¨ä¸ºæ‚¨åˆ·æ–°ã€‚",
+                        cancel: function () {
+                            shopshowre(readCookie("p"), 1);
                         },
                         cancelDisplay: false
                     });
                     s.show();
-                    setTimeout(function() {
-                        shopshowre(readCookie("p"),1);
+                    setTimeout(function () {
+                        shopshowre(readCookie("p"), 1);
                         s.close().remove();
-                    },
-                    2000);
-
+                    }, 2000);
                 }
+            }
 
-            } else if (str == "moneyerror") {
-                var s = dialog({
-                    title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-                    content: 'ÎŞÓÇ±Ò²»×ã£¬¹ºÂòÇëÏÈ³äÖµ¡£'
-                });
-                s.show();
-                setTimeout(function() {
-                    s.close().remove();
-                },
-                2000);
+        }
 
-            } else if (str == "Errorord") {
-                var s = dialog({
-                    title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-                    content: '´Ëµ¥ºÅÒÑ±»ÆäËû»áÔ±¹ºÂò¡£'
-                });
-                s.show();
-                setTimeout(function() {
-                    s.close().remove();
-                },
-                2000);
 
-            }else if (str == "errorlogin") {
-             alert('Äúµ±Ç°»¹Ã»ÓĞµÇÂ¼,ÇëÄúÏÈµÇÂ¼£¡');location.href='../login'
+    }
+}
+
+$(function () {
+    if (readCookie("seller") != "") {
+        var sc = document.getElementById("seller").options;
+        for (var i = 0; i < sc.length; i++) {
+            if (sc[i].value == readCookie("seller")) {
+                sc[i].selected = true;
+                break;
+            }
         }
 
     }
 
-  }
- }
-}
-
-
-
-function qigm() {
-		var temp = document.getElementsByName("id");
-		var ii = 0;
-		for (i = 0; i < temp.length; i++) {
-			if (temp[i].checked) {
-				var ii = ii + 1;
-			}
-		}
-	dialog({
-		title: 'È·ÈÏ¿ò',
-		content: 'ÄúÈ·ÈÏÅúÁ¿¹ºÂòÒÑÑ¡ÔñµÄ '+ii+' µ¥£¿',
-		button: [{
-			value: 'È·¶¨',
-			callback: function() {
-				gmm();
-			},
-			autofocus: true
-		}, {
-			value: 'È¡Ïû'
-		}]
-	}).show();
-
-	function gmm() {
-
-		var temp = document.getElementsByName("id");
-		var ii = 0;
-		for (i = 0; i < temp.length; i++) {
-			if (temp[i].checked) {
-				var ii = ii + 1;
-			}
-		}
-		if (ii < 1) {
-			alert("ÇëÑ¡Ôñ£¡");
-			return;
-		}
-		var qiid = '';
-		for (i = 0; i < temp.length; i++) {
-			if (temp[i].checked) {
-				qiid += temp[i].value + '.';
-			}
-		}
-
-		$.ajax({
-			type: 'post',
-			url: 'Refund.asp?qi=Shopism',
-			dataType: 'html',
-			data: {
-				id: qiid,
-				ii: ii
-			},
-			timeout: 0,
-			cache: false,
-			error: err,
-			success: suc
-		})
-
-		function err() {
-			var s = dialog({
-				title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-				content: '´íÎó£¬ÇëÖØÊÔ¡£'
-			});
-			s.show();
-			setTimeout(function() {
-				s.close().remove();
-			}, 2000);
-		}
-
-		function suc(str) {
-
-			if (str == "no") {
-				var s = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: 'ÎŞÓÇ±Ò²»×ã£¬¹ºÂòÇëÏÈ³äÖµ¡£'
-				});
-				s.show();
-				setTimeout(function() {
-					s.close().remove();
-				}, 2000);
-			} else if (str == "nn") {
-				var s = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: 'Äã¹´Ñ¡µÄµ¥ºÅÒÑ±»¹ºÂò, 2Ãëºó×Ô¶¯Ë¢ĞÂÍøÒ³¡£'
-				});
-				s.show();
-				setTimeout(function() {
-					location.reload();
-				}, 2000);
-			} else if (str == "ns") {
-				var s = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: 'Î´·¢ÏÖ¹´Ñ¡¹ºÂòµÄµ¥ºÅ, 2Ãëºó×Ô¶¯Ë¢ĞÂÍøÒ³¡£'
-				});
-				s.show();
-				setTimeout(function() {
-					location.reload();
-				}, 2000);
-			} else {
-				if ($("#qindex").val() == "1") {
-					var s = dialog({
-						title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-						content: str+"<br/> 2Ãëºó×Ô¶¯ÎªÄúË¢ĞÂ¡£",
-						cancel: function() {
-							location.reload();
-						},
-						cancelDisplay: false
-					});
-					s.show();
-					setTimeout(function() {
-						location.reload();
-						s.close().remove();
-					}, 2000);
-				} else {
-					var s = dialog({
-						title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-						content: str+"<br/> 2Ãëºó×Ô¶¯ÎªÄúË¢ĞÂ¡£",
-						cancel: function() {
-							shopshowre(readCookie("p"),1);
-						},
-						cancelDisplay: false
-					});
-					s.show();
-					setTimeout(function() {
-						shopshowre(readCookie("p"),1);
-						s.close().remove();
-					},2000);
-				}
-			}
-
-		}
-
-
-	}
-}
-
-$(function(){
-if(readCookie("seller")!=""){
-var sc = document.getElementById("seller").options;
-for (var i=0; i<sc.length; i++) {
-if (sc[i].value==readCookie("seller")) {
-sc[i].selected=true;
-break;
-	}
-  }
- 
-}
-    
-});  
+});
 
 function timer(time) {
     var btn = $("#select");
-    btn.attr("disabled", true);  //°´Å¥½ûÖ¹µã»÷
-    btn.val(time <= 0 ? "" : ("Ìá½»²éÑ¯ (" + (time)+")" ));
-    var hander = setInterval(function() {
+    btn.attr("disabled", true);  //æŒ‰é’®ç¦æ­¢ç‚¹å‡»
+    btn.val(time <= 0 ? "" : ("æäº¤æŸ¥è¯¢ (" + (time) + ")" ));
+    var hander = setInterval(function () {
         if (time <= 0) {
-            clearInterval(hander); //Çå³ıµ¹¼ÆÊ±
-            btn.val("Ìá½»²éÑ¯");
+            clearInterval(hander); //æ¸…é™¤å€’è®¡æ—¶
+            btn.val("æäº¤æŸ¥è¯¢");
             btn.attr("disabled", false);
             return false;
-        }else {
-            btn.val("Ìá½»²éÑ¯ (" + (time--) +")");
+        } else {
+            btn.val("æäº¤æŸ¥è¯¢ (" + (time--) + ")");
         }
     }, 1000);
 }
 
 
 function sncx(str) {
-var str = unescape(str)	
-var s = dialog({
-    title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-    content: "ÊÕ¼şÊ±¼ä£º<br/>"+ str +"<br/> Çë×ĞÏ¸±È¶ÔÉ¨ÃèÊ±¼ä£¡",
-    cancel: function() {
-        s.close().remove();
+    var str = unescape(str)
+    var s = dialog({
+        title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+        content: "æ”¶ä»¶æ—¶é—´ï¼š<br/>" + str + "<br/> è¯·ä»”ç»†æ¯”å¯¹æ‰«ææ—¶é—´ï¼",
+        cancel: function () {
+            s.close().remove();
 
-    },
-    cancelDisplay: false
+        },
+        cancelDisplay: false
 
-});
-s.showModal();;
-setTimeout(function() {
-    s.close().remove();
+    });
+    s.showModal();
+    ;
+    setTimeout(function () {
+            s.close().remove();
 
-},
-2000);
+        },
+        2000);
 }
 
-function Coss(com, id, f) {	
-	 dialog({
-		id: 'ccx',
-		content: 'ÕıÔÚ¼ì²âÖĞ,ÇëÄúÉÔµÈ£¡........'
-	}).showModal();
-      jc = dialog.get('ccx').title('ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú');	
-	  
-		$.ajax({
-		type: 'get',
-		url: 'Refund.asp?qi=noss',
-		dataType: 'text',
-		data: {
-			ord: com,
-			ordlx1: id,
-		},
-		timeout: 0,
-		cache: false,
-		error: err,
-		success: suc
-		
-	}) 
+function Coss(com, id, f) {
+    dialog({
+        id: 'ccx',
+        content: 'æ­£åœ¨æ£€æµ‹ä¸­,è¯·æ‚¨ç¨ç­‰ï¼........'
+    }).showModal();
+    jc = dialog.get('ccx').title('æ·˜å•æ— å¿§,æç¤ºæ‚¨');
 
-	function err() {
-	jc.close().remove();	
-		var s = dialog({
-			title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-			content: '¼ì²â½Ó¿Ú²éÑ¯´íÎó,ÔİÊ±²»¿É¼ì²â£¡'
-		});
-		s.show();
-	}
- function suc(str) {
-	jc.close().remove();			
-			if (str == 1){	
-				var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#FF0000\">´Ëµ¥ºÅ²»¿ÉÊ¹ÓÃ,ÒÑÉ¾³ı,µã»÷OkÖØĞÂ²éÑ¯¡£</font>',
-					ok: function() {
-						if (f==0){showre(readCookie("p"),1);};
-						if (f==1){shopshowre(readCookie("p"),1);};
-						if (f==2){location.reload();};
-						}	
-				});
-				d.showModal();						
-		 }
-		 if(str == 0){
-			 var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#145887\">´Ëµ¥ºÅµ±Ç°¿ÉÕı³£Ê¹ÓÃ,Äú¿ÉÒÔÏÂÒ»²½²Ù×÷À²£¡</font>',
-					ok: function() {}	
-				});
-				d.showModal();
-			 }
-			 
-		 if(str == 3){
-			 var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#ff6000\">ÏµÍ³¼ì²é³ÌĞò,²éÑ¯¹ıÓÚ·±Ã¦,ÇëÄúÖØĞÂ¼ì²â£¡</font>',
-					ok: function() {}	
-				});
-				d.showModal();
+    $.ajax({
+        type: 'get',
+        url: 'Refund.asp?qi=noss',
+        dataType: 'text',
+        data: {
+            ord: com,
+            ordlx1: id,
+        },
+        timeout: 0,
+        cache: false,
+        error: err,
+        success: suc
 
-			 } 
+    })
 
-			if(str == "Error"){
-			 var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#ff0000\">ÏµÍ³¼ì²é³ÌĞòÑÏÖØ´íÎó,ÇëÁªÏµÔÚÏß¿Í·ş½â¾ö£¡</font>',
-					ok: function() {}	
-				});
-				d.showModal();
+    function err() {
+        jc.close().remove();
+        var s = dialog({
+            title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+            content: 'æ£€æµ‹æ¥å£æŸ¥è¯¢é”™è¯¯,æš‚æ—¶ä¸å¯æ£€æµ‹ï¼'
+        });
+        s.show();
+    }
 
-			 } 
+    function suc(str) {
+        jc.close().remove();
+        if (str == 1) {
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: '<font color=\"#FF0000\">æ­¤å•å·ä¸å¯ä½¿ç”¨,å·²åˆ é™¤,ç‚¹å‡»Oké‡æ–°æŸ¥è¯¢ã€‚</font>',
+                ok: function () {
+                    if (f == 0) {
+                        showre(readCookie("p"), 1);
+                    }
+                    ;
+                    if (f == 1) {
+                        shopshowre(readCookie("p"), 1);
+                    }
+                    ;
+                    if (f == 2) {
+                        location.reload();
+                    }
+                    ;
+                }
+            });
+            d.showModal();
+        }
+        if (str == 0) {
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: '<font color=\"#145887\">æ­¤å•å·å½“å‰å¯æ­£å¸¸ä½¿ç”¨,æ‚¨å¯ä»¥ä¸‹ä¸€æ­¥æ“ä½œå•¦ï¼</font>',
+                ok: function () {
+                }
+            });
+            d.showModal();
+        }
 
-			if(str == "sotime"){
-			 var d = dialog({
-					title: 'ÌÔµ¥ÎŞÓÇ,ÌáÊ¾Äú',
-					content: '<font color=\"#a422ef\">¼ì²â¹ıÓÚÆµ·±,ÏµÍ³ÏŞÖÆ¼ä¸ô3Ãë¼ì²âÒ»´Î¡£<br/>ÇëÉÔºóÔÚ³¢ÊÔ¼ì²â²Ù×÷£¡</font>',
-					ok: function() {}	
-				});
-				d.showModal();
+        if (str == 3) {
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: '<font color=\"#ff6000\">ç³»ç»Ÿæ£€æŸ¥ç¨‹åº,æŸ¥è¯¢è¿‡äºç¹å¿™,è¯·æ‚¨é‡æ–°æ£€æµ‹ï¼</font>',
+                ok: function () {
+                }
+            });
+            d.showModal();
 
-			 }   
-	 }	 		 
- }
+        }
+
+        if (str == "Error") {
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: '<font color=\"#ff0000\">ç³»ç»Ÿæ£€æŸ¥ç¨‹åºä¸¥é‡é”™è¯¯,è¯·è”ç³»åœ¨çº¿å®¢æœè§£å†³ï¼</font>',
+                ok: function () {
+                }
+            });
+            d.showModal();
+
+        }
+
+        if (str == "sotime") {
+            var d = dialog({
+                title: 'æ·˜å•æ— å¿§,æç¤ºæ‚¨',
+                content: '<font color=\"#a422ef\">æ£€æµ‹è¿‡äºé¢‘ç¹,ç³»ç»Ÿé™åˆ¶é—´éš”3ç§’æ£€æµ‹ä¸€æ¬¡ã€‚<br/>è¯·ç¨ååœ¨å°è¯•æ£€æµ‹æ“ä½œï¼</font>',
+                ok: function () {
+                }
+            });
+            d.showModal();
+
+        }
+    }
+}

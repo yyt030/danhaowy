@@ -1,10 +1,9 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 from datetime import datetime, timedelta
-from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
-    make_response, current_app, send_from_directory
-from web.utils.account import signin_user, signout_user
-from ..models import db, User, Order, ShopLog
+from flask import render_template, Blueprint, redirect, url_for, g, request, \
+    current_app
+from ..models import db, User, Order, ShopLog, MailBox
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
 
@@ -16,7 +15,8 @@ bp = Blueprint('login_user', __name__)
 @require_user
 def index():
     form = SigninForm()
-    return render_template('login_user/index.html', form=form)
+    user = g.user
+    return render_template('login_user/index.html', form=form, user=user)
 
 
 @bp.route('/ornumber', methods=['GET'])
@@ -24,10 +24,81 @@ def index():
 def ornumber():
     """单号领取"""
     form = SigninForm()
-    return render_template('login_user/ornumber.html', form=form)
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Order.query
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
 
 
-@bp.route('/ornumber', methods=['GET'])
+@bp.route('/number')
+@require_user
+def number():
+    """领取次数增加"""
+    pass
+    user = g.user
+    form = SigninForm()
+
+    return render_template('login_user/number.html', form=form, user=user)
+
+
+@bp.route('/file', methods=['GET', 'POST'])
+@require_user
+def file():
+    user = g.user
+    action = request.args.get('action', '')
+    if request.method == 'POST':
+        if action == 'cishu':
+            count = request.form.get('Count', 0, type=int)
+            pay = count * 5
+        if action == 'cishution':
+            count = request.form.get('hOutG', 0, type=int)
+            pay = request.form.get('hInMoney', 0, type=float)
+
+        if user.wuyoubi < pay:
+            tip = "用户%s 无忧币不足！" % user.name
+            return render_template('error.html', error=tip, url="number")
+
+        user.wuyoubi -= pay
+        user.max_order_num += count
+
+        db.session.add(user)
+        db.session.commit()
+
+    tip = "用户%s 增加次数成功！" % user.name
+    return render_template('error.html', error=tip, url="number")
+
+
+@bp.route('/wybjihuo', methods=['GET', 'POST'])
+@require_user
+def wybjihuo():
+    user = g.user
+    form = RegisterForm()
+    action = request.args.get('action', '')
+    if request.method == 'POST' and action == 'jihuo':
+        user.wuyoubi -= 50
+        user.is_active = True
+        db.session.add(user)
+        db.session.commit()
+        tip = "用户%s已激活！" % user.name
+        return render_template('error.html', error=tip, url="ornumber")
+
+    return render_template('login_user/wybjihuo.html', form=form, user=user)
+
+
+@bp.route('/shopnumber', methods=['GET'])
 @require_user
 def shopnumber():
     """单号购买"""
@@ -137,12 +208,23 @@ def paywyb():
     return render_template('site/index.html', form=form)
 
 
-@bp.route('/upseller', methods=['GET'])
+@bp.route('/upseller', methods=['GET', 'POST'])
 @require_user
 def upseller():
     """申请成为卖家"""
     form = SigninForm()
-    return render_template('login_user/upseller.html', form=form)
+    user = g.user
+
+    if request.method == 'POST':
+        # msg = MailBox(sender_id=user.id, recver_id=1)
+        # msg.title = 'QQ:%s mail:%s 申请卖家' % (request.form.get('QQ', ''), request.form.get('Email', ''))
+        # msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
+        # request.form.get('ag1', ''), request.form.get('ag2', ''), request.form.get('typ', ''))
+        # db.session.add(msg)
+        # db.session.commit()
+        tip = "申请已发送，请联系管理员处理！"
+        return render_template('error.html', error=tip, url="")
+    return render_template('login_user/upseller.html', form=form, user=user)
 
 
 @bp.route('/woyaojihuo', methods=['GET'])
@@ -161,7 +243,7 @@ def chgpwd():
         password = request.form.get('password')
         newpassword = request.form.get('newpassword')
         newpassword2 = request.form.get('newpassword2')
-        if user.check_password(password):
+        if not user.check_password(password):
             error = "用户名或密码错误"
             return render_template('error.html', error=error, url="")
         if newpassword != newpassword2:
@@ -269,3 +351,47 @@ def sellerjf():
             tip = "兑换积分失败, 无足够积分!"
         return render_template('error.html', error=tip, url="")
     return render_template('login_user/sellerjf.html', form=form, user=user)
+
+
+@bp.route('/msg', methods=['GET', 'POST'])
+@require_user
+def msg():
+    """站内信箱"""
+    form = RegisterForm()
+
+    user = g.user
+    msg_id = request.args.get('id', 0, type=int)
+    action = request.args.get('nn', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = MailBox.query.filter(MailBox.recver_id == user.id)
+
+    if msg_id:
+        msg = MailBox.query.get_or_404(msg_id)
+        msg.is_read = True
+        db.session.add(msg)
+        db.session.commit()
+        return render_template('login_user/msg_show.html', msg=msg)
+    if action:
+        if action == 'del':
+            msgs = query.all()
+            for msg in msgs:
+                db.session.delete(msg)
+        if action == 'yd':
+            msgs = query.all()
+            for msg in msgs:
+                msg.is_read = True
+            db.session.add_all(msgs)
+        db.session.commit()
+        return redirect(url_for('.msg'))
+
+    count_all = query.count()
+    page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(MailBox.create_at.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    msgs = pagination.items
+
+    return render_template('login_user/msg.html', form=form, msgs=msgs, page=page, page_all=page_all,
+                           count_all=count_all)

@@ -64,9 +64,9 @@
                             <td>{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}</td>
 
                             <td>0.50</td>
-                            <td>{{ order.send_timestamp }}</td>
+                            <td>{{ order.create_time }}</td>
                             <td><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd'
-                                                           value='75966213'></span>
+                                                           value='{{ order.id }}'></span>
                             </td>
                         </tr>
 
@@ -89,14 +89,10 @@
                             <form method=Post action="?">
                                 <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
                                 <a href=?page=1>首页</a>
-                                {% if page <= 1 %}
-                                    <a href=?page=1>上页</a>
-                                {% else %}
+                                {% if page > 1 %}
                                     <a href=?page={{ page - 1 }}>上页</a>
                                 {% endif %}
-                                {% if page == page_all %}
-                                    <a href=?page={{ page_all }}>下页</a>
-                                {% else %}
+                                {% if page < page_all %}
                                     <a href=?page={{ page + 1 }}>下页</a>
                                 {% endif %}
                                 <a href=?page={{ page_all }}>末页</a>
@@ -150,7 +146,7 @@
                 if (Qiids.charAt(Qiids.length - 1) == "&") {
                     Qiids = Qiids.substring(Qiids.length - 1, Qiids);
                 }
-                location = "sellerlist.asp?type=delall&" + Qiids + "";
+                location = "sellerlist?type=delall&" + Qiids + "";
             }
         }
     </script>

@@ -162,11 +162,11 @@
                     {% for count, shoplog in shoplogs %}
                         <tr>
                             <td align="center">{{ count + 1 }}</td>
-                            <td align="center">{{ shoplog.type }}</td>
-                            <td align="center">快递单号：{{ shoplog.order.tracking_no }} ,已成功售出。</td>
+                            <td align="center">{{ shoplog.tracking_company }}</td>
+                            <td align="center">快递单号：{{ shoplog.tracking_no }} ,已成功售出。</td>
                             <td align="center">+0.24</td>
                             <td align="center">974.48</td>
-                            <td align="center">{{ shoplog.create_at }}</td>
+                            <td align="center">{{ shoplog.buy_time }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -177,14 +177,10 @@
                             <form method=Post action="?">
                                 <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
                                 <a href=?page=1>首页</a>
-                                {% if page <= 1 %}
-                                    <a href=?page=1>上页</a>
-                                {% else %}
+                                {% if page > 1 %}
                                     <a href=?page={{ page - 1 }}>上页</a>
                                 {% endif %}
-                                {% if page == page_all %}
-                                    <a href=?page={{ page_all }}>下页</a>
-                                {% else %}
+                                {% if page < page_all %}
                                     <a href=?page={{ page + 1 }}>下页</a>
                                 {% endif %}
                                 <a href=?page={{ page_all }}>末页</a>

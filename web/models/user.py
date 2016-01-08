@@ -86,7 +86,7 @@ class User(db.Model):
         return ret
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return '<User %r %r>' % (self.name, self.id)
 
 
 class Profile(db.Model):

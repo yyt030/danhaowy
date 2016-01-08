@@ -43,6 +43,35 @@ def ornumber():
     return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
 
 
+@bp.route('/Qiso.asp', methods=['GET', 'POST'])
+@require_user
+def qiso():
+    from flask import Response
+
+    rsp_data = """<?xml version="1.0" encoding="utf-8"?><data Nums="163"><title Time="2016/1/8" id="76**" Qoi="1" Qid="78893824" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 静安区
+]]></sh><title Time="2016/1/8" id="73**" Qoi="2" Qid="78889852" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 长宁区
+]]></sh><title Time="2016/1/8" id="86**" Qoi="3" Qid="78882806" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 闵行区
+]]></sh><title Time="2016/1/8" id="92**" Qoi="4" Qid="78882813" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 普陀区
+]]></sh><title Time="2016/1/8" id="78**" Qoi="5" Qid="78882819" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 松江区
+]]></sh><title Time="2016/1/8" id="81**" Qoi="6" Qid="78881879" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 宝山区
+]]></sh><title Time="2016/1/8" id="94**" Qoi="7" Qid="78870686" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 朝阳区]]></fh><sh><![CDATA[上海 上海市 松江区
+]]></sh><title Time="2016/1/8" id="72**" Qoi="8" Qid="78870704" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 朝阳区]]></fh><sh><![CDATA[上海 上海市 青浦区
+]]></sh><title Time="2016/1/8" id="41**" Qoi="9" Qid="78869336" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 普陀区
+]]></sh><title Time="2016/1/8" id="17**" Qoi="10" Qid="78869339" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 浦东新区
+]]></sh><title Time="2016/1/8" id="27**" Qoi="11" Qid="78869341" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 嘉定区
+]]></sh><title Time="2016/1/8" id="86**" Qoi="12" Qid="78866399" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
+]]></sh><title Time="2016/1/8" id="18**" Qoi="13" Qid="78866401" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
+]]></sh><title Time="2016/1/8" id="86**" Qoi="14" Qid="78866427" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
+]]></sh><title Time="2016/1/8" id="69**" Qoi="15" Qid="78866517" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
+]]></sh><title Time="2016/1/8" id="23**" Qoi="16" Qid="78862682" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 嘉定区
+]]></sh><title Time="2016/1/8" id="85**" Qoi="17" Qid="78853513" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 虹口区
+]]></sh><title Time="2016/1/8" id="67**" Qoi="18" Qid="78853534" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 杨浦区
+]]></sh><title Time="2016/1/8" id="78**" Qoi="19" Qid="78853538" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 闵行区
+]]></sh><title Time="2016/1/8" id="25**" Qoi="20" Qid="78853451" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 闵行区
+]]></sh></data>"""
+    return Response(rsp_data, mimetype='text/xml')
+
+
 @bp.route('/number')
 @require_user
 def number():

@@ -76,7 +76,7 @@ function showre(p, x) {
     writeCookie("shdz", shdz, "30");
     writeCookie("fhdz", fhdz, "30");
     writeCookie("p", p, "30");
-    gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>正在查询中。。。</div>");
+    gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>正在查询中。。。</div>");
     var url = "Qiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&x=" + x + "&p=" + p + "&token=" + token + "&radios=" + radios + "&code=" + code;
     var lx = showhtml;
     xmlHttp = GetXmlHttpObject(lx)

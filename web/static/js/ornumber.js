@@ -74,7 +74,7 @@ function showre(p,x) {
 	writeCookie("shdz", shdz, "30");
 	writeCookie("fhdz", fhdz, "30");
 	writeCookie("p", p, "30");
-	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>正在查询中。。。</div>");
+	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>正在查询中。。。</div>");
 	var url = "Qiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&x=" + x + "&p=" + p + "&token=" + token + "&radios=" + radios + "&code=" + code;
 	var lx = showhtml;
 	xmlHttp = GetXmlHttpObject(lx)
@@ -139,10 +139,10 @@ function showhtml() {
 				imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
 				imglist += "<td style='text-align: center;'>发货地址：" + fh + "<br/><font color=#EE5C42>收货地址：" + sh + "</font></td>";
 				if (sm == 0 || sm == 2) {
-					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='点击查询状态' onClick=Qikd('" + kda + "',1,'" + Qid + "','0')><img src='images/so.jpg'></a></td>"
+					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='点击查询状态' onClick=Qikd('" + kda + "',1,'" + Qid + "','0')><img src='/static/images/so.jpg'></a></td>"
 					imglist += "<td style='text-align: center;'><input type='button' id='fs" + Qid + "' class='btnumey' value='领  取' onClick=Qik('" + Qid + "','"+sm+"') style='cursor:hand;margin-top: 9px'></td>";
 				} else {
-					imglist += "<td style='line-height: 40px;'><font color='red'>" + sm + "</font><a href='javascript:' title='点击查询状态' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
+					imglist += "<td style='line-height: 40px;'><font color='red'>" + sm + "</font><a href='javascript:' title='点击查询状态' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='/static/images/so.jpg'></a></td>";
 					imglist += "<td style='text-align: center;'><input type='button' class='btnumey' value='领  取' onClick=Qik('" + Qid + "','"+ escape(sm) +"') style='cursor:hand;margin-top: 9px'></td>";
 				}
 				imglist += "<TD style='text-align:center;'><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd' value='" + Qid + "' style='margin-top: 12px'></span></TD>";
@@ -238,7 +238,7 @@ function shopshowre(p,x) {
 	writeCookie("fhdz", fhdz, "30");
 	writeCookie("seller", seller, "30");
 	writeCookie("p", p, "30");
-	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/wait.gif'/>正在查询中。。。</div>");
+	gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>正在查询中。。。</div>");
 	var url = "ShopQiso.asp?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
 	var lx = shopshowhtml;
 	xmlHttp = GetXmlHttpObject(lx)
@@ -300,9 +300,9 @@ function shopshowhtml() {
 				imglist += "<td style='text-align: center;'>发货地址：" + fh + "<br/><font color=#EE5C42>收货地址：" + sh + "</font></td>";
 				imglist += "<td style='color:#2E2EFE;line-height: 40px;text-align:center;' id='nn"+Qid+"'>" + shopmoney + "/元</td>";
 				if (sm == 0 || sm == 2 ) {	
-					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='录入时间："+Time+"' onClick=Qikd('" + kda + "',1,'" + Qid + "','1')><img src='images/so.jpg'></a></td>"
+					imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='录入时间："+Time+"' onClick=Qikd('" + kda + "',1,'" + Qid + "','1')><img src='/static/images/so.jpg'></a></td>"
 				} else {
-					imglist += "<td style='line-height: 40px;text-align:center;'><font color='red'>" + sm + "</font><a href='javascript:' title='点击查询状态' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='images/so.jpg'></a></td>";
+					imglist += "<td style='line-height: 40px;text-align:center;'><font color='red'>" + sm + "</font><a href='javascript:' title='点击查询状态' onClick=sncx('" + escape(sm)+"&nbsp;"+ escape(saomiaotxt) + "')><img src='/static/images/so.jpg'></a></td>";
 				}
 				if (shopuser == 0){
 					imglist += "<td style='color:#603;line-height: 40px;text-align:center;'>管理员</td>";	
@@ -594,7 +594,7 @@ function Qikd(com, id, qid,i) {
 					content: '<font color=\"#FF0000\">-_-。sorry！ 该单号已扫描,请仔细比对时间。<br/>收件时间：<br/>'+str[0]+ ' '+str[1]+'</font>',
 					ok: function() {
 						$("#fs"+ qid ).attr("onclick","Qik('"+qid+"','"+escape(str[0])+"')");
-						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"点击查询状态\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"images/so.jpg\"></a>");
+						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"点击查询状态\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"/static/images/so.jpg\"></a>");
 
 
 					}
@@ -643,7 +643,7 @@ function Qikd(com, id, qid,i) {
 					content: '<font color=\"#FF0000\">-_-。sorry！ 该单号已扫描,请仔细比对时间。<br/>收件时间：<br/>'+str[0]+ ' '+str[1]+'</font>',
 					ok: function() {
 						
-						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"点击查询状态\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"images/so.jpg\"></a>");
+						$("#qs" + qid).html("<font color=\"#FF0000\">" + str[0] + "</font><a href=\"javascript:\" title=\"点击查询状态\" onclick=\"sncx('"+str[0]+" "+str[1]+"')\"><img src=\"/static/images/so.jpg\"></a>");
 						nus = $("#nn" + qid).html();
 						nus = nus.replace('/元','')
 						if (nus != "0.25"){

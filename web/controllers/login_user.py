@@ -1,11 +1,12 @@
 # !/usr/bin/env python
-# -*- coding: UTF-8 -*-
+# coding: utf-8
 from datetime import datetime, timedelta
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
-    current_app
+    current_app, make_response
 from ..models import db, User, Order, MailBox
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
+import re
 
 bp = Blueprint('login_user', __name__)
 
@@ -43,33 +44,83 @@ def ornumber():
     return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
 
 
-@bp.route('/Qiso.asp', methods=['GET', 'POST'])
+@bp.route('/Qiso', methods=['GET', 'POST'])
 @require_user
 def qiso():
-    from flask import Response
+    """单号领取->提交查询"""
+    user = g.user
+    # 录单时间
+    sja = request.args.get('sja', '')
+    # 发货地址
+    sa = request.args.get('sa', '')
+    # 收货地址
+    sb = request.args.get('sb', '')
+    # 快递类型
+    kd = request.args.get('kd', '')
+    # 是否扫描
+    sm = request.args.get('sm', '')
+    print '-' * 10, request.args
+    print '-' * 10, kd, sm
+    query = Order.query
+    if sja:
+        query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
+        print '1' * 10, query.all()
+    if sa:
+        query = query.filter(
+                Order.send_addr_province + Order.send_addr_city + Order.send_addr_county == re.sub('[ ]+', '', sa))
+        print '2' * 10, query.all(), re.sub('[ ]+', '', sa)
+    if sb:
+        query = query.filter(
+                Order.recv_addr_province + Order.recv_addr_city + Order.recv_addr_county == re.sub('[ ]+', '', sb))
+        print '3' * 10, query.all()
+    if kd and kd != '0':
+        query = query.filter(Order.tracking_company == kd)
+        print '4' * 10, query.all(), kd
+    if sm and kd != '0':
+        query = query.filter(Order.is_scan == sm)
+        print '5' * 10, query.all()
 
-    rsp_data = """<?xml version="1.0" encoding="utf-8"?><data Nums="163"><title Time="2016/1/8" id="76**" Qoi="1" Qid="78893824" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 静安区
-]]></sh><title Time="2016/1/8" id="73**" Qoi="2" Qid="78889852" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 长宁区
-]]></sh><title Time="2016/1/8" id="86**" Qoi="3" Qid="78882806" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 闵行区
-]]></sh><title Time="2016/1/8" id="92**" Qoi="4" Qid="78882813" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 普陀区
-]]></sh><title Time="2016/1/8" id="78**" Qoi="5" Qid="78882819" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 昌平区]]></fh><sh><![CDATA[上海 上海市 松江区
-]]></sh><title Time="2016/1/8" id="81**" Qoi="6" Qid="78881879" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 宝山区
-]]></sh><title Time="2016/1/8" id="94**" Qoi="7" Qid="78870686" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 朝阳区]]></fh><sh><![CDATA[上海 上海市 松江区
-]]></sh><title Time="2016/1/8" id="72**" Qoi="8" Qid="78870704" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 朝阳区]]></fh><sh><![CDATA[上海 上海市 青浦区
-]]></sh><title Time="2016/1/8" id="41**" Qoi="9" Qid="78869336" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 普陀区
-]]></sh><title Time="2016/1/8" id="17**" Qoi="10" Qid="78869339" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 浦东新区
-]]></sh><title Time="2016/1/8" id="27**" Qoi="11" Qid="78869341" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 通州区]]></fh><sh><![CDATA[上海 上海市 嘉定区
-]]></sh><title Time="2016/1/8" id="86**" Qoi="12" Qid="78866399" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
-]]></sh><title Time="2016/1/8" id="18**" Qoi="13" Qid="78866401" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
-]]></sh><title Time="2016/1/8" id="86**" Qoi="14" Qid="78866427" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
-]]></sh><title Time="2016/1/8" id="69**" Qoi="15" Qid="78866517" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 大兴区]]></fh><sh><![CDATA[上海 上海市 静安区
-]]></sh><title Time="2016/1/8" id="23**" Qoi="16" Qid="78862682" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 丰台区]]></fh><sh><![CDATA[上海 上海市 嘉定区
-]]></sh><title Time="2016/1/8" id="85**" Qoi="17" Qid="78853513" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 虹口区
-]]></sh><title Time="2016/1/8" id="67**" Qoi="18" Qid="78853534" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 杨浦区
-]]></sh><title Time="2016/1/8" id="78**" Qoi="19" Qid="78853538" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 闵行区
-]]></sh><title Time="2016/1/8" id="25**" Qoi="20" Qid="78853451" sm="0" kda="huitong" page="1" P_Nums="9" PerPage="20" jh="1" saomiaotxt="" cc="HTKY"><![CDATA[ 汇通 ]]></title><fh><![CDATA[北京 北京市 东城区]]></fh><sh><![CDATA[上海 上海市 闵行区
-]]></sh></data>"""
-    return Response(rsp_data, mimetype='text/xml')
+    page = request.args.get('page', 1, type=int)
+    all_num = query.count()
+    page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders),
+                                  page_every=current_app.config['FLASKY_PER_PAGE'] or 40,
+                                  page=page, page_all=page_all, user=user, all_num=all_num
+                                  )
+    response = make_response(sitemap_xml)
+    response.headers["Content-Type"] = "text/xml"
+    print '-' * 10, user.is_active_num
+    for order in orders:
+        print '+' * 10, order.create_date, order.tracking_company_cn
+    return response
+
+
+@bp.route('/Refund', methods=['GET', 'POST'])
+@require_user
+def refund():
+    """快递单号检测"""
+    qi = request.args.get('qi')
+    ord = request.args.get('ord')
+    ordlx1 = request.args.get('ordlx1')
+
+    return 'Errors'
+
+
+@bp.route('/Qikd', methods=['POST'])
+@require_user
+def qikd():
+    """单号领取 -> 扫描时间"""
+    com = request.form.get('com')
+    id = request.form.get('id')
+    qid = request.form.get('qid')
+    q = request.form.get('q')
+
+    return '2016/1/9 00:25,【广东佛山公司】的收件员【】已收件'
 
 
 @bp.route('/number')

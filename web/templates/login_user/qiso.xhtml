@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data Nums="{{ all_num }}">
+    {% for count,order in orders %}
+        <title Time="{{ order.create_date }}" id="76**" Qoi="{{ count + 1 }}" Qid="{{ order.id }}"
+               sm="{{ order.is_scan }}" kda="{{ order.tracking_company }}"
+               page="{{ page }}"
+               P_Nums="{{ page_all }}"
+               PerPage="{{ page_every }}"
+               jh="{{ user.is_active_num }}"
+               saomiaotxt="" cc="HTKY"><![CDATA[ {{ order.tracking_company_cn }} ]]></title>
+        <fh><![CDATA[{{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}]]></fh>
+        <sh><![CDATA[{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}]]></sh>
+    {% endfor %}
+</data>

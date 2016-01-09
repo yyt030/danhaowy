@@ -85,6 +85,13 @@ class User(db.Model):
 
         return ret
 
+    @property
+    def is_active_num(self):
+        if self.is_active == True:
+            return 1
+        else:
+            return 0
+
     def __repr__(self):
         return '<User %r %r>' % (self.name, self.id)
 

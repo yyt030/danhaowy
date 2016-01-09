@@ -40,5 +40,21 @@ class Order(db.Model):
     # 录入时间
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
+    @property
+    def create_date(self):
+        return self.create_time.date()
+
+    @property
+    def tracking_company_cn(self):
+        com = {
+            "yunda": u'韵达',
+            "yuantong": u'圆通',
+            "shentong": u'申通',
+            "zhongtong": u'中通',
+            "quanfeng": u'全峰',
+            "huitong": u'汇通'
+        }
+        return com[self.tracking_company]
+
     def __repr__(self):
         return '<Order %r>' % self.tracking_no

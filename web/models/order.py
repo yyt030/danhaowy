@@ -58,3 +58,20 @@ class Order(db.Model):
 
     def __repr__(self):
         return '<Order %r>' % self.tracking_no
+
+
+class OrderList(db.Model):
+    """订单领取"""
+    id = db.Column(db.Integer, primary_key=True)
+    order_id = db.Column(db.ForeignKey('order.id'), nullable=False)
+    order = db.relationship('Order', backref=db.backref('order_list', lazy='dynamic'))
+    user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref=db.backref('order_list', lazy='dynamic'))
+    create_time = db.Column(db.DateTime, default=datetime.now)
+
+    @property
+    def create_date(self):
+        return self.create_time.date()
+
+    def __repr__(self):
+        return '<OrderList %r>' % self.id

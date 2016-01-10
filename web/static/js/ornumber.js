@@ -401,7 +401,7 @@ function Qiall() {
     if (Qiids.charAt(Qiids.length - 1) == "&") {
         Qiids = Qiids.substring(Qiids.length - 1, Qiids);
     }
-    location = "BatchGetNumber.asp?" + Qiids + "";
+    location = "BatchGetNumber?" + Qiids + "";
 }
 
 function Qik(uid, sm) {
@@ -411,7 +411,7 @@ function Qik(uid, sm) {
             content: '该单号已扫描,但未查询过物流,你可以先查询物流！<br/>您确定要领取吗,领取后不可退单哦？',
             okValue: '确定',
             ok: function () {
-                var url = "GetNumber.asp?uid=" + uid;
+                var url = "GetNumber?uid=" + uid;
                 location = url;
                 return false;
             },
@@ -428,7 +428,7 @@ function Qik(uid, sm) {
                 content: '该单号已扫描,领取前请先比对扫描时间！<br/>扫描时间：' + sm + '<br/>您确定要领取吗,领取后不可退单哦？',
                 okValue: '确定',
                 ok: function () {
-                    var url = "GetNumber.asp?uid=" + uid;
+                    var url = "GetNumber?uid=" + uid;
                     location = url;
                     return false;
                 },
@@ -439,7 +439,7 @@ function Qik(uid, sm) {
             d.show();
         }
         else {
-            var url = "GetNumber.asp?uid=" + uid;
+            var url = "GetNumber?uid=" + uid;
             location = url;
 
         }

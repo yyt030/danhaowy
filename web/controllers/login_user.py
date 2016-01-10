@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
-from ..models import db, User, Order, MailBox
+from ..models import db, User, Order, OrderList, MailBox
 from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
 import re
@@ -59,26 +59,33 @@ def qiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
-    print '-' * 10, request.args
-    print '-' * 10, kd, sm
     query = Order.query
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
-        print '1' * 10, query.all()
     if sa:
-        query = query.filter(
-                Order.send_addr_province + Order.send_addr_city + Order.send_addr_county == re.sub('[ ]+', '', sa))
-        print '2' * 10, query.all(), re.sub('[ ]+', '', sa)
+        send_addr_province, send_addr_city, send_addr_county = sa.split(' ')
+        if send_addr_province:
+            query = query.filter(Order.send_addr_province == send_addr_province)
+
+        if send_addr_city:
+            query = query.filter(Order.send_addr_city == send_addr_city)
+
+        if send_addr_county:
+            query = query.filter(Order.send_addr_county == send_addr_county)
     if sb:
-        query = query.filter(
-                Order.recv_addr_province + Order.recv_addr_city + Order.recv_addr_county == re.sub('[ ]+', '', sb))
-        print '3' * 10, query.all()
+        recv_addr_province, recv_addr_city, recv_addr_county = sb.split(' ')
+        if recv_addr_province:
+            query = query.filter(Order.recv_addr_province == recv_addr_province)
+
+        if recv_addr_city:
+            query = query.filter(Order.recv_addr_city == recv_addr_city)
+
+        if recv_addr_county:
+            query = query.filter(Order.recv_addr_county == recv_addr_county)
     if kd and kd != '0':
         query = query.filter(Order.tracking_company == kd)
-        print '4' * 10, query.all(), kd
     if sm and kd != '0':
         query = query.filter(Order.is_scan == sm)
-        print '5' * 10, query.all()
 
     page = request.args.get('page', 1, type=int)
     all_num = query.count()
@@ -94,9 +101,6 @@ def qiso():
                                   )
     response = make_response(sitemap_xml)
     response.headers["Content-Type"] = "text/xml"
-    print '-' * 10, user.is_active_num
-    for order in orders:
-        print '+' * 10, order.create_date, order.tracking_company_cn
     return response
 
 
@@ -108,7 +112,7 @@ def refund():
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
 
-    return 'Errors'
+    return '0'
 
 
 @bp.route('/Qikd', methods=['POST'])
@@ -121,6 +125,47 @@ def qikd():
     q = request.form.get('q')
 
     return '2016/1/9 00:25,【广东佛山公司】的收件员【】已收件'
+
+
+@bp.route('/GetNumber', methods=['GET', 'POST'])
+@bp.route('/BatchGetNumber', methods=['GET', 'POST'])
+@require_user
+def getnumber():
+    form = SigninForm()
+    user = g.user
+    uids = request.args.getlist('uid')
+    type = request.args.get('type', '')
+
+    left_num = user.max_order_num - OrderList.query.filter(OrderList.user_id == user.id,
+                                                           OrderList.create_time >= datetime.today().date()).count()
+
+    if left_num < len(uids) or left_num < 1:
+        tip = "用户%s剩余领取次数%d不足！" % (user.name, left_num)
+        return render_template('error.html', error=tip, url="number")
+    if uids:
+        if len(uids) > 1:
+            for order_id in uids:
+                orderlist = OrderList()
+                orderlist.order_id = order_id
+                orderlist.user_id = user.id
+                db.session.add(orderlist)
+            db.session.commit()
+
+            orders = Order.query.filter(Order.id.in_(uids))
+            return render_template('login_user/getbatchnumber.html', form=form, user=user, orders=orders)
+        else:
+
+            order = Order.query.get_or_404(request.args.get('uid', ''))
+            return render_template('login_user/getnumber.html', form=form, user=user, order=order, left_num=left_num)
+    if type == 'Success':
+        orderlist = OrderList()
+        uid = request.form.get('uid', 0, type=int)
+        orderlist.order_id = uid
+        orderlist.user_id = user.id
+        db.session.add(orderlist)
+        db.session.commit()
+        tip = "用户%s 领取单号%d成功！" % (user.name, uid)
+        return render_template('error.html', error=tip, url="ornumber")
 
 
 @bp.route('/number')
@@ -264,7 +309,7 @@ def seller():
     return render_template('login_user/seller.html', form=form)
 
 
-@bp.route('/ornumber', methods=['GET'])
+@bp.route('/ornumber_1', methods=['GET'])
 @require_user
 def buykongbao():
     """空包大厅"""

@@ -349,6 +349,31 @@ def shopqiso():
     return response
 
 
+@bp.route('/LookShopNumber', methods=['GET', 'POST'])
+@require_user
+def lookshopnumber():
+    """查看已购买单号"""
+    user = g.user
+    page = request.args.get('page', 1, type=int)
+    starttime = request.args.get('starttime')
+    endtime = request.args.get('endtime')
+
+    query = Order.query.filter(Order.buyer_id == user.id)
+    if starttime:
+        query = query.filter(datetime.strptime(starttime, '%Y-%m-%d') <= Order.buy_time)
+    if endtime:
+        query = query.filter(datetime.strptime(endtime, '%Y-%m-%d') + timedelta(days=1) >= Order.buy_time)
+    print '-' * 10, query
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.buy_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    ordershoplists = pagination.items
+
+    return render_template('login_user/lookshopnumber.html', ordershoplists=enumerate(ordershoplists),
+                           page_all=page_all, page=page)
+
+
 @bp.route('/seller', methods=['GET', 'POST'])
 @require_user
 def seller():

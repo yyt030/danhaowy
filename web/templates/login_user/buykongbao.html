@@ -1,0 +1,380 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>空包中心 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* __mainBody2----------------------------*/
+        #mainBody2 {
+            width: 760px;
+            float: right;
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .mainBox2 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox2 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .mainBox3 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox3 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .tab th {
+            padding: 5px;
+            background: #5A91F7;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab td {
+            padding: 5px;
+        }
+
+        .tab2 th {
+            padding: 5px;
+            background: #5A91F7;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .tab2 td {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .notice3 {
+            background: #FFF0CE;
+            border: 1px solid #FFD5AA;
+            color: #EA5F00;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            border: 1px solid #ddd;
+            padding: 2px;
+        }
+
+        .btn {
+            background: url(/static/images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .btn2 {
+            background: url(/static/images/btnBg2.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .red {
+            color: #f75d39;
+            font-weight: bold;
+        }
+
+        .zdcz_07 {
+            background: url(/static/images/step_jt1.png) no-repeat center center;
+            height: 41px;
+            clear: both;
+        }
+
+        .bs {
+            overflow: hidden;
+            border: 1px solid #CBCBCB;
+        }
+
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script src="/static/js/layer.min.js"></script>
+    <script type="text/javascript">
+        /*
+         $(function(){
+         layer.confirm('空包全网下架,5.1稳定后恢复。<br/>对此带来的不便请谅解。<br/>具体原因点击确定查看', function(){
+         window.location.href = 'News.asp?id=749'
+         });
+         });
+         */
+        function getmyprice() {
+            $("#tiens").html("<font style=\"color:#BCBCBC\" >正在加载快递介绍请稍等....!</font>");
+            var regstr = /^\d+$/;
+            var kbtype = $("#orderform #typ").val();
+            if (regstr.test(kbtype)) {
+                $.post("getmyprice", {
+                    "typ": kbtype
+                }, function (msg) {
+                    var strs = new Array();
+                    strs = msg.split(",");
+                    $("#priceSpan").html(strs[0]);
+                    $("#tiens").html(strs[1]);
+                });
+            }
+
+        }
+
+
+        $(function () {
+
+            $("#Qiad").click(function () {
+                var nam = $("#realname").val();
+                var tel = $("#tel").val();
+                var sf = $("#Select1").val();
+                var cs = $("#Select2").val();
+                var xq = $("#Select3").val();
+                var xx = $("#street").val();
+                var yb = $("#streets").val();
+                var n = ($("#file").val().split('\n')).length - 1;
+                if (n >= 9) {
+                    layer.alert('最多添加10条！', 3, !1);
+                    return;
+                }
+                if (nam == "" || tel == "" || sf == "" || cs == "" || xx == "" || yb == "") {
+                    layer.alert('请填写完整！', 3, !1);
+                    return;
+                }
+                var qsr = nam + "，" + tel + "，，" + sf + " " + cs + " " + xq + " " + xx + "，" + yb;
+
+                if ($("#file").val() == "") {
+                    $("#file").val(qsr);
+                } else {
+                    $("#file")[0].value += "\n" + qsr;
+                }
+
+                $("#realname").val("");
+                $("#tel").val("");
+                $("#street").val("");
+            });
+        });
+
+        function checkkongbao() {
+            time = Math.floor(Math.random() * 500 + 2000);
+            var a = /^\d+$/;
+            var b = $("#orderform #file").val();
+            if (!a.test($("#orderform #address").val())) {
+                layer.alert('请先设置发货地址！', 3, !1);
+
+                return false
+            }
+            if (!a.test($("#orderform #typ").val())) {
+
+                layer.alert('请选择快递类型！', 3, !1);
+                return false
+            }
+            if (b.length <= 0) {
+                layer.alert('收货地址列表不能为空！', 3, !1);
+                return false
+            }
+            $("#buttonqi").attr("disabled", "disabled");
+            $("#buttonqi").val("努力提交中...");
+
+            var loadi = layer.load('准备提交数据,跳转后请勿刷新！！');
+            window.setTimeout(function () {
+                layer.close(loadi);
+                var d = document.getElementsByName("form")[0];
+                d.submit()
+                $("#buttonqi").attr("disabled", false);
+                $("#buttonqi").val("提交订单");
+
+            }, time);
+            return false
+        }
+
+    </script>
+    <script>
+        function Qtxts(str) {
+            document.getElementById("file").value = str;
+        }
+    </script>
+    <script>
+        document.write("<s" + "cript type='text/javascript' src='/static/js/kbjsAddress.js?" + Math.random() + "'></scr" + "ipt>");
+    </script>
+    <script type="text/javascript">
+        addressInit('Select1', 'Select2', 'Select3');
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 空包发货{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <div class="notice3">空包发货前,请检查发货地址是否正确,检查无优币是否充足,提交后当天晚上22点统一发货,第二天出物流走件记录！</div>
+        <form id="orderform" name="form" method="post" action="file?action=buykongbao"
+              onsubmit="return checkkongbao()">
+            <div class="mainBox2">
+                <h3>⒈发货地址:</h3>
+                <div class="content">
+
+                    <select name="address" id="address" style="width:700px; font-weight:bold; font-size:16px;">
+                        <option value="28913">吴天凌，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
+                    </select>
+                </div>
+            </div>
+            <div class="zdcz_07"></div>
+            <div class="mainBox2">
+                <h3>⒉快递类型</h3>
+                <div class="content">
+                    <a class="red">选择快递类型：</a>
+                    <select name="typ" id="typ" onchange="getmyprice()"
+                            style="font-weight:bold; font-size:16px; border:1px #CCC solid;">
+
+                        <option value="35">快递类型：天天快递,支持全部 （全国发货）, 价格：2.2元</option>
+
+                        <option value="40">快递类型：优速快递,支持淘宝 （全国发货）, 价格：2元</option>
+
+                        <option value="26">快递类型：快捷快递,支持全部 （全国发货）, 价格：2元</option>
+
+                        <option value="10">快递类型：龙邦速递,支持全部 （全国发货）, 价格：2.1元</option>
+
+                        <option value="34">快递类型：飞远(爱彼西),仅支持淘宝 （全国发货）, 价格：2元</option>
+
+                        <option value="36">快递类型：全峰快递,京东专用-淘宝禁用（全国发货） , 价格：2元</option>
+
+                        <option value="39">快递类型：申通快递,支持全部 （全国发货） 【已下架】</option>
+
+                    </select><a href="setdefault"
+                                style="color:#F60; font-size:12px; padding-left:20px; text-decoration:underline; font-weight:bold;"
+                                title="设置默认快递" target="_top">[设置默认快递]</a>
+                </div>
+                <div style="border-top:1px solid  #E6E6E6; width:100%; height:45px; background:#f8f8f8;"><span
+                        style="padding-left:3px; font-size:14px; color:#F00;">快递介绍：</span>
+                    <p><span style="padding-left:15px; color:#03F; font-weight:bold; font-size:13px" id="tiens"><font
+                            style="color:#BCBCBC">正在加载快递介绍请稍等....!</font></span></p></div>
+            </div>
+            <div class="zdcz_07"></div>
+            <!--div1样式start-->
+            <div class="mainBox3" id="div1">
+                <h3 class="red">⒊请严格按样式图去复制地址提交，否则不出物流</h3>
+                <div class="content"><img src="/static/images/me01.gif" width="700" height="130"/><br/>
+                    <br/>
+            <span style="font-size:14px; line-height:24px;">直接到淘宝后台——已卖出宝贝——等待发货——点详情——再点收货和物流信息。<br/>
+            就可以看到一个买家留的"收货地址"，请复制这个格式到下面即可</span><br/>
+                    <span class="red"><br/>收货地址格式：小优，15888888888， ，广东省 广州市 越秀区 应元路华光街，510000<br/>收货地址格式：小优，15888888888，广东省 广州市 越秀区 应元路华光街，510000<br/>收货地址格式：小优, 15888888888, 广东省 广州市 越秀区 应元路华光街, 510000	<font
+                            color=red>(新增)</font><br/>收货地址格式：收件人:小优 手机:15888888888 地址:广东省 广州市 越秀区 应元路华光街 邮编:510000 <font
+                            color=red>(新增)</font></span></div>
+            </div>
+            <!--div1样式end-->
+
+            <!--div2样式start-->
+            <div class="mainBox3" id="div2" style="display:none">
+                <h3 class="red">⒊请严格按样式图去复制地址提交，否则不出物流</h3>
+                <div class="content"><img src="/static/images/me02.gif" width="700" height="220"/><br/>
+                    <br/>
+            <span style="font-size:14px; line-height:24px;">流程：已卖出宝贝--等待发货--点发货--自己联系物流--其他物流--其他--填写空包名称--填写单号--确认。<br/>
+            <font color=red>请各位会员购买此类空包,请严格按照流程否则不出物流！</font></span><br/>
+                    <span class="red"><br/>如您还是不太了解,请点击查询详细流程(图文)说明！<input name="button" type="button" class="btn"
+                                                                           onclick="javascript:window.open('News.asp?id=662','_blank');"
+                                                                           id="button" value="了解详细流程"/></span><br /
+                    ><span class="red"><br/>收货地址格式：小优，15888888888， ，广东省 广州市 越秀区 应元路华光街，510000<br/>收货地址格式：小优，15888888888，广东省 广州市 越秀区 应元路华光街，510000<br/>收货地址格式：小优, 15888888888, 广东省 广州市 越秀区 应元路华光街, 510000</span>
+                </div>
+            </div>
+            <!--div2样式end-->
+
+            <div class="mainBox3">
+                <h3>⒋收货地填写↓可批量下单，每行一个地址最多100个地址<br/>
+                </h3>
+                <div class="content">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+                        <tr>
+                            <td><font color=red>*</font> 收货人姓名：</td>
+                            <td width="618"><input name="realname" type="text" class="input" id="realname"
+                                                   size="40"/><span id="realnameSpan" style="color:#999999">请输入姓名</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><font color=red>*</font> 收货人电话：</td>
+                            <td><input name="tel" type="text" class="input" id="tel" size="40"/><span id="telSpan"
+                                                                                                      style="color:#999999">请输入联系电话</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="116"><font color=red>*</font> 收货人城市：</td>
+                            <td>
+                                <select id="Select1" name="provice"></select>
+                                <select id="Select2" name="city"></select>
+                                <select id="Select3" name="county"></select>
+                                <span id="addressSpan" style="color:#999999">请选择地址</span>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td><font color=red>*</font> 详细地址：</td>
+                            <td><input name="street" type="text" class="input" id="street" size="40"/><span
+                                    id="streetSpan" style="color:#999999">请输入详细地址</span></td>
+                        </tr>
+                        <tr>
+                        <tr style="display:none;">
+                            <td><font color=red>*</font> 收货人邮编：</td>
+                            <td><input name="streets" type="text" class="input" id="streets" size="40"
+                                       value="000000"/><span id="streetSpan" style="color:#999999">请输入邮政编码</span></td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td><input type="button" class="btn" id="Qiad" value="添加"/><span id="streetSpan"
+                                                                                             style="color:#999999">　　↓添加到下面↓</span>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <textarea name="content1" id="file" class="bs"
+                              style="width:750px; height:250px;overflow:auto"></textarea>
+
+                    <br/><br/>
+                    <font color=red>空包单价：<span id="priceSpan"></span>元/单</font>
+                    <br/>
+                    <font color=red>无忧币：2.5 元 （批量下单请检查余额是否充足）</font>
+                    <br/>
+                    <br/>
+                    <div style="width:100%; height:40px;">
+                        <input name="button" type="submit" class="btn" id="buttonqi" value="提交订单"/> <span
+                            style="margin-left:25px;"><iframe style=" margin-bottom:-8px;" frameborder="0" height="25"
+                                                              width="83" scrolling="no" name="upload"
+                                                              src="inc/upload"></iframe><a href="../News.asp?id=758"
+                                                                                           style="color:#36F"
+                                                                                           target="_blank">导入操作教程>></a></span>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    <td width="38"></td>
+
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

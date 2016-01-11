@@ -452,12 +452,29 @@ def seller():
     return render_template('login_user/seller.html', form=form)
 
 
-@bp.route('/ornumber_1', methods=['GET'])
+@bp.route('/buykongbao', methods=['GET'])
 @require_user
 def buykongbao():
     """空包大厅"""
     form = SigninForm()
-    return render_template('site/index.html', form=form)
+    return render_template('login_user/buykongbao.html', form=form)
+
+
+@bp.route('/getmyprice', methods=['GET', 'POST'])
+@require_user
+def getmyprice():
+    price = {
+        "35": (2.2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
+        "40": (2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
+        "26": (2, '快捷快递,支持全部 （全国发货）, 价格：2元'),
+        "10": (2.1, '龙邦速递,支持全部 （全国发货）, 价格：2.1元'),
+        "34": (2, '飞远(爱彼西),仅支持淘宝 （全国发货）, 价格：2元'),
+        "36": (2, '全峰快递,京东专用-淘宝禁用（全国发货） , 价格：2元'),
+        "39": (2, '申通快递,支持全部 （全国发货） 【已下架】')
+
+    }
+    typ = request.form.get('typ', '')
+    return '%s, %s' % price.get(typ)
 
 
 @bp.route('/tuiguang', methods=['GET'])

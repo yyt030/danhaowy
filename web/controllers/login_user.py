@@ -108,10 +108,25 @@ def qiso():
 @require_user
 def refund():
     """快递单号检测"""
+    user = g.user
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
     print '-' * 10, qi, ord, ordlx1
+    if qi == 'Shopism':
+        ids = request.form.get('id', '').split('.')
+        succ_num = 0
+        for id in ids:
+            if id:
+                order = Order.query.get(id)
+                order.buyer_id = user.id
+                order.buy_time = datetime.now()
+                order.is_sell = 1
+                db.session.add(order)
+                succ_num += 1
+        db.session.commit()
+        return str(succ_num)
+
     return '0'
 
 
@@ -235,6 +250,7 @@ def looknumber():
 @bp.route('/wybjihuo', methods=['GET', 'POST'])
 @require_user
 def wybjihuo():
+    """无忧币激活帐号"""
     user = g.user
     form = RegisterForm()
     action = request.args.get('action', '')
@@ -253,7 +269,6 @@ def wybjihuo():
 @require_user
 def shopnumber():
     """单号购买"""
-
     form = SigninForm()
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -271,7 +286,67 @@ def shopnumber():
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
+    return render_template('login_user/shopnumber.html', orders=enumerate(orders), page=page, page_all=page_all)
+
+
+@bp.route('/ShopQiso', methods=['GET', 'POST'])
+@require_user
+def shopqiso():
+    """单号领取->提交查询"""
+    user = g.user
+    # 录单时间
+    sja = request.args.get('sja', '')
+    # 发货地址
+    sa = request.args.get('sa', '')
+    # 收货地址
+    sb = request.args.get('sb', '')
+    # 快递类型
+    kd = request.args.get('kd', '')
+    # 是否扫描
+    sm = request.args.get('sm', '')
+    query = Order.query
+    if sja:
+        query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
+    if sa:
+        send_addr_province, send_addr_city, send_addr_county = sa.split(' ')
+        if send_addr_province:
+            query = query.filter(Order.send_addr_province == send_addr_province)
+
+        if send_addr_city:
+            query = query.filter(Order.send_addr_city == send_addr_city)
+
+        if send_addr_county:
+            query = query.filter(Order.send_addr_county == send_addr_county)
+    if sb:
+        recv_addr_province, recv_addr_city, recv_addr_county = sb.split(' ')
+        if recv_addr_province:
+            query = query.filter(Order.recv_addr_province == recv_addr_province)
+
+        if recv_addr_city:
+            query = query.filter(Order.recv_addr_city == recv_addr_city)
+
+        if recv_addr_county:
+            query = query.filter(Order.recv_addr_county == recv_addr_county)
+    if kd and kd != '0':
+        query = query.filter(Order.tracking_company == kd)
+    if sm and kd != '0':
+        query = query.filter(Order.is_scan == sm)
+
+    page = request.args.get('page', 1, type=int)
+    all_num = query.count()
+    page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    sitemap_xml = render_template('login_user/shopqiso.xhtml', orders=enumerate(orders),
+                                  page_every=current_app.config['FLASKY_PER_PAGE'] or 40,
+                                  page=page, page_all=page_all, user=user, all_num=all_num
+                                  )
+    response = make_response(sitemap_xml)
+    response.headers["Content-Type"] = "text/xml"
+    return response
 
 
 @bp.route('/seller', methods=['GET', 'POST'])

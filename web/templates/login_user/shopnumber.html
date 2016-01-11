@@ -1,0 +1,193 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>单号大厅(购买) -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+
+{% block page_css %}
+    <link href="/static/css/Qiindex.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/style/public.css">
+    <link rel="/static/stylesheet" href="/static/css/ui-dialog.css">
+    <LINK href="/static/css/Qiindex.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .zdybutton {
+            height: 20px;
+            line-height: 20px;
+            padding: 0 4px;
+            border: 1px solid #06F;
+            background: #09C;
+            color: #FFF;
+        }
+    </style>
+
+{% endblock %}
+{% block page_js %}
+    <script language="javascript" type="text/javascript" src="/static/js/jquery-1.10.2.js"></script>
+    <script language="javascript" type="text/javascript" src="/static/js/dialog-min.js"></script>
+    <script language="javascript" type="text/javascript" charset="utf-8"
+            src="/static/js/ornumber.js?20150930S"></script>
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+    <script>
+        document.write("<s" + "cript type='text/javascript' src='/static/js/fhjsAddress.js'></scr" + "ipt>");
+    </script>
+    <script type="text/javascript">
+        if (readCookie("s1") != "") {
+            addressInit('Select1', 'Select2', 'Select3', readCookie("s1"), readCookie("s2"), readCookie("s3"));
+            shopshowre();
+        } else {
+            addressInit('Select1', 'Select2', 'Select3');
+        }
+    </script>
+
+
+    <script>
+        document.write("<s" + "cript type='text/javascript' src='/static/js/fhjsAddress.js'></scr" + "ipt>");
+    </script>
+    <script type="text/javascript">
+        if (readCookie("s4") != "") {
+            addressInit('Select4', 'Select5', 'Select6', readCookie("s4"), readCookie("s5"), readCookie("s6"));
+            shopshowre();
+        } else {
+            addressInit('Select4', 'Select5', 'Select6');
+        }
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 单号大厅{% endblock %}
+{% block content %}
+    <td valign="top" width="800">
+        <div id="Notice" class="notice">单号大厅（购买），购买未扫描单号单价：0.50元 ,购买已扫描单号单价：0.25元
+            单号每天11点30开始更新,晚18点结束更新。<a href="/News.asp?id=48" style="color: #F00">>点击查看帮助<</a></div>
+
+        <DIV class="div_block" style="margin-bottom:10px;">
+            <DIV class="navbar-inner"><br/>
+                <DIV class="input-prepend input-append">
+                    <SPAN class="add-on">录单时间：</SPAN>
+                    <INPUT id="sja" class="Wdate input-medium" type="text" value="2016-01-08"
+                           onClick="WdatePicker({skin:'twoer',minDate:'%y-%M-%(d-2)',maxDate:'%y-%M-%d'})"/>
+
+                    <SPAN class="add-on">查询方式：</SPAN> <SPAN class="add-on"
+                                                            style="background:#FFF; font-size:12px">
+                      <label><input type="radio" id="sertype" name="sertype" value="1"
+                                    onclick="javascript:changesertype (1);" checked="checked"/>按省市查询<input type="radio"
+                                                                                                           id="sertype"
+                                                                                                           name="sertype"
+                                                                                                           value="2"
+                                                                                                           onClick="javascript:changesertype (2);"/>模糊查询</label>
+                      </SPAN>
+                </DIV>
+                <div id="diz2" style="display:none">
+                    <DIV class="input-prepend input-append"><SPAN class="add-on">发货地址：</SPAN>
+                        <INPUT id="shdz" name="shdz" class="input-medium" type="text" value=""/>
+                        <SPAN class="add-on">收货地址：</SPAN>
+                        <INPUT id="fhdz" name="fhdz" class="input-medium" type="text"
+                               value=""/> <SPAN
+                                class="add-on">*请注意省市区中间加空格。</SPAN>
+                    </DIV>
+                </div>
+                <div id="diz1">
+                    <DIV class="input-prepend input-append"><SPAN class="add-on">发货地址：</SPAN>
+                        <SELECT name='shenglist' id="Select1" class="input-medium"></SELECT>
+                        <SELECT name='shilist' id="Select2" class="input-medium"></SELECT>
+                        <SELECT name='qulist' id="Select3" class="input-medium"></SELECT>
+                    </DIV>
+
+
+                    <DIV class="input-prepend input-append"><SPAN class="add-on">收货地址：</SPAN>
+                        <SELECT name='shenglist' id="Select4" class="input-medium"></SELECT>
+                        <SELECT name='shilist' id="Select5" claqisoss="input-medium"></SELECT>
+                        <SELECT name='qulist' id="Select6" class="input-medium"></SELECT>
+                    </DIV>
+
+                </div>
+
+                <DIV class="input-prepend input-append"><SPAN class="add-on">快递类型：</SPAN>
+                    <SELECT id="com" class="input-small" name="com">
+                        <OPTION value="0" selected="selected">全部</OPTION>
+                        <option value="yunda">韵达</option>
+                        <option value="yuantong">圆通</option>
+                        <option value="shentong">申通</option>
+                        <option value="zhongtong">中通</option>
+                        <option value="quanfeng">全峰</option>
+                        <option value="ems">EMS</option>
+                        <option value="huitong">汇通</option>
+                        <option value="shunfeng">顺丰</option>
+                        <option value="bgpyghx">邮政包裹</option>
+                        <option value="yousu">优速</option>
+                        <option value="tiantian">天天</option>
+                        <option value="ems2">EMS经济</option>
+                        <option value="zjs">宅急送</option>
+                        <option value="kuaijie">快捷</option>
+                    </SELECT>
+
+                    <SPAN class="add-on">是否扫描：</SPAN>
+                    <SELECT id="sm" class="input-small">
+                        <OPTION value="0">全部</OPTION>
+                        <OPTION value="1">是</OPTION>
+                        <OPTION value="2">否</OPTION>
+                    </SELECT>
+                    <SPAN class="add-on">是否卖家：</SPAN>
+                    <SELECT id="seller" class="input-small">
+                        <OPTION value="0">全部</OPTION>
+                        <OPTION value="1">是</OPTION>
+                        <OPTION value="2">否</OPTION>
+                    </SELECT>
+                </DIV>
+
+                <DIV class="input-prepend input-append" style="display:none;">
+                    <SPAN class="add-on">验证码：</SPAN>
+                    <input name="code" type="text" id="code" size="8" maxlength="5"
+                           style="border:1px solid #ccc;"/>
+                    <!--   <a href="#" onclick="getcode();return false;">
+                   <img id="icode" src="inc/node.asp" border="0" alt="看不清楚请点击刷新验证码" style="cursor : pointer;">
+                   </a> --></DIV>
+
+
+                <input type="button" class="btn btn-primary" id="select" onClick="shopshowre()"
+                       value="提交查询"/><br><br>
+
+            </DIV>
+        </DIV>
+
+
+        <DIV class="well">
+            <DIV class="nav"><span style="float:right;"><BUTTON class="btn btn-primary" id="select"
+                                                                onClick="qigm()">批量购买
+            </BUTTON></span><strong>实时更新列表</strong>（只显示最近更新的20条记录,获取更多请输入发货和收货城市点查询按钮即可呈现）<br/><strong
+                    style="color:#ff0000;">温馨提示：建议购买 发布方为 <font color=#ea00ff>紫色</font>
+                的快递单号,安全质量更有保证！</strong>
+            </DIV>
+            <HR>
+
+            <span id="jhs"></span>
+
+            <div id="imglist">
+                <TABLE class="table table-bordered table-condensed table-striped"
+                       style="font-size: 12px;">
+                    <THEAD>
+                    <TR>
+                        <TH align="center" style="text-align:center;" width="7%">序号</TH>
+                        <TH align="center" style="text-align:center;" width="12%">快递单号</TH>
+                        <TH align="center" style="text-align:center;" width="9%">快递类型</TH>
+                        <TH align="center" style="text-align:center;" width="29%">发货地址/收货地址</TH>
+                        <TH align="center" style="text-align:center;" width="8%">单价</TH>
+                        <TH align="center" style="text-align:center;" width="17%">扫描时间</TH>
+                        <TH align="center" style="text-align:center;" width="7%">发布方</TH>
+                        <TH align="center" style="text-align:center;" width="12%">全选/反选
+                            <input type="checkbox" id="chkAll" value="checkbox" style="border:0"
+                                   onClick="shopcheckAll()"><input id="qindex" type="hidden"
+                                                                   value="1"/>
+                        </TH>
+                    </TR>
+                    </THEAD>
+                </TABLE>
+            </div>
+        </DIV>
+    </td>
+    <div class="clear"></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

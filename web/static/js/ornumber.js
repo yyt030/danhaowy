@@ -242,7 +242,7 @@ function shopshowre(p, x) {
     writeCookie("seller", seller, "30");
     writeCookie("p", p, "30");
     gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>正在查询中。。。</div>");
-    var url = "ShopQiso?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
+    var url = "ShopQiso?sja=" + sja + "&sa=" + sa + "&sb=" + sb + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
     var lx = shopshowhtml;
     xmlHttp = GetXmlHttpObject(lx)
     xmlHttp.open("GET", url, true)
@@ -783,6 +783,15 @@ function shopQik(uid, mon, sm) {
         }).showModal();
 
         function gm(uid, mon) {
+            var csrftoken = $('meta[name=csrf-token]').attr('content')
+            //xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            $.ajaxSetup({
+                beforeSend: function (xhr, settings) {
+                    if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                    }
+                }
+            })
             $.ajax({
                 type: 'post',
                 url: 'Refund?qi=Shop',
@@ -894,7 +903,15 @@ function qigm() {
     }).show();
 
     function gmm() {
-
+        var csrftoken = $('meta[name=csrf-token]').attr('content')
+        //xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken)
+                }
+            }
+        })
         var temp = document.getElementsByName("id");
         var ii = 0;
         for (i = 0; i < temp.length; i++) {
@@ -1058,6 +1075,15 @@ function sncx(str) {
 }
 
 function Coss(com, id, f) {
+    var csrftoken = $('meta[name=csrf-token]').attr('content')
+    //xhr.setRequestHeader("X-CSRFToken", csrftoken);
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken)
+            }
+        }
+    })
     dialog({
         id: 'ccx',
         content: '正在检测中,请您稍等！........'

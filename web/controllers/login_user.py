@@ -125,7 +125,7 @@ def refund():
                 db.session.add(order)
                 succ_num += 1
         db.session.commit()
-        return str(succ_num)
+        return '购买成功'
 
     return '0'
 

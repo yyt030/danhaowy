@@ -6,14 +6,19 @@
     <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
     <script src="/static/js/layer.min.js"></script>
     <script language="JavaScript" type="text/javascript">
+
+        var pagei = ""
         function COSS(ord1, ordlx1) {
+
             var loadi = layer.load('正在检查此单号可用性,请您稍等！<br/>查询时间20~60秒,请耐心等待结果。');
+
             $.ajax({
+
                 timeout: 60000,
                 async: true,
                 dataType: "text",
                 type: "get",
-                url: "Refund?qi=Soss&ord=" + ord1 + "&ordlx1=" + ordlx1 + "",
+                url: "Refund.asp?qi=Soss&ord=" + ord1 + "&ordlx1=" + ordlx1 + "",
                 error: function (msg) {
                     layer.close(loadi)
                     layer.alert('检测超时了,刷新网页重试.', 3);
@@ -22,12 +27,12 @@
                     layer.close(loadi)
                     if (data == "Errorord") {
                         layer.alert('单号不存在！', 3, function () {
-                            location.href = 'LookNumber.asp';
+                            location.href = 'LookShopNumber';
                         });
                         return;
                     }
                     if (data == "Errortime") {
-                        layer.alert('禁止检测,此单号领取或购买时间已超过60分钟！', 7);
+                        layer.alert('禁止检测,此单号购买时间已超过60分钟！', 7);
                         return;
                     }
 
@@ -36,14 +41,14 @@
                         return;
                     }
                     if (data == "1") {
-                        layer.alert('此单号不可使用,已帮你删除,请重新领取。', 8, function () {
-                            location.href = 'LookNumber';
+                        layer.alert('此单号不可使用,已帮你删除,请重新购买。', 8, function () {
+                            location.href = 'LookShopNumber';
                         });
                         return;
                     }
                     if (data == "2") {
                         layer.alert('此单号不可使用,已帮你删除并退款,请重新购买。', 8, function () {
-                            location.href = 'LookNumber';
+                            location.href = 'LookShopNumber';
                         });
                         return;
                     }
@@ -105,8 +110,8 @@
 
             } else {
 
-                var question = $("#question2").val();
-                tion = confirm("申诉快递单号:" + num_id + "\n您的申诉原因为:" + (question) + ", 您确定需要申诉吗?\n\n温馨提示：恶意申诉本站有权拒绝申诉.")
+                var question = escape($("#question2").val());
+                tion = confirm("申诉快递单号:" + num_id + "\n您的申诉原因为:" + unescape(question) + ", 您确定需要申诉吗?\n\n温馨提示：恶意申诉本站有权拒绝申诉.")
                 if (tion != "0") {
                     layer.close(pagei)
                     $.ajax({
@@ -150,10 +155,10 @@
 {% block page_title %}
     <title>查看已购买单号 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 查看已领取单号{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 查看已购买单号{% endblock %}
 {% block content %}
     <td valign="top" width="82%">
-        <form method="get" action="LookNumber">
+        <form method="get" action="LookShopNumber">
             <DIV class="div_block navbar" style="margin-bottom:10px;">
                 <DIV class="navbar-inner">
                     <DIV class="input-prepend input-append" style="margin-top:5px;"><SPAN class="add-on">从</SPAN>
@@ -201,7 +206,7 @@
                                            value="检测"
                                            class="zdybutton">
                                 </td>
-                                <td align="center">{{ ordershoplisttracking_company_cn }}</td>
+                                <td align="center">{{ ordershoplist.tracking_company_cn }}</td>
                                 <td align="center">{{ ordershoplist.create_time }}</td>
                                 <td align="center">{{ ordershoplist.buy_time }}</td>
                                 <td style="text-align: center;"><a

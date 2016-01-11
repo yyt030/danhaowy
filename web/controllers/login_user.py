@@ -1,12 +1,12 @@
 # !/usr/bin/env python
 # coding: utf-8
 from datetime import datetime, timedelta
+
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
-from ..models import db, User, Order, OrderList, MailBox
-from ..forms import SigninForm, RegisterForm
 from web.utils.permissions import require_user
-import re
+from ..forms import SigninForm, RegisterForm
+from ..models import db, User, Order, OrderList, MailBox
 
 bp = Blueprint('login_user', __name__)
 
@@ -111,7 +111,7 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
-
+    print '-' * 10, qi, ord, ordlx1
     return '0'
 
 
@@ -172,7 +172,7 @@ def getnumber():
 @require_user
 def number():
     """领取次数增加"""
-    pass
+
     user = g.user
     form = SigninForm()
 
@@ -182,6 +182,7 @@ def number():
 @bp.route('/file', methods=['GET', 'POST'])
 @require_user
 def file():
+    """领取次数增加"""
     user = g.user
     action = request.args.get('action', '')
     if request.method == 'POST':
@@ -206,6 +207,31 @@ def file():
     return render_template('error.html', error=tip, url="number")
 
 
+@bp.route('/LookNumber', methods=['GET', 'POST'])
+@require_user
+def looknumber():
+    """查看已领取单号"""
+    user = g.user
+    page = request.args.get('page', 1, type=int)
+    starttime = request.args.get('starttime')
+    endtime = request.args.get('endtime')
+
+    query = OrderList.query.filter(OrderList.user_id == user.id)
+    if starttime:
+        query = query.filter(datetime.strptime(starttime, '%Y-%m-%d') <= OrderList.create_time)
+    if endtime:
+        query = query.filter(datetime.strptime(endtime, '%Y-%m-%d') + timedelta(days=1) >= OrderList.create_time)
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(OrderList.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orderlists = pagination.items
+
+    return render_template('login_user/looknumber.html', orderlists=enumerate(orderlists),
+                           page_all=page_all, page=page)
+
+
 @bp.route('/wybjihuo', methods=['GET', 'POST'])
 @require_user
 def wybjihuo():
@@ -227,8 +253,25 @@ def wybjihuo():
 @require_user
 def shopnumber():
     """单号购买"""
+
     form = SigninForm()
-    return render_template('site/index.html', form=form)
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Order.query
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
+                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    orders = pagination.items
+
+    return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
 
 
 @bp.route('/seller', methods=['GET', 'POST'])

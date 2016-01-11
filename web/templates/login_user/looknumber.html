@@ -1,0 +1,188 @@
+{% extends 'login_layout.html' %}
+{% block page_css %}
+    <link href="/static/css/Qiym.css" rel="stylesheet" type="text/css"/>
+{% endblock %}
+{% block page_js %}
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+    <script src="/static/js/layer.min.js"></script>
+    <script language="JavaScript" type="text/javascript">
+        function COSS(ord1, ordlx1) {
+            var loadi = layer.load('正在检查此单号可用性,请您稍等！<br/>查询时间20~60秒,请耐心等待结果。');
+            $.ajax({
+                timeout: 60000,
+                async: true,
+                dataType: "text",
+                type: "get",
+                url: "Refund?qi=Soss&ord=" + ord1 + "&ordlx1=" + ordlx1 + "",
+                error: function (msg) {
+                    layer.close(loadi)
+                    layer.alert('检测超时了,刷新网页重试.', 3);
+                },
+                success: function (data) {
+                    layer.close(loadi)
+                    if (data == "Errorord") {
+                        layer.alert('单号不存在！', 3, function () {
+                            location.href = 'LookNumber.asp';
+                        });
+                        return;
+                    }
+                    if (data == "Errortime") {
+                        layer.alert('禁止检测,此单号领取或购买时间已超过60分钟！', 7);
+                        return;
+                    }
+
+                    if (data == "Error") {
+                        layer.alert('检测系统出错,请联系在线客服！', 3);
+                        return;
+                    }
+                    if (data == "1") {
+                        layer.alert('此单号不可使用,已帮你删除,请重新领取。', 8, function () {
+                            location.href = 'LookNumber';
+                        });
+                        return;
+                    }
+                    if (data == "2") {
+                        layer.alert('此单号不可使用,已帮你删除并退款,请重新购买。', 8, function () {
+                            location.href = 'LookNumber';
+                        });
+                        return;
+                    }
+                    if (data == "3") {
+                        layer.alert('系统检查程序,查询过于繁忙,请您重新查询！', 11);
+                        return;
+                    }
+                    if (data == "4") {
+                        layer.alert('系统检测目前不可用,暂停使用！！', 3);
+                        return;
+                    }
+                    if (data == "0") {
+                        layer.alert('此单号当前可正常使用,您可以到淘宝发货啦！', 1);
+                        return;
+                    }
+                    if (data == "sotime") {
+                        layer.alert('检测过于频繁,系统限制间隔3秒检测一次。<br/>请稍后在尝试检测操作！', 11);
+                        return;
+                    }
+                }
+
+            });
+
+        }
+
+
+        function s(v) {
+            $.layer({
+                type: 2,
+                shadeClose: true,
+                title: '单号复制 id:' + v,
+
+                offset: ['auto', ''],
+                area: ['400px', '250px'],
+                iframe: {src: 'fz.asp?id=' + v}
+            });
+        }
+
+    </script>
+{% endblock %}
+{% block page_title %}
+    <title>查看已领取单号 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 查看已领取单号{% endblock %}
+{% block content %}
+    <td valign="top" width="82%">
+        <form method="get" action="LookNumber">
+            <DIV class="div_block navbar" style="margin-bottom:10px;">
+                <DIV class="navbar-inner">
+                    <DIV class="input-prepend input-append" style="margin-top:5px;"><SPAN class="add-on">从</SPAN>
+
+                        <INPUT id="sja" class="Wdate input-medium" type="text" name="starttime" value=""
+                               onClick="WdatePicker()"/><SPAN class="add-on">到</SPAN>
+                        <INPUT id="sjb" class="Wdate input-medium" type="text" name="endtime" value=""
+                               onClick="WdatePicker()"/>
+                        　
+                        <BUTTON class="btn" id="select" onClick="showre()" style="margin-left:5px; margin-bottom:7px">
+                            查询
+                        </BUTTON>
+                    </DIV>
+                </DIV>
+            </DIV>
+        </form>
+        <div class="expertinfo" id="expertinfo">
+            <DIV class="well">
+                <div class="nav" style="color:#F00"><i class="icon-th-large"></i>
+                    说明：1.使用单号前点击查询按钮进行检测，领取超过1个半小时关闭检测功能；2.检测后请在10分钟内使用,如不能使用请重新检测。
+                </div>
+                <div id="imglist">
+                    <TABLE class='tablelist' style='font-size: 12px;' width='100%'>
+                        <THEAD>
+                        <TR>
+                            <TH>序号</TH>
+                            <th>快递单号</th>
+                            <th>快递类型</th>
+                            <th>录单时间</th>
+                            <th>领取时间</th>
+                            <th>查询</th>
+                            <th>操作</th>
+                        </TR>
+                        </THEAD>
+                        <TBODY>
+
+                        {% for count,orderlist in orderlists %}
+                            <TR>
+
+                                <td align="center">{{ count + 1 }}</td>
+                                <td align="center">{{ orderlist.order.tracking_no }}
+                                    <input name="COSS" type="button" onclick="COSS({{ orderlist.id }},'SF');" value="检测"
+                                           class="zdybutton">
+                                </td>
+                                <td align="center">{{ orderlist.order.tracking_company_cn }}</td>
+                                <td align="center">{{ orderlist.order.create_time }}</td>
+                                <td align="center">{{ orderlist.create_time }}</td>
+                                <td style="text-align: center;"><a
+                                        href='http://www.aikuaidi.cn/express/{{ orderlist.order.tracking_company }}-{{ orderlist.order.tracking_no }}.html'
+                                        title='点击查询状态'
+                                        target='_blank'><img src='/static/images/so.jpg' style='vertical-align:middle;'></a>
+                                </td>
+                                <td align="center"><input name="111s" type="button" id="seephotos"
+                                                          onClick="s({{ orderlist.id }});"
+                                                          value="复制" class="zdybutton">
+                                </td>
+                            </TR>
+                            <tr>
+                                <td></td>
+                                <td colspan="8">
+                                    发货地址：{{ orderlist.order.send_addr_province }} {{ orderlist.order.send_addr_city }} {{ orderlist.order.send_addr_county }}
+                                    收货地址：{{ orderlist.order.recv_addr_province }} {{ orderlist.order.recv_addr_city }} {{ orderlist.order.recv_addr_county }}
+                                    &nbsp;&nbsp;</td>
+                            </tr>
+
+                        {% endfor %}
+                        </TBODY>
+                    </table>
+                    <DIV class="page_list">
+                        <DIV class="p_l">
+                            <DIV id="page_iwymb">
+                                <form method=Post action="?">
+                                    <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
+                                    <a href=?page=1>首页</a>
+                                    {% if page > 1 %}
+                                        <a href=?page={{ page - 1 }}>上页</a>
+                                    {% endif %}
+                                    {% if page < page_all %}
+                                        <a href=?page={{ page + 1 }}>下页</a>
+                                    {% endif %}
+                                    <a href=?page={{ page_all }}>末页</a>
+                                </form>
+                            </DIV>
+                        </DIV>
+                    </DIV>
+
+
+                </div>
+            </DIV>
+        </div>
+    </td>
+
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

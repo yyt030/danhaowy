@@ -253,7 +253,9 @@
                     <select name="typ" id="typ" onchange="getmyprice()"
                             style="font-weight:bold; font-size:16px; border:1px #CCC solid;">
                         {% for exp in express %}
-                            <option value="{{ exp.id }}">快递类型：{{ exp.type }},支持全部
+                            <option value="{{ exp.id }}"
+                                    {% if user.default_express_id == exp.id %} selected="selected" {% endif %}>
+                                快递类型：{{ exp.type }},支持全部
                                 （全国发货）, {% if exp.status == 1 %}价格：{{ exp.price |float }}元{% else %}［已下架]{% endif %}
                             </option>
                         {% endfor %}

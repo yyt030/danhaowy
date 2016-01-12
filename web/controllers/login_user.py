@@ -517,7 +517,7 @@ def buykongbao():
 
     sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id)
     express = Express.query.all()
-    return render_template('login_user/buykongbao.html', form=form, sendaddrs=sendaddrs, express=express)
+    return render_template('login_user/buykongbao.html', form=form, user=user, sendaddrs=sendaddrs, express=express)
 
 
 @bp.route('/setdefault')

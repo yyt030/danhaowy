@@ -16,6 +16,9 @@ class NullPacket(db.Model):
 
     # 下单时间
     create_time = db.Column(db.DateTime, default=datetime.utcnow)
+    create_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    create_user = db.relationship('User', backref=db.backref('nullpackets', lazy='dynamic'))
+
     # 发收货地址
     send_user_name = db.Column(db.String(20))
     send_user_mobile = db.Column(db.String(11))
@@ -62,13 +65,13 @@ class SendAddr(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('sendaddrs', lazy='dynamic'))
 
-    create_time = db.Column(db.DateTime,default=datetime.now)
+    create_time = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
         return '<SendAddr %r>' % self.id
 
 
-class ExpressComp(db.Column):
+class Express(db.Model):
     """快递公司"""
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(64), nullable=False)

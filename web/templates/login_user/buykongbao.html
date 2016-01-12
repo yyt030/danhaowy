@@ -233,12 +233,15 @@
         <div class="notice3">空包发货前,请检查发货地址是否正确,检查无优币是否充足,提交后当天晚上22点统一发货,第二天出物流走件记录！</div>
         <form id="orderform" name="form" method="post" action="file?action=buykongbao"
               onsubmit="return checkkongbao()">
+            {{ form.csrf_token }}
             <div class="mainBox2">
                 <h3>⒈发货地址:</h3>
                 <div class="content">
 
                     <select name="address" id="address" style="width:700px; font-weight:bold; font-size:16px;">
-                        <option value="28913">吴天凌，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
+                        <option value="28913">吴天凌1，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
+                        <option value="28913">吴天凌2，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
+                        <option value="28913">吴天凌3，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
                     </select>
                 </div>
             </div>

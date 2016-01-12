@@ -6,7 +6,7 @@ from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
 from web.utils.permissions import require_user
 from ..forms import SigninForm, RegisterForm
-from ..models import db, User, Order, OrderList, MailBox, SendAddr
+from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express
 
 bp = Blueprint('login_user', __name__)
 
@@ -504,8 +504,12 @@ def seller():
 @require_user
 def buykongbao():
     """空包大厅"""
+    user = g.user
     form = SigninForm()
-    return render_template('login_user/buykongbao.html', form=form)
+
+    sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id)
+    express = Express()
+    return render_template('login_user/buykongbao.html', form=form, sendaddrs=sendaddrs, express=express)
 
 
 @bp.route('/getmyprice', methods=['GET', 'POST'])

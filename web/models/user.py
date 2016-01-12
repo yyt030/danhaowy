@@ -48,8 +48,8 @@ class User(db.Model):
     send_addr_county = db.Column(db.String(20))
 
     # 空包中心　默认快递类型
-    # default_comp_id = db.Column(db.Integer, db.ForeignKey('express_comp.id'))
-    # default_comp = db.relationship('ExpressComp', backref=db.backref('users', lazy='dynamic'))
+    default_express_id = db.Column(db.Integer, db.ForeignKey('express.id'))
+    default_express = db.relationship('Express', backref=db.backref('users', lazy='dynamic'))
 
     @property
     def active_time(self):

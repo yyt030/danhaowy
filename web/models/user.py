@@ -1,12 +1,9 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
-import datetime
-import random
-import hashlib
-import time
+from datetime import datetime
+
 from werkzeug import security
 from . import db
-from datetime import datetime
 from ..utils._redis import get_user_active_time
 
 
@@ -45,9 +42,14 @@ class User(db.Model):
     max_order_num = db.Column(db.Integer, nullable=False, default=10)
     login_time = db.Column(db.DateTime, default=datetime.now)
 
-    default_send_province = db.Column(db.String(20))
-    default_send_city = db.Column(db.String(20))
-    default_send_county = db.Column(db.String(20))
+    # 卖家中心设置默认发货城市
+    send_addr_province = db.Column(db.String(20))
+    send_addr_city = db.Column(db.String(20))
+    send_addr_county = db.Column(db.String(20))
+
+    # 空包中心　默认快递类型
+    # default_comp_id = db.Column(db.Integer, db.ForeignKey('express_comp.id'))
+    # default_comp = db.relationship('ExpressComp', backref=db.backref('users', lazy='dynamic'))
 
     @property
     def active_time(self):

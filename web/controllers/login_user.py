@@ -6,7 +6,7 @@ from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
 from web.utils.permissions import require_user
 from ..forms import SigninForm, RegisterForm
-from ..models import db, User, Order, OrderList, MailBox
+from ..models import db, User, Order, OrderList, MailBox, SendAddr
 
 bp = Blueprint('login_user', __name__)
 
@@ -204,22 +204,70 @@ def file():
         if action == 'cishu':
             count = request.form.get('Count', 0, type=int)
             pay = count * 5
+
+            if user.wuyoubi < pay:
+                tip = "用户%s 无忧币不足！" % user.name
+                return render_template('error.html', error=tip, url="number")
+
+            user.wuyoubi -= pay
+            user.max_order_num += count
+            db.session.add(user)
+            db.session.commit()
+            tip = "用户%s 增加次数成功！" % user.name
+            return render_template('error.html', error=tip, url="number")
         if action == 'cishution':
             count = request.form.get('hOutG', 0, type=int)
             pay = request.form.get('hInMoney', 0, type=float)
 
-        if user.wuyoubi < pay:
-            tip = "用户%s 无忧币不足！" % user.name
+            if user.wuyoubi < pay:
+                tip = "用户%s 无忧币不足！" % user.name
+                return render_template('error.html', error=tip, url="number")
+
+            user.wuyoubi -= pay
+            user.max_order_num += count
+
+            db.session.add(user)
+            db.session.commit()
+
+            tip = "用户%s 增加次数成功！" % user.name
             return render_template('error.html', error=tip, url="number")
+        # 空包中心设置发货地址
+        if action == 'default':
+            sendaddr = SendAddr()
+            sendaddr.user_id = user.id
+            sendaddr.send_user_name = request.form.get('realname', '')
+            sendaddr.send_user_mobile = request.form.get('tel', '')
+            sendaddr.send_addr_province = request.form.get('provice')
+            sendaddr.send_addr_city = request.form.get('city', '')
+            sendaddr.send_addr_county = request.form.get('county', '')
+            sendaddr.send_addr_detail = request.form.get('street', '')
 
-        user.wuyoubi -= pay
-        user.max_order_num += count
+            db.session.add(sendaddr)
+            db.session.commit()
+            return redirect(url_for('.sendaddress'))
 
-        db.session.add(user)
-        db.session.commit()
+    if request.method == 'GET':
+        if action == 'setdefault':
+            addr = SendAddr.query.filter(SendAddr.user_id == user.id)
+            id = request.args.get('id', '')
+            oldaddr = addr.filter(SendAddr.is_default == 1).first()
+            if oldaddr:
+                oldaddr.is_default = 0
+                db.session.add(oldaddr)
+                db.session.commit()
 
-    tip = "用户%s 增加次数成功！" % user.name
-    return render_template('error.html', error=tip, url="number")
+            sendaddr = addr.filter(SendAddr.id == id).first()
+            sendaddr.is_default = 1
+            db.session.add(sendaddr)
+            db.session.commit()
+            return redirect(url_for('.sendaddress'))
+
+        if action == 'deldefault':
+            id = request.args.get('id', '')
+            addr = SendAddr.query.get_or_404(id)
+            db.session.delete(addr)
+            db.session.commit()
+            return redirect(url_for('.sendaddress'))
 
 
 @bp.route('/LookNumber', methods=['GET', 'POST'])
@@ -466,15 +514,34 @@ def getmyprice():
     price = {
         "35": (2.2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
         "40": (2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
-        "26": (2, '快捷快递,支持全部 （全国发货）, 价格：2元'),
-        "10": (2.1, '龙邦速递,支持全部 （全国发货）, 价格：2.1元'),
-        "34": (2, '飞远(爱彼西),仅支持淘宝 （全国发货）, 价格：2元'),
-        "36": (2, '全峰快递,京东专用-淘宝禁用（全国发货） , 价格：2元'),
-        "39": (2, '申通快递,支持全部 （全国发货） 【已下架】')
+        "26": (2, '快捷快递(全国发全国)物流仅支持 淘宝 快捷官网，不支持京东 等其他第三方平台，*当天下单延迟1天出物流，介意的请勿下单！'),
+        "10": (2.1, '龙邦快递(全国发全国)物流仅支持 淘宝 京东，不支持 阿里 等其他第三方平台，收发地址支持全国，下单后请立即发货。'),
+        "34": (2, '飞远(爱彼西)配送(全国发全国)物流仅支持 淘宝 不支持飞远官网 阿里 京东等其他平台，收发地址支持全国 *非淘宝请勿下单'),
+        "36": (2, '全峰快递(京东专用)物流仅支持 京东 全峰官网 等其他第三方平台，淘宝禁止下单，收发地址 西藏 港澳台禁止下单(无网点)。'),
+        "39": (2, '申通快递(全国发全国)物流仅支持 淘宝 天猫 申通官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。')
 
     }
     typ = request.form.get('typ', '')
     return '%s, %s' % price.get(typ)
+
+
+@bp.route('/address', methods=['GET', 'POST'])
+@require_user
+def sendaddress():
+    form = RegisterForm()
+    user = g.user
+
+    query = SendAddr.query.filter(SendAddr.user_id == user.id)
+
+    page = request.form.get('page', 1, type=int)
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(SendAddr.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    sendaddrs = pagination.items
+
+    return render_template('login_user/sendaddress.html', sendaddrs=sendaddrs,
+                           page_all=page_all, page=page, form=form)
 
 
 @bp.route('/tuiguang', methods=['GET'])

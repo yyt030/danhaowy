@@ -269,6 +269,14 @@ def file():
             db.session.commit()
             return redirect(url_for('.sendaddress'))
 
+        if action == 'typdefault':
+            # 空包中心设置默认快递
+            id = request.args.get('id', '')
+            user.default_express_id = id
+            db.session.add(user)
+            db.session.commit()
+            return redirect(url_for('.setdefault'))
+
 
 @bp.route('/LookNumber', methods=['GET', 'POST'])
 @require_user
@@ -508,25 +516,31 @@ def buykongbao():
     form = SigninForm()
 
     sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id)
-    express = Express()
+    express = Express.query.all()
     return render_template('login_user/buykongbao.html', form=form, sendaddrs=sendaddrs, express=express)
+
+
+@bp.route('/setdefault')
+@require_user
+def setdefault():
+    """发布空包－＞设置默认快递"""
+    user = g.user
+    form = RegisterForm()
+    express = Express.query.all()
+    if request.method == 'POST':
+        u = User.query.get_or_404(user.id)
+        u.default_express_id = 12
+
+    return render_template('login_user/setdefault.html', form=form, user=user, express=express)
 
 
 @bp.route('/getmyprice', methods=['GET', 'POST'])
 @require_user
 def getmyprice():
-    price = {
-        "35": (2.2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
-        "40": (2, '天天快递(全国发全国)物流仅支持 淘宝 天猫 天天官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。'),
-        "26": (2, '快捷快递(全国发全国)物流仅支持 淘宝 快捷官网，不支持京东 等其他第三方平台，*当天下单延迟1天出物流，介意的请勿下单！'),
-        "10": (2.1, '龙邦快递(全国发全国)物流仅支持 淘宝 京东，不支持 阿里 等其他第三方平台，收发地址支持全国，下单后请立即发货。'),
-        "34": (2, '飞远(爱彼西)配送(全国发全国)物流仅支持 淘宝 不支持飞远官网 阿里 京东等其他平台，收发地址支持全国 *非淘宝请勿下单'),
-        "36": (2, '全峰快递(京东专用)物流仅支持 京东 全峰官网 等其他第三方平台，淘宝禁止下单，收发地址 西藏 港澳台禁止下单(无网点)。'),
-        "39": (2, '申通快递(全国发全国)物流仅支持 淘宝 天猫 申通官网 查询物流，不支持 阿里 京东发货，下单后请立即发货。')
+    typ = request.form.get('typ', 0, type=int)
+    express = Express.query.get_or_404(typ)
 
-    }
-    typ = request.form.get('typ', '')
-    return '%s, %s' % price.get(typ)
+    return '%s, %s' % (express.price, express.content)
 
 
 @bp.route('/address', methods=['GET', 'POST'])

@@ -77,3 +77,4 @@ class Express(db.Model):
     type = db.Column(db.String(64), nullable=False)
     content = db.Column(db.String(128), nullable=False)
     price = db.Column(db.Float(10, 2), default=0.0)
+    status = db.Column(db.SmallInteger, default=1)

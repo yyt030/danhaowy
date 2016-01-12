@@ -252,20 +252,12 @@
                     <a class="red">选择快递类型：</a>
                     <select name="typ" id="typ" onchange="getmyprice()"
                             style="font-weight:bold; font-size:16px; border:1px #CCC solid;">
+                        {% for exp in express %}
+                            <option value="{{ exp.id }}">快递类型：{{ exp.type }},支持全部
+                                （全国发货）, {% if exp.status == 1 %}价格：{{ exp.price |float }}元{% else %}［已下架]{% endif %}
+                            </option>
+                        {% endfor %}
 
-                        <option value="35">快递类型：天天快递,支持全部 （全国发货）, 价格：2.2元</option>
-
-                        <option value="40">快递类型：优速快递,支持淘宝 （全国发货）, 价格：2元</option>
-
-                        <option value="26">快递类型：快捷快递,支持全部 （全国发货）, 价格：2元</option>
-
-                        <option value="10">快递类型：龙邦速递,支持全部 （全国发货）, 价格：2.1元</option>
-
-                        <option value="34">快递类型：飞远(爱彼西),仅支持淘宝 （全国发货）, 价格：2元</option>
-
-                        <option value="36">快递类型：全峰快递,京东专用-淘宝禁用（全国发货） , 价格：2元</option>
-
-                        <option value="39">快递类型：申通快递,支持全部 （全国发货） 【已下架】</option>
 
                     </select><a href="setdefault"
                                 style="color:#F60; font-size:12px; padding-left:20px; text-decoration:underline; font-weight:bold;"

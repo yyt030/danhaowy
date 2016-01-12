@@ -1,0 +1,179 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>设置默认快递 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* __mainBody2----------------------------*/
+        #mainBody2 {
+            width: 760px;
+            float: right;
+            overflow: hidden;
+        }
+
+        .mainBox2 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            padding: 2px;
+            margin-bottom: 10px;
+        }
+
+        .mainBox2 h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #64bd53;
+            background: #F4F4F4;
+            padding: 10px;
+        }
+
+        .mainBox3 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            padding: 2px;
+            margin-bottom: 10px;
+        }
+
+        .mainBox3 h3 {
+            font-size: 16px;
+            font-weight: bold;
+            color: #f75d39;
+            background: #F4F4F4;
+            padding: 10px;
+        }
+
+        .tab th {
+            padding: 5px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab td {
+            padding: 5px;
+        }
+
+        .tab2 th {
+            padding: 5px;
+            background: #608BF6;
+            color: #FFFFFF;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .tab2 td {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .notice3 {
+            background: #FFF0CE;
+            border: 1px solid #FFD5AA;
+            color: #EA5F00;
+            padding: 10px;
+            margin-bottom: 10px;
+            top: 25px
+        }
+
+        .input {
+            border: 1px solid #ddd;
+            padding: 5px;
+        }
+
+        .btn {
+            background: url(/static/images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .btn2 {
+            background: url(/static/images/btnBg2.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .per_nraa table {
+            width: 685px;
+            margin-bottom: 15px;
+            margin-left: 25px;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script type="text/javascript">
+        function defconfirm(tipstr, linkstr) {
+            if (confirm(tipstr)) {
+                location.href = linkstr;
+            }
+        }
+
+        function checkaddress() {
+            var regstr = /^.+$/;
+
+            if (!regstr.test($("#addressform #realname").val())) {
+                $("#addressform #realnameSpan").css({color: "#ff0000"});
+                return false;
+            }
+            else {
+                $("#addressform #realnameSpan").css({color: "#999999"});
+            }
+
+            if (!regstr.test($("#addressform #tel").val())) {
+                $("#addressform #telSpan").css({color: "#ff0000"});
+                return false;
+            }
+            else {
+                $("#addressform #telSpan").css({color: "#999999"});
+            }
+
+            if (!regstr.test($("#addressform #provice option:selected").val())) {
+                $("#addressform #addressSpan").css({color: "#ff0000"});
+                return false;
+            }
+            else {
+                $("#addressform #addressSpan").css({color: "#999999"});
+            }
+
+            if (!regstr.test($("#addressform #street").val())) {
+                $("#addressform #streetSpan").css({color: "#ff0000"});
+                return false;
+            }
+            else {
+                $("#addressform #streetSpan").css({color: "#999999"});
+            }
+        }
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 空包中心 > 设置默认快递{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab2" style="border:1px solid #608BF6;">
+            <tr>
+                <th width="75%"> 快递名称</th>
+                <th width="25%"> 操作</th>
+            </tr>
+            {% for exp in express %}
+                <tr>
+                    <td>{{ exp.type }},支持全部 （全国发货）</td>
+                    {% if user.default_express_id == exp.id %}
+                        <td><font color=red>默认快递类型</font></td>
+                    {% else %}
+                        <td><input type="button" class="btn" value="设置为默认"
+                                   onclick="location.href='file?action=typdefault&id={{ exp.id }}'"/></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+    </td>
+    <td width="38"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

@@ -10,7 +10,9 @@ from . import db
 class NullPacket(db.Model):
     """空包"""
     id = db.Column(db.Integer, primary_key=True)
-    tracking_com = db.Column(db.String(50), nullable=False)
+    express_id = db.Column(db.Integer, db.ForeignKey('express.id'))
+    express = db.relationship('Express', backref=db.backref('nullpackets', lazy='dynamic'))
+
     tracking_no = db.Column(db.String(100), unique=True, index=True)
     price = db.Column(db.Float(10, 2))
 
@@ -33,6 +35,7 @@ class NullPacket(db.Model):
     recv_addr_city = db.Column(db.String(20))
     recv_addr_county = db.Column(db.String(20))
     recv_addr_detail = db.Column(db.Text)
+    recv_addr_postcode = db.Column(db.String(10))
 
     # 空包状态
     status = db.Column(db.SmallInteger, default=0)

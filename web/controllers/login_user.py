@@ -6,7 +6,7 @@ from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
 from web.utils.permissions import require_user
 from ..forms import SigninForm, RegisterForm
-from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express
+from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket
 
 bp = Blueprint('login_user', __name__)
 
@@ -245,6 +245,40 @@ def file():
             db.session.add(sendaddr)
             db.session.commit()
             return redirect(url_for('.sendaddress'))
+
+        # 空包中心　空包发货
+        if action == 'buykongbao':
+            sendaddr = SendAddr.query.get_or_404(request.form.get('address', 0, type=int))
+            express = Express.query.get_or_404(request.form.get('typ', 0, type=int))
+            content1 = request.form.get('content1').split('\r')
+            for content in content1:
+                recv_user_name, recv_user_mobile, tmp, recv_addr, recv_addr_postcode = content.split(u'，')
+                print '-' * 10, recv_addr
+                recv_addr_province, recv_addr_city, recv_addr_county, recv_addr_detail = recv_addr.split(' ')
+
+                null_packet = NullPacket()
+                null_packet.send_user_name = sendaddr.send_user_name
+                null_packet.send_user_mobile = sendaddr.send_user_mobile
+                null_packet.send_addr_province = sendaddr.send_addr_province
+                null_packet.send_addr_city = sendaddr.send_addr_city
+                null_packet.send_addr_county = sendaddr.send_addr_county
+                null_packet.send_addr_detail = sendaddr.send_addr_detail
+
+                null_packet.express_id = express.id
+                null_packet.create_user_id = user.id
+                null_packet.recv_user_name = recv_user_name
+                null_packet.recv_user_mobile = recv_user_mobile
+                null_packet.recv_addr_province = recv_addr_province
+                null_packet.recv_addr_city = recv_addr_city
+                null_packet.recv_addr_county = recv_addr_county
+                null_packet.recv_addr_detail = recv_addr_detail
+                null_packet.recv_addr_postcode = recv_addr_postcode
+
+                db.session.add(null_packet)
+
+            db.session.commit()
+
+            return redirect(url_for('.buykongbao'))
 
     if request.method == 'GET':
         if action == 'setdefault':
@@ -514,8 +548,8 @@ def buykongbao():
     """空包大厅"""
     user = g.user
     form = SigninForm()
-
-    sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id)
+    sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id).all()
+    print '-' * 10, sendaddrs
     express = Express.query.all()
     return render_template('login_user/buykongbao.html', form=form, user=user, sendaddrs=sendaddrs, express=express)
 

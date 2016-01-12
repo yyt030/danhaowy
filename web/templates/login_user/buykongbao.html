@@ -140,7 +140,7 @@
                 }, function (msg) {
                     var strs = new Array();
                     strs = msg.split(",");
-                    $("#priceSpan").html(strs[0]);
+                    $("#priceSpan").html(parseFloat(strs[0]));
                     $("#tiens").html(strs[1]);
                 });
             }
@@ -239,9 +239,10 @@
                 <div class="content">
 
                     <select name="address" id="address" style="width:700px; font-weight:bold; font-size:16px;">
-                        <option value="28913">吴天凌1，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
-                        <option value="28913">吴天凌2，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
-                        <option value="28913">吴天凌3，18056338725，，浙江省 杭州市 余杭区 浙江省杭州市九龙坡</option>
+                        {% for sendaddr in sendaddrs %}
+                            <option value="{{ sendaddr.id }}" {% if sendaddr.is_default == 1 %}
+                                    selected="selected" {% endif %}>{{ sendaddr.send_user_name }}，{{ sendaddr.send_user_mobile }}，，{{ sendaddr.send_addr_province }} {{ sendaddr.send_addr_city }} {{ sendaddr.send_addr_county }} {{ sendaddr.send_addr_detail }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>

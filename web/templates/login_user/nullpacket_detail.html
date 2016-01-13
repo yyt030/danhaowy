@@ -1,0 +1,208 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>空包详情页 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        #pageBody {
+            width: 1000px;
+            padding: 20px 0;
+            margin: 0 auto;
+            overflow: auto;
+            zoom: 1;
+        }
+
+        /* __sideBar2----------------------------*/
+        #sideBar2 {
+            width: 230px;
+            float: left;
+            overflow: hidden;
+        }
+
+        /* __mainBody2----------------------------*/
+        #mainBody2 {
+            width: 760px;
+            float: right;
+            overflow: hidden;
+        }
+
+        .content {
+            padding-top: 15px;
+        }
+
+        .mainBox2 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            padding: 2px;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox2 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .mainBox3 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            padding: 2px;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox3 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .tab th {
+            padding: 5px;
+            background: #608BF6;
+            border-bottom: 1px solid #eee;
+            text-indent: 10px;
+        }
+
+        .tab td {
+            padding: 5px;
+        }
+
+        .tab2 th {
+            padding: 5px;
+            background: #929393;
+            color: #FFFFFF;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .tab2 td {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .notice3 {
+            background: #FFF0CE;
+            border: 1px solid #FFD5AA;
+            color: #EA5F00;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            border: 1px solid #ddd;
+            padding: 2px;
+        }
+
+        .btn {
+            background: url(/static/images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .btn2 {
+            background: url(/static/images/btnBg2.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .red {
+            color: #f75d39;
+            font-weight: bold;
+        }
+
+        .zdcz_07 {
+            background: url(/static/images/step_jt1.png) no-repeat center center;
+            height: 41px;
+            clear: both;
+        }
+
+        .bng_gg {
+            background: url(/static/images/kbtx.gif) no-repeat;
+            width: 760px;
+            height: 120px;
+            margin-bottom: 5px;
+            line-height: 64px;
+            overflow: hidden;
+        }
+
+        .per_nraa table {
+            width: 685px;
+            margin-bottom: 15px;
+            margin-left: 25px;
+            border: solid #608BF6 1px;
+        }
+    </style>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 空包中心 > 等待发货{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <div id="mainBody2">
+            <div class="mainBox2">
+                <h3>空包详细信息 　　　　　　　(空包id：{{ nullpacket.id }})</h3>
+                <div class="content">
+
+
+                    <table width="100%" border="0" class="tab" cellspacing="0" cellpadding="5">
+                        <tr>
+                            <td width="14%">快递类型：</td>
+                            <td width="86%">{{ nullpacket.express.type }}</td>
+                        </tr>
+                        <tr>
+                            <td>单号：</td>
+                            <td>{{ nullpacket.tracking_no }}</td>
+                        </tr>
+                        <tr>
+                            <td>单价：</td>
+                            <td>{{ nullpacket.price }}元</td>
+                        </tr>
+                        <tr>
+                            <td>发货地址：</td>
+                            <td>{{ nullpacket.send_user_name }}， {{ nullpacket.send_user_mobile }}，，{{ nullpacket.send_addr_province }} {{ nullpacket.send_addr_city }} {{ nullpacket.send_addr_county }} {{ nullpacket.send_addr_detail }}</td>
+                        </tr>
+                        <tr>
+                            <td>收货地址：</td>
+                            <td>{{ nullpacket.recv_user_name }}， {{ nullpacket.recv_user_mobile }}，，{{ nullpacket.recv_addr_province }} {{ nullpacket.recv_addr_city }} {{ nullpacket.recv_addr_county }} {{ nullpacket.recv_addr_detail }} {{ nullpacket.recv_addr_postcode }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>空包状态：</td>
+                            {% if  nullpacket.status == 1 %}
+                                <td> 已发货</td>
+                            {% else %}
+                                <td> 未发货</td>
+                            {% endif %}
+                        </tr>
+                        <tr>
+                            <td>下单时间：</td>
+                            <td>{{ nullpacket.create_time }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>发货时间：</td>
+                            <td>{{ nullpacket.send_time }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td width="38"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

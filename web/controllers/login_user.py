@@ -580,6 +580,7 @@ def getmyprice():
 @bp.route('/address', methods=['GET', 'POST'])
 @require_user
 def sendaddress():
+    """设置发货地"""
     form = RegisterForm()
     user = g.user
 
@@ -594,6 +595,80 @@ def sendaddress():
 
     return render_template('login_user/sendaddress.html', sendaddrs=sendaddrs,
                            page_all=page_all, page=page, form=form)
+
+
+@bp.route('/waitforsend', methods=['GET', 'POST'])
+@require_user
+def waitforsend():
+    """等待发货"""
+    form = RegisterForm()
+    user = g.user
+
+    query = NullPacket.query.filter(NullPacket.create_user_id == user.id, NullPacket.status == 0)
+
+    if request.method == 'POST':
+        trackingno = request.form.get('trackingno')
+        startdate = request.form.get('startdate')
+        enddate = request.form.get('enddate')
+        if trackingno:
+            query = query.filter(NullPacket.tracking_no == trackingno)
+        if startdate:
+            query = query.filter(NullPacket.create_time >= datetime.strptime(startdate, '%Y-%m-%d'))
+        if enddate:
+            query = query.filter(NullPacket.create_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page = request.form.get('page', 1, type=int)
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(NullPacket.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    nullpackets = pagination.items
+
+    return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
+                           page_all=page_all, page=page, form=form, status=0)
+
+
+@bp.route('/kbinfo', methods=['GET', 'POST'])
+@require_user
+def kbinfo():
+    """空单详情"""
+    user = g.user
+    id = request.args.get('id', '', type=int)
+
+    nullpacket = NullPacket.query.get_or_404(id)
+
+    return render_template('login_user/nullpacket_detail.html', nullpacket=nullpacket)
+
+
+@bp.route('/kbsent', methods=['GET', 'POST'])
+@require_user
+def kbsent():
+    """已经发货"""
+    form = RegisterForm()
+    user = g.user
+
+    query = NullPacket.query.filter(NullPacket.create_user_id == user.id, NullPacket.status == 1)
+
+    if request.method == 'POST':
+        trackingno = request.form.get('trackingno')
+        startdate = request.form.get('startdate')
+        enddate = request.form.get('enddate')
+        if trackingno:
+            query = query.filter(NullPacket.tracking_no == trackingno)
+        if startdate:
+            query = query.filter(NullPacket.create_time >= datetime.strptime(startdate, '%Y-%m-%d'))
+        if enddate:
+            query = query.filter(NullPacket.create_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page = request.form.get('page', 1, type=int)
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(NullPacket.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    nullpackets = pagination.items
+
+    return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
+                           page_all=page_all, page=page, form=form, status=1)
 
 
 @bp.route('/tuiguang', methods=['GET'])

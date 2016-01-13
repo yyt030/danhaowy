@@ -1,9 +1,49 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>发布单号 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
+    <liNK rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .div_block {
+            margin: 10px auto 10px;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        }
+
+        .breadcrumb {
+            margin: 0;
+        }
+
+        footer span {
+            margin-right: 20px;;
+        }
+
+        .bs-docs-example {
+            margin: 5px 0 5px 0;
+        }
+
+    </style>
+{% endblock %}
+{% block page_js %}
     <script language="javascript" type="text/javascript" src="/static/js/bootstrap.js"></script>
-
     <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
-
     <script>
         document.write("<s" + "cript type='text/javascript' src='/static/js/sellerress.js?" + Math.random() + "'></scr" + "ipt>");
         var timer
@@ -62,14 +102,13 @@
                             type: "post",
                             url: "seller?qi=xzseller",
                             dataType: "text",
-
                             data: {
                                 "send_date": $("#send_time").val(),
-                                "cshenglist": escape($("#Select7").val()),
-                                "cshilist": escape($("#Select8").val()),
-                                "cqulist": escape($("#Select9").val()),
+                                "cshenglist": $("#Select7").val(),
+                                "cshilist": $("#Select8").val(),
+                                "cqulist": $("#Select9").val(),
                                 "com": $("#pcom").val(),
-                                "r": escape($("#textarea").val()),
+                                "r": $("#textarea").val(),
                                 "scan": $("#scan").val()
                             },
                             success: complete,
@@ -84,15 +123,15 @@
 
         function loading() {
             boll = 1
-            $('#result').html("<img src='/static/images/wait.gif';/> 正在发布中,请耐心等待发布结果！").show();
+            $('#result').html("<img src='/static/images/wait.gif'/> 正在发布中,请耐心等待发布结果！").show();
 
         }
 
 
         function Qpost() {
-//alert("导入文件发布系统修复,预计15号之前恢复\n对此带来的不便请谅解。");
-//ifmxls("file")
-//return false;
+            //alert("导入文件发布系统修复,预计15号之前恢复\n对此带来的不便请谅解。");
+            //ifmxls("file")
+            //return false;
 
             var filename = document.getElementById("file").value;
             var mime = filename.toLowerCase().substr(filename.lastIndexOf("."));
@@ -168,42 +207,15 @@
             obj.outerHTML = obj.outerHTML;
         }
     </script>
-    <style type="text/css">
-        ul {
-            margin: 0;
-            padding: 0;
-        }
+    <script type="text/javascript">
+        addressInit('Select1', 'Select2', 'Select3', '云南省', '昆明市', '')
 
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
+        addressInit('Select4', 'Select5', 'Select6', '云南省', '昆明市', '')
 
-        .div_block {
-            margin: 10px auto 10px;
-            background-color: #fff;
-            border: 1px solid #e5e5e5;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
-        }
+        addressInit('Select7', 'Select8', 'Select9', '浙江省', '杭州市', '余杭区')
 
-        .breadcrumb {
-            margin: 0;
-        }
+    </script>
 
-        footer span {
-            margin-right: 20px;;
-        }
-
-        .bs-docs-example {
-            margin: 5px 0 5px 0;
-        }
-
-    </style>
 
 {% endblock %}
 {% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 发布单号{% endblock %}
@@ -256,29 +268,17 @@
                                     <div class="control-group">
                                         <label for="textarea" class="control-label">发货地点</label>
                                         <div class="controls">
-                                            <SELECT name='dshenglist' id="Select1"
-                                                    class="input-medium"></SELECT>
-                                            <SELECT name='dshilist' id="Select2"
-                                                    class="input-medium"></SELECT>
-                                            <SELECT name='dqulist' id="Select3"
-                                                    class="input-medium"></SELECT>
-                                            <script type="text/javascript">
-                                                addressInit('Select1', 'Select2', 'Select3', '浙江省', '杭州市', '余杭区')
-                                            </script>
+                                            <SELECT name='dshenglist' id="Select1" class="input-medium"></SELECT>
+                                            <SELECT name='dshilist' id="Select2" class="input-medium"></SELECT>
+                                            <SELECT name='dqulist' id="Select3" class="input-medium"></SELECT>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label for="textarea" class="control-label">收货地点</label>
                                         <div class="controls">
-                                            <SELECT name='ashenglist' id="Select4"
-                                                    class="input-medium"></SELECT>
-                                            <SELECT name='ashilist' id="Select5"
-                                                    class="input-medium"></SELECT>
-                                            <SELECT name='aqulist' id="Select6"
-                                                    class="input-medium"></SELECT>
-                                            <script type="text/javascript">
-                                                addressInit('Select4', 'Select5', 'Select6')
-                                            </script>
+                                            <SELECT name='ashenglist' id="Select4" class="input-medium"></SELECT>
+                                            <SELECT name='ashilist' id="Select5" class="input-medium"></SELECT>
+                                            <SELECT name='aqulist' id="Select6" class="input-medium"></SELECT>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -339,9 +339,6 @@
                                                     class="input-medium"></SELECT>
                                             <SELECT name='cqulist' id="Select9"
                                                     class="input-medium"></SELECT>
-                                            <script type="text/javascript">
-                                                addressInit('Select7', 'Select8', 'Select9', '浙江省', '杭州市', '余杭区')
-                                            </script>
                                         </div>
                                     </div>
                                     <div class="control-group">

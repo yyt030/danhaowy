@@ -6,7 +6,7 @@ from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response
 from web.utils.permissions import require_user
 from ..forms import SigninForm, RegisterForm
-from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket
+from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog
 
 bp = Blueprint('login_user', __name__)
 
@@ -723,6 +723,31 @@ def jifen():
         return render_template('error.html', error=tip, url="")
 
     return render_template('login_user/jifen.html', user=user, form=form)
+
+
+@bp.route('/txlog', methods=['GET', 'POST'])
+@require_user
+def txlog():
+    """提现记录"""
+    user = g.user
+
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Txlog.query.filter(Txlog.user_id == user.id)
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Txlog.create_time,
+                             Txlog.create_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Txlog.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    txlogs = pagination.items
+
+    return render_template('login_user/txlog.html', txlogs=enumerate(txlogs), page=page, page_all=page_all)
 
 
 @bp.route('/upseller', methods=['GET', 'POST'])

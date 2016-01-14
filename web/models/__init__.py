@@ -10,3 +10,4 @@ from .notice import *
 from .order import *
 from .mailbox import *
 from .nullpacket import *
+from .log import *

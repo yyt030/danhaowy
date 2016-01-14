@@ -1,0 +1,72 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>提现记录 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无忧积分兑换{% endblock %}
+{% block content %}
+    <td valign="top" width="593">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div>
+                <div class="xzbt03">提现记录</div>
+                <div class="mess_all">
+                    <ul>
+                        <li>温馨提醒：每页显示20条,提现记录永久保存！</li>
+                    </ul>
+                </div>
+            </div>
+            <!--温馨提示框结束-->
+
+            <div class="rizhi">
+                <ul>
+
+                    <li class="rz03">用户名/订单号</li>
+                    <li class="rz03">提现金额</li>
+                    <li class="rz04">提现时间</li>
+                    <li class="rz06">提现状态</li>
+                </ul>
+                <table id="tlist" width="100%" border="0" cellspacing="0" cellpadding="0">
+                    {% for txlog in txlogs %}
+                        <tr>
+                            <td class="rz03">{{ txlog.user.name }} / 4797</td>
+                            <td class="rz05">￥{{ txlog.money |float }}</td>
+                            <td class="rz04">{{ txlog.create_time }}</td>
+                            <td class="rz05" style="color:#F00">{{ txlog.status }}.</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <DIV class="page_list">
+                    <DIV class="p_l">
+                        <DIV id="page_iwymb">
+                            <form method=Post action="?">
+                                <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
+                                <a href=?page=1>首页</a>
+                                {% if page > 1 %}
+                                    <a href=?page={{ page - 1 }}>上页</a>
+                                {% endif %}
+                                {% if page < page_all %}
+                                    <a href=?page={{ page + 1 }}>下页</a>
+                                {% endif %}
+                                <a href=?page={{ page_all }}>末页</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </td>
+    <td width="180"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

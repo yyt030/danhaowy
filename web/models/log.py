@@ -16,7 +16,7 @@ class Paylog(db.Model):
     alipay_no = db.Column(db.String(50))
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     # 充值状态
-    status = db.Column(db.Enum(['已支付', '待确认', '未支付']))
+    status = db.Column(db.Enum('已支付', '待确认', '未支付'), default='已支付')
     # 记录内容
     action = db.Column(db.String(30), nullable=False)
     user_id = db.Column(db.ForeignKey('user.id'))
@@ -48,6 +48,6 @@ class Txlog(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     money = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('fundslogs', lazy='dynamic'))
-    status = db.Column(db.Enum(['提现成功']))
+    user = db.relationship('User', backref=db.backref('txlogs', lazy='dynamic'))
+    status = db.Column(db.Enum('提现成功', '提现失败'))
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)

@@ -200,7 +200,7 @@
                         {% for count,ordershoplist in ordershoplists %}
                             <TR>
 
-                                <td align="center">{{ count + 1 }}</td>
+                                <td align="center">{{ count }}</td>
                                 <td align="center">{{ ordershoplist.tracking_no }}
                                     <input name="COSS" type="button" onclick="COSS({{ ordershoplist.id }},'SF');"
                                            value="检测"

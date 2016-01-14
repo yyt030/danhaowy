@@ -41,7 +41,7 @@ def ornumber():
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/ornumber.html', orders=enumerate(orders), page=page, page_all=page_all)
+    return render_template('login_user/ornumber.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
 
 
 @bp.route('/Qiso', methods=['GET', 'POST'])
@@ -95,7 +95,7 @@ def qiso():
             error_out=False)
     orders = pagination.items
 
-    sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders),
+    sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders, start=1),
                                   page_every=current_app.config['FLASKY_PER_PAGE'] or 40,
                                   page=page, page_all=page_all, user=user, all_num=all_num
                                   )
@@ -333,7 +333,7 @@ def looknumber():
             error_out=False)
     orderlists = pagination.items
 
-    return render_template('login_user/looknumber.html', orderlists=enumerate(orderlists),
+    return render_template('login_user/looknumber.html', orderlists=enumerate(orderlists, start=1),
                            page_all=page_all, page=page)
 
 
@@ -376,7 +376,8 @@ def shopnumber():
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/shopnumber.html', orders=enumerate(orders), page=page, page_all=page_all)
+    return render_template('login_user/shopnumber.html', orders=enumerate(orders, start=1), page=page,
+                           page_all=page_all)
 
 
 @bp.route('/ShopQiso', methods=['GET', 'POST'])
@@ -430,7 +431,7 @@ def shopqiso():
             error_out=False)
     orders = pagination.items
 
-    sitemap_xml = render_template('login_user/shopqiso.xhtml', orders=enumerate(orders),
+    sitemap_xml = render_template('login_user/shopqiso.xhtml', orders=enumerate(orders, start=1),
                                   page_every=current_app.config['FLASKY_PER_PAGE'] or 40,
                                   page=page, page_all=page_all, user=user, all_num=all_num
                                   )
@@ -460,7 +461,7 @@ def lookshopnumber():
             error_out=False)
     ordershoplists = pagination.items
 
-    return render_template('login_user/lookshopnumber.html', ordershoplists=enumerate(ordershoplists),
+    return render_template('login_user/lookshopnumber.html', ordershoplists=enumerate(ordershoplists, start=1),
                            page_all=page_all, page=page)
 
 
@@ -747,7 +748,62 @@ def txlog():
             error_out=False)
     txlogs = pagination.items
 
-    return render_template('login_user/txlog.html', txlogs=enumerate(txlogs), page=page, page_all=page_all)
+    return render_template('login_user/txlog.html', txlogs=txlogs, page=page, page_all=page_all)
+
+
+@bp.route('/paylog', methods=['GET', 'POST'])
+@require_user
+def paylog():
+    """提现记录"""
+    user = g.user
+
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Paylog.query.filter(Paylog.user_id == user.id)
+    if startdate and enddate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Paylog.create_time,
+                             Paylog.create_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Paylog.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    paylogs = pagination.items
+
+    return render_template('login_user/paylog.html', paylogs=paylogs, page=page, page_all=page_all)
+
+
+@bp.route('/Fundslog', methods=['GET', 'POST'])
+@require_user
+def fundslog():
+    """提现记录"""
+    user = g.user
+
+    startdate = request.args.get('startdate', '')
+    enddate = request.args.get('enddate', '')
+    action = request.args.get('ddlSave', '')
+
+    page = request.args.get('page', 1, type=int)
+
+    query = Fundslog.query.filter(Fundslog.user_id == user.id)
+    if action:
+        query = query.filter(Fundslog.action == action)
+    if startdate:
+        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Fundslog.create_time)
+    if enddate:
+        query = query.filter(Fundslog.create_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
+
+    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
+    pagination = query.order_by(Fundslog.create_time.desc()).paginate(
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
+    fundslogs = pagination.items
+
+    return render_template('login_user/fundslog.html', fundslogs=enumerate(fundslogs, start=1), page=page,
+                           page_all=page_all)
 
 
 @bp.route('/upseller', methods=['GET', 'POST'])
@@ -831,7 +887,8 @@ def sellerlist():
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/sellerlist.html', orders=enumerate(orders), page=page, page_all=page_all)
+    return render_template('login_user/sellerlist.html', orders=enumerate(orders, start=1), page=page,
+                           page_all=page_all)
 
 
 @bp.route('/sellerout', methods=['GET', 'POST'])
@@ -855,7 +912,7 @@ def sellerout():
             error_out=False)
     orders = pagination.items
 
-    return render_template('login_user/sellerout.html', orders=enumerate(orders), page=page, page_all=page_all)
+    return render_template('login_user/sellerout.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
 
 
 @bp.route('/shoplog', methods=['GET', 'POST'])
@@ -878,7 +935,8 @@ def shoplog():
             error_out=False)
     shoplogs = pagination.items
 
-    return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs), page=page, page_all=page_all)
+    return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs, start=1), page=page,
+                           page_all=page_all)
 
 
 @bp.route('/sellerset', methods=['GET', 'POST'])

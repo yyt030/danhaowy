@@ -130,7 +130,7 @@
                         {% for count,orderlist in orderlists %}
                             <TR>
 
-                                <td align="center">{{ count + 1 }}</td>
+                                <td align="center">{{ count }}</td>
                                 <td align="center">{{ orderlist.order.tracking_no }}
                                     <input name="COSS" type="button" onclick="COSS({{ orderlist.id }},'SF');" value="检测"
                                            class="zdybutton">

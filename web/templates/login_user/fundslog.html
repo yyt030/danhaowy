@@ -1,0 +1,241 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>消费记录 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* __mainBody2----------------------------*/
+        #mainBody2 {
+            width: 760px;
+            float: right;
+            overflow: hidden;
+        }
+
+        .content {
+            padding: 10px;
+        }
+
+        .mainBox2 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox2 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .mainBox3 {
+            border: 1px solid #f3f3f3;
+            background: #fff;
+            margin-bottom: 7px;
+            border: solid #4E7EF9 1px;
+        }
+
+        .mainBox3 h3 {
+            font-size: 14px;
+            font-weight: bold;
+            color: #FFFFFF;
+            background: #4E7EF9;
+            padding: 5px;
+        }
+
+        .tab th {
+            padding: 5px;
+            background: #608BF6;
+            border-bottom: 1px solid #eee;
+        }
+
+        .tab td {
+            padding: 5px;
+        }
+
+        .tab2 th {
+            padding: 5px;
+            background: #929393;
+            color: #FFFFFF;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .tab2 td {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+
+        .notice3 {
+            background: #FFF0CE;
+            border: 1px solid #FFD5AA;
+            color: #EA5F00;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            border: 1px solid #ddd;
+            padding: 5px;
+            font-size: 13px;
+        }
+
+        .btn {
+            background: url(/static/images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .btn2 {
+            background: url(/static/images/btnBg2.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+
+        .red {
+            color: #f75d39;
+            font-weight: bold;
+        }
+
+        .zdcz_07 {
+            background: url(/static/images/step_jt1.png) no-repeat center center;
+            height: 41px;
+            clear: both;
+        }
+
+        .per_nraa table {
+            width: 685px;
+            margin-bottom: 15px;
+            margin-left: 25px;
+            border: solid #608BF6 1px;
+        }
+
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script language="javascript" type="text/javascript" src="/static/WdatePicker/WdatePicker.js"></script>
+{% endblock %}
+
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 消费记录{% endblock %}
+{% block content %}
+    <td valign="top" width="800">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>变化无忧币/无忧积分：是指执行当前操作后实际增加或者被扣除的无忧币、无忧积分。正代表增加，负代表扣除。</li>
+                    <li>当前无忧币/无忧积分：是指执行当前操作后您的账户还可以使用的无忧币、无忧积分的数额。</li>
+            </div>
+            <!--温馨提示框结束-->
+            <div class="note">
+                <div class="title">
+                    <h1 id="divTab"><a class="fqa">我的消费记录</a></h1>
+
+                </div>
+
+                <form method="GET" action="Fundslog">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
+                        <tr>
+                            <td align="left">
+                                记录类型：<select class="input" name="ddlSave" id="ddlSave">
+                                <option selected="selected" value="">全部内容</option>
+                                <option value="购买单号">购买单号</option>
+                                <option value="购买空包">购买空包</option>
+                                <option value="增加次数">增加次数</option>
+                                <option value="推广奖励">推广奖励</option>
+                                <option value="积分兑换">积分兑换</option>
+                                <option value="单号退款">单号退款</option>
+
+                            </select>
+                                时间：
+
+                                <input type="text" id="startdate" class="input" name="startdate" onClick="WdatePicker()"
+                                       class="Wdate inp" value="2015-12-15" style="width:105px"/>
+                                到
+                                <input type="text" id="enddate" class="input" name="enddate" onClick="WdatePicker()"
+                                       class="Wdate inp" value="2016-1-15" style="width:105px"/>
+
+
+                                <input type="submit" class="btn" id="button" value="查询"/></td>
+                        </tr>
+                    </table>
+                </form>
+                <div id="divMoneyList" class="lie">
+                    <table id="tlist" width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                        <thead>
+                        <tr>
+                            <td colspan="8">
+                                <ul>
+                                    <li class="postime">序号</li>
+                                    <li class="book">记录内容</li>
+                                    <li class="rmb">变化无忧币/无忧积分</li>
+                                    <li class="rmb">当前无忧币/无忧积分</li>
+                                    <li class="rmb">时间</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for num,fundslog in fundslogs %}
+                            <tr>
+                                <td class="postime" valign="top">{{ num }}</td>
+                                <td class="book">
+                                    <div class="title" style="background-position:2px -785px"
+                                         onmouseover="$(this).next().show();" onmouseleave="$(this).next().hide();">
+                                        <strong>{{ fundslog.action }}</strong>
+                                    </div>
+                                    <div class="cont" style="display:none; color:Red; border-color:#666;">
+                                        {{ fundslog.action }}：1个，消费无优币{{ fundslog.change_wuyoubi }}元
+                                    </div>
+                                </td>
+                                <td class="rmb" valign="top">
+                                    -{{ fundslog.change_wuyoubi }}元/{{ fundslog.change_wuyoujifen }}分
+                                </td>
+                                <td class="rmb" valign="top">{{ fundslog.left_wuyoubi }}元/{{ fundslog.left_wuyoujifen }}分</td>
+                                <td class="rmb" valign="top">{{ fundslog.create_time }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <DIV class="page_list">
+                        <DIV class="p_l">
+                            <DIV id="page_iwymb">
+                                <form method=Post action="?">
+                                    <span class=pageinfo>{{ page }}/{{ page_all }}页</span>
+                                    <a href=?page=1>首页</a>
+                                    {% if page > 1 %}
+                                        <a href=?page={{ page - 1 }}>上页</a>
+                                    {% endif %}
+                                    {% if page < page_all %}
+                                        <a href=?page={{ page + 1 }}>下页</a>
+                                    {% endif %}
+                                    <a href=?page={{ page_all }}>末页</a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="clear">&nbsp;</div>
+    </td>
+    <td width="180"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

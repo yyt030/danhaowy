@@ -1,6 +1,6 @@
 {% extends 'login_layout.html' %}
 {% block page_title %}
-    <title>提现记录 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+    <title>充值记录 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
 {% endblock %}
 {% block page_css %}
     <style type="text/css">
@@ -10,17 +10,16 @@
         }
     </style>
 {% endblock %}
-
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无忧积分兑换{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 充值日志{% endblock %}
 {% block content %}
     <td valign="top" width="593">
         <div class="midmess">
             <!--温馨提示框-->
             <div>
-                <div class="xzbt03">提现记录</div>
+                <div class="xzbt03">充值记录</div>
                 <div class="mess_all">
                     <ul>
-                        <li>温馨提醒：每页显示20条,提现记录永久保存！</li>
+                        <li>温馨提醒：每页显示20条,充值记录永久保存！</li>
                     </ul>
                 </div>
             </div>
@@ -29,18 +28,22 @@
             <div class="rizhi">
                 <ul>
 
-                    <li class="rz03">用户名/订单号</li>
-                    <li class="rz03">提现金额</li>
-                    <li class="rz04">提现时间</li>
-                    <li class="rz06">提现状态</li>
+                    <li class="rz01">订单号</li>
+                    <li class="rz01">充值金额</li>
+                    <li class="rz02">充值时间</li>
+                    <li class="rz01">交易流水号</li>
+                    <li class="rz01">充值状态</li>
+                    <li class="rz01">日志纪录</li>
                 </ul>
                 <table id="tlist" width="100%" border="0" cellspacing="0" cellpadding="0">
-                    {% for txlog in txlogs %}
+                    {% for paylog in paylogs %}
                         <tr>
-                            <td class="rz03">{{ txlog.user.name }} / {{ txlog.id }}</td>
-                            <td class="rz05">￥{{ txlog.money |float }}</td>
-                            <td class="rz04">{{ txlog.create_time }}</td>
-                            <td class="rz05" style="color:#F00">{{ txlog.status }}.</td>
+                            <td class="rz01">{{ paylog.id }}</td>
+                            <td class="rz01">￥{{ paylog.money|float }}</td>
+                            <td class="rz02">{{ paylog.create_time }}</td>
+                            <td class="rz01"><a title="20150628200040011100250026039017">201506..039017</a></td>
+                            <td class="rz01"><span style="color:green;">{{ paylog.status }}</span></td>
+                            <td class="rz01"><span style="color:red;">{{ paylog.action }}</span></td>
                         </tr>
                     {% endfor %}
                 </table>
@@ -67,6 +70,10 @@
         </div>
     </td>
     <td width="180"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
     <div class="clear"></div>
     <div style="height:40px;"></div>
 {% endblock %}

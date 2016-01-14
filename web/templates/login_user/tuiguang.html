@@ -1,0 +1,107 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>好友推广管理 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script language="javascript">
+
+        function CopyValue(input) {
+            var clipBoardContent = "";
+            clipBoardContent += input.value;
+            if (window.clipboardData) {
+                window.clipboardData.clearData();
+                window.clipboardData.setData("Text", clipBoardContent);
+            } else if (navigator.userAgent.indexOf("Opera") != -1) {
+                window.location = clipBoardContent;
+            } else if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                    alert("您的当前浏览器设置已关闭此功能！请按以下步骤开启此功能！\n新开一个浏览器，在浏览器地址栏输入'about:config'并回车。\n然后找到'signed.applets.codebase_principal_support'项，双击后设置为'true'。\n声明：本功能不会危极您计算机或数据的安全！");
+                }
+                var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+                if (!clip) return;
+                var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+                if (!trans) return;
+                trans.addDataFlavor('text/unicode');
+                var str = new Object();
+                var len = new Object();
+                var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+                var copytext = clipBoardContent;
+                str.data = copytext;
+                trans.setTransferData("text/unicode", str, copytext.length * 2);
+                var clipid = Components.interfaces.nsIClipboard;
+                if (!clip) return false;
+                clip.setData(trans, null, clipid.kGlobalClipboard);
+            }
+            alert("已成功复制！");
+            return true;
+        }
+
+
+        function copyfun(i) {
+            var bv = document.getElementById(i);
+            CopyValue(bv);
+        }
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> &gt; 会员中心 &gt; 佣金提现{% endblock %}
+{% block content %}
+    <td valign="top" width="593">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>推广会员活动介绍：</h1>
+                <ul>
+                    <li>1、推广的会员必须在注册时填写<font color="#FF0000">您的网站用户名</font>,您才有机会领取奖励！</li>
+                    <li>3、推广的会员必须已成功<font color="#FF0000">激活帐号</font>,您才可以成功领取奖励！</li>
+                    <li>4、推广的会员帐号为：<font color="#FF0000">未激活状态</font>,不允许领取奖励！帐号为：<font color="#339900">已激活状态</font>,允许领取奖励！
+                    </li>
+                    <li>5、奖励说明：<font color="#FF00FF">①永久每天领取单号次数增加1次 ②奖励无忧币：5元</font></li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+            <div class="hei">
+                <h1>我的推广</h1>
+                <div class="heiaa">
+                    <div style="padding-bottom:10px;">
+                        我的推广连接：<input class="bs" style="width:400px;" type="text"
+                                      value="http://www.taodanwy.com/index?code={{ user.name }}" name="tutext"
+                                      readonly="readonly"/>
+                        <input type="button" class="btnumoff" onclick="copyfun('tutext')" value="复制"/></br>
+                        <font color="#FF0000" face="Tahoma, Geneva, sans-serif"
+                              style="text-indent:20em; margin:0px 8em;">点击按钮无法复制的,请使用IE浏览器,或直接复制文本框里的连接！</font>
+
+                    </div>
+                    <DIV class="guo">
+                        <ul>
+                            <li>用户名</li>
+                            <li>注册时间</li>
+                            <li>联系QQ</li>
+                            <li>是否激活</li>
+                            <li>获得奖励</li>
+                        </ul>
+                        <br/><font color="#FF0000" face="Tahoma, Geneva, sans-serif"
+                                   style="text-indent:40em; margin:10px 20em;">抱歉：您还没有推广过,请复制上面的推广连接！</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </td>
+    <td width="180"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

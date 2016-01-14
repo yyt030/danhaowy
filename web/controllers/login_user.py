@@ -677,7 +677,8 @@ def kbsent():
 def tuiguang():
     """推广大厅"""
     form = SigninForm()
-    return render_template('site/index.html', form=form)
+    user = g.user
+    return render_template('login_user/tuiguang.html', form=form, user=user)
 
 
 @bp.route('/paywyb', methods=['GET'])

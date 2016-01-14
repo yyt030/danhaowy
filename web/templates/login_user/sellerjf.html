@@ -1,55 +1,9 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>发布积分兑换 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
     <link rel="stylesheet" type="text/css" href="/static/css/public.css"/>
-    <style>
-        a {
-            text-decoration: none;
-        }
-
-        a:link {
-            text-decoration: none;
-        }
-
-        a:visited {
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-
-        a:active {
-            text-decoration: none;
-        }
-
-        a:focus {
-            outline: none;
-            -moz-outline: none;
-        }
-
-        .bs {
-            height: 20px;
-            width: 180px;
-            overflow: hidden;
-            border: 1px solid #CBCBCB;
-        }
-
-        .btnumoff {
-            background: url(./images/stkb.gif) repeat-x;
-            color: #fff;
-            border: 0;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-
-        .btnumon {
-            background: url(./images/stkb1.gif) repeat-x;
-            color: #fff;
-            border: 0;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-    </style>
     <style type="text/css">
         ul {
             margin: 0;
@@ -61,10 +15,78 @@
             padding: 0px;
         }
 
+        <!--
+        .kda {
+            width: 192px;
+        }
+
+        .kdb {
+            width: 300px;
+        }
+
+        .kdc {
+            width: 50px;
+            text-align: center;
+        }
+
+        #wforder {
+            width: 85%;
+            height: 400px
+        }
+
+        .wftitle, .wforderr {
+            border-color: #CCCCCC;
+        }
+
+        .bdbox li {
+            width: 100%;
+        }
+
+        .bdbox li span.bdl {
+            width: 80px;
+        }
+
+        .bdbox li span.bdr {
+            width: 82%;
+        }
+
+        .bdbox li.product {
+            height: 32px;
+        }
+
+        .bdbox li.pay {
+            height: 90px;
+        }
+
+        .bdbox li.guest {
+            height: 30px;
+        }
+
+        .bdbox li.guest2 {
+            height: 200px;
+        }
+
+        .bdbox li span.bdr textarea.guest {
+            height: 80px;
+        }
+
+        #wffahuo {
+            height: 450px;
+        }
+
+        .bdbox li.hmf {
+            height: 50px;
+        }
+
+        .bdbox li.zy {
+            height: 30px;
+        }
+
+        -->
         .submit {
             cursor: pointer;
             color: #FFFFFF;
-            background: url(./images/v.gif) no-repeat 0 0;
+            background: url(/static/images/v.gif) no-repeat 0 0;
             width: 47px;
             line-height: 21px;
             height: 21px;
@@ -74,9 +96,6 @@
     </style>
 {% endblock %}
 {% block page_js %}
-    <script src="/static/js/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/totop.js"></script>
-    <script src="/static/js/ContactIndex.js"></script>
     <script>function cop() {
         var str = document.getElementById("jifen").value;
         var fen =
@@ -144,7 +163,8 @@
             <div class="come">
                 <ul>
                     <li class="c01">亲爱的 <span>mengjunz</span> 欢迎您！</li>
-                    <li class="c02">发布积分：<span>{{ user.fabujifen | float }}</span>提现佣金：<span>{{ user.money |float}}</span></li>
+                    <li class="c02">
+                        发布积分：<span>{{ user.fabujifen | float }}</span>提现佣金：<span>{{ user.money |float }}</span></li>
                     <li class="c03">兑换无忧比例：<span>2万发布积分=1元佣金</span>，请在有足够的发布积分，完成兑换。</li>
                 </ul>
             </div>

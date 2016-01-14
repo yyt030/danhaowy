@@ -16,7 +16,8 @@ bp = Blueprint('site', __name__)
 @bp.route('/index', methods=['GET'])
 def index():
     form = SigninForm()
-    return render_template('site/index.html', form=form)
+    user = g.user
+    return render_template('site/index.html', form=form, user=user)
 
 
 @bp.route('/banner', methods=['GET'])
@@ -27,6 +28,7 @@ def banner():
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = SigninForm()
+    user = g.user
     if request.method == 'POST':
         value = form.username.data
         password = form.password.data
@@ -56,7 +58,7 @@ def login():
             return render_template('tip.html', error=True, tip="请仔细填写您的账号密码，如果忘记，请返回点击找回密码选项，或者联系客服！", url="login")
     else:
 
-        return render_template('login.html', form=form)
+        return render_template('login.html', form=form, user=user)
 
 
 @bp.route('/get_pass', methods=['GET', 'POST'])
@@ -114,7 +116,7 @@ def reg():
 @require_visitor
 def news():
     id = request.args.get("id", type=int)
-    type = request.args.get("type","news")
+    type = request.args.get("type", "news")
     if id:
         info = Notice.query.get_or_404(id)
     else:
@@ -122,13 +124,12 @@ def news():
     return render_template('site/news_detail.html', info=info)
 
 
-
 @bp.route('/news_list', methods=['GET', 'POST'])
 @require_visitor
 def news_list():
-    type = request.args.get("type","news")
+    type = request.args.get("type", "news")
     if type:
-        info = Notice.query.filter(Notice.type==type)
+        info = Notice.query.filter(Notice.type == type)
     else:
         info = {}
     return render_template('site/news_list.html', info=info)

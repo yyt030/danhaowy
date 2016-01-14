@@ -751,6 +751,15 @@ def txlog():
     return render_template('login_user/txlog.html', txlogs=txlogs, page=page, page_all=page_all)
 
 
+@bp.route('/sj', methods=['GET', 'POST'])
+@require_user
+def sj():
+    """手机号码生成"""
+    user = g.user
+
+    return render_template('login_user/sj.html')
+
+
 @bp.route('/paylog', methods=['GET', 'POST'])
 @require_user
 def paylog():

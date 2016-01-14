@@ -51,6 +51,10 @@ class User(db.Model):
     default_express_id = db.Column(db.Integer, db.ForeignKey('express.id'))
     default_express = db.relationship('Express', backref=db.backref('users', lazy='dynamic'))
 
+    # 支付宝账户，姓名
+    alipay_name = db.Column(db.String(50))
+    alipay_account = db.Column(db.String(50))
+
     @property
     def active_time(self):
         """从Redis中获取用户最后活跃时间，若不存在，则返回当前时间"""

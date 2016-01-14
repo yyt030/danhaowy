@@ -856,6 +856,33 @@ def chgpwd():
     return render_template('login_user/chgpwd.html', form=form, user=user)
 
 
+@bp.route('/alipay', methods=['GET', 'POST'])
+@require_user
+def alipay():
+    user = g.user
+    form = RegisterForm()
+    if request.method == 'POST':
+        if user.alipay_account or user.alipay_name:
+            tip = "不能重复绑定"
+            return render_template('error.html', error=tip, url="")
+
+        name = request.form.get('alipayxm', '')
+        account = request.form.get('alipayuser', '')
+        user.alipay_name = name
+        user.alipay_account = account
+        db.session.add(user)
+        db.session.commit()
+        tip = "绑定成功"
+        return render_template('error.html', error=tip, url="")
+
+    if user.alipay_account or user.alipay_name:
+        done = 1
+    else:
+        done = 0
+
+    return render_template('login_user/alipay.html', user=user, form=form, done=done)
+
+
 @bp.route('/sellerlist')
 @require_user
 def sellerlist():

@@ -40,7 +40,7 @@
                             <td class="rz03">{{ txlog.user.name }} / {{ txlog.id }}</td>
                             <td class="rz05">￥{{ txlog.money |float }}</td>
                             <td class="rz04">{{ txlog.create_time }}</td>
-                            <td class="rz05" style="color:#F00">{{ txlog.status }}.</td>
+                            <td class="rz05" style="color:#F00">{{ txlog.get_status }}.</td>
                         </tr>
                     {% endfor %}
                 </table>

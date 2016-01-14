@@ -1,0 +1,183 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>佣金提现 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <liNK rel="stylesheet" type="text/css" href="/static/css/public.css"/>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .btn-primary {
+            margin: 0px;
+            padding: 4px 12px;
+            vertical-align: middle;
+            border-width: 1px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.247059);
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            line-height: 20px;
+            font-size: 14px;
+            display: inline-block;
+            cursor: pointer;
+            box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px;
+            text-shadow: rgba(0, 0, 0, 0.247059) 0px -1px 0px;
+            background-image: linear-gradient(rgb(0, 136, 204), rgb(0, 85, 204));
+            background-color: rgb(61, 159, 244);
+            background-repeat: repeat-x;
+        }
+
+        -->
+        .tbtr {
+            margin: 0px;
+            padding: 0px 3px;
+            border-width: 0px 0px 1px;
+            border-bottom-style: dashed;
+            border-bottom-color: rgb(231, 231, 231);
+            font-family: 微软雅黑;
+            line-height: 30px;
+        }
+
+        .input-medium {
+            margin: 0px;
+            padding: 4px 6px;
+            vertical-align: middle;
+            border: 1px solid rgb(204, 204, 204);
+            height: 20px;
+            width: 150px;
+            transition: border 0.2s linear, box-shadow 0.2s linear;
+            -webkit-transition: border 0.2s linear, box-shadow 0.2s linear;
+            box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px inset;
+            color: rgb(85, 85, 85);
+            line-height: 20px;
+            background: url(/static/WdatePicker/skin/datePicker.gif) 100% 50% no-repeat rgb(255, 255, 255);
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script type="text/javascript">
+        function money() {
+            var txje = document.form1.txtmoney.value
+            if (txje == "" || txje < 10) {
+                alert("提现的佣金不能为空或提现佣金不能小于10元")
+                return false
+            } else {
+                var txje1 = txje / 1000
+                if (txje1 <= 0.5) {
+                    txje1 = 0.5
+                } else {
+                    if (txje1 >= 10) {
+
+                        txje1 = 10
+                    } else {
+                        txje1 = txje1
+                    }
+                }
+
+                if (confirm("你提现的佣金为：" + txje + " 元,服务费：" + txje1 + "\n佣金提现收取0.1%服务费,服务费最低0.50元,最高10元\n您确定要提现吗？")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> &gt; 会员中心 &gt; 佣金提现{% endblock %}
+{% block content %}
+    <td valign="top" width="624">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>1、尊敬的用户您好！平台提现暂时只有支付宝提现方式。</li>
+                    <li>2、当天申请的提现统一在第二天22点处理提现到账！</li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+
+            <div class="hei">
+                <H1>佣金提现</H1>
+            </div>
+
+            <table class="tba" cellspacing="0" cellpadding="0" align="left"
+                   style="margin: 0px; padding: 0px; border-collapse: collapse; max-width: 100%; border-spacing: 0px; border: 0px; font-family: 微软雅黑;">
+                <tbody>
+                <form name="form1" method="post" action="tx?action=ok" id="form1" onsubmit="return money()">
+                    {{ form.csrf_token }}
+                    <tr>
+                        <td height="40" align="right" class="tbtr">当前可提现金额：</td>
+                        <td class="tbtr"><font color="red">{{ user.money|float }}</font></td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">提现冻结金额：</td>
+                        <td class="tbtr"><font color="red">{{ pending_money }}</font></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td valign="center" width="150" align="middle" class="tbtr"><img
+                                src="/static/images/pay_alipay.gif"
+                                alt="2" class="pjmg"
+                                style="vertical-align: top;"/>
+                        </td>
+                        <td style="margin: 0px; padding: 0px 3px; border-width: 0px 0px 1px; border-bottom-style: dashed; border-bottom-color: rgb(231, 231, 231); font-family: 微软雅黑; line-height: 20px;">
+                            <p><font color="#b10000">提现温馨提醒</font><br/>
+                                使用提现服务前需注意如下事项：<span class="Apple-converted-space"></span><span class="style1">本平台只支持支付宝提现</span>
+                            </p>
+                            <p>提现至少必须是整数，比如100元，不能是100.10元。最少提现金额为10元。</p></td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">支付宝姓名：</td>
+                        <td class="tbtr"><label>
+                            <input type="text" name="txtpayid" value="{{ user.alipay_name }}" id="txtpayid"
+                                   class="input-medium"
+                                   disabled="disabled"/>
+                            <font color="red">（已绑定支付宝的姓名）</font></label></td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">支付宝帐号：</td>
+                        <td class="tbtr"><input type="text" name="txtname" value="{{ user.alipay_account }}"
+                                                id="txtname"
+                                                class="input-medium" disabled="disabled"/>
+                            <font color="red">（已绑定支付宝的帐号）</font></td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">提现金额：</td>
+                        <td class="tbtr"><input name="txtmoney" id="txtmoney" type="text" value=""
+                                                onkeyup="value=value.replace(/[^\d.-]/g,'')" class="input-medium"/></td>
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">&nbsp;</td>
+                        <td class="tbtr">佣金提现收取0.1%服务费,服务费最低0.50元/笔,最高10.00元/笔</td>
+
+                    </tr>
+                    <tr>
+                        <td height="40" align="right" class="tbtr">&nbsp;</td>
+                        <td class="tbtr"><input name="btnSubmit" id="btnSubmit" type="submit" value="提 交"
+                                                class="btn-primary"/></td>
+
+                    </tr>
+                </form>
+                </tbody>
+            </table>
+
+        </div>
+
+    </td>
+    <td width="163"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

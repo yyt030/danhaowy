@@ -49,5 +49,14 @@ class Txlog(db.Model):
     money = db.Column(db.Float, nullable=False)
     user_id = db.Column(db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('txlogs', lazy='dynamic'))
-    status = db.Column(db.Enum('提现成功', '提现失败'))
+    status = db.Column(db.Enum('0', '1', '2'), default='0')
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
+
+    @property
+    def get_status(self):
+        s = {
+            '0': u'提现冻结',
+            '1': u'提现成功',
+            '2': u'提现失败'
+        }
+        return s[self.status]

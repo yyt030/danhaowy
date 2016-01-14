@@ -1,0 +1,65 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>支付宝绑定 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .btn {
+            background: url(/static/images/stkb.gif) repeat-x;
+            color: #fff;
+            border: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 支付宝绑定{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <DIV class="midmess">
+            <DIV class="bt01">支付宝绑定</DIV>
+            <DIV class="per_nraa">
+                <TABLE width="655" height="208" border="0" cellPadding="0" cellSpacing="0" style="width: 655px;">
+                    <form name="form1" method="post" action="alipay" id="form1">
+                        {{ form.csrf_token }}
+                        <TR>
+                            <td height="63" align="center"><img src="/static/images/pay_alipay.gif"/></td>
+                            <TD width="445" align="left" style="color:#F00">*温馨提示：支付宝绑定后禁止修改,绑定前请仔细核对。</TD>
+                        </TR>
+                        <TR>
+                            <td height="37" align="right" valign="middle"><p>支付宝姓名：</p></td>
+                            <TD colspan="2"><p>
+                                <INPUT class="bs" size=16 type="text" name="alipayxm"
+                                       value="{{ user.alipay_name |trim }}"
+                                       {% if done == 1 %}readonly="readonly" {% endif %}>
+                            </p></TD>
+                        </TR>
+                        <TR>
+                            <td height="40" align="right" valign="middle">支付宝帐号：</td>
+                            <TD colspan="2"><INPUT class="bs" size="16" type="text" name="alipayuser"
+                                                   value="{{ user.alipay_account }}"
+                                                   {% if done == 1 %}readonly="readonly" {% endif %}></TD>
+
+                        </TR>
+                        {% if done == 0 %}
+                            <TR>
+                                <TD></TD>
+                                <TD width="144" align="center"><input name="submit" type="submit" class="btnumoff"
+                                                                      value="绑定"/></TD>
+                                <TD width="76" align="left">&nbsp;</TD>
+                                <TD></TD>
+                            </TR>
+                        {% endif %}
+                    </form>
+                </TABLE>
+            </DIV>
+        </DIV>
+    <td width="38"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

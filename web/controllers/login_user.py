@@ -883,6 +883,34 @@ def alipay():
     return render_template('login_user/alipay.html', user=user, form=form, done=done)
 
 
+@bp.route('/tx', methods=['GET', 'POST'])
+@require_user
+def tx():
+    """佣金提现"""
+    user = g.user
+    form = RegisterForm()
+
+    from sqlalchemy import func
+    pending_money = db.session.query(func.sum(Txlog.money)).filter(Txlog.user_id == user.id).scalar()
+
+    if request.method == 'POST':
+        txtmoney = request.form.get('txtmoney', 0, type=int)
+        if txtmoney > user.money:
+            tip = "当前可用余额不足, %0.2f" % user.money
+            return render_template('error.html', error=tip, url="")
+
+        user.money -= txtmoney
+        txlog = Txlog(user_id=user.id, money=txtmoney)
+
+        db.session.add(user)
+        db.session.add(txlog)
+        db.session.commit()
+
+        tip = "提交成功，稍后等管理员处理"
+        return render_template('error.html', error=tip, url="")
+    return render_template('login_user/tx.html', user=user, form=form, pending_money=pending_money)
+
+
 @bp.route('/sellerlist')
 @require_user
 def sellerlist():

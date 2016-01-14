@@ -682,9 +682,24 @@ def tuiguang():
 @bp.route('/paywyb', methods=['GET'])
 @require_user
 def paywyb():
-    """账号充值"""
+    """充值无忧币"""
     form = SigninForm()
-    return render_template('site/index.html', form=form)
+    user = g.user
+
+    return render_template('login_user/paywyb.html', form=form,user=user)
+
+
+@bp.route('/PaySkip', methods=['POST'])
+@require_user
+def payskip():
+    """充值无忧币"""
+    user = g.user
+    optEmail = request.form.get('optEmail')
+    payAmount = request.form.get('payAmount', 0, type=int)
+    memo = request.form.get('memo')
+    title = request.form.get('title')
+
+    return render_template('login_user/payskip.html', optEmail=optEmail, payAmount=payAmount, memo=memo)
 
 
 @bp.route('/upseller', methods=['GET', 'POST'])

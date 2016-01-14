@@ -1,0 +1,391 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>无优币购买 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        .midmess .chongzhi {
+            padding-top: 0px;
+            _margin-top: 0px;
+            _padding-top: 0px;
+        }
+
+        s {
+            padding-top: 10px;
+        }
+
+        .zong {
+            width: 100%;
+        }
+
+        .zong .zong_mail {
+            width: 750px;
+            margin: auto;
+            position: relative;
+        }
+
+        .zong th {
+            font-size: 12px;
+            background: url(/static/images/bg_table.jpg) repeat-x 0 -26px;
+            line-height: 22px;
+            height: 24px !important;
+            height: 22px;
+            font-weight: bold;
+        }
+
+        .zong th, .zong td {
+            line-height: 24px;
+            text-align: center !important;
+            color: #5097D8;
+            height: 24px;
+        }
+
+        .zong table {
+            background: #99d3fb;
+            margin-top: -5px !important;
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: inherit;
+            border-spacing: 1px;
+        }
+
+        .zong td {
+            background: #fff;
+        }
+
+        .zdcz_01 {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .zdcz_01 span.fr {
+            background: url(/static/images/help_ico.png) no-repeat left center;
+            padding: 0 0 0 20px;
+        }
+
+        user agent stylesheetstrong, b {
+            font-weight: bold;
+        }
+
+        .zdcz_01 {
+            line-height: 30px;
+        }
+
+        .zdcz_02 {
+            background: #fffee8;
+            border: 1px solid #f5d3a1;
+            height: 107px;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .zdcz_03 {
+            background: url(/static/images/step_01.png) no-repeat left top;
+            width: 153px;
+            height: 107px;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .zdcz_07 {
+            background: url(/static/images/step_jt.png) no-repeat center center;
+            height: 60px;
+            clear: both;
+        }
+
+        .zdcz_02 {
+            background: #fffee8;
+            border: 1px solid #f5d3a1;
+            height: 107px;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .zdcz_08 {
+            background: url(/static/images/step_02.png) no-repeat left top;
+            width: 153px;
+            height: 107px;
+        }
+
+        .zdcz_04 {
+            padding: 15px 0;
+            width: 320px;
+        }
+
+        .zdcz_04_1 {
+            padding: 1px 0;
+            width: 150px;
+            border-right: 1px dotted #CCC
+
+        }
+
+        .zdcz_05 {
+            width: 200px;
+            padding: 30px 0 0 0;
+        }
+
+        .zdcz_05_1 {
+            width: 435px;
+            padding-left: 1px;
+        }
+
+        .zdcz_051 {
+            width: 200px;
+            padding: 10px 20px 1px;
+        }
+
+        .zdcz_06 {
+            background: url(/static/images/Alipay_01.png) no-repeat left top !important;
+            width: 231px;
+            height: 50px;
+            border: none;
+            display: block;
+            cursor: pointer;
+        }
+
+        .container {
+            text-align: left;
+        }
+
+        .zdcz_11 {
+            background: url(/static/images/step_03.png) no-repeat left top;
+            width: 153px;
+            height: 107px;
+        }
+
+        .zdcz_12 {
+            padding: 20px;
+            width: 500px;
+        }
+
+        .zdcz_12 p {
+            line-height: 34px;
+            font-size: 14px;
+        }
+
+        .zdcz_12 p span {
+            font-size: 24px;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #C00;
+            padding: 0 10px;
+        }
+
+        #varleft a {
+            float: right;
+            margin-right: 20px;
+        }
+
+        .divshow {
+            width: auto;
+            position: absolute;
+            background-color: #FFFFFF;
+            z-index: 20;
+            padding-top: 2px;
+            margin-top: -15px;
+            left: 280px;
+        }
+
+        .moneycheck2 {
+            color: #000;
+            width: 240px;
+            height: 34px;
+            font-size: 15px;
+            color: #FF0000;
+            font-weight: bold;
+            border: 1px solid #669900;
+            line-height: 36px;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script language="javascript">
+
+        function CheckForm() {
+            if (document.Form1.MainC_TextBox.value.length < 1) {
+                alert("请填写支付宝交易号,支付宝交易号不能为空!");
+                document.Form1.MainC_TextBox.focus();
+                return false;
+            }
+        }
+
+
+        function payhtml() {
+            art.dialog({
+                id: 'testID2',
+                title: '查看支付宝交易号流程(图文)',
+                content: '<img src="/static/images/jcpay.gif"  />',
+                width: 400, height: 170,
+                lock: true,
+                button: [{
+                    name: '我已清楚',
+                    callback: function () {
+                        this.title('亲,请稍等,一秒后自动关闭！').time(1);
+                        return false;
+                    },
+                    focus: true
+                },
+                    {
+                        name: '关闭我'
+                    }
+                ]
+            });
+        }
+        ;
+
+        function Change(i) {
+            if (i == 1) {
+                $("#type_1").css('display', 'block')
+                $("#type_2").css('display', 'none')
+            } else {
+                $("#type_1").css('display', 'none')
+                $("#type_2").css('display', 'block')
+            }
+        }
+
+    </script>
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无优币购买{% endblock %}
+{% block content %}
+    <td valign="top" width="756">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="midmess">
+                <!--温馨提示框-->
+                <div class="mess_all">
+                    <h1>温馨提示：</h1>
+                    <ul>
+                        <li>无优币最低充值1元,最高无限制！</li>
+                        <li>官方唯一无忧币充值支付宝：paywuyou@163.com ，其他一律为骗子,请勿充值！</li>
+                        <li><font color=red>温馨提醒：充值金额低于10元,不赠送无忧积分。</font></li>
+
+                    </ul>
+                </div>
+                <!--温馨提示框结束-->
+                <div style="padding-top: 10px; _margin-top: 10px; _padding-top: 10px;">
+                    <div id="Notice" class="notice" style="font-size:13px">温馨提示： 支付宝转账时<font
+                            color="#FF0000">“付款说明”</font>请填写网站会员帐号,转账成功后,30秒内自动到账。<br/>温馨提示： 支付宝转账时如未填写<font
+                            color="#FF0000">"付款说明"</font>请等待30秒后,第二步手动填写或粘贴支付宝交易号,并点击充值即可到账！
+                    </div>
+                </div>
+                <div class="chongzhi">
+                    <ul class="chong">
+                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(1)">PC网页充值</a></li>
+                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(2)">二维码手机充值</a>
+                        </li>
+                        <li class="fubao"><a id="lbankpay" href="/News.asp?id=729" target="_blank">无优币充值流程</a></li>
+                    </ul>
+
+                    <div class="clear">&nbsp;</div>
+                    <div class="hr"></div>
+                    <div class="sure">
+                        <div id="divbankpay" class="sure_top">
+                            <div class="box_detail">
+
+                                <div class="zdcz_02" id="type_1">
+                                    <div class="zdcz_03 fl"></div>
+                                    <form method="post" target="_blank" action="PaySkip" accept-charset="GBK"
+                                          onsubmit="document.charset='GBK';" novalidate="novalidate">
+                                        {{ form.csrf_token }}
+                                        <div class="zdcz_04 fl">
+                                            <p>官方支付宝：
+                                                <input type="hidden" value="mengjunz" name="memo"/>
+
+                                                <input type="text" name="optEmail" value="paywuyou@163.com"
+                                                       readonly="readonly" class="bs"
+                                                       style="background-color:#379BF8;color:#FFFFFF; font-weight:bold; width:180px;_height:15px;_line-height:15px;"/>
+                                            </p>
+
+                                            <p style="position:relative;margin-top:15px;_margin-top:10px;_height:15px;_line-height:15px;">
+                                                充值金额： <span
+                                                    style=" position:absolute;left:65px;width:180px;overflow:hidden;">
+                  <input name="payAmount" type="text" id="payAmount" size="5" value="50"
+                         style="_height:15px;_line-height:15px; overflow:hidden; border:1px solid #CBCBCB;"/>
+                  元 <font color="red">*最低充值1元</font> </span></p>
+                                        </div>
+                                        <input type="hidden" name="title" id="title" value="mengjunz"/>
+                                        <div class="zdcz_05 fl"><a id="aPayAlipay" href="#" target="_blank">
+                                            <input type="submit" class="zdcz_06" value=""/>
+                                        </a></div>
+                                    </form>
+                                </div>
+
+                                <div class="zdcz_02" id="type_2" style="display:none;">
+                                    <div class="zdcz_03 fl"></div>
+                                    <div class="zdcz_04_1 fl">
+                                        <img src="/static/images/qrcode.jpg" width="105" height="105"/>
+                                    </div>
+                                    <div class="zdcz_05_1 fl">
+
+                                        <p style="font-size:13px; font-weight:bold">1、请先打开手机“支付宝钱包”,点击扫一扫,扫描左侧二维码图片。</p>
+                                        <p style="font-size:13px; font-weight:bold">2、扫描完毕后,点击转账,付款金额任意填写,备注填写<font
+                                                color=red>“mengjunz”</font>,点击确认转账。</p>
+                                        <p style="font-size:13px; font-weight:bold">
+                                            3、转账完毕后,已备注的30内自动到账,未备注的请在第二步提交交易号！</p>
+
+                                    </div>
+                                </div>
+                                <div class="zdcz_07"></div>
+                                <div class="zdcz_02">
+                                    <div class="zdcz_08 fl"></div>
+
+                                    <div class="aspNetHidden"></div>
+                                    <div class="zdcz_10 fl">
+                                        <p style="position:relative; margin-top:8px;*margin-top:20px;">
+                                            1、如您已付款成功了,款项会在10秒-30秒内自动充值的您的账户,请届时刷新本网址！</p>
+                                        <p style="position:relative; margin-top:8px;*margin-top:20px;"><font
+                                                color="#3333FF">2、如您付款时"付款说明"未填写网站账户名,请在下面手动提交交易号！</font></p>
+                                    </div>
+                                    <form name="Form1" id="Fomr1" method="post" action="paywyb?idkey=trading"
+                                          onSubmit="return CheckForm();">
+                                        {{ form.csrf_token }}
+                                        <div class="zdcz_10 fl" style="padding:1px 0">
+                                            <p style="position:relative; margin-top:8px;*margin-top:20px;">支付宝交易号：
+                                                <input name="MainC_TextBox" type="text" id="MainC_TextBox"
+                                                       class="moneycheck2" style="width:200px;"
+                                                       autoComplete="off"/></br>
+                                                <font style="color: red;font-size: 14px;line-height: 50px;padding-left: 95px;"
+                                                      id="btn_html">请填写支付宝已付款的交易号</font>
+                                            </p>
+                                        </div>
+
+                                        <div class="zdcz_051 fl" style=" margin-top:5px;">
+                                            <input name="btnEBankInPay" class="c_an" id="btnEBankInPay"
+                                                   style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"
+                                                   type="image" src="/static/images/chongzhi.gif"/></div>
+                                    </form>
+
+                                </div>
+                                <div class="zdcz_07"></div>
+                                <div class="zdcz_02">
+                                    <div class="zdcz_11 fl"></div>
+                                    <div class="zdcz_12 fl">
+                                        <p>当前帐号余额：<span>{{ user.wuyoubi }}</span>元<br/>如果你充值未能够成功或充值遇到问题，请联系客服！</p>
+                                    </div>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+
+                </div>
+
+            </div>
+
+        </DIV>
+    <td width="38"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div></div>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

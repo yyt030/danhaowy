@@ -1,0 +1,179 @@
+{% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>无忧积分兑换 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
+{% block page_css %}
+    <liNK rel="stylesheet" type="text/css" href="/static/css/public.css"/>
+    <style type="text/css">
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        <!--
+        .kda {
+            width: 192px;
+        }
+
+        .kdb {
+            width: 300px;
+        }
+
+        .kdc {
+            width: 50px;
+            text-align: center;
+        }
+
+        #wforder {
+            width: 85%;
+            height: 400px
+        }
+
+        .wftitle, .wforderr {
+            border-color: #CCCCCC;
+        }
+
+        .bdbox li {
+            width: 100%;
+        }
+
+        .bdbox li span.bdl {
+            width: 80px;
+        }
+
+        .bdbox li span.bdr {
+            width: 82%;
+        }
+
+        .bdbox li.product {
+            height: 32px;
+        }
+
+        .bdbox li.pay {
+            height: 90px;
+        }
+
+        .bdbox li.guest {
+            height: 30px;
+        }
+
+        .bdbox li.guest2 {
+            height: 200px;
+        }
+
+        .bdbox li span.bdr textarea.guest {
+            height: 80px;
+        }
+
+        #wffahuo {
+            height: 450px;
+        }
+
+        .bdbox li.hmf {
+            height: 50px;
+        }
+
+        .bdbox li.zy {
+            height: 30px;
+        }
+
+        -->
+        .submit {
+            cursor: pointer;
+            color: #FFFFFF;
+            background: url(/static/images/v.gif) no-repeat 0 0;
+            width: 47px;
+            line-height: 21px;
+            height: 21px;
+            border: 0px;
+            padding: 0;
+        }
+    </style>
+{% endblock %}
+{% block page_js %}
+    <script>function cop() {
+        var
+                str = document.getElementById("jifen").value;
+        document.getElementById("money").innerHTML = str / 10 + " 元";
+    }
+
+    </script>
+
+{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无忧积分兑换{% endblock %}
+{% block content %}
+    <td valign="top" width="624">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>1. 每次充值100无忧币=10无忧积分,10无忧积分可兑换1无忧币</li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+
+            <div class="come">
+                <p></p>
+                <ul>
+                    <li class="c01">亲爱的 <span>{{ user.name }}</span> 欢迎您！</li>
+                    <li class="c02">无忧币：<span>{{ user.wuyoubi }}</span>
+                        无忧积分：<span>{{ user.wuyoujifen }}</span></li>
+                    <li class="c03">兑换无忧比例：<span>10积分=1元</span>，请在有足够的积分，完成兑换。</li>
+                </ul>
+            </div>
+
+            <div class="hei">
+                <H1>无忧积分兑换</H1>
+            </div>
+            <div class="bdbox">
+                <ul>
+                    <li class="zy"><span class="bdl">注意</span>
+                        <span class="bdr">
+                            <font style="color: rgb(0, 115, 0);">兑换比例 ： 10：1</font>
+                        </span>
+                    </li>
+
+                    <form name="thisForm" method="post" action="jifen?idkey=duihuan" accept-charset="gbk"
+                          onSubmit="document.charset='gbk';" onKeyDown="if(event.keyCode==13){return false;}">
+                        {{ form.csrf_token }}
+                        <!--订单编号-->
+                        <li><span class="bdl">无忧积分</span>
+                            <span class="bdr"><font id="bmoney" color="#FF0000">{{ user.wuyoujifen }}</font>&nbsp;分</span>
+
+                        </li>
+
+                        <!--宝贝拍下时间-->
+                        <li><span class="bdl">兑换积分</span>
+                              <span class="bdr">
+                                <input id="jifen" name="jifen" type="text" class="bs"
+                                       style="width:100px;text-align:center;"
+                                       onKeyUp="value=value.replace(/[^\d.]/g,'')" onpropertychange="cop()"
+                                       oninput="cop()" maxlength="8"/>
+                                【请填写要兑换的积分】</span>
+                        </li>
+
+                        <!--快递类型--><!--数量-->
+                        <li><span class="bdl">无忧币</span> <span class="bdr"><font id="money"
+                                                                                 color="#FF0000"></font></span></li>
+                        <!--发货地址--><!--收货地址-->
+                        <li class="next">
+                            <input name="wfsubmit" type="submit" class="suba" value="兑换无忧币"/>&nbsp;
+                            <input name="wfreset" class="subb" type="reset" value="重置"/>
+                        </li>
+                    </form>
+                </ul>
+            </div>
+
+        </div>
+
+    </td>
+    <td width="163"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
+{% endblock %}

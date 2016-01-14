@@ -35,7 +35,7 @@ class User(db.Model):
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Float(10, 2), default=0.0)
 
-    jifen = db.Column(db.Float(10, 2), default=0.0)
+    fabujifen = db.Column(db.Float(10, 2), default=0.0)
 
     wuyoubi = db.Column(db.Integer, default=0)
     wuyoujifen = db.Column(db.Integer, default=0)

@@ -686,7 +686,7 @@ def paywyb():
     form = SigninForm()
     user = g.user
 
-    return render_template('login_user/paywyb.html', form=form,user=user)
+    return render_template('login_user/paywyb.html', form=form, user=user)
 
 
 @bp.route('/PaySkip', methods=['POST'])
@@ -700,6 +700,29 @@ def payskip():
     title = request.form.get('title')
 
     return render_template('login_user/payskip.html', optEmail=optEmail, payAmount=payAmount, memo=memo)
+
+
+@bp.route('/jifen', methods=['GET', 'POST'])
+@require_user
+def jifen():
+    """充值无忧币"""
+    user = g.user
+    form = RegisterForm()
+    if request.method == 'POST':
+        jifen = request.form.get('jifen', 0, type=float)
+        if jifen > user.wuyoujifen:
+            tip = '无忧积分不足!'
+            return render_template('error.html', error=tip, url="")
+
+        user.wuyoujifen -= jifen
+        user.wuyoubi += jifen / 10
+        db.session.add(user)
+        db.session.commit()
+
+        tip = '积分兑换成功!'
+        return render_template('error.html', error=tip, url="")
+
+    return render_template('login_user/jifen.html', user=user, form=form)
 
 
 @bp.route('/upseller', methods=['GET', 'POST'])
@@ -852,9 +875,9 @@ def sellerjf():
     from decimal import Decimal
     jifen = request.form.get('jifen', 0.0, type=Decimal)
     if request.method == 'POST':
-        if user.jifen >= jifen:
+        if user.fabujifen >= jifen:
             user.money += jifen * Decimal(.00005)
-            user.jifen -= jifen
+            user.fabujifen -= jifen
             db.session.add(user)
             db.session.commit()
             tip = "兑换积分成功！"

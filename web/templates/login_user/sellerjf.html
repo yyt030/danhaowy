@@ -80,7 +80,7 @@
     <script>function cop() {
         var str = document.getElementById("jifen").value;
         var fen =
-        {{ user.jifen|int }}
+        {{ user.fabujifen|int }}
         var re = /[^0-9]/;
         if (!re.test(str) == true) {
             if (str * 1 > fen * 1) {
@@ -101,7 +101,7 @@
         var
                 str = document.getElementById("jifen").value;
         var fen =
-        {{ user.jifen|int }}
+        {{ user.fabujifen|int }}
         if (str * 1 > fen * 1) {
             alert("输入积分已超过当前剩余发布积分！");
             return false
@@ -144,7 +144,7 @@
             <div class="come">
                 <ul>
                     <li class="c01">亲爱的 <span>mengjunz</span> 欢迎您！</li>
-                    <li class="c02">发布积分：<span>{{ user.jifen | float }}</span>提现佣金：<span>{{ user.money |float}}</span></li>
+                    <li class="c02">发布积分：<span>{{ user.fabujifen | float }}</span>提现佣金：<span>{{ user.money |float}}</span></li>
                     <li class="c03">兑换无忧比例：<span>2万发布积分=1元佣金</span>，请在有足够的发布积分，完成兑换。</li>
                 </ul>
             </div>
@@ -165,7 +165,7 @@
                         {{ form.csrf_token }}
                         <li><span class="bdl">发布积分</span>
                             <span class="bdr"><font id="bmoney"
-                                                    color="#FF0000">{{ user.jifen |float }}</font>&nbsp;分</span>
+                                                    color="#FF0000">{{ user.fabujifen |float }}</font>&nbsp;分</span>
 
                         </li>
 

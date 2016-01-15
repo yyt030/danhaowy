@@ -30,8 +30,10 @@ class User(db.Model):
     password = db.Column(db.String(200))
     role = db.Column(db.String(20), default='member')
     create_time = db.Column(db.DateTime, default=datetime.now)
-
+    # 是否激活
     is_active = db.Column(db.Boolean, default=False)
+    # 是否卖家
+    is_seller = db.Column(db.Boolean, nullable=False, default=False)
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Float(10, 2), default=0.0)
 

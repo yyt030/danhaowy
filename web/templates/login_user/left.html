@@ -47,9 +47,11 @@
             <li><a href="/login_user/sellerjf"><span>发布积分兑换</span></a>
                 <img alt="" src="/static/images/midnew.gif">
             </li>
-            <li><a href="/login_user/upseller"><span>申请卖家</span></a>
-                <img alt="" src="/static/images/midnew.gif">
-            </li>
+            {% if not g.user.is_seller %}
+                <li><a href="/login_user/upseller"><span>申请卖家</span></a>
+                    <img alt="" src="/static/images/midnew.gif">
+                </li>
+            {% endif %}
         </ul>
     </div>
     <div class="new_left">

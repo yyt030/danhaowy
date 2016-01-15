@@ -43,7 +43,7 @@ class Config(object):
     SENTRY_DSN = ''
 
     # 查询分页
-    FLASKY_PER_PAGE = 5
+    FLASKY_PER_PAGE = 20
 
     # Host string, used by fabric
     HOST_STRING = "ubuntu@182.254.152.46"

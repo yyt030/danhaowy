@@ -99,22 +99,22 @@ function showhtml() {
             var title = xmltitle[i].firstChild.data;
             var jh = xmltitle[i].getAttribute("jh");
             if (title == "loginerror") {
-                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>登录已经失效,请重新登录！</div>");
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/error_01.png'/>登录已经失效,请重新登录！</div>");
             }
             if (title == "tokenerror") {
-                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>提交失败,请重新提交查询！</div>");
+                gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/error_01.png'/>提交失败,请重新提交查询！</div>");
             }
             if (jh == 0) {
-                gethtml("jhs", "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'>您好，您当前帐号没有激活,查询只显示10条单号。帐号激活后,查询显示所有单号。<a href='wybjihuo.asp'><img src='images/jihuo.gif'  border='0' align='top' title='点击此按钮激活帐号' /></a></div>");
+                gethtml("jhs", "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'>您好，您当前帐号没有激活,查询只显示10条单号。帐号激活后,查询显示所有单号。<a href='wybjihuo'><img src='/static/images/jihuo.gif'  border='0' align='top' title='点击此按钮激活帐号' /></a></div>");
             }
             if (title == "没有") {
-                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='images/error_01.png'/>未查找到,请扩大查找范围! <a href='/News.asp?id=48' target='_blank'>>>点击查看帮助<</a> <br /><br />未查找到? 建议您尝试发空包！<a href='buykongbao.asp' target='_blank' class='btn'>我要发空包</a></div>";
+                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='/static/images/error_01.png'/>未查找到,请扩大查找范围! <a href='/News.asp?id=48' target='_blank'>>>点击查看帮助<</a> <br /><br />未查找到? 建议您尝试发空包！<a href='buykongbao' target='_blank' class='btn'>我要发空包</a></div>";
                 gethtml("imglist");
             } else if (title == "timererror") {
-                imglist = "<div style='color:red;text-align:center;'><img src='face/018.gif'/>压力山大，由于您查询过于频繁,请歇歇,预计3秒内可再次查询！</div>";
+                imglist = "<div style='color:red;text-align:center;'><img src='/static/face/018.gif'/>压力山大，由于您查询过于频繁,请歇歇,预计3秒内可再次查询！</div>";
                 gethtml("imglist");
             } else if (title == "codeerror") {
-                imglist = "<div style='color:red;text-align:center;'><img src='images/error_01.png'/>您输入的验证码错误,请重新输入后在提交查询!</div>";
+                imglist = "<div style='color:red;text-align:center;'><img src='/static/images/error_01.png'/>您输入的验证码错误,请重新输入后在提交查询!</div>";
                 $("#code").val("");
                 getcode();
                 gethtml("imglist");

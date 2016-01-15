@@ -502,14 +502,14 @@ def seller():
             success_count = 0
             failed_count = 0
             contents = request.form.get('r')
-            content_list = contents.split('%0A')
             import re
+            content_list = re.split(r'\n', contents)
             for record in content_list:
                 order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
                               send_addr_city=send_addr_city, send_addr_county=send_addr_county,
                               tracking_company=tracking_company, is_scan=is_scan)
 
-                record = re.split(r'%7C|%20', record)
+                record = re.split(r'[ |]', record)
                 if len(record) < 4:
                     failed_count += 1
                     continue

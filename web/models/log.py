@@ -16,7 +16,8 @@ class Paylog(db.Model):
     alipay_no = db.Column(db.String(50))
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
     # 充值状态
-    status = db.Column(db.Enum('已支付', '待确认', '未支付'), default='已支付')
+    # status = db.Column(db.Enum('已支付', '待确认', '未支付'), default='已支付')
+    status = db.Column(db.String(10), default='已支付')
     # 记录内容
     action = db.Column(db.String(30), nullable=False)
     user_id = db.Column(db.ForeignKey('user.id'))

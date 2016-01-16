@@ -143,7 +143,7 @@ function showhtml() {
                 }
                 imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
                 imglist += "<td style='text-align: center;'>发货地址：" + fh + "<br/><font color=#EE5C42>收货地址：" + sh + "</font></td>";
-                if (sm == 0 || sm == 2) {
+                if (sm == 0 || sm == 2 ||sm == 1) {
                     imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='点击查询状态' onClick=Qikd('" + kda + "',1,'" + Qid + "','0')><img src='/static/images/so.jpg'></a></td>"
                     imglist += "<td style='text-align: center;'><input type='button' id='fs" + Qid + "' class='btnumey' value='领  取' onClick=Qik('" + Qid + "','" + sm + "') style='cursor:hand;margin-top: 9px'></td>";
                 } else {
@@ -302,7 +302,7 @@ function shopshowhtml() {
                 imglist += "<td style='line-height: 40px;text-align:center;'>" + title + "</td>";
                 imglist += "<td style='text-align: center;'>发货地址：" + fh + "<br/><font color=#EE5C42>收货地址：" + sh + "</font></td>";
                 imglist += "<td style='color:#2E2EFE;line-height: 40px;text-align:center;' id='nn" + Qid + "'>" + shopmoney + "/元</td>";
-                if (sm == 0 || sm == 2) {
+                if (sm == 0 || sm == 2 || sm == 1) {
                     imglist += "<td style='color: #1E90FF;line-height: 40px;text-align:center;' id='qs" + Qid + "'>点击查询<a href='javascript:' title='录入时间：" + Time + "' onClick=Qikd('" + kda + "',1,'" + Qid + "','1')><img src='/static/images/so.jpg'></a></td>"
                 } else {
                     imglist += "<td style='line-height: 40px;text-align:center;'><font color='red'>" + sm + "</font><a href='javascript:' title='点击查询状态' onClick=sncx('" + escape(sm) + "&nbsp;" + escape(saomiaotxt) + "')><img src='/static/images/so.jpg'></a></td>";

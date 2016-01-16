@@ -85,7 +85,7 @@
             <li><a href="/login_user/sj"><span>手机号码生成</span></a><img alt="" src="/static/images/midnew.gif">
             </li>
             <li><a href="/login_user/tuiguang">我的好友推广</a></li>
-            <li><a href="/login_user/msg"><span>站内信箱</span></a>
+            <li><a href="/login_user/msg"><span>站内信箱{% if g.msg_num %}({{ g.msg_num }}){% endif %}</span></a>
                 <img alt="" src="/static/images/midnew.gif">
             </li>
             <li><a href="" onclick="rusure() ;return false;">安全退出</a></li>

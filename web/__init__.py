@@ -1,7 +1,9 @@
 # coding: UTF-8
 
-import os
 import sys
+
+import os
+from .models import MailBox
 
 # 将project目录加入sys.path
 from flask.ext.cache import Cache
@@ -9,7 +11,7 @@ from flask.ext.cache import Cache
 project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 if project_path not in sys.path:
     sys.path.insert(0, project_path)
-from flask import Flask, request, url_for, g, render_template, session
+from flask import Flask, request, url_for, g, render_template
 from flask_wtf.csrf import CsrfProtect
 from flask.ext.uploads import configure_uploads
 from utils._redis import set_user_active_time
@@ -53,6 +55,7 @@ def create_app():
         g.user = get_current_user()
         if g.user:
             set_user_active_time(g.user.id)
+            g.msg_num = MailBox.query.filter(MailBox.recver_id == g.user.id, MailBox.is_read == False).count()
         pass
 
     from .utils.devices import Devices
@@ -193,7 +196,7 @@ def register_db(app):
 
 def register_routes(app):
     """注册路由"""
-    from controllers import site, login_user,admin
+    from controllers import site, login_user, admin
 
     app.register_blueprint(site.bp, url_prefix='')
     app.register_blueprint(login_user.bp, url_prefix='/login_user')

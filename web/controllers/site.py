@@ -45,7 +45,7 @@ def login():
 
             if user is not None and user.check_password(password):
                 signin_user(user)
-                user.address = 'localhost'  # TODO
+                user.address = request.headers.get('X-Real-Ip', request.remote_addr)
                 user.login_time = datetime.now()
                 db.session.add(user)
                 db.session.commit()

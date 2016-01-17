@@ -432,7 +432,15 @@ def shopqiso():
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:
-        send_addr_province, send_addr_city, send_addr_county = sa.split(' ')
+        send_addr = sa.split(' ')
+        send_addr_province, send_addr_city, send_addr_county = [''] * 3
+        if len(send_addr) == 1:
+            send_addr_province = send_addr
+        elif len(send_addr) == 2:
+            send_addr_province, send_addr_city = send_addr
+        elif len(send_addr) >= 3:
+            send_addr_province, send_addr_city, send_addr_county = send_addr[:3]
+
         if send_addr_province:
             query = query.filter(Order.send_addr_province == send_addr_province)
 
@@ -442,7 +450,15 @@ def shopqiso():
         if send_addr_county:
             query = query.filter(Order.send_addr_county == send_addr_county)
     if sb:
-        recv_addr_province, recv_addr_city, recv_addr_county = sb.split(' ')
+        recv_addr = sb.split(' ')
+        recv_addr_province, recv_addr_city, recv_addr_county = [''] * 3
+        if len(recv_addr) == 1:
+            recv_addr_province = recv_addr
+        elif len(recv_addr) == 2:
+            recv_addr_province, recv_addr_city = recv_addr
+        elif len(recv_addr) >= 3:
+            recv_addr_province, recv_addr_city, recv_addr_county = recv_addr[:3]
+
         if recv_addr_province:
             query = query.filter(Order.recv_addr_province == recv_addr_province)
 

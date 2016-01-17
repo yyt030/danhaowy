@@ -87,13 +87,20 @@ def qiso():
     if sm and kd != '0':
         query = query.filter(Order.is_scan == sm)
 
-    page = request.args.get('page', 1, type=int)
-    all_num = query.count()
-    page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
-    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
-    orders = pagination.items
+    if not user.is_active:
+        all_num = 10
+        page_all = page = 1
+        orders = query.limit(10).all()
+    else:
+        page = request.args.get('p', 1, type=int)
+        if page <= 0:
+            page = 1
+        all_num = query.count()
+        page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
+        pagination = query.order_by(Order.send_timestamp.desc()).paginate(
+                page, per_page=current_app.config['FLASKY_PER_PAGE'] or 40,
+                error_out=False)
+        orders = pagination.items
 
     sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders, start=1),
                                   page_every=current_app.config['FLASKY_PER_PAGE'] or 40,
@@ -395,7 +402,8 @@ def shopqiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
-    query = Order.query
+    # 查询没有卖出的单号　is_sell=0
+    query = Order.query.filter(Order.is_sell == 0)
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:
@@ -423,7 +431,9 @@ def shopqiso():
     if sm and kd != '0':
         query = query.filter(Order.is_scan == sm)
 
-    page = request.args.get('page', 1, type=int)
+    page = request.args.get('p', 1, type=int)
+    if page == 0:
+        page = 1
     all_num = query.count()
     page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
@@ -478,6 +488,9 @@ def seller():
     """
     form = SigninForm()
     user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     batch_flag = request.args.get('qi')
     if request.method == 'POST':
         seller_id = user.id
@@ -502,14 +515,14 @@ def seller():
             success_count = 0
             failed_count = 0
             contents = request.form.get('r')
-            content_list = contents.split('%0A')
             import re
+            content_list = re.split(r'\n', contents)
             for record in content_list:
                 order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
                               send_addr_city=send_addr_city, send_addr_county=send_addr_county,
                               tracking_company=tracking_company, is_scan=is_scan)
 
-                record = re.split(r'%7C|%20', record)
+                record = re.split(r'[ |]', record)
                 if len(record) < 4:
                     failed_count += 1
                     continue
@@ -926,6 +939,9 @@ def tx():
 def sellerlist():
     """已发布的单号"""
     user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     type = request.args.get('type', '')
     if type == 'delall':
         id_lists = request.args.getlist('uid')
@@ -961,6 +977,9 @@ def sellerlist():
 def sellerout():
     """已售出的单号"""
     user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
 
@@ -985,6 +1004,9 @@ def sellerout():
 def shoplog():
     """佣金记录"""
     user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
 
@@ -1008,6 +1030,10 @@ def shoplog():
 @require_user
 def sellerset():
     '''设置默认发货'''
+    user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     form = RegisterForm()
     return render_template('login_user/sellerset.html', form=form)
 
@@ -1018,6 +1044,9 @@ def sellerjf():
     '''发布积分兑换'''
     form = RegisterForm()
     user = g.user
+    if not user.is_seller:
+        return redirect(url_for('.upseller'))
+
     user = User.query.filter(User.id == user.id).first()
 
     from decimal import Decimal

@@ -52,7 +52,15 @@ class Order(db.Model):
             "shentong": u'申通',
             "zhongtong": u'中通',
             "quanfeng": u'全峰',
-            "huitong": u'汇通'
+            "huitong": u'汇通',
+            "ems": 'EMS',
+            "shunfeng": u'顺丰',
+            "bgpyghx": u'邮政包裹',
+            "yousu": u'优速',
+            "tiantian": u'天天',
+            "ems2": u'EMS经济',
+            "zjs": u'宅急送',
+            "kuaijie": u'快捷'
         }
         return com[self.tracking_company]
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from flask import g
+from flask import g, render_template
 from functools import wraps
 from flask import abort, redirect, url_for, flash
 
@@ -29,6 +29,20 @@ def require_user(func):
 
     return decorator
 
+
+
+def require_active(func):
+    """需要激活"""
+
+    @wraps(func)
+    def decorator(*args, **kwargs):
+        if not g.user.is_active:
+
+            tip = "%s您当前账号还未激活,请先激活账号" % g.user.name
+            return render_template('error.html', error=tip, url="wybjihuo")
+        return func(*args, **kwargs)
+
+    return decorator
 
 def require_mobile_user(func):
     """Check if mobile user login"""

@@ -162,7 +162,7 @@ def get_code(code):
     img = validate_code[0]
     img.save(mstream, "GIF")
     session['validate'] = validate_code[1]
-    print session['validate']
+    # print session['validate']
     # return (mstream.getvalue(), "image/gif")
     response = make_response(mstream.getvalue())
     response.headers['Content-Type'] = 'image/gif'

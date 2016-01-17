@@ -14,7 +14,7 @@
 <body>
 <script type="text/javascript">
     function changeimg() {
-        document.getElementById('SeedImg').src = 'checkcode?' + Math.random();
+        document.getElementById('SeedImg').src = '/checkcode?' + Math.random();
     }
 
 
@@ -218,7 +218,7 @@
             </tr>
         </table>
 
-        <div class="code"><img src="../inc/checkcode.asp" id="SeedImg" align="absmiddle" style="cursor:pointer;"
+        <div class="code"><img src="/checkcode" id="SeedImg" align="absmiddle" style="cursor:pointer;"
                                border="0" alt="点我刷新" title="点我刷新" onclick="changeimg()"/> <input id="imgcode"
                                                                                                  name="code" type="text"
                                                                                                  value="" size="8"

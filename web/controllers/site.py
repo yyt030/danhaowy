@@ -1,5 +1,6 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
+import StringIO
 import os
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
@@ -8,6 +9,8 @@ from ..models import db, User, Notice
 from ..forms import SigninForm, RegisterForm
 from ..utils.permissions import require_user, require_visitor
 from datetime import datetime
+from web.utils.code import create_validate_code
+from web.utils.code2 import getCodePiture
 
 bp = Blueprint('site', __name__)
 
@@ -148,18 +151,19 @@ def loginout():
     return redirect(url_for('site.index'))
 
 
-@bp.route('/resource/<string:folder1>/<string:filename>', defaults={"folder2": "", "folder3": ""}, methods=['GET'])
-@bp.route('/resource/<string:folder1>/<string:folder2>/<string:filename>', defaults={"folder3": ""}, methods=['GET'])
-@bp.route('/resource/<string:folder1>/<string:folder2>/<string:folder3>/<string:filename>', methods=['GET'])
-def get_resourse(folder1, folder2, folder3, filename):
-    if folder3 == "":
-        BASE_URL = os.path.join(current_app.config.get('PROJECT_PATH'), 'resource/%s/%s') % (folder1, folder2)
-        # print BASE_URL
-        # print filename
-    else:
-        BASE_URL = os.path.join(current_app.config.get('PROJECT_PATH'), 'resource/%s/%s/%s') % (
-            folder1, folder2, folder3)
-    ext = os.path.splitext(filename)[1][1:]
-    mimetypes = {"jpg": 'image/jpg', "css": 'text/css', "png": "image/png", "js": 'application/x-javascript',
-                 "xml": 'application/xHTML+XML'}
-    return send_from_directory(BASE_URL, filename, mimetype=mimetypes.get(ext))
+@bp.route('/checkcode', methods=['GET'], defaults={"code": None})
+@bp.route('/checkcode/<string:code>', methods=['GET'])
+def get_code(code):
+    # 把strs发给前端,或者在后台使用session保存
+    mstream = StringIO.StringIO()
+    # validate_code = create_validate_code()
+    validate_code = getCodePiture()
+
+    img = validate_code[0]
+    img.save(mstream, "GIF")
+    session['validate'] = validate_code[1]
+    print session['validate']
+    # return (mstream.getvalue(), "image/gif")
+    response = make_response(mstream.getvalue())
+    response.headers['Content-Type'] = 'image/gif'
+    return response

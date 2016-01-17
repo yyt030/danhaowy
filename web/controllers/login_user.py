@@ -144,8 +144,8 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
-    print '-' * 10, qi, ord, ordlx1
     if qi == 'Shopism':
+        # 单号购买
         ids = request.form.get('id', '').split('.')
         succ_num = 0
         for id in ids:
@@ -154,7 +154,12 @@ def refund():
                 order.buyer_id = user.id
                 order.buy_time = datetime.now()
                 order.is_sell = 1
+                # 购买动作消息发送
+                msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+                msg.title = u'您发布的单号：%s 已成功售出' %order.tracking_no
+
                 db.session.add(order)
+                db.session.add(msg)
                 succ_num += 1
         db.session.commit()
         return '购买成功'

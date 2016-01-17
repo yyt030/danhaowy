@@ -59,7 +59,16 @@ def qiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
-    query = Order.query
+    # 当前用户避免重复领取
+    from sqlalchemy import func
+    query = Order.query.filter(~
+                               Order.id.in_(
+                                       db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
+    # 限定单号最多领取10次
+    query = query.filter(~
+                         Order.id.in_(db.session.query(OrderList.order_id).group_by(OrderList.order_id).having(
+                             func.count(OrderList.order_id) >= 10)))
+
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:

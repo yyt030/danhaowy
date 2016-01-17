@@ -52,8 +52,8 @@ class User(db.Model):
     default_express = db.relationship('Express', backref=db.backref('users', lazy='dynamic'))
 
     # 支付宝账户，姓名
-    alipay_name = db.Column(db.String(50))
-    alipay_account = db.Column(db.String(50))
+    alipay_name = db.Column(db.String(50),default='')
+    alipay_account = db.Column(db.String(50),default='')
 
     @property
     def active_time(self):

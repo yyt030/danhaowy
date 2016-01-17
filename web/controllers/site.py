@@ -76,9 +76,9 @@ def reg():
         &Email=@&QQ=&sj=&_=1451397819278
         """
     form = RegisterForm()
-    if g.user:
-        error = "您已经登录，不能注册账号！当前登录账号:%s" % g.user.name
-        return render_template('error.html', error=error, url="/")
+    # if g.user:
+    #     error = "您已经登录，不能注册账号！当前登录账号:%s" % g.user.name
+    #     return render_template('error.html', error=error, url="/")
     if request.method == 'GET':
         clientid = request.args.get('clientid', '')
         res = ''

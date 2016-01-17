@@ -12,7 +12,7 @@ def getRandomChar():
 
 def getRandomNumber():
     numbers=random.sample(range(0,9), 4)
-    print numbers
+    # print numbers
     return numbers
 # 获得颜色
 def getRandomColor():

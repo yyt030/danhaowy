@@ -3,8 +3,8 @@
 from datetime import datetime, timedelta
 
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
-    current_app, make_response
-from web.utils.permissions import require_user
+    current_app, make_response, session
+from web.utils.permissions import require_user, require_active
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog
 
@@ -48,6 +48,7 @@ def ornumber():
 @require_user
 def qiso():
     """单号领取->提交查询"""
+
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')
@@ -182,7 +183,9 @@ def qikd():
 @bp.route('/GetNumber', methods=['GET', 'POST'])
 @bp.route('/BatchGetNumber', methods=['GET', 'POST'])
 @require_user
+@require_active
 def getnumber():
+
     form = SigninForm()
     user = g.user
     uids = request.args.getlist('uid')
@@ -210,14 +213,22 @@ def getnumber():
             order = Order.query.get_or_404(request.args.get('uid', ''))
             return render_template('login_user/getnumber.html', form=form, user=user, order=order, left_num=left_num)
     if type == 'Success':
-        orderlist = OrderList()
-        uid = request.form.get('uid', 0, type=int)
-        orderlist.order_id = uid
-        orderlist.user_id = user.id
-        db.session.add(orderlist)
-        db.session.commit()
-        tip = "用户%s 领取单号%d成功！" % (user.name, uid)
-        return render_template('error.html', error=tip, url="ornumber")
+        # 验证码校验
+        code=request.form.get("code")
+        url=request.referrer
+        print "code",code
+        if code ==session.get("validate"):
+            orderlist = OrderList()
+            uid = request.form.get('uid', 0, type=int)
+            orderlist.order_id = uid
+            orderlist.user_id = user.id
+            db.session.add(orderlist)
+            db.session.commit()
+            # TODO 跳转到领取成功页面,信息包括：快递单号	快递	预计扫描时间	发货地址	收货地址
+            return render_template('login_user/getnumber_success.html')
+        else:
+            tip = "验证码不正确，领取单号失败！"
+            return render_template('error.html', error=tip, url="ornumber")
 
 
 @bp.route('/number')

@@ -158,6 +158,7 @@ def refund():
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
+                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：0.24,请注意查收' %(order.tracking_no)
 
                 db.session.add(order)
                 db.session.add(msg)
@@ -939,7 +940,7 @@ def upseller():
 
     if request.method == 'POST':
         admin_user = User.query.filter(User.role == 'admin').first()
-        msg = MailBox(sender_id=user.id, recver_id=admin_user.id)
+        msg = MailBox(sender_id=user.id, recver_id=admin_user.id, msg_type='申请')
         msg.title = '用户[%s]QQ[%s]申请成为卖家' % (user.name, request.form.get('QQ', ''))
         msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
             request.form.get('ag1', ''), request.form.get('ag2', ''), request.form.get('typ', ''))
@@ -1180,9 +1181,9 @@ def msg():
 
     query = MailBox.query.filter(MailBox.recver_id == user.id)
 
-    if msg_id:
+    if msg_id and not action:
         msg = MailBox.query.get_or_404(msg_id)
-        msg.is_read = True
+        msg.result = u'已读'
         db.session.add(msg)
         db.session.commit()
         return render_template('login_user/msg_show.html', msg=msg)
@@ -1191,13 +1192,35 @@ def msg():
             msgs = query.all()
             for msg in msgs:
                 db.session.delete(msg)
+            db.session.commit()
+            return redirect(url_for('.msg'))
         if action == 'yd':
             msgs = query.all()
             for msg in msgs:
-                msg.is_read = True
+                msg.result = u'已读'
             db.session.add_all(msgs)
-        db.session.commit()
-        return redirect(url_for('.msg'))
+            db.session.commit()
+            return redirect(url_for('.msg'))
+        if action == 'yes':
+            # 同意申请为卖家申请
+            msg = MailBox.query.get_or_404(msg_id)
+            msg.result = u'已同意'
+            seller = User.query.get_or_404(msg.sender_id)
+            seller.is_seller = True
+
+            db.session.add(msg)
+            db.session.add(seller)
+            db.session.commit()
+
+            return redirect(url_for('.msg'))
+        if action == 'no':
+            # 不同意申请为卖家申请
+            msg = MailBox.query.get_or_404(msg_id)
+            msg.result = u'已驳回'
+            db.session.add(msg)
+            db.session.commit()
+
+            return redirect(url_for('.msg'))
 
     count_all = query.count()
     page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1

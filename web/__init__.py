@@ -55,7 +55,7 @@ def create_app():
         g.user = get_current_user()
         if g.user:
             set_user_active_time(g.user.id)
-            g.msg_num = MailBox.query.filter(MailBox.recver_id == g.user.id, MailBox.is_read == False).count()
+            g.msg_num = MailBox.query.filter(MailBox.recver_id == g.user.id, MailBox.result is not None).count()
         pass
 
     from .utils.devices import Devices
@@ -79,11 +79,12 @@ def register_jinja(app):
                 "url": "http://localhost:5000",
                 "logo": "/static/images/logo.png",
                 "title": "单号网",
-                "alipay":"888888@163.com",
+                "alipay": "888888@163.com",
             }
         return dict(
-            website=site_info,
+                website=site_info,
         )
+
     def url_for_other_page(page, key='page', params=None):
         """Generate url for pagination"""
         view_args = request.view_args.copy()

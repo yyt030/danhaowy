@@ -23,7 +23,8 @@ class MailBox(db.Model):
                              backref=db.backref('mailboxs_recver', lazy='dynamic'))
 
     create_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    is_read = db.Column(db.Boolean, nullable=False, default=False)
+    result = db.Column(db.String(10))
+    msg_type = db.Column(db.String(10), nullable=False, default='通知')
 
     def __repr__(self):
         return '<MailBox %r>' % self.id

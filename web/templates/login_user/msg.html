@@ -72,7 +72,7 @@
                                 <LI class="no01">主题</LI>
                                 <LI class="no02">发布人</LI>
                                 <LI class="no03">发布时间</LI>
-                                <LI class="no04">未读/已读</LI>
+                                <LI class="no04">操作状态</LI>
                             </UL>
                         </DIV>
                     </TD>
@@ -88,23 +88,37 @@
                                 <UL style="PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; WIDTH: 100%; PADDING-RIGHT: 0px; PADDING-TOP: 0px">
                                     <LI class=w400><a href="msg?id={{ msg.id }}" target=_top>
                                         <font
-                                            color="#3300FF">{{ msg.title |trim}}
+                                                color="#3300FF">{{ msg.title |trim }}
                                         </font></a></LI>
                                     <LI class=w180>{{ msg.sender.name }}</LI>
                                     <LI class=w200><font color="#FF0000">{{ msg.create_at }}</font></LI>
-                                    <LI class=w100><font color="#0066CC">
-                                        <font color="#3366CC">
-                                            {% if msg.is_read %}已读
-                                            {% else %}未读
-                                            {% endif %}
-                                        </font>
-                                    </font>
+                                    <LI class=w100>
+                                        {% if msg.msg_type == '申请' %}
+
+                                            <font color="#0066CC">
+                                                <font color="#3366CC">
+                                                    {% if msg.result %}{{ msg.result }}
+                                                    {% else %}
+                                                        <a href="msg?nn=yes&id={{ msg.id }}">同意</a>
+                                                        <a href="msg?nn=no&id={{ msg.id }}">驳回</a>
+                                                    {% endif %}
+                                                </font>
+                                            </font>
+                                        {% else %}
+                                            <font color="#0066CC">
+                                                <font color="#3366CC">
+                                                    {% if msg.result %}{{ msg.result }}
+                                                    {% else %}未读
+                                                    {% endif %}
+                                                </font>
+                                            </font>
+                                        {% endif %}
                                     </LI>
                                 </UL>
                             {% endfor %}
 
                             <p>
-                            <CENTER STYLE="word-break:break-all;word-wrap:break-word;">
+                            <CENTER STYLE=" word-break:break-all;word-wrap:break-word;">
                                 </br>
                                 【共有记录 {{ count_all }} 条 | 第 <strong>{{ page }}</strong> 页 | 共 {{ page_all }} 页 | －
                                 <a href=?page=1>首页</a>

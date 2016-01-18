@@ -771,20 +771,20 @@ def tuiguang():
     return render_template('login_user/tuiguang.html', form=form, user=user)
 
 
-@bp.route('/paywyb', methods=['GET','POST'])
+@bp.route('/paywyb', methods=['GET', 'POST'])
 @require_user
 def paywyb():
     """充值无忧币"""
     form = SigninForm()
     user = g.user
-    if request.method=='POST':
-        trade_no=request.form.get("MainC_TextBox")
-        log=Paylog.query.filter(Paylog.alipay_no==trade_no).first()
+    if request.method == 'POST':
+        trade_no = request.form.get("MainC_TextBox")
+        log = Paylog.query.filter(Paylog.alipay_no == trade_no).first()
         if log:
             tip = '该交易号已经提交，请勿重复提交!'
             return render_template('error.html', error=tip, url="")
         else:
-            pay_log=Paylog(alipay_no=trade_no,money=0,user_id=g.user.id,action="")
+            pay_log = Paylog(alipay_no=trade_no, money=0, user_id=g.user.id, action="")
             db.session.add(pay_log)
             db.session.commit()
 
@@ -938,12 +938,13 @@ def upseller():
     user = g.user
 
     if request.method == 'POST':
-        # msg = MailBox(sender_id=user.id, recver_id=1)
-        # msg.title = 'QQ:%s mail:%s 申请卖家' % (request.form.get('QQ', ''), request.form.get('Email', ''))
-        # msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
-        # request.form.get('ag1', ''), request.form.get('ag2', ''), request.form.get('typ', ''))
-        # db.session.add(msg)
-        # db.session.commit()
+        admin_user = User.query.filter(User.role == 'admin').first()
+        msg = MailBox(sender_id=user.id, recver_id=admin_user.id)
+        msg.title = '用户[%s]QQ[%s]申请成为卖家' % (user.name, request.form.get('QQ', ''))
+        msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
+            request.form.get('ag1', ''), request.form.get('ag2', ''), request.form.get('typ', ''))
+        db.session.add(msg)
+        db.session.commit()
         tip = "申请已发送，请联系管理员处理！"
         return render_template('error.html', error=tip, url="")
     return render_template('login_user/upseller.html', form=form, user=user)

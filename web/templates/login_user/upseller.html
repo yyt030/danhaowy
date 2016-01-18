@@ -1,51 +1,11 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>申请卖家 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
     <link href="/static/css/Qiindex.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/static/style/public.css">
-    <script src="/static/js/jquery-1.10.2.js"></script>
     <link rel="/static/stylesheet" href="/static/js/css/ui-dialog.css">
-    <script src="/static/js/dialog-min.js"></script>
-    <script src="/static/js/ornumber.js?20150930S"></script>
-    <script type="text/javascript">
-        function a() {
-            if (document.thisForm.QQ.value.length < 1) {
-                alert("请填写联系您的QQ");
-                document.thisForm.QQ.focus();
-                return false;
-            } else {
-                var temp = document.thisForm.Email.value;
-                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                if (filter.test(temp)) {
-                    var checkbox = document.getElementById('ag1');
-                    var checkbox1 = document.getElementById('ag2');
-
-                    if (checkbox.checked) {
-                        if (checkbox1.checked == false) {
-                            alert("请选择 承诺发布的单号均为唯一单号");
-                            return false;
-                        } else {
-                            if (confirm("您确定要申请加入卖家吗？\n申请加入后每日必须发布10条以上的单号\n发布的单号必须为真实有效单号\n连续7天停单将永久关闭卖家权限\n您确定考虑好了？") == false) {
-                                return false;
-                            }
-
-                        }
-                    } else {
-                        alert("请选择 承诺发布的单号均为真实单号");
-                        return false;
-                    }
-                } else {
-
-                    alert('您的电子邮件格式不正确');
-                    document.thisForm.Email.focus();
-                    return false;
-
-                }
-
-            }
-
-
-        }
-    </script>
     <style type="text/css">
         ul {
             margin: 0;
@@ -129,9 +89,54 @@
 
 
 {% endblock %}
+{% block page_js %}
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <script src="/static/js/dialog-min.js"></script>
+    <script src="/static/js/ornumber.js?20150930S"></script>
+    <script type="text/javascript">
+        function a() {
+            if (document.thisForm.QQ.value.length < 1) {
+                alert("请填写联系您的QQ");
+                document.thisForm.QQ.focus();
+                return false;
+            } else {
+                var temp = document.thisForm.Email.value;
+                var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (filter.test(temp)) {
+                    var checkbox = document.getElementById('ag1');
+                    var checkbox1 = document.getElementById('ag2');
+
+                    if (checkbox.checked) {
+                        if (checkbox1.checked == false) {
+                            alert("请选择 承诺发布的单号均为唯一单号");
+                            return false;
+                        } else {
+                            if (confirm("您确定要申请加入卖家吗？\n申请加入后每日必须发布10条以上的单号\n发布的单号必须为真实有效单号\n连续7天停单将永久关闭卖家权限\n您确定考虑好了？") == false) {
+                                return false;
+                            }
+
+                        }
+                    } else {
+                        alert("请选择 承诺发布的单号均为真实单号");
+                        return false;
+                    }
+                } else {
+
+                    alert('您的电子邮件格式不正确');
+                    document.thisForm.Email.focus();
+                    return false;
+
+                }
+
+            }
+
+
+        }
+    </script>
+{% endblock %}
 {% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 申请卖家{% endblock %}
 {% block content %}
-    <td valign="top" width="624">
+    <td valign="top" width="800">
         <div class="midmess">
             <!--温馨提示框-->
             <div class="mess_all">
@@ -152,9 +157,9 @@
             <div class="bdbox">
                 <ul>
                     <li class="zy"><span class="bdl"><b style=" font-size:16px; color:#63F">温馨提醒</b></span>
-  <span class="bdr">
- <font style="color: rgb(0, 115, 0);">请认真填写以下数据： 我们会根据你的条件，为你升级成为卖家！</font>
- </span>
+                          <span class="bdr">
+                         <font style="color: rgb(0, 115, 0);">请认真填写以下数据： 我们会根据你的条件，为你升级成为卖家！</font>
+                         </span>
                     </li>
 
                     <form name="thisForm" method="post" action="upseller?type=sq" accept-charset="gbk"
@@ -172,7 +177,7 @@
                         </li>
                         <li><span class="bdl">Email：</span>
                               <span class="bdr">
-                                <input name="Email" type="text" class="bs" id="Email" style="width:100px;">
+                                <input name="Email" type="text" class="bs" id="Email" style="width:200px;">
                                 【请填写联系您的邮箱】</span>
                         </li>
 

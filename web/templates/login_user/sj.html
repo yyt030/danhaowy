@@ -127,8 +127,9 @@
                     document.getElementById("wait").style.display = "none";
                 }
             }
-            xmlhttp.open("GET", "inc/sjOk.asp?str=" + str, true);
-            xmlhttp.setRequestHeader("Content-Type", "text/html;charset=utf-8");
+
+            xmlhttp.open("GET", "sj?str=" + str, true);
+            xmlhttp.setRequestHeader("Content-Type", "text/html;charset=UTF-8");
             xmlhttp.send();
         }
 

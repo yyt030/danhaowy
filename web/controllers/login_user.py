@@ -60,11 +60,28 @@ def qiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
-    query = Order.query
+    # 当前用户避免重复领取
+    from sqlalchemy import func
+    query = Order.query.filter(~
+                               Order.id.in_(
+                                       db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
+    # 限定单号最多领取10次
+    query = query.filter(~
+                         Order.id.in_(db.session.query(OrderList.order_id).group_by(OrderList.order_id).having(
+                                 func.count(OrderList.order_id) >= 10)))
+
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:
-        send_addr_province, send_addr_city, send_addr_county = sa.split(' ')
+        send_addr = sa.split(' ')
+        send_addr_province, send_addr_city, send_addr_county = [''] * 3
+        if len(send_addr) == 1:
+            send_addr_province = send_addr
+        elif len(send_addr) == 2:
+            send_addr_province, send_addr_city = send_addr
+        elif len(send_addr) >= 3:
+            send_addr_province, send_addr_city, send_addr_county = send_addr[:3]
+
         if send_addr_province:
             query = query.filter(Order.send_addr_province == send_addr_province)
 
@@ -74,7 +91,15 @@ def qiso():
         if send_addr_county:
             query = query.filter(Order.send_addr_county == send_addr_county)
     if sb:
-        recv_addr_province, recv_addr_city, recv_addr_county = sb.split(' ')
+        recv_addr = sb.split(' ')
+        recv_addr_province, recv_addr_city, recv_addr_county = [''] * 3
+        if len(recv_addr) == 1:
+            recv_addr_province = recv_addr
+        elif len(recv_addr) == 2:
+            recv_addr_province, recv_addr_city = recv_addr
+        elif len(recv_addr) >= 3:
+            recv_addr_province, recv_addr_city, recv_addr_county = recv_addr[:3]
+
         if recv_addr_province:
             query = query.filter(Order.recv_addr_province == recv_addr_province)
 
@@ -120,8 +145,8 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
-    print '-' * 10, qi, ord, ordlx1
     if qi == 'Shopism':
+        # 单号购买
         ids = request.form.get('id', '').split('.')
         succ_num = 0
         for id in ids:
@@ -130,7 +155,12 @@ def refund():
                 order.buyer_id = user.id
                 order.buy_time = datetime.now()
                 order.is_sell = 1
+                # 购买动作消息发送
+                msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+                msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
+
                 db.session.add(order)
+                db.session.add(msg)
                 succ_num += 1
         db.session.commit()
         return '购买成功'
@@ -146,8 +176,29 @@ def qikd():
     id = request.form.get('id')
     qid = request.form.get('qid')
     q = request.form.get('q')
+    order = Order.query.get_or_404(qid)
+    import requests, json
+    url = 'http://www.kuaidi100.com/query'
+    params = {'type': com, 'postid': order.tracking_no}
+    try:
+        req = requests.get(url, params=params, timeout=3)
+        print '>>>', req.url
+        print '>>>', req.content
+        print '>>>', req.status_code
 
-    return '2016/1/9 00:25,【广东佛山公司】的收件员【】已收件'
+    except:
+        return '查询失败:status[%s], messages[%s]' % (req.content.get('status'),
+                                                  req.content.get('message'))
+    else:
+        rsp = json.loads(req.content)
+        print '>>>', rsp.get('data')[0].get('time')
+        print '>>>', rsp.get('data')[0].get('context')
+        if rsp.get('status') == '200':
+            return '%s,%s' % (rsp.get('data')[0].get('time'),
+                              rsp.get('data')[0].get('context'))
+        else:
+            return '查询失败:status[%s], messages[%s]' % (rsp.get('status'),
+                                                      rsp.get('message'))
 
 
 @bp.route('/GetNumber', methods=['GET', 'POST'])
@@ -155,7 +206,6 @@ def qikd():
 @require_user
 @require_active
 def getnumber():
-
     form = SigninForm()
     user = g.user
     uids = request.args.getlist('uid')
@@ -184,10 +234,10 @@ def getnumber():
             return render_template('login_user/getnumber.html', form=form, user=user, order=order, left_num=left_num)
     if type == 'Success':
         # 验证码校验
-        code=request.form.get("code")
-        url=request.referrer
-        print "code",code
-        if code ==session.get("validate"):
+        code = request.form.get("code")
+        url = request.referrer
+        print "code", code
+        if code == session.get("validate"):
             orderlist = OrderList()
             uid = request.form.get('uid', 0, type=int)
             orderlist.order_id = uid
@@ -418,7 +468,15 @@ def shopqiso():
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:
-        send_addr_province, send_addr_city, send_addr_county = sa.split(' ')
+        send_addr = sa.split(' ')
+        send_addr_province, send_addr_city, send_addr_county = [''] * 3
+        if len(send_addr) == 1:
+            send_addr_province = send_addr
+        elif len(send_addr) == 2:
+            send_addr_province, send_addr_city = send_addr
+        elif len(send_addr) >= 3:
+            send_addr_province, send_addr_city, send_addr_county = send_addr[:3]
+
         if send_addr_province:
             query = query.filter(Order.send_addr_province == send_addr_province)
 
@@ -428,7 +486,15 @@ def shopqiso():
         if send_addr_county:
             query = query.filter(Order.send_addr_county == send_addr_county)
     if sb:
-        recv_addr_province, recv_addr_city, recv_addr_county = sb.split(' ')
+        recv_addr = sb.split(' ')
+        recv_addr_province, recv_addr_city, recv_addr_county = [''] * 3
+        if len(recv_addr) == 1:
+            recv_addr_province = recv_addr
+        elif len(recv_addr) == 2:
+            recv_addr_province, recv_addr_city = recv_addr
+        elif len(recv_addr) >= 3:
+            recv_addr_province, recv_addr_city, recv_addr_county = recv_addr[:3]
+
         if recv_addr_province:
             query = query.filter(Order.recv_addr_province == recv_addr_province)
 
@@ -791,6 +857,20 @@ def txlog():
 def sj():
     """手机号码生成"""
     user = g.user
+    # http://www.danhaowy.com/login_user/inc/sjOk.asp?str=
+    addr = request.args.get('str')
+    if request.method == 'GET' and addr:
+        import requests
+        url = 'http://www.danhaowy.com/login_user/inc/sjOk.asp'
+        # headers = {'Content-Type': 'text/html;charset=utf-8'}
+        params = {'str': addr.encode('gb2312')}
+        try:
+            req = requests.get(url, params=params, timeout=5)
+        except Exception:
+            return '生成失败，请稍后再试'
+        else:
+            print '>>>', req.status_code, req.content.decode('gb2312').encode('utf-8')
+            return req.content.decode('gb2312').encode('utf-8')
 
     return render_template('login_user/sj.html')
 

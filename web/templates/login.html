@@ -61,6 +61,7 @@
 <div id="wra">
     <div class="wrabg">
         <div class="left">
+        {% set roles={"member":'普通会员',"seller":"超级卖家"} %}
             {% if not g.user %}
                 <I>可以选择哦</I>
 
@@ -115,7 +116,7 @@
                     </tr>
                     <tr>
                         <td width="100" class="tar pr10">当前等级：</td>
-                        <td>{{ user.role }}</td>
+                        <td>{{ roles.get(user.role) }}</td>
                     </tr>
                     <tr>
                         <td width="100"></td>

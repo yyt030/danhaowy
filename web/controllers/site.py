@@ -1,16 +1,20 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import StringIO
+import json
 import os
+import hashlib
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
     make_response, current_app, send_from_directory
+from web import csrf
 from web.utils.account import signin_user, signout_user
-from ..models import db, User, Notice
+from ..models import db, User, Notice, Paylog
 from ..forms import SigninForm, RegisterForm
-from ..utils.permissions import require_user, require_visitor
+from ..utils.permissions import require_user, require_visitor, require_admin
 from datetime import datetime
 from web.utils.code import create_validate_code
 from web.utils.code2 import getCodePiture
+from web.utils.uploadsets import process_question, images
 
 bp = Blueprint('site', __name__)
 
@@ -74,7 +78,7 @@ def GetPass():
 @bp.route('/reg', methods=['GET', 'POST'])
 def reg():
     """注册ajax 校验
-        http://localhost:5000/ajax.asp?c=user&clientid=username
+        http:#localhost:5000/ajax.asp?c=user&clientid=username
         &rand=1451397827713&username=asfasf123123
         &Email=@&QQ=&sj=&_=1451397819278
         """
@@ -167,3 +171,49 @@ def get_code(code):
     response = make_response(mstream.getvalue())
     response.headers['Content-Type'] = 'image/gif'
     return response
+
+
+@csrf.exempt
+@bp.route('/upload_image', methods=['POST'])
+@require_admin
+def upload_image():
+    try:
+        filename = process_question(request.files['file'], images, "")
+    except Exception, e:
+        return json.dumps({'status': 'no', 'error': e.__repr__()})
+    else:
+        return json.dumps({"status": 'ok', "url": filename})
+
+
+@csrf.exempt
+@bp.route('/test', methods=['GET', 'POST'])
+def test():
+    args = dict(request.form)
+    key = "123456"
+    sig = request.form['sig']  # 签名
+    tradeNo = request.form['tradeNo']  # 交易号
+    desc = request.form['desc']  # 交易名称（付款说明）
+    time = request.form['time']  # 付款时间
+    username = request.form['username']  # 客户名称
+    userid = request.form['userid']  # 客户id
+    amount = request.form['amount']  # 交易额
+    status = request.form['status']  # 交易状态
+    print "status,", status
+    tmp_list = [tradeNo, desc, time, username, userid, amount, status, key]
+    tmp_str = '|'.join(tmp_list)
+    md5_str = (hashlib.md5(tmp_str.encode('utf-8')).hexdigest()).upper()
+    # md5 校验
+    if sig == md5_str:
+        print "ok"
+        query_log = Paylog.query.filter(Paylog.alipay_no == tradeNo, status == "待确认").first()
+        if query_log:
+            if status == "交易成功":
+                query_log.status = "已支付"
+                query_log.action = desc
+                db.session.add(query_log)
+                db.session.commit()
+    print sig
+    print md5_str
+    import pprint
+    pprint.pprint(args)
+    return json.dumps({"status": 'ok'})

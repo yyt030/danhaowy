@@ -6,6 +6,8 @@ from flask import render_template, Blueprint, redirect, url_for, g, session, req
 from sqlalchemy import func
 from web.forms.account import AdminloginForm
 from web.forms.notice import NoticeForm
+from web.forms.site import SiteInfo
+from web.models.site import Site
 from web.utils.account import signin_user, signout_user
 from ..models import db, User, Notice
 from ..forms import SigninForm, RegisterForm
@@ -38,6 +40,32 @@ def login():
             status = "登录失败"
             print "error"
     return render_template("admin/login.html", form=form, status=status)
+
+
+@bp.route("/site_info", methods=('GET', 'POST'))
+@require_admin
+def site_info():
+    form = SiteInfo()
+    info = Site.query.first()
+    if request.method == 'POST':
+        print "logo,", form.logo.data
+        if not info:
+            info = Site(url=form.url.data, name=form.name.data, sitelogo=form.logo.data,
+                        alipay=form.alipay.data)
+            db.session.add(info)
+        else:
+            info.url = form.url.data
+            info.name = form.name.data
+            info.alipay = form.alipay.data
+            info.sitelogo = form.logo.data
+        db.session.commit()
+    else:
+        if info:
+            form.url.data = info.url
+            form.name.data = info.name
+            form.alipay.data = info.alipay
+            form.logo.data = info.sitelogo
+    return render_template("admin/site_info.html", form=form, admin_nav=1, info=info)
 
 
 @bp.route("/home", methods=('GET', 'POST'))
@@ -110,4 +138,19 @@ def notice_delete():
 @require_admin
 def userlist():
     users = User.query.filter(User.name != 'admin')
+    # users = User.query.all()
     return render_template("admin/users.html", users=users)
+
+
+@bp.route('/userlist/delete', methods=('GET', 'POST'))
+@require_admin
+def user_delete():
+    datas = request.form
+    print dict(datas)
+    for k in datas:
+        id = int(datas[k])
+        info = User.query.get(id)
+        db.session.delete(info)
+        db.session.commit()
+    users = User.query.all()
+    return render_template('admin/users.html', users=users)

@@ -33,7 +33,7 @@
                     <li class="rz02">充值时间</li>
                     <li class="rz01">交易流水号</li>
                     <li class="rz01">充值状态</li>
-                    <li class="rz01">日志纪录</li>
+                    <li class="rz01">交易名称</li>
                 </ul>
                 <table id="tlist" width="100%" border="0" cellspacing="0" cellpadding="0">
                     {% for paylog in paylogs %}
@@ -41,7 +41,13 @@
                             <td class="rz01">{{ paylog.id }}</td>
                             <td class="rz01">￥{{ paylog.money|float }}</td>
                             <td class="rz02">{{ paylog.create_time }}</td>
-                            <td class="rz01"><a title="20150628200040011100250026039017">201506..039017</a></td>
+                            <td class="rz01">
+                                <a title="{{ paylog.alipay_no }}">
+                                {% if paylog.alipay_no %}
+                                    {{ paylog.alipay_no[0:6] }}..{{ paylog.alipay_no[-5:] }}
+                                    {% else %}
+                                    {{ paylog.alipay_no or '' }}
+                                {% endif %}</a></td>
                             <td class="rz01"><span style="color:green;">{{ paylog.status }}</span></td>
                             <td class="rz01"><span style="color:red;">{{ paylog.action }}</span></td>
                         </tr>

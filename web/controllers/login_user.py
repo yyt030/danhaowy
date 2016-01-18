@@ -705,12 +705,22 @@ def tuiguang():
     return render_template('login_user/tuiguang.html', form=form, user=user)
 
 
-@bp.route('/paywyb', methods=['GET'])
+@bp.route('/paywyb', methods=['GET','POST'])
 @require_user
 def paywyb():
     """充值无忧币"""
     form = SigninForm()
     user = g.user
+    if request.method=='POST':
+        trade_no=request.form.get("MainC_TextBox")
+        log=Paylog.query.filter(Paylog.alipay_no==trade_no).first()
+        if log:
+            tip = '该交易号已经提交，请勿重复提交!'
+            return render_template('error.html', error=tip, url="")
+        else:
+            pay_log=Paylog(alipay_no=trade_no,money=0,user_id=g.user.id,action="")
+            db.session.add(pay_log)
+            db.session.commit()
 
     return render_template('login_user/paywyb.html', form=form, user=user)
 

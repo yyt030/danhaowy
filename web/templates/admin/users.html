@@ -73,7 +73,7 @@
                                 }
                             </style>
 
-
+                             {% set roles={"member":'普通会员',"seller":"超级卖家"} %}
                             <form action="javascript:;" method="post" name="login_form" id="login_form">
 
                                 <table class="table table-striped table-bordered table-hover dataTables-example">
@@ -82,7 +82,13 @@
                                         <th><input type="checkbox" class="i-checks" id="userListCheck"/></th>
                                         <th>UID</th>
                                         <th>用户名</th>
+                                        <th>状态</th>
+                                        <th>当前等级</th>
+                                        <th>qq号码</th>
                                         <th>邮箱</th>
+                                        <th>手机号码</th>
+                                        <th>金币</th>
+                                        <th>积分</th>
                                         <th>注册时间</th>
                                     </tr>
                                     </thead>
@@ -93,7 +99,13 @@
                                         <td><input type="checkbox" class="i-checks"></td>
                                         <td class="userListId">{{ u.id }}</td>
                                         <td>{{ u.name }}</td>
+                                        <td>{% if u.is_active %}已激活{% else %}未激活{% endif %}</td>
+                                        <td>{{ roles.get(u.role) }}</td>
+                                        <td>{{ u.qq }}</td>
                                         <td>{{ u.email }}</td>
+                                        <td>{{ u.phone }}</td>
+                                        <td>{{ u.wuyoubi }}</td>
+                                        <td>{{ u.wuyoujifen }}</td>
                                         <td>{{ u.create_time }}</td>
                                     </tr>
                                     {% endfor %}
@@ -137,6 +149,28 @@
         </div>
     </div>
 </div>
+<script>
+        function getCookie(name) {
+            var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return r ? r[1] : undefined;
+        }
+       $(function () {
+            var json1 = _alert('.btn.btn-w-m.delete1', '.modal-body .delete1Content', '您要删除的用户ID为');
 
+            $('.deleteUserId').click(function () {
+                $.ajax({
+                    url: '/admin/userlist/delete',
+                    type: 'post',
+                    data: json1,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        //  alert('error');
+                    }
+                });
+            });
+        })
+    </script>
 
 {% endblock %}

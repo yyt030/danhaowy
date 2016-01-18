@@ -263,7 +263,7 @@
                     <h1>温馨提示：</h1>
                     <ul>
                         <li>无优币最低充值1元,最高无限制！</li>
-                        <li>官方唯一无忧币充值支付宝：paywuyou@163.com ，其他一律为骗子,请勿充值！</li>
+                        <li>官方唯一无忧币充值支付宝：{{ website.alipay }} ，其他一律为骗子,请勿充值！</li>
                         <li><font color=red>温馨提醒：充值金额低于10元,不赠送无忧积分。</font></li>
 
                     </ul>
@@ -278,9 +278,8 @@
                 <div class="chongzhi">
                     <ul class="chong">
                         <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(1)">PC网页充值</a></li>
-                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(2)">二维码手机充值</a>
-                        </li>
-                        <li class="fubao"><a id="lbankpay" href="/News.asp?id=729" target="_blank">无优币充值流程</a></li>
+{#                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(2)">二维码手机充值</a></li>#}
+                        <li class="fubao"><a id="lbankpay" href="/news?id=729" target="_blank">无优币充值流程</a></li>
                     </ul>
 
                     <div class="clear">&nbsp;</div>
@@ -296,9 +295,9 @@
                                         {{ form.csrf_token }}
                                         <div class="zdcz_04 fl">
                                             <p>官方支付宝：
-                                                <input type="hidden" value="mengjunz" name="memo"/>
+                                                <input type="hidden" value="{{ g.user.name }}" name="memo"/>
 
-                                                <input type="text" name="optEmail" value="paywuyou@163.com"
+                                                <input type="text" name="optEmail" value="{{ website.alipay }}"
                                                        readonly="readonly" class="bs"
                                                        style="background-color:#379BF8;color:#FFFFFF; font-weight:bold; width:180px;_height:15px;_line-height:15px;"/>
                                             </p>
@@ -310,7 +309,7 @@
                          style="_height:15px;_line-height:15px; overflow:hidden; border:1px solid #CBCBCB;"/>
                   元 <font color="red">*最低充值1元</font> </span></p>
                                         </div>
-                                        <input type="hidden" name="title" id="title" value="mengjunz"/>
+                                        <input type="hidden" name="title" id="title" value="{{ g.user.name }}"/>
                                         <div class="zdcz_05 fl"><a id="aPayAlipay" href="#" target="_blank">
                                             <input type="submit" class="zdcz_06" value=""/>
                                         </a></div>
@@ -326,7 +325,7 @@
 
                                         <p style="font-size:13px; font-weight:bold">1、请先打开手机“支付宝钱包”,点击扫一扫,扫描左侧二维码图片。</p>
                                         <p style="font-size:13px; font-weight:bold">2、扫描完毕后,点击转账,付款金额任意填写,备注填写<font
-                                                color=red>“mengjunz”</font>,点击确认转账。</p>
+                                                color=red>“{{ g.user.name }}”</font>,点击确认转账。</p>
                                         <p style="font-size:13px; font-weight:bold">
                                             3、转账完毕后,已备注的30内自动到账,未备注的请在第二步提交交易号！</p>
 
@@ -343,7 +342,7 @@
                                         <p style="position:relative; margin-top:8px;*margin-top:20px;"><font
                                                 color="#3333FF">2、如您付款时"付款说明"未填写网站账户名,请在下面手动提交交易号！</font></p>
                                     </div>
-                                    <form name="Form1" id="Fomr1" method="post" action="paywyb?idkey=trading"
+                                    <form name="Form1" id="Form1" method="post" action="paywyb?idkey=trading"
                                           onSubmit="return CheckForm();">
                                         {{ form.csrf_token }}
                                         <div class="zdcz_10 fl" style="padding:1px 0">
@@ -357,7 +356,7 @@
                                         </div>
 
                                         <div class="zdcz_051 fl" style=" margin-top:5px;">
-                                            <input name="btnEBankInPay" class="c_an" id="btnEBankInPay"
+                                            <input
                                                    style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"
                                                    type="image" src="/static/images/chongzhi.gif"/></div>
                                     </form>

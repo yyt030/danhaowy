@@ -3,7 +3,7 @@
 import sys
 
 import os
-from .models import MailBox
+from .models import MailBox, Site
 
 # 将project目录加入sys.path
 from flask.ext.cache import Cache
@@ -73,25 +73,17 @@ def register_jinja(app):
     @app.context_processor
     def inject_vars():
 
-        # site info
-        g_site_info = {
-            "url": "http://localhost:5000",
-            "logo": "../static/images/logo.png",
-            "title": "",
-            "company": "济南锦粉世家商贸有限公司",
-            "year": "2015",
-            "icp": "沪ICP备11038770号",
-            "qq": "8888888",
-            "qqgroup": "1234567",
-            "tel": "8888888",
-            "email": "admin@admin.com",
-        }
-
+        site_info = Site.query.first()
+        if not site_info:
+            site_info = {
+                "url": "http://localhost:5000",
+                "logo": "/static/images/logo.png",
+                "title": "单号网",
+                "alipay":"888888@163.com",
+            }
         return dict(
-                website=g_site_info,
-
+            website=site_info,
         )
-
     def url_for_other_page(page, key='page', params=None):
         """Generate url for pagination"""
         view_args = request.view_args.copy()

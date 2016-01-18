@@ -30,12 +30,13 @@ class Config(object):
     REDIS_HOST = "localhost"
     REDIS_PORT = 6379
     REDIS_DB = 1
-    # Uploadsets config
+   # Uploadsets config
     # UPLOADS_DEFAULT_DEST = "/WebServer/Documents/uploads"  # 上传文件存储路径
     # UPLOADS_DEFAULT_DEST = "D:/xampp/htdocs/jeepsk_uploads"  # 上传文件存储路径
-    UPLOADS_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'resource/attachment')  # 上传文件存储路径
+    UPLOADS_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'web/static')  # 上传文件存储路径
+
     # UPLOADS_DEFAULT_URL = "http://localhost/jeepsk_uploads/"  # 上传文件访问URL
-    UPLOADS_DEFAULT_URL = "/resource/attachment"  # 上传文件访问URL
+    UPLOADS_DEFAULT_URL = "static"  # 上传文件访问URL
     # Flask-DebugToolbar
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 

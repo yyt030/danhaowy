@@ -176,8 +176,29 @@ def qikd():
     id = request.form.get('id')
     qid = request.form.get('qid')
     q = request.form.get('q')
+    order = Order.query.get_or_404(qid)
+    import requests, json
+    url = 'http://www.kuaidi100.com/query'
+    params = {'type': com, 'postid': order.tracking_no}
+    try:
+        req = requests.get(url, params=params, timeout=3)
+        print '>>>', req.url
+        print '>>>', req.content
+        print '>>>', req.status_code
 
-    return '2016/1/9 00:25,【广东佛山公司】的收件员【】已收件'
+    except:
+        return '查询失败:status[%s], messages[%s]' % (req.content.get('status'),
+                                                  req.content.get('message'))
+    else:
+        rsp = json.loads(req.content)
+        print '>>>', rsp.get('data')[0].get('time')
+        print '>>>', rsp.get('data')[0].get('context')
+        if rsp.get('status') == '200':
+            return '%s,%s' % (rsp.get('data')[0].get('time'),
+                              rsp.get('data')[0].get('context'))
+        else:
+            return '查询失败:status[%s], messages[%s]' % (rsp.get('status'),
+                                                      rsp.get('message'))
 
 
 @bp.route('/GetNumber', methods=['GET', 'POST'])

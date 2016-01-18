@@ -157,7 +157,7 @@ def refund():
                 order.is_sell = 1
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
-                msg.title = u'您发布的单号：%s 已成功售出' %order.tracking_no
+                msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
 
                 db.session.add(order)
                 db.session.add(msg)
@@ -185,7 +185,6 @@ def qikd():
 @require_user
 @require_active
 def getnumber():
-
     form = SigninForm()
     user = g.user
     uids = request.args.getlist('uid')
@@ -214,10 +213,10 @@ def getnumber():
             return render_template('login_user/getnumber.html', form=form, user=user, order=order, left_num=left_num)
     if type == 'Success':
         # 验证码校验
-        code=request.form.get("code")
-        url=request.referrer
-        print "code",code
-        if code ==session.get("validate"):
+        code = request.form.get("code")
+        url = request.referrer
+        print "code", code
+        if code == session.get("validate"):
             orderlist = OrderList()
             uid = request.form.get('uid', 0, type=int)
             orderlist.order_id = uid
@@ -827,6 +826,20 @@ def txlog():
 def sj():
     """手机号码生成"""
     user = g.user
+    # http://www.danhaowy.com/login_user/inc/sjOk.asp?str=
+    addr = request.args.get('str')
+    if request.method == 'GET' and addr:
+        import requests
+        url = 'http://www.danhaowy.com/login_user/inc/sjOk.asp'
+        # headers = {'Content-Type': 'text/html;charset=utf-8'}
+        params = {'str': addr.encode('gb2312')}
+        try:
+            req = requests.get(url, params=params, timeout=5)
+        except Exception:
+            return '生成失败，请稍后再试'
+        else:
+            print '>>>', req.status_code, req.content.decode('gb2312').encode('utf-8')
+            return req.content.decode('gb2312').encode('utf-8')
 
     return render_template('login_user/sj.html')
 

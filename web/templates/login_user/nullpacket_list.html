@@ -1,6 +1,5 @@
 {% extends 'login_layout.html' %}
 {% block page_title %}
-
     <title>{% if status == 0 %}空包等待发货 {% else %} 空包已经发货{% endif %}- 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
 {% endblock %}
 {% block page_css %}
@@ -171,7 +170,8 @@
                     <table width="100%" border="0" cellpadding="0" cellspacing="0" class="tab">
                         <tr>
                             <td align="left">
-                                <form method="post" action="waitforsend">
+                                <form method="post" {% if status == 0 %}action="waitforsend"
+                                      {% else %}action="kbsent"{% endif %}>
                                     {{ form.csrf_token }}
                                     单号：<input type="text" class="input" id="trackingno" name="trackingno" size="10"
                                               value="" style="width:120px">

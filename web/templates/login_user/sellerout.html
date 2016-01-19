@@ -61,11 +61,11 @@
                         <tr>
                             <td>{{ count }}</td>
                             <td>{{ order.tracking_no }}</td>
-                            <td>{{ order.tracking_company }}</td>
+                            <td>{{ order.tracking_company_cn }}</td>
                             <td>{{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}</td>
                             <td>{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}</td>
-                            <td>0.50</td>
-                            <td>0.25</td>
+                            <td>{{ order.price |float }}</td>
+                            <td>{{ order.price * 0.95 |float }}</td>
                             <td>{{ order.buy_time }}</td>
                         </tr>
 

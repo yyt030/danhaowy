@@ -158,7 +158,7 @@ def refund():
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
-                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：0.24,请注意查收' % (order.tracking_no)
+                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95)
 
                 db.session.add(order)
                 db.session.add(msg)
@@ -453,7 +453,7 @@ def shopnumber():
 @bp.route('/ShopQiso', methods=['GET', 'POST'])
 @require_user
 def shopqiso():
-    """单号领取->提交查询"""
+    """单号购买->提交查询"""
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')

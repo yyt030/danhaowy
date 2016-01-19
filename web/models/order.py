@@ -41,6 +41,9 @@ class Order(db.Model):
     # 录入时间
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
+    # 单号价格
+    price = db.Column(db.Float, nullable=False, default=0.5)
+
     @property
     def create_date(self):
         return self.create_time.date()

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response, session
-from web.utils.permissions import require_user, require_active
+from web.utils.permissions import require_user, require_active, require_seller
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog, \
     ApplySellerRecord
@@ -146,27 +146,86 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
+    # 批量购买
     if qi == 'Shopism':
         # 单号购买
         ids = request.form.get('id', '').split('.')
-        succ_num = 0
         for id in ids:
             if id:
                 order = Order.query.get(id)
                 order.buyer_id = user.id
                 order.buy_time = datetime.now()
                 order.is_sell = 1
+
+                # money
+                if order.is_scan == 0:
+                    user.money -= order.price / 2
+                    order.seller.money += float(order.price) * 0.95 / 2
+                else:
+                    user.money -= order.price
+                    order.seller.money += float(order.price) * 0.95 / 2
+
+                # fabujifen
+                order.seller.fabujifen += 10
+
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
-                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：0.24,请注意查收' % (order.tracking_no)
+
+                if order.is_scan == 0:
+                    msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (
+                        order.tracking_no, float(order.price) * 0.95 / 2.0)
+                else:
+                    msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95)
 
                 db.session.add(order)
+                db.session.add(user)
                 db.session.add(msg)
-                succ_num += 1
-        db.session.commit()
-        return '购买成功'
+        if user.money < 0:
+            db.session.rollback()
+            return 'moneyerror'
+        else:
+            db.session.commit()
+            return 'Success'
 
+    # 单个购买
+    if qi == 'Shop':
+        id = request.form.get('uid', '')
+        order = Order.query.get_or_404(id)
+        order.buyer_id = user.id
+        order.buy_time = datetime.now()
+        order.is_sell = 1
+
+        # money
+        if order.is_scan == 0:
+            user.money -= order.price / 2
+            order.seller.money += float(order.price) * 0.95 / 2
+        else:
+            user.money -= order.price
+            order.seller.money += float(order.price) * 0.95 / 2
+
+        # fabujifen
+        order.seller.fabujifen += 10
+
+        # 购买动作消息发送
+        msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+        msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
+        if order.is_scan == 0:
+            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95 / 2.0)
+        else:
+            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95)
+
+        db.session.add(order)
+        db.session.add(user)
+        db.session.add(msg)
+
+        if user.money < 0:
+            db.session.rollback()
+            return 'moneyerror'
+        else:
+            db.session.commit()
+            # 购买成功
+            return 'Success'
     return '0'
 
 
@@ -246,8 +305,9 @@ def getnumber():
             orderlist.user_id = user.id
             db.session.add(orderlist)
             db.session.commit()
-            # TODO 跳转到领取成功页面,信息包括：快递单号	快递	预计扫描时间	发货地址	收货地址
-            return render_template('login_user/getnumber_success.html')
+
+            order = Order.query.get_or_404(uid)
+            return render_template('login_user/getnumber_success.html', order=order, user=user, left_num=left_num)
         else:
             tip = "验证码不正确，领取单号失败！"
             return render_template('error.html', error=tip, url="ornumber")
@@ -255,6 +315,7 @@ def getnumber():
 
 @bp.route('/number')
 @require_user
+@require_active
 def number():
     """领取次数增加"""
 
@@ -453,7 +514,7 @@ def shopnumber():
 @bp.route('/ShopQiso', methods=['GET', 'POST'])
 @require_user
 def shopqiso():
-    """单号领取->提交查询"""
+    """单号购买->提交查询"""
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')
@@ -556,6 +617,7 @@ def lookshopnumber():
 
 @bp.route('/seller', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def seller():
     """发布单号
     ImmutableMultiDict([('dshenglist', u'\u56db\u5ddd\u7701'),
@@ -567,8 +629,6 @@ def seller():
     """
     form = SigninForm()
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     batch_flag = request.args.get('qi')
     if request.method == 'POST':
@@ -585,6 +645,7 @@ def seller():
         recv_addr_city = request.form.get('dshilist')
         recv_addr_county = request.form.get('dqulist')
 
+        # 批量发布单号
         if batch_flag:
             send_addr_province = request.form.get('cshenglist')
             send_addr_city = request.form.get('cshilist')
@@ -616,18 +677,23 @@ def seller():
                 order.recv_addr_county = record[3]
                 order_list.append(order)
                 success_count += 1
-
+            # 卖家发布单号 增加10fabu积分
+            user.fabujifen += success_count * 10
             db.session.add_all(order_list)
+            db.session.add(user)
             db.session.commit()
             return '成功%d条，错误%d条' % (success_count, failed_count)
+        # 单个发布
         else:
             order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
                           send_addr_city=send_addr_city, send_addr_county=send_addr_county,
                           tracking_company=tracking_company, is_scan=is_scan, tracking_no=tracking_no,
                           recv_addr_province=recv_addr_province,
                           recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county)
-
+            # 卖家发布单号 增加10fabu积分
+            user.fabujifen += 10
             db.session.add(order)
+            db.session.add(user)
             db.session.commit()
             tip = "订单%s发布成功！" % order.tracking_no
             return render_template('error.html', error=tip, url="")
@@ -1047,11 +1113,10 @@ def tx():
 
 @bp.route('/sellerlist')
 @require_user
+@require_seller
 def sellerlist():
     """已发布的单号"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     type = request.args.get('type', '')
     if type == 'delall':
@@ -1085,11 +1150,10 @@ def sellerlist():
 
 @bp.route('/sellerout', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerout():
     """已售出的单号"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -1112,11 +1176,10 @@ def sellerout():
 
 @bp.route('/shoplog', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def shoplog():
     """佣金记录"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -1139,11 +1202,10 @@ def shoplog():
 
 @bp.route('/sellerset', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerset():
     '''设置默认发货'''
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     form = RegisterForm()
     return render_template('login_user/sellerset.html', form=form)
@@ -1151,12 +1213,11 @@ def sellerset():
 
 @bp.route('/sellerjf', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerjf():
     '''发布积分兑换'''
     form = RegisterForm()
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     user = User.query.filter(User.id == user.id).first()
 
@@ -1201,9 +1262,9 @@ def msg():
             for msg in msgs:
                 db.session.delete(msg)
             db.session.commit()
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
         if action == 'yd':
-            msgs = query.all()
+            msgs = query.filter(MailBox.msg_type.in_([u'通知'])).all()
             for msg in msgs:
                 msg.result = u'已读'
             db.session.add_all(msgs)
@@ -1220,7 +1281,7 @@ def msg():
             db.session.add(seller)
             db.session.commit()
 
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
         if action == 'no':
             # 不同意申请为卖家申请
             msg = MailBox.query.get_or_404(msg_id)
@@ -1228,7 +1289,7 @@ def msg():
             db.session.add(msg)
             db.session.commit()
 
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
 
     count_all = query.count()
     page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1

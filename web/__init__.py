@@ -55,8 +55,7 @@ def create_app():
         g.user = get_current_user()
         if g.user:
             set_user_active_time(g.user.id)
-            g.msg_num = MailBox.query.filter(MailBox.recver_id == g.user.id, MailBox.result is not None).count()
-        pass
+            g.msg_num = MailBox.query.filter(MailBox.recver_id == g.user.id, MailBox.result == None).count()
 
     from .utils.devices import Devices
 

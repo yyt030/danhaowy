@@ -37,7 +37,7 @@ class User(db.Model):
     token = db.Column(db.String(20), default='')
     money = db.Column(db.Float(10, 2), default=0.0)
 
-    fabujifen = db.Column(db.Float(10, 2), default=0.0)
+    fabujifen = db.Column(db.Float(10, 2), nullable=False, default=0.0)
 
     wuyoubi = db.Column(db.Integer, default=0)
     wuyoujifen = db.Column(db.Integer, default=0)
@@ -54,8 +54,8 @@ class User(db.Model):
     default_express = db.relationship('Express', backref=db.backref('users', lazy='dynamic'))
 
     # 支付宝账户，姓名
-    alipay_name = db.Column(db.String(50),default='')
-    alipay_account = db.Column(db.String(50),default='')
+    alipay_name = db.Column(db.String(50), default='')
+    alipay_account = db.Column(db.String(50), default='')
 
     @property
     def active_time(self):

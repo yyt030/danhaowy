@@ -1,4 +1,7 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>佣金记录 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
     <liNK rel="stylesheet" type="text/css" href="/static/css/bootstrap.css"/>
     <style type="text/css">
@@ -163,7 +166,7 @@
                     {% for count, shoplog in shoplogs %}
                         <tr>
                             <td align="center">{{ count}}</td>
-                            <td align="center">{{ shoplog.tracking_company }}</td>
+                            <td align="center">{{ shoplog.tracking_company_cn }}</td>
                             <td align="center">快递单号：{{ shoplog.tracking_no }} ,已成功售出。</td>
                             <td align="center">+0.24</td>
                             <td align="center">974.48</td>

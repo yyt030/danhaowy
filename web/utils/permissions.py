@@ -29,6 +29,17 @@ def require_user(func):
 
     return decorator
 
+def require_seller(func):
+    """Check if user login"""
+
+    @wraps(func)
+    def decorator(*args, **kwargs):
+        if not g.user.is_seller:
+            # flash('此操作需要登录账户')
+            return redirect(url_for('login_user.upseller'))
+        return func(*args, **kwargs)
+
+    return decorator
 
 
 def require_active(func):

@@ -2,8 +2,9 @@
 # coding: utf8
 __author__ = 'yueyt'
 
-from . import db
 from datetime import datetime
+
+from . import db
 
 
 class Order(db.Model):
@@ -40,6 +41,9 @@ class Order(db.Model):
     # 录入时间
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
+    # 单号价格
+    price = db.Column(db.Float(10, 2), nullable=False, default=0.5)
+
     @property
     def create_date(self):
         return self.create_time.date()
@@ -63,6 +67,10 @@ class Order(db.Model):
             "kuaijie": u'快捷'
         }
         return com[self.tracking_company]
+
+    @property
+    def plan_scan_time(self):
+        return '%s %s' % (self.create_time.date(), '19:00:00')
 
     def __repr__(self):
         return '<Order %r>' % self.tracking_no

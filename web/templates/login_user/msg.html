@@ -94,13 +94,12 @@
                                     <LI class=w200><font color="#FF0000">{{ msg.create_at }}</font></LI>
                                     <LI class=w100>
                                         {% if msg.msg_type == '申请' %}
-
                                             <font color="#0066CC">
                                                 <font color="#3366CC">
                                                     {% if msg.result %}{{ msg.result }}
                                                     {% else %}
-                                                        <a href="msg?nn=yes&id={{ msg.id }}">同意</a>
-                                                        <a href="msg?nn=no&id={{ msg.id }}">驳回</a>
+                                                        <a href="msg?nn=yes&id={{ msg.id }}&page={{ page }}">同意</a>
+                                                        <a href="msg?nn=no&id={{ msg.id }}&page={{ page }}">驳回</a>
                                                     {% endif %}
                                                 </font>
                                             </font>

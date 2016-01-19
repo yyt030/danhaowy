@@ -158,7 +158,7 @@ def refund():
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
-                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：0.24,请注意查收' %(order.tracking_no)
+                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：0.24,请注意查收' % (order.tracking_no)
 
                 db.session.add(order)
                 db.session.add(msg)
@@ -1193,9 +1193,9 @@ def msg():
             for msg in msgs:
                 db.session.delete(msg)
             db.session.commit()
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
         if action == 'yd':
-            msgs = query.all()
+            msgs = query.filter(MailBox.msg_type.in_([u'通知'])).all()
             for msg in msgs:
                 msg.result = u'已读'
             db.session.add_all(msgs)
@@ -1212,7 +1212,7 @@ def msg():
             db.session.add(seller)
             db.session.commit()
 
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
         if action == 'no':
             # 不同意申请为卖家申请
             msg = MailBox.query.get_or_404(msg_id)
@@ -1220,7 +1220,7 @@ def msg():
             db.session.add(msg)
             db.session.commit()
 
-            return redirect(url_for('.msg'))
+            return redirect(url_for('.msg', page=page))
 
     count_all = query.count()
     page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1

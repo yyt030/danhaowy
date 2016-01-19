@@ -31,7 +31,7 @@ def run_80():
 def create_admin():
     """Create admin."""
 
-    user = User(name="admin", qq=123456789, email="admin@qq.com", mobile="18812345678", address='localhost')
+    user = User(name="admin", qq=123456789, email="admin@qq.com", mobile="18812345678", address='localhost',role='admin')
     user.password = "admin"
     user.hash_password()
     user.gene_token()

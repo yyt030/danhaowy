@@ -42,7 +42,7 @@ class Order(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     # 单号价格
-    price = db.Column(db.Float, nullable=False, default=0.5)
+    price = db.Column(db.Float(10, 2), nullable=False, default=0.5)
 
     @property
     def create_date(self):

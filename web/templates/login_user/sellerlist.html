@@ -64,12 +64,12 @@
                         <tr>
                             <td>{{ count }}</td>
                             <td>{{ order.tracking_no }}</td>
-                            <td>{{ order.tracking_company }}</td>
+                            <td>{{ order.tracking_company_cn }}</td>
                             <td>
                                 {{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}</td>
                             <td>{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}</td>
 
-                            <td>0.50</td>
+                            <td>{% if order.is_scan == 1 %}0.25{% else %}{{ order.price }}{% endif %}</td>
                             <td>{{ order.create_time }}</td>
                             <td><span class='qiall'><input id='Qidd' type='checkbox' name='Qidd'
                                                            value='{{ order.id }}'></span>

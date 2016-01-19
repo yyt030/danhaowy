@@ -156,13 +156,15 @@ def refund():
                 order.buy_time = datetime.now()
                 order.is_sell = 1
 
-                # 买家
+                # money
                 if order.is_scan == 0:
-                    user.money -= order.price / 2.0
+                    user.money -= order.price / 2
+                    order.seller.money += float(order.price) * 0.95 / 2
                 else:
                     user.money -= order.price
+                    order.seller.money += float(order.price) * 0.95 / 2
 
-                # 卖家
+                # fabujifen
                 order.seller.fabujifen += 10
 
                 # 购买动作消息发送
@@ -170,7 +172,7 @@ def refund():
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
                 if order.is_scan == 0:
                     msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (
-                    order.tracking_no, float(order.price) * 0.95 / 2.0)
+                        order.tracking_no, float(order.price) * 0.95 / 2.0)
                 else:
                     msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95)
 
@@ -192,14 +194,15 @@ def refund():
         order.buy_time = datetime.now()
         order.is_sell = 1
 
-        # 买家
+        # money
         if order.is_scan == 0:
             user.money -= order.price / 2
+            order.seller.money += float(order.price) * 0.95 / 2
         else:
-
             user.money -= order.price
+            order.seller.money += float(order.price) * 0.95 / 2
 
-        # 卖家
+        # fabujifen
         order.seller.fabujifen += 10
 
         # 购买动作消息发送

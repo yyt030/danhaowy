@@ -245,8 +245,9 @@ def getnumber():
             orderlist.user_id = user.id
             db.session.add(orderlist)
             db.session.commit()
-            # TODO 跳转到领取成功页面,信息包括：快递单号	快递	预计扫描时间	发货地址	收货地址
-            return render_template('login_user/getnumber_success.html')
+
+            order = Order.query.get_or_404(uid)
+            return render_template('login_user/getnumber_success.html', order=order, user=user, left_num=left_num)
         else:
             tip = "验证码不正确，领取单号失败！"
             return render_template('error.html', error=tip, url="ornumber")

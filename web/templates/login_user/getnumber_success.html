@@ -266,7 +266,7 @@
 
 <div id="Popup"><a id="popupClose" href="#"><img src="/static/images/close.png" alt="" border="0"></a>
 
-    <h1>领取汇通成功！</h1>
+    <h1>领取{{ order.tracking_company_cn }}成功！</h1>
 
     <p>
     <table width='100%' border='0' cellpadding='0' cellspacing='1' bgcolor='#BBD3EB'>
@@ -278,12 +278,13 @@
             <td height='27' align='center' background='/static/images/index1_72.gif' bgcolor='#FFFFFF'>收货地址</td>
         </tr>
         <tr>
-            <td height='26' align='center' bgcolor='#FFFFFF'>50266499802721</td>
-            <td height='26' align='center' bgcolor='#FFFFFF'>汇通</td>
-            <td height='26' align='center' bgcolor='#FFFFFF'>2016-01-17 21:00</td>
-            <td height='26' align='center' bgcolor='#FFFFFF'>广东省 深圳市 宝安区</td>
-            <td height='26' align='center' bgcolor='#FFFFFF'>湖北省 黄冈市 红安县
-            </td>
+            <td height='26' align='center' bgcolor='#FFFFFF'>{{ order.tracking_no }}</td>
+            <td height='26' align='center' bgcolor='#FFFFFF'>{{ order.tracking_company_cn }}</td>
+            <td height='26' align='center' bgcolor='#FFFFFF'>{{ order.plan_scan_time}}</td>
+            <td height='26' align='center'
+                bgcolor='#FFFFFF'>{{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}</td>
+            <td height='26' align='center'
+                bgcolor='#FFFFFF'>{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}</td>
         </tr>
     </table>
     <br/><font color='red' style='text-align:center;'>*温馨提示：领取后请到'已领取单号'页面先进行单号自检,确认可以使用请在10分钟内使用。 </font></p></div>
@@ -295,8 +296,8 @@
                                                                                      href='javascript:void(0);'>×</a>
     </div>
     <div id='msg_title'>单号无忧-温馨提示框-领取单号</div>
-    <div id='msg_content'>尊贵的会员：mengjunz <br>领取的单号：50266499802721<br>快递类型：汇通<br>您每日领取单号数：<font color='#FF0000'>10</font><br>您今日剩余领取单号数：<font
-            color='#FF0000'>9</font><br><br><a href='LookNumber' style='color:#F00;text-decoration:none;'
+    <div id='msg_content'>尊贵的会员：{{ user.name }} <br>领取的单号：{{ order.tracking_no }}<br>快递类型：{{ order.tracking_company_cn}}<br>您每日领取单号数：<font color='#FF0000'>{{ user.max_order_num }}</font><br>您今日剩余领取单号数：<font
+            color='#FF0000'>{{ left_num }}</font><br><br><a href='LookNumber' style='color:#F00;text-decoration:none;'
                                                target='_self'>查看三日内已领取单号</a></div>
 </div>
 

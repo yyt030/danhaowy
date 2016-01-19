@@ -62,134 +62,127 @@
 {% endblock %}
 {% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 领取次数增加 {% endblock %}
 {% block content %}
-    {% if user.is_active == True %}
-        <td valign="top" width="624">
-            <div class="midmess">
-                <!--温馨提示框-->
-                <div class="mess_all">
-                    <h1>温馨提示：</h1>
-                    <ul>
-                        <li>1、欢迎您来到每日领取次数增加中心，您可以在这里增加每日领取次数。</li>
-                        <li><font color=red>2、增加次数为永久增加上限：当前每日领取次数+购买次数=每日领取总次数，购买后即时生效！</font></li>
-                    </ul>
-                </div>
-                <!--温馨提示框结束-->
-                <div class="come">
-                    <p></p>
-                    <ul>
-                        <li class="c01">亲爱的 <span>{{ user.name }}</span> 欢迎您！</li>
-                        <li class="c02">
-                            无优积分：<span>{{ user.wuyoujifen }}</span>
-                            无优币：<span>{{ user.wuyoubi }}</span> 您当前等级：<a><font
-                                color="#FF0000">{{ user.role }}</font></a>
-                        </li>
-                        <li class="c02">
-                            每日领取次数：<span>{{ user.max_order_num }}</span>
-                            今日已领取次数：<span>0</span>
-                        </li>
-                        <li class="c03">购买每日领取次数价格：<span>增加1个次数=5元</span>，请在有足够的无优币，在进行购买。</li>
-                        <li class="c04">兑换下面各种卡片，更实惠！</li>
-                    </ul>
-                </div>
+    <td valign="top" width="624">
+        <div class="midmess">
+            <!--温馨提示框-->
+            <div class="mess_all">
+                <h1>温馨提示：</h1>
+                <ul>
+                    <li>1、欢迎您来到每日领取次数增加中心，您可以在这里增加每日领取次数。</li>
+                    <li><font color=red>2、增加次数为永久增加上限：当前每日领取次数+购买次数=每日领取总次数，购买后即时生效！</font></li>
+                </ul>
+            </div>
+            <!--温馨提示框结束-->
+            <div class="come">
+                <p></p>
+                <ul>
+                    <li class="c01">亲爱的 <span>{{ user.name }}</span> 欢迎您！</li>
+                    <li class="c02">
+                        无优积分：<span>{{ user.wuyoujifen }}</span>
+                        无优币：<span>{{ user.wuyoubi }}</span> 您当前等级：<a><font
+                            color="#FF0000">{{ user.role }}</font></a>
+                    </li>
+                    <li class="c02">
+                        每日领取次数：<span>{{ user.max_order_num }}</span>
+                        今日已领取次数：<span>0</span>
+                    </li>
+                    <li class="c03">购买每日领取次数价格：<span>增加1个次数=5元</span>，请在有足够的无优币，在进行购买。</li>
+                    <li class="c04">兑换下面各种卡片，更实惠！</li>
+                </ul>
+            </div>
 
-                <div class="get">
-                    <h1>领取次数增加</h1>
-                    <div class="getaa">
-                        <form id="orderform" name="orderform" method="post" action="file?action=cishu"
-                              onsubmit="return CheckForm();">
+            <div class="get">
+                <h1>领取次数增加</h1>
+                <div class="getaa">
+                    <form id="orderform" name="orderform" method="post" action="file?action=cishu"
+                          onsubmit="return CheckForm();">
+                        {{ form.csrf_token }}
+                        <p>每日领取次数 5元加一次，1次起售。我要购买
+                            <input class="bs" onkeyup="this.value=this.value.replace(/\D/g,'')"
+                                   onafterpaste="this.value=this.value.replace(/\D/g,'')"
+                                   style="width:30px;text-align:center;" name="Count"
+                                   type="text"
+                                   value="1" id="txtXGCount" class="gk"/>次
+                            <input type="image" name="btnKXGBuy" id="btnKXGBuy" class="an"
+                                   src="/static/images/chongzhi.gif"
+                                   border="0"/>
+                        </p>
+                    </form>
+                    <div class="get_ka">
+                        <img src="/static/images/ka01.gif"/>
+                        <form id="orderform" name="orderform" method="post" action="file?action=cishution">
                             {{ form.csrf_token }}
-                            <p>每日领取次数 5元加一次，1次起售。我要购买
-                                <input class="bs" onkeyup="this.value=this.value.replace(/\D/g,'')"
-                                       onafterpaste="this.value=this.value.replace(/\D/g,'')"
-                                       style="width:30px;text-align:center;" name="Count"
-                                       type="text"
-                                       value="1" id="txtXGCount" class="gk"/>次
-                                <input type="image" name="btnKXGBuy" id="btnKXGBuy" class="an"
-                                       src="/static/images/chongzhi.gif"
-                                       border="0"/>
-                            </p>
+                            <ul>
+                                <li>100次，4元/次，</li>
+                                <li>需要400元无优币（<span>节省100元</span>）</li>
+                                <li><input type="image" name="btnBuy" id="btnBuy" class="an"
+                                           src="/static/images/get.gif"
+                                           border="0"/></li>
+                            </ul>
+                            <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="400.00"/>
+                            <input name="hOutG" type="hidden" id="ctl01_hOutG" value="100"/>
+                            <input name="key" type="hidden" id="key" value="1"/>
                         </form>
-                        <div class="get_ka">
-                            <img src="/static/images/ka01.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
-                                {{ form.csrf_token }}
-                                <ul>
-                                    <li>100次，4元/次，</li>
-                                    <li>需要400元无优币（<span>节省100元</span>）</li>
-                                    <li><input type="image" name="btnBuy" id="btnBuy" class="an"
-                                               src="/static/images/get.gif"
-                                               border="0"/></li>
-                                </ul>
-                                <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="400.00"/>
-                                <input name="hOutG" type="hidden" id="ctl01_hOutG" value="100"/>
-                                <input name="key" type="hidden" id="key" value="1"/>
-                            </form>
-                        </div>
-
-                        <div class="get_ka">
-                            <img src="/static/images/ka02.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
-                                {{ form.csrf_token }}
-                                <ul>
-                                    <li>50次，4.2元/次，</li>
-                                    <li>需要210元无优币（<span>节省40元</span>）</li>
-                                    <li><input type="image" name="btnBuy" id="btnBuy" class="an"
-                                               src="/static/images/get.gif"
-                                               border="0"/></li>
-                                </ul>
-                                <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="210.00"/>
-                                <input name="hOutG" type="hidden" id="ctl01_hOutG" value="50"/>
-                                <input name="key" type="hidden" id="key" value="2"/>
-                            </form>
-                        </div>
-
-                        <div class="get_ka">
-                            <img src="/static/images/ka03.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
-                                {{ form.csrf_token }}
-                                <ul>
-                                    <li>20次，4.5元/次，</li>
-                                    <li>需要90元无优币（<span>节省10元</span>）</li>
-                                    <li><input type="image" name="btnBuy" id="btnBuy" class="an"
-                                               src="/static/images/get.gif"
-                                               border="0"/></li>
-                                </ul>
-                                <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="90.00"/>
-                                <input name="hOutG" type="hidden" id="ctl01_hOutG" value="20"/>
-                                <input name="key" type="hidden" id="key" value="3"/>
-                            </form>
-                        </div>
-
-                        <div class="get_ka">
-                            <img src="/static/images/ka04.gif"/>
-                            <form id="orderform" name="orderform" method="post" action="file?action=cishution">
-                                {{ form.csrf_token }}
-                                <ul>
-                                    <li>10次，4.8元/次，</li>
-                                    <li>需要48元无优币（<span>节省2元</span>）</li>
-                                    <li><input type="image" name="btnBuy" id="btnBuy" class="an"
-                                               src="/static/images/get.gif"
-                                               border="0"/></li>
-                                </ul>
-                                <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="48.00"/>
-                                <input name="hOutG" type="hidden" id="ctl01_hOutG" value="10"/>
-                                <input name="key" type="hidden" id="key" value="4"/>
-                            </form>
-                        </div>
-
                     </div>
+
+                    <div class="get_ka">
+                        <img src="/static/images/ka02.gif"/>
+                        <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                            {{ form.csrf_token }}
+                            <ul>
+                                <li>50次，4.2元/次，</li>
+                                <li>需要210元无优币（<span>节省40元</span>）</li>
+                                <li><input type="image" name="btnBuy" id="btnBuy" class="an"
+                                           src="/static/images/get.gif"
+                                           border="0"/></li>
+                            </ul>
+                            <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="210.00"/>
+                            <input name="hOutG" type="hidden" id="ctl01_hOutG" value="50"/>
+                            <input name="key" type="hidden" id="key" value="2"/>
+                        </form>
+                    </div>
+
+                    <div class="get_ka">
+                        <img src="/static/images/ka03.gif"/>
+                        <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                            {{ form.csrf_token }}
+                            <ul>
+                                <li>20次，4.5元/次，</li>
+                                <li>需要90元无优币（<span>节省10元</span>）</li>
+                                <li><input type="image" name="btnBuy" id="btnBuy" class="an"
+                                           src="/static/images/get.gif"
+                                           border="0"/></li>
+                            </ul>
+                            <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="90.00"/>
+                            <input name="hOutG" type="hidden" id="ctl01_hOutG" value="20"/>
+                            <input name="key" type="hidden" id="key" value="3"/>
+                        </form>
+                    </div>
+
+                    <div class="get_ka">
+                        <img src="/static/images/ka04.gif"/>
+                        <form id="orderform" name="orderform" method="post" action="file?action=cishution">
+                            {{ form.csrf_token }}
+                            <ul>
+                                <li>10次，4.8元/次，</li>
+                                <li>需要48元无优币（<span>节省2元</span>）</li>
+                                <li><input type="image" name="btnBuy" id="btnBuy" class="an"
+                                           src="/static/images/get.gif"
+                                           border="0"/></li>
+                            </ul>
+                            <input name="hInMoney" type="hidden" id="ctl01_hInMoney" value="48.00"/>
+                            <input name="hOutG" type="hidden" id="ctl01_hOutG" value="10"/>
+                            <input name="key" type="hidden" id="key" value="4"/>
+                        </form>
+                    </div>
+
                 </div>
             </div>
-            <div class="clear">&nbsp;</div>
-        </td>
-        <td width="163"></td>
-        <div class="clear"></div>
-        <div style="height:40px;"></div>
-    {% else %}
-        <script>
-            alert('您好：microhan 您的帐号未激活,不能增加每日领取次数!');
-            location.href = 'wybjihuo'
-        </script>
-    {% endif %}
+        </div>
+        <div class="clear">&nbsp;</div>
+    </td>
+    <td width="163"></td>
+    <div class="clear"></div>
+    <div style="height:40px;"></div>
 
 {% endblock %}

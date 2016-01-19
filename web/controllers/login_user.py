@@ -255,6 +255,7 @@ def getnumber():
 
 @bp.route('/number')
 @require_user
+@require_active
 def number():
     """领取次数增加"""
 

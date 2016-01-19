@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response, session
-from web.utils.permissions import require_user, require_active
+from web.utils.permissions import require_user, require_active, require_seller
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog
 
@@ -201,7 +201,7 @@ def refund():
         msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
         msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
         if order.is_scan == 0:
-            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95/2.0)
+            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95 / 2.0)
         else:
             msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95)
 
@@ -606,6 +606,7 @@ def lookshopnumber():
 
 @bp.route('/seller', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def seller():
     """发布单号
     ImmutableMultiDict([('dshenglist', u'\u56db\u5ddd\u7701'),
@@ -617,8 +618,6 @@ def seller():
     """
     form = SigninForm()
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     batch_flag = request.args.get('qi')
     if request.method == 'POST':
@@ -1096,11 +1095,10 @@ def tx():
 
 @bp.route('/sellerlist')
 @require_user
+@require_seller
 def sellerlist():
     """已发布的单号"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     type = request.args.get('type', '')
     if type == 'delall':
@@ -1134,11 +1132,10 @@ def sellerlist():
 
 @bp.route('/sellerout', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerout():
     """已售出的单号"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -1161,11 +1158,10 @@ def sellerout():
 
 @bp.route('/shoplog', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def shoplog():
     """佣金记录"""
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     startdate = request.args.get('startdate', '')
     enddate = request.args.get('enddate', '')
@@ -1188,11 +1184,10 @@ def shoplog():
 
 @bp.route('/sellerset', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerset():
     '''设置默认发货'''
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     form = RegisterForm()
     return render_template('login_user/sellerset.html', form=form)
@@ -1200,12 +1195,11 @@ def sellerset():
 
 @bp.route('/sellerjf', methods=['GET', 'POST'])
 @require_user
+@require_seller
 def sellerjf():
     '''发布积分兑换'''
     form = RegisterForm()
     user = g.user
-    if not user.is_seller:
-        return redirect(url_for('.upseller'))
 
     user = User.query.filter(User.id == user.id).first()
 

@@ -145,27 +145,76 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
+    # 批量购买
     if qi == 'Shopism':
         # 单号购买
         ids = request.form.get('id', '').split('.')
-        succ_num = 0
         for id in ids:
             if id:
                 order = Order.query.get(id)
                 order.buyer_id = user.id
                 order.buy_time = datetime.now()
                 order.is_sell = 1
+
+                # 买家
+                if order.is_scan == 0:
+                    user.money -= order.price / 2.0
+                else:
+                    user.money -= order.price
+
+                # 卖家
+                order.seller.fabujifen += 10
+
                 # 购买动作消息发送
                 msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
                 msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95)
 
                 db.session.add(order)
+                db.session.add(user)
                 db.session.add(msg)
-                succ_num += 1
-        db.session.commit()
-        return '购买成功'
+        if user.money < 0:
+            db.session.rollback()
+            return '购买失败，金额不足'
+        else:
+            db.session.commit()
+            return '购买成功'
 
+    # 单个购买
+    if qi == 'Shop':
+        id = request.form.get('uid', '')
+        order = Order.query.get_or_404(id)
+        order.buyer_id = user.id
+        order.buy_time = datetime.now()
+        order.is_sell = 1
+
+        # 买家
+        if order.is_scan == 0:
+            user.money -= order.price / 2.0
+        else:
+            user.money -= order.price
+
+        # 卖家
+        order.seller.fabujifen += 10
+
+        # 购买动作消息发送
+        msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+        msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
+        if order.is_scan == 0:
+            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95/2.0)
+        else:
+            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (order.tracking_no, order.price * 0.95)
+
+        db.session.add(order)
+        db.session.add(user)
+        db.session.add(msg)
+
+        if user.money < 0:
+            db.session.rollback()
+            return '购买失败，金额不足'
+        else:
+            db.session.commit()
+            return '购买成功'
     return '0'
 
 
@@ -586,6 +635,7 @@ def seller():
         recv_addr_city = request.form.get('dshilist')
         recv_addr_county = request.form.get('dqulist')
 
+        # 批量发布单号
         if batch_flag:
             send_addr_province = request.form.get('cshenglist')
             send_addr_city = request.form.get('cshilist')
@@ -617,18 +667,23 @@ def seller():
                 order.recv_addr_county = record[3]
                 order_list.append(order)
                 success_count += 1
-
+            # 卖家发布单号 增加10fabu积分
+            user.fabujifen += success_count * 10
             db.session.add_all(order_list)
+            db.session.add(user)
             db.session.commit()
             return '成功%d条，错误%d条' % (success_count, failed_count)
+        # 单个发布
         else:
             order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
                           send_addr_city=send_addr_city, send_addr_county=send_addr_county,
                           tracking_company=tracking_company, is_scan=is_scan, tracking_no=tracking_no,
                           recv_addr_province=recv_addr_province,
                           recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county)
-
+            # 卖家发布单号 增加10fabu积分
+            user.fabujifen += 10
             db.session.add(order)
+            db.session.add(user)
             db.session.commit()
             tip = "订单%s发布成功！" % order.tracking_no
             return render_template('error.html', error=tip, url="")

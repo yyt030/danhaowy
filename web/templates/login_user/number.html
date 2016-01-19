@@ -1,4 +1,7 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>领取次数增加 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
     <style type="text/css">
         ul {
@@ -57,7 +60,7 @@
     <script src="/static/js/totop.js"></script>
     <script src="/static/js/ContactIndex.js"></script>
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a＞已发布单号列表　{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 领取次数增加 {% endblock %}
 {% block content %}
     {% if user.is_active == True %}
         <td valign="top" width="624">

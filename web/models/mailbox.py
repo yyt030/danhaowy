@@ -28,3 +28,18 @@ class MailBox(db.Model):
 
     def __repr__(self):
         return '<MailBox %r>' % self.id
+
+
+class ApplySellerRecord(db.Model):
+    id = db.Column(db.Integer, nullable=False, primary_key=True)
+    user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', primaryjoin='User.id == ApplySellerRecord.user_id',
+                             backref=db.backref('apply_seller_users', lazy='dynamic'))
+    qq = db.Column(db.String(20))
+    email = db.Column(db.String(20))
+    typ = db.Column(db.Integer,default=500)
+    processed = db.Column(db.Float, default=False)
+    passed=db.Column(db.Float, default=False)
+    create_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    def __repr__(self):
+        return '<ApplySellerRecord %r>' % self.id

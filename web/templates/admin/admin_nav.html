@@ -3,9 +3,7 @@
         <ul class="nav" id="side-menu">
             <li class="nav-header">
                 <div class="dropdown profile-element">
-                    <span>
-
-                             </span>
+                    <span></span>
                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                     <span class="block m-t-xs"> <strong
@@ -53,6 +51,50 @@
                     <li><a href="/admin/adduser">添加用户</a></li>
                 </ul>
             </li>
+            <li class="{% if admin_nav==5 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">卖家管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/seller_list?type=not_authed">待审核的列表</a></li>
+                    <li><a href="/admin/seller_list?type=authed">已审核的卖家</a></li>
+                </ul>
+            </li>
+        <li class="{% if admin_nav==6 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">单号管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/number_list">发布的单号列表</a></li>
+                    <li><a href="/admin/look_number_list">单号领取记录</a></li>
+                    <li><a href="/admin/number_list?type=not_paid">待售出的单号</a></li>
+                    <li><a href="/admin/number_list?type=paid">已售出的单号</a></li>
+                </ul>
+            </li>
+            <li class="{% if admin_nav==7 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">空包管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/seller_list?type=not_authed">待发货的空包</a></li>
+                    <li><a href="/admin/seller_list?type=authed">已发货的空包</a></li>
+                </ul>
+            </li>
+
+            <li class="{% if admin_nav==8 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">充值管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/pay_log?type=waiting">未到账的充值记录</a></li>
+                    <li><a href="/admin/pay_log?type=ok">已到账的充值记录</a></li>
+                </ul>
+            </li>
+            <li class="{% if admin_nav==9 %}active{% endif %}">
+                <a href="#"><i class="fa fa-male"></i> <span class="nav-label">提现管理</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    <li><a href="/admin/pay_log?type=waiting">待处理的提现记录</a></li>
+                    <li><a href="/admin/pay_log?type=ok">已处理的提现记录</a></li>
+                </ul>
+            </li>
+
 
 
         </ul>

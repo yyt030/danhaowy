@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf8
+
 __author__ = 'yueyt'
 
 from datetime import datetime
@@ -42,7 +43,7 @@ class Order(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     # 单号价格
-    price = db.Column(db.Float(10, 2), nullable=False, default=0.5)
+    price = db.Column(db.Float, nullable=False, default=0.5)
 
     @property
     def create_date(self):
@@ -74,6 +75,7 @@ class Order(db.Model):
 
     @property
     def real_price(self):
+        # 非扫描单号价格0.5 ,　扫描价格0.25
         if self.is_scan == 0:
             return self.price / 2
         else:
@@ -81,7 +83,8 @@ class Order(db.Model):
 
     @property
     def profit(self):
-        return float(self.real_price) * 0.95
+        # 每个单号卖家能获取0.95的钱
+        return self.real_price * 0.95
 
     def __repr__(self):
         return '<Order %r>' % self.tracking_no

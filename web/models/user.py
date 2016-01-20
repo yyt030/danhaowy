@@ -35,9 +35,9 @@ class User(db.Model):
     # 是否卖家
     is_seller = db.Column(db.Boolean, nullable=False, default=False)
     token = db.Column(db.String(20), default='')
-    money = db.Column(db.Float(10, 2), default=0.0)
+    money = db.Column(db.Float, default=0.0)
 
-    fabujifen = db.Column(db.Float(10, 2), nullable=False, default=0.0)
+    fabujifen = db.Column(db.Float, nullable=False, default=0.0)
 
     wuyoubi = db.Column(db.Integer, default=0)
     wuyoujifen = db.Column(db.Integer, default=0)

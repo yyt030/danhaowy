@@ -166,7 +166,7 @@ def refund():
                 # wuyoubi
                 user.wuyoubi -= order.real_price
                 order.seller.wuyoubi += order.profit
-                order.seller_left_wuyoubi = order.seller.wuyoubi
+                order.seller_left_money = order.seller.wuyoubi
 
                 # fabujifen
                 order.seller.fabujifen += 10
@@ -202,7 +202,7 @@ def refund():
         # wuyoubi
         user.wuyoubi -= order.real_price
         order.seller.wuyoubi += order.profit
-        order.seller_left_wuyoubi = order.seller.wuyoubi
+        order.seller_left_money = order.seller.wuyoubi
 
         # fabujifen
         order.seller.fabujifen += 10

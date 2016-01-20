@@ -163,10 +163,10 @@ def refund():
                 order.buy_time = datetime.now()
                 order.is_sell = 1
 
-                # money
-                user.money -= order.real_price
-                order.seller.money += order.profit
-                order.seller_left_money = order.seller.money
+                # wuyoubi
+                user.wuyoubi -= order.real_price
+                order.seller.wuyoubi += order.profit
+                order.seller_left_wuyoubi = order.seller.wuyoubi
 
                 # fabujifen
                 order.seller.fabujifen += 10
@@ -184,7 +184,7 @@ def refund():
                 db.session.add(order)
                 db.session.add(user)
                 db.session.add(msg)
-        if user.money < 0:
+        if user.wuyoubi < 0:
             db.session.rollback()
             return 'moneyerror'
         else:
@@ -199,10 +199,10 @@ def refund():
         order.buy_time = datetime.now()
         order.is_sell = 1
 
-        # money
-        user.money -= order.real_price
-        order.seller.money += order.profit
-        order.seller_left_money = order.seller.money
+        # wuyoubi
+        user.wuyoubi -= order.real_price
+        order.seller.wuyoubi += order.profit
+        order.seller_left_wuyoubi = order.seller.wuyoubi
 
         # fabujifen
         order.seller.fabujifen += 10
@@ -219,7 +219,7 @@ def refund():
         db.session.add(user)
         db.session.add(msg)
 
-        if user.money < 0:
+        if user.wuyoubi < 0:
             db.session.rollback()
             return 'moneyerror'
         else:

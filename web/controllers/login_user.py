@@ -488,7 +488,9 @@ def shopnumber():
 
     page = request.args.get('page', 1, type=int)
 
-    query = Order.query.filter(Order.user_id !=1)
+    # 去除admin???
+    query = Order.query.filter(Order.seller_id != 1)
+
     if startdate and enddate:
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
                              Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))

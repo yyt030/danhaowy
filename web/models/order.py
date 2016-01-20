@@ -72,6 +72,17 @@ class Order(db.Model):
     def plan_scan_time(self):
         return '%s %s' % (self.create_time.date(), '19:00:00')
 
+    @property
+    def real_price(self):
+        if self.is_scan == 0:
+            return self.price / 2
+        else:
+            return self.price
+
+    @property
+    def profit(self):
+        return float(self.real_price) * 0.95
+
     def __repr__(self):
         return '<Order %r>' % self.tracking_no
 

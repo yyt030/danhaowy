@@ -157,12 +157,8 @@ def refund():
                 order.is_sell = 1
 
                 # money
-                if order.is_scan == 0:
-                    user.money -= order.price / 2
-                    order.seller.money += float(order.price) * 0.95 / 2
-                else:
-                    user.money -= order.price
-                    order.seller.money += float(order.price) * 0.95 / 2
+                user.money -= order.real_price
+                order.seller.money += order.profit
 
                 # fabujifen
                 order.seller.fabujifen += 10
@@ -195,12 +191,8 @@ def refund():
         order.is_sell = 1
 
         # money
-        if order.is_scan == 0:
-            user.money -= order.price / 2
-            order.seller.money += float(order.price) * 0.95 / 2
-        else:
-            user.money -= order.price
-            order.seller.money += float(order.price) * 0.95 / 2
+        user.money -= order.real_price
+        order.seller.money += order.profit
 
         # fabujifen
         order.seller.fabujifen += 10
@@ -632,19 +624,19 @@ def seller():
     if request.method == 'POST':
         seller_id = user.id
         send_timestamp = request.form.get('send_date')
-        send_addr_province = request.form.get('ashenglist')
-        send_addr_city = request.form.get('ashilist')
-        send_addr_county = request.form.get('aqulist')
+        send_addr_province = request.form.get('dshenglist')
+        send_addr_city = request.form.get('dshilist')
+        send_addr_county = request.form.get('dqulist')
         tracking_company = request.form.get('com')
         is_scan = request.form.get('scan', 0, type=int)
 
         tracking_no = request.form.get('num')
-        recv_addr_province = request.form.get('dshenglist')
-        recv_addr_city = request.form.get('dshilist')
-        recv_addr_county = request.form.get('dqulist')
+        recv_addr_province = request.form.get('ashenglist')
+        recv_addr_city = request.form.get('ashilist')
+        recv_addr_county = request.form.get('aqulist')
 
         # 批量发布单号
-        if batch_flag:
+        if batch_flag == 'xzseller':
             send_addr_province = request.form.get('cshenglist')
             send_addr_city = request.form.get('cshilist')
             send_addr_county = request.form.get('cqulist')

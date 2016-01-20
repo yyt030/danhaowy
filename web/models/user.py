@@ -39,7 +39,7 @@ class User(db.Model):
 
     fabujifen = db.Column(db.Float, nullable=False, default=0.0)
 
-    wuyoubi = db.Column(db.Integer, default=0)
+    wuyoubi = db.Column(db.Float, default=0)
     wuyoujifen = db.Column(db.Integer, default=0)
     max_order_num = db.Column(db.Integer, nullable=False, default=10)
     login_time = db.Column(db.DateTime, default=datetime.now)

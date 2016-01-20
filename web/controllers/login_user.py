@@ -18,7 +18,13 @@ bp = Blueprint('login_user', __name__)
 def index():
     form = SigninForm()
     user = g.user
-    return render_template('login_user/index.html', form=form, user=user)
+    # 已发布单号数
+    order_num = Order.query.filter(Order.seller_id == user.id).count()
+    # 已售出单号数
+    order_selled_num = Order.query.filter(Order.seller_id == user.id, Order.is_sell == 1).count()
+
+    return render_template('login_user/index.html', form=form, user=user, order_num=order_num,
+                           order_selled_num=order_selled_num)
 
 
 @bp.route('/ornumber', methods=['GET'])

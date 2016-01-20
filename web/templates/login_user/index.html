@@ -64,11 +64,11 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">已发布单号数：<font color="#FF0000">0</font>&nbsp;条
+                <td height="25" valign="center" align="left">已发布单号数：<font color="#FF0000">{{ order_num }}</font>&nbsp;条
                     <img src="/static/images/wenhao.gif" align="bottom"
                          title="已在本站发布的单号(每3天清理一次数据)！">
                 </td>
-                <td height="25" valign="center" align="left">已售出单号数：<font color="#FF0000">0</font>&nbsp;条
+                <td height="25" valign="center" align="left">已售出单号数：<font color="#FF0000">{{ order_selled_num }}</font>&nbsp;条
                     <img src="/static/images/wenhao.gif" align="bottom"
                          title="已在本站售出的单号(每3天清理一次数据)！">
                 </td>
@@ -89,7 +89,7 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">发布积分：<font color="#FF0000">0</font> 分
+                <td height="25" valign="center" align="left">发布积分：<font color="#FF0000">{{ user.fabujifen }}</font> 分
                     <a href="sellerjf" target="_blank">
                         <img src="/static/images/dh01.gif" width="25px" height="13px"
                              align="absbottom"

@@ -33,6 +33,7 @@ class Config(object):
     # UPLOADS_DEFAULT_DEST = "/WebServer/Documents/uploads"  # 上传文件存储路径
     # UPLOADS_DEFAULT_DEST = "D:/xampp/htdocs/jeepsk_uploads"  # 上传文件存储路径
     UPLOADS_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'web/static')  # 上传文件存储路径
+    DOWNLOAD_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'web/static/download')  # 上传文件存储路径
 
     # UPLOADS_DEFAULT_URL = "http://localhost/jeepsk_uploads/"  # 上传文件访问URL
     UPLOADS_DEFAULT_URL = "static"  # 上传文件访问URL

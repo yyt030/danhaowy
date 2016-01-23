@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 import re
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
-    current_app, make_response, session
+    current_app, make_response, session, send_from_directory
 from web.utils.permissions import require_user, require_active, require_seller
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog, \
@@ -739,6 +739,13 @@ def upload_file():
             return '发布成功%d条' % (row_num - 1)
     else:
         return '发布失败,文件解析失败,请按表格正确填写。'
+
+
+@bp.route('/download/<path:filename>', methods=['GET'])
+@require_active
+def download_file(filename):
+    return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
+                               filename=filename)
 
 
 @bp.route('/buykongbao', methods=['GET'])

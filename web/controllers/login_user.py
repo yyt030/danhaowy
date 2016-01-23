@@ -2,6 +2,7 @@
 # coding: utf-8
 from datetime import datetime, timedelta
 
+import re
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
     current_app, make_response, session
 from web.utils.permissions import require_user, require_active, require_seller
@@ -243,17 +244,12 @@ def qikd():
     params = {'type': com, 'postid': order.tracking_no}
     try:
         req = requests.get(url, params=params, timeout=3)
-        print '>>>', req.url
-        print '>>>', req.content
-        print '>>>', req.status_code
 
     except:
         return '查询失败:status[%s], messages[%s]' % (req.content.get('status'),
                                                   req.content.get('message'))
     else:
         rsp = json.loads(req.content)
-        print '>>>', rsp.get('data')[0].get('time')
-        print '>>>', rsp.get('data')[0].get('context')
         if rsp.get('status') == '200':
             return '%s,%s' % (rsp.get('data')[0].get('time'),
                               rsp.get('data')[0].get('context'))
@@ -297,7 +293,6 @@ def getnumber():
         # 验证码校验
         code = request.form.get("code")
         url = request.referrer
-        print "code", code
         if code == session.get("validate"):
             orderlist = OrderList()
             uid = request.form.get('uid', 0, type=int)
@@ -384,7 +379,6 @@ def file():
             content1 = request.form.get('content1').split('\r')
             for content in content1:
                 recv_user_name, recv_user_mobile, tmp, recv_addr, recv_addr_postcode = content.split(u'，')
-                print '-' * 10, recv_addr
                 recv_addr_province, recv_addr_city, recv_addr_county, recv_addr_detail = recv_addr.split(' ')
 
                 null_packet = NullPacket()
@@ -606,7 +600,6 @@ def lookshopnumber():
         query = query.filter(datetime.strptime(starttime, '%Y-%m-%d') <= Order.buy_time)
     if endtime:
         query = query.filter(datetime.strptime(endtime, '%Y-%m-%d') + timedelta(days=1) >= Order.buy_time)
-    print '-' * 10, query
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
             page, per_page=current_app.config['FLASKY_PER_PAGE'],
@@ -657,7 +650,6 @@ def seller():
             success_count = 0
             failed_count = 0
             contents = request.form.get('r')
-            import re
             content_list = re.split(r'\n', contents)
             for record in content_list:
                 order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
@@ -679,8 +671,9 @@ def seller():
                 order.recv_addr_county = record[3]
                 order_list.append(order)
                 success_count += 1
-            # 卖家发布单号 增加10fabu积分
-            user.fabujifen += success_count * 10
+                # 卖家发布单号 增加10fabu积分
+                user.fabujifen += success_count * 10
+
             db.session.add_all(order_list)
             db.session.add(user)
             db.session.commit()
@@ -703,6 +696,51 @@ def seller():
     return render_template('login_user/seller.html', form=form)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
+
+
+@bp.route('/Import', methods=['POST'])
+@require_active
+def upload_file():
+    """单号批量导入"""
+    import pyexcel, pyexcel_xls, pyexcel_xlsx
+    user = g.user
+    file = request.files['file']
+    send_timestamp = request.form.get('send_time1')
+    tracking_company = request.form.get('com1')
+    is_scan = request.form.get('scan')
+    if file and allowed_file(file.filename):
+        extension = file.filename.split('.')[1]
+        sheet = pyexcel.get_sheet(file_type=extension, file_content=file.read())
+        if extension == 'xls':
+            sheet.column.format(0, int)
+        row_num = 0
+        for record in sheet:
+            tracking_no, send_addr_province, send_addr_city, send_addr_county, \
+            recv_addr_province, recv_addr_city, recv_addr_county = record[:7]
+            if row_num >= 1:
+                order = Order(tracking_no=str(tracking_no), send_addr_province=send_addr_province,
+                              send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                              recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
+                              recv_addr_county=recv_addr_county,
+                              send_timestamp=send_timestamp, tracking_company=tracking_company,
+                              is_scan=is_scan, seller_id=user.id)
+                db.session.add(order)
+            row_num += 1
+        try:
+            db.session.commit()
+        except Exception as e:
+            print e.args, e.message
+            print pyexcel_xls.READERS, pyexcel_xlsx.READERS
+            return '发布失败,文件解析失败,请按表格正确填写。'
+        else:
+            return '发布成功%d条' % (row_num - 1)
+    else:
+        return '发布失败,文件解析失败,请按表格正确填写。'
+
+
 @bp.route('/buykongbao', methods=['GET'])
 @require_user
 def buykongbao():
@@ -710,7 +748,6 @@ def buykongbao():
     user = g.user
     form = SigninForm()
     sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id).all()
-    print '-' * 10, sendaddrs
     express = Express.query.all()
     return render_template('login_user/buykongbao.html', form=form, user=user, sendaddrs=sendaddrs, express=express)
 
@@ -939,7 +976,6 @@ def sj():
         except Exception:
             return '生成失败，请稍后再试'
         else:
-            print '>>>', req.status_code, req.content.decode('gb2312').encode('utf-8')
             return req.content.decode('gb2312').encode('utf-8')
 
     return render_template('login_user/sj.html')

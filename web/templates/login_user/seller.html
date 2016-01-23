@@ -393,9 +393,9 @@
 
                             <div id="3" class="tab-pane">
                                 <Div class="form-horizontal">
-                                    <form action="inc/Import.asp" method="post"
+                                    <form action="Import" method="post"
                                           enctype="multipart/form-data" target="ifm">
-
+                                        {{ form.csrf_token }}
                                         <div class="control-group">
                                             <label for="textarea" class="control-label">发货时间</label>
                                             <div class="controls">

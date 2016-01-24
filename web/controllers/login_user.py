@@ -614,14 +614,7 @@ def lookshopnumber():
 @require_user
 @require_seller
 def seller():
-    """发布单号
-    ImmutableMultiDict([('dshenglist', u'\u56db\u5ddd\u7701'),
-     ('csrf_token', u'1451659269.98##820fb0a1ab9ba8accff0e8f00b309b654128e1c1'),
-      ('ashilist', u'\u5317\u4eac\u5e02'), ('scan', u'1'),
-      ('ashenglist', u'\u5317\u4eac'), ('aqulist', u'\u4e1c\u57ce\u533a'),
-      ('dqulist', u'\u9526\u6c5f\u533a'), ('dshilist', u'\u6210\u90fd\u5e02'),
-       ('num', u'123123123123213'),('send_date', u'2016-01-01 21:41:14'), ('com', u'yuantong')])
-    """
+    """发布单号    """
     form = SigninForm()
     user = g.user
 
@@ -702,12 +695,16 @@ def allowed_file(filename):
 
 
 @bp.route('/Import', methods=['POST'])
-@require_active
+@bp.route('/inc/Import', methods=['POST'])
+@require_user
+@require_seller
 def upload_file():
     """单号批量导入"""
     import pyexcel, pyexcel_xls, pyexcel_xlsx
+    form = RegisterForm()
     user = g.user
     file = request.files['file']
+    type = request.args.get('type')
     send_timestamp = request.form.get('send_time1')
     tracking_company = request.form.get('com1')
     is_scan = request.form.get('scan')
@@ -717,18 +714,51 @@ def upload_file():
         if extension == 'xls':
             sheet.column.format(0, int)
         row_num = 0
-        for record in sheet:
-            tracking_no, send_addr_province, send_addr_city, send_addr_county, \
-            recv_addr_province, recv_addr_city, recv_addr_county = record[:7]
-            if row_num >= 1:
-                order = Order(tracking_no=str(tracking_no), send_addr_province=send_addr_province,
-                              send_addr_city=send_addr_city, send_addr_county=send_addr_county,
-                              recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
-                              recv_addr_county=recv_addr_county,
-                              send_timestamp=send_timestamp, tracking_company=tracking_company,
-                              is_scan=is_scan, seller_id=user.id)
+        if type == 'kongbao':
+            orderlist = []
+            sheet.delete_named_row_at(0)
+
+            rsp_post = '''
+                <style>body{padding:0;margin:0;font-family:"微软雅黑",Verdana,Arial;font-size:11px}.upfile{cursor:pointer;direction:rtl;height:35px;opacity:0;width:80px;filter:alpha(opacity=0);position:absolute;top:0;left:0}#xxnb2{position:relative;cursor:pointer;display:inline-block;background:url(/static/images/stkb.gif) repeat-x;color:#fff;border:0;padding:5px 15px;width:75px;text-decoration:none}</style>
+                <script>window.parent.document.getElementById("file").value="%s";function Qpost(){var filename=document.getElementById("file").value;var mime=filename.toLowerCase().substr(filename.lastIndexOf("."));if(mime!=".xls"){alert("请选择csv格式的文件上传!");return false}else{document.getElementById("upfrm").submit()}};</script>
+                <form action="Import?type=kongbao" method="post" enctype="multipart/form-data" target="upload" id="upfrm">%s<a href="javascript:void(0);" id="xxnb2"><input type="file" id="file" name="file" class="upfile" onchange="Qpost();"/>导入淘宝文件</a></form>
+            '''
+            for record in sheet:
+                if len(record) < 40:
+                    return '导入失败'
+
+                try:
+                    recv_addr = record[13].split(' ')
+                    if len(recv_addr) > 4:
+                        recv_addr[3] = ''.join(recv_addr[3:])
+
+                    recv_user_name, recv_user_mobile, recv_zipcode = record[12], record[16], \
+                                                                     re.split(r'[)(]', record[13])[1]
+                    orderlist.append(u'，'.join(
+                            [recv_user_name, recv_user_mobile, '',
+                             ' '.join(recv_addr[:4]), recv_zipcode
+                             ]
+                    ))
+                except Exception as e:
+                    print e.args, e.message
+                    return '导入失败'
+            return rsp_post % ('\\n'.join(orderlist), form.csrf_token)
+
+        else:
+            sheet.delete_named_row_at(0)
+            for record in sheet:
+                tracking_no, send_addr_province, send_addr_city, send_addr_county, \
+                recv_addr_province, recv_addr_city, recv_addr_county = record[:7]
+                order = Order(
+                        tracking_no=str(tracking_no), send_addr_province=send_addr_province,
+                        send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                        recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
+                        recv_addr_county=recv_addr_county,
+                        send_timestamp=send_timestamp, tracking_company=tracking_company,
+                        is_scan=is_scan, seller_id=user.id
+                )
                 db.session.add(order)
-            row_num += 1
+                row_num += 1
         try:
             db.session.commit()
         except Exception as e:
@@ -736,16 +766,29 @@ def upload_file():
             print pyexcel_xls.READERS, pyexcel_xlsx.READERS
             return '发布失败,文件解析失败,请按表格正确填写。'
         else:
-            return '发布成功%d条' % (row_num - 1)
+            return '发布成功%d条' % (row_num)
     else:
         return '发布失败,文件解析失败,请按表格正确填写。'
 
 
 @bp.route('/download/<path:filename>', methods=['GET'])
-@require_active
+@require_user
 def download_file(filename):
     return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
                                filename=filename)
+
+
+@bp.route('/inc/upload', methods=['GET', 'POST'])
+@bp.route('/inc/uploada', methods=['GET', 'POST'])
+@require_user
+def upload():
+    form = RegisterForm()
+    rsp = '''
+        <style>body{padding:0;margin:0;font-family:"微软雅黑",Verdana,Arial;font-size:11px}.upfile{cursor:pointer;direction:rtl;height:35px;opacity:0;width:80px;filter:alpha(opacity=0);position:absolute;top:0;left:0}#xxnb2{position:relative;cursor:pointer;display:inline-block;background:url(/static/images/stkb.gif) repeat-x;color:#fff;border:0;padding:5px 15px;width:75px;text-decoration:none}</style>
+        <script>function Qpost(){var filename=document.getElementById("file").value;var mime=filename.toLowerCase().substr(filename.lastIndexOf("."));if(mime!=".xls"){alert("请选择csv格式的文件上传!");return false}else{document.getElementById("upfrm").submit()}};</script>
+        <form action="Import?type=kongbao" method="post" enctype="multipart/form-data" target="upload" id="upfrm">%s<a href="javascript:void(0);" id="xxnb2"><input type="file" id="file" name="file" class="upfile" onchange="Qpost();"/>导入淘宝文件</a></form>
+    ''' % form.csrf_token
+    return rsp
 
 
 @bp.route('/buykongbao', methods=['GET'])

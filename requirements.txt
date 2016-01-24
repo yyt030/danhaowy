@@ -12,3 +12,6 @@ redis
 requests
 
 MySQL-python==1.2.5
+pyexcel==0.2.0
+pyexcel-xls==0.1.0
+pyexcel-xlsx==0.1.0

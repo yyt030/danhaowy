@@ -381,27 +381,26 @@ def file():
                 recv_user_name, recv_user_mobile, tmp, recv_addr, recv_addr_postcode = content.split(u'，')
                 recv_addr_province, recv_addr_city, recv_addr_county, recv_addr_detail = recv_addr.split(' ')
 
-                null_packet = NullPacket()
-                null_packet.send_user_name = sendaddr.send_user_name
-                null_packet.send_user_mobile = sendaddr.send_user_mobile
-                null_packet.send_addr_province = sendaddr.send_addr_province
-                null_packet.send_addr_city = sendaddr.send_addr_city
-                null_packet.send_addr_county = sendaddr.send_addr_county
-                null_packet.send_addr_detail = sendaddr.send_addr_detail
+                null_packet = NullPacket(
+                        send_user_name=sendaddr.send_user_name, send_user_mobile=sendaddr.send_user_mobile,
+                        send_addr_province=sendaddr.send_addr_province, send_addr_city=sendaddr.send_addr_city,
+                        send_addr_county=sendaddr.send_addr_county, send_addr_detail=sendaddr.send_addr_detail,
+                        express_id=express.id, create_user_id=user.id, recv_user_name=recv_user_name,
+                        recv_user_mobile=recv_user_mobile, recv_addr_province=recv_addr_province,
+                        recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county,
+                        recv_addr_detail=recv_addr_detail, recv_addr_postcode=recv_addr_postcode
 
-                null_packet.express_id = express.id
-                null_packet.create_user_id = user.id
-                null_packet.recv_user_name = recv_user_name
-                null_packet.recv_user_mobile = recv_user_mobile
-                null_packet.recv_addr_province = recv_addr_province
-                null_packet.recv_addr_city = recv_addr_city
-                null_packet.recv_addr_county = recv_addr_county
-                null_packet.recv_addr_detail = recv_addr_detail
-                null_packet.recv_addr_postcode = recv_addr_postcode
-
+                )
                 db.session.add(null_packet)
 
-            db.session.commit()
+            if user.wuyoubi >= express.price * len(content1):
+                user.wuyoubi -= express.price * len(content1)
+                db.session.add(user)
+                db.session.commit()
+            else:
+                db.session.rollback()
+                tip = "用户%s金额[%d]不足！" % (user.name, user.wuyoubi)
+                return render_template('error.html', error=tip, url="buykongbao")
 
             return redirect(url_for('.buykongbao'))
 

@@ -32,24 +32,8 @@ def index():
 @require_user
 def ornumber():
     """单号领取"""
-    form = SigninForm()
-    startdate = request.args.get('startdate', '')
-    enddate = request.args.get('enddate', '')
 
-    page = request.args.get('page', 1, type=int)
-
-    query = Order.query
-    if startdate and enddate:
-        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
-                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
-
-    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
-    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
-    orders = pagination.items
-
-    return render_template('login_user/ornumber.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
+    return render_template('login_user/ornumber.html')
 
 
 @bp.route('/Qiso', methods=['GET', 'POST'])
@@ -68,11 +52,17 @@ def qiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
+
+    admin = User.query.filter(User.name == 'admin').first()
+
+    # 仅仅查询出来admin发布的，供免费领取
+    query = Order.query.filter(Order.seller == admin)
+
     # 当前用户避免重复领取
     from sqlalchemy import func
-    query = Order.query.filter(~
-                               Order.id.in_(
-                                       db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
+    query = query.filter(~
+                         Order.id.in_(
+                                 db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
     # 限定单号最多领取10次
     query = query.filter(~
                          Order.id.in_(db.session.query(OrderList.order_id).group_by(OrderList.order_id).having(
@@ -521,8 +511,13 @@ def shopqiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
+
+    admin = User.query.filter(User.name == 'admin').first()
+    # admin发布的，不在查询结果集中
+    query = Order.query.filter(Order.seller != admin)
+
     # 查询没有卖出的单号　is_sell=0
-    query = Order.query.filter(Order.is_sell == 0)
+    query = query.filter(Order.is_sell == 0)
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:

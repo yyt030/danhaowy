@@ -21,7 +21,6 @@ class Config(object):
     # http://docs.sqlalchemy.org/en/rel_0_9/core/engines.html#database-urls
     SQLALCHEMY_DATABASE_URI = "mysql://root:root@localhost/dhwy"
 
-
     SQLALCHEMY_RECORD_QUERIES = True
     FLASKY_DB_QUERY_TIMEOUT = 0.5
 
@@ -30,10 +29,11 @@ class Config(object):
     REDIS_HOST = "localhost"
     REDIS_PORT = 6379
     REDIS_DB = 1
-   # Uploadsets config
+    # Uploadsets config
     # UPLOADS_DEFAULT_DEST = "/WebServer/Documents/uploads"  # 上传文件存储路径
     # UPLOADS_DEFAULT_DEST = "D:/xampp/htdocs/jeepsk_uploads"  # 上传文件存储路径
     UPLOADS_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'web/static')  # 上传文件存储路径
+    DOWNLOAD_DEFAULT_DEST = os.path.join(PROJECT_PATH, 'web/static/download')  # 上传文件存储路径
 
     # UPLOADS_DEFAULT_URL = "http://localhost/jeepsk_uploads/"  # 上传文件访问URL
     UPLOADS_DEFAULT_URL = "static"  # 上传文件访问URL
@@ -56,3 +56,8 @@ class Config(object):
         ('tablet', 'iPad|Android'),
         ('pc', '.*')
     ]
+
+    # 上传文件格式
+    ALLOWED_EXTENSIONS = set(['xls', 'xlsx'])
+    # 16 M
+    MAX_CONTENT_LENGTH = 16777216

@@ -14,7 +14,7 @@ class NullPacket(db.Model):
     express = db.relationship('Express', backref=db.backref('nullpackets', lazy='dynamic'))
 
     tracking_no = db.Column(db.String(100), unique=True, index=True)
-    price = db.Column(db.Float(10, 2))
+    price = db.Column(db.Float)
 
     # 下单时间
     create_time = db.Column(db.DateTime, default=datetime.utcnow)
@@ -79,5 +79,5 @@ class Express(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(64), nullable=False)
     content = db.Column(db.String(128), nullable=False)
-    price = db.Column(db.Float(10, 2), default=0.0)
+    price = db.Column(db.Float, default=0.0)
     status = db.Column(db.SmallInteger, default=1)

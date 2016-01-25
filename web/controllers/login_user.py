@@ -2,8 +2,9 @@
 # coding: utf-8
 from datetime import datetime, timedelta
 
+import re
 from flask import render_template, Blueprint, redirect, url_for, g, request, \
-    current_app, make_response, session
+    current_app, make_response, session, send_from_directory
 from web.utils.permissions import require_user, require_active, require_seller
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog, \
@@ -18,31 +19,21 @@ bp = Blueprint('login_user', __name__)
 def index():
     form = SigninForm()
     user = g.user
-    return render_template('login_user/index.html', form=form, user=user)
+    # 已发布单号数
+    order_num = Order.query.filter(Order.seller_id == user.id).count()
+    # 已售出单号数
+    order_selled_num = Order.query.filter(Order.seller_id == user.id, Order.is_sell == 1).count()
+
+    return render_template('login_user/index.html', form=form, user=user, order_num=order_num,
+                           order_selled_num=order_selled_num)
 
 
 @bp.route('/ornumber', methods=['GET'])
 @require_user
 def ornumber():
     """单号领取"""
-    form = SigninForm()
-    startdate = request.args.get('startdate', '')
-    enddate = request.args.get('enddate', '')
 
-    page = request.args.get('page', 1, type=int)
-
-    query = Order.query
-    if startdate and enddate:
-        query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
-                             Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
-
-    page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
-    pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
-    orders = pagination.items
-
-    return render_template('login_user/ornumber.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
+    return render_template('login_user/ornumber.html')
 
 
 @bp.route('/Qiso', methods=['GET', 'POST'])
@@ -61,15 +52,21 @@ def qiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
+
+    admin = User.query.filter(User.name == 'admin').first()
+
+    # 仅仅查询出来admin发布的，供免费领取
+    query = Order.query.filter(Order.seller == admin)
+
     # 当前用户避免重复领取
     from sqlalchemy import func
-    query = Order.query.filter(~
-                               Order.id.in_(
-                                   db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
+    query = query.filter(~
+                         Order.id.in_(
+                                 db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
     # 限定单号最多领取10次
     query = query.filter(~
                          Order.id.in_(db.session.query(OrderList.order_id).group_by(OrderList.order_id).having(
-                             func.count(OrderList.order_id) >= 10)))
+                                 func.count(OrderList.order_id) >= 10)))
 
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
@@ -125,8 +122,8 @@ def qiso():
         all_num = query.count()
         page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
         pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'] or 40,
-            error_out=False)
+                page, per_page=current_app.config['FLASKY_PER_PAGE'] or 40,
+                error_out=False)
         orders = pagination.items
 
     sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders, start=1),
@@ -157,13 +154,10 @@ def refund():
                 order.buy_time = datetime.now()
                 order.is_sell = 1
 
-                # money
-                if order.is_scan == 0:
-                    user.money -= order.price / 2
-                    order.seller.money += float(order.price) * 0.95 / 2
-                else:
-                    user.money -= order.price
-                    order.seller.money += float(order.price) * 0.95 / 2
+                # wuyoubi
+                user.wuyoubi -= order.real_price
+                order.seller.wuyoubi += order.profit
+                order.seller_left_money = order.seller.wuyoubi
 
                 # fabujifen
                 order.seller.fabujifen += 10
@@ -181,7 +175,7 @@ def refund():
                 db.session.add(order)
                 db.session.add(user)
                 db.session.add(msg)
-        if user.money < 0:
+        if user.wuyoubi < 0:
             db.session.rollback()
             return 'moneyerror'
         else:
@@ -196,13 +190,10 @@ def refund():
         order.buy_time = datetime.now()
         order.is_sell = 1
 
-        # money
-        if order.is_scan == 0:
-            user.money -= order.price / 2
-            order.seller.money += float(order.price) * 0.95 / 2
-        else:
-            user.money -= order.price
-            order.seller.money += float(order.price) * 0.95 / 2
+        # wuyoubi
+        user.wuyoubi -= order.real_price
+        order.seller.wuyoubi += order.profit
+        order.seller_left_money = order.seller.wuyoubi
 
         # fabujifen
         order.seller.fabujifen += 10
@@ -219,7 +210,7 @@ def refund():
         db.session.add(user)
         db.session.add(msg)
 
-        if user.money < 0:
+        if user.wuyoubi < 0:
             db.session.rollback()
             return 'moneyerror'
         else:
@@ -243,17 +234,12 @@ def qikd():
     params = {'type': com, 'postid': order.tracking_no}
     try:
         req = requests.get(url, params=params, timeout=3)
-        print '>>>', req.url
-        print '>>>', req.content
-        print '>>>', req.status_code
 
     except:
         return '查询失败:status[%s], messages[%s]' % (req.content.get('status'),
                                                   req.content.get('message'))
     else:
         rsp = json.loads(req.content)
-        print '>>>', rsp.get('data')[0].get('time')
-        print '>>>', rsp.get('data')[0].get('context')
         if rsp.get('status') == '200':
             return '%s,%s' % (rsp.get('data')[0].get('time'),
                               rsp.get('data')[0].get('context'))
@@ -297,7 +283,6 @@ def getnumber():
         # 验证码校验
         code = request.form.get("code")
         url = request.referrer
-        print "code", code
         if code == session.get("validate"):
             orderlist = OrderList()
             uid = request.form.get('uid', 0, type=int)
@@ -384,30 +369,28 @@ def file():
             content1 = request.form.get('content1').split('\r')
             for content in content1:
                 recv_user_name, recv_user_mobile, tmp, recv_addr, recv_addr_postcode = content.split(u'，')
-                print '-' * 10, recv_addr
                 recv_addr_province, recv_addr_city, recv_addr_county, recv_addr_detail = recv_addr.split(' ')
 
-                null_packet = NullPacket()
-                null_packet.send_user_name = sendaddr.send_user_name
-                null_packet.send_user_mobile = sendaddr.send_user_mobile
-                null_packet.send_addr_province = sendaddr.send_addr_province
-                null_packet.send_addr_city = sendaddr.send_addr_city
-                null_packet.send_addr_county = sendaddr.send_addr_county
-                null_packet.send_addr_detail = sendaddr.send_addr_detail
+                null_packet = NullPacket(
+                        send_user_name=sendaddr.send_user_name, send_user_mobile=sendaddr.send_user_mobile,
+                        send_addr_province=sendaddr.send_addr_province, send_addr_city=sendaddr.send_addr_city,
+                        send_addr_county=sendaddr.send_addr_county, send_addr_detail=sendaddr.send_addr_detail,
+                        express_id=express.id, create_user_id=user.id, recv_user_name=recv_user_name,
+                        recv_user_mobile=recv_user_mobile, recv_addr_province=recv_addr_province,
+                        recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county,
+                        recv_addr_detail=recv_addr_detail, recv_addr_postcode=recv_addr_postcode
 
-                null_packet.express_id = express.id
-                null_packet.create_user_id = user.id
-                null_packet.recv_user_name = recv_user_name
-                null_packet.recv_user_mobile = recv_user_mobile
-                null_packet.recv_addr_province = recv_addr_province
-                null_packet.recv_addr_city = recv_addr_city
-                null_packet.recv_addr_county = recv_addr_county
-                null_packet.recv_addr_detail = recv_addr_detail
-                null_packet.recv_addr_postcode = recv_addr_postcode
-
+                )
                 db.session.add(null_packet)
 
-            db.session.commit()
+            if user.wuyoubi >= express.price * len(content1):
+                user.wuyoubi -= express.price * len(content1)
+                db.session.add(user)
+                db.session.commit()
+            else:
+                db.session.rollback()
+                tip = "用户%s金额[%d]不足！" % (user.name, user.wuyoubi)
+                return render_template('error.html', error=tip, url="buykongbao")
 
             return redirect(url_for('.buykongbao'))
 
@@ -460,8 +443,8 @@ def looknumber():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(OrderList.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     orderlists = pagination.items
 
     return render_template('login_user/looknumber.html', orderlists=enumerate(orderlists, start=1),
@@ -496,15 +479,17 @@ def shopnumber():
 
     page = request.args.get('page', 1, type=int)
 
-    query = Order.query.filter(Order.user_id !=1)
+    # 去除admin???
+    query = Order.query.filter(Order.seller_id != 1)
+
     if startdate and enddate:
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.send_timestamp,
                              Order.send_timestamp <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     orders = pagination.items
 
     return render_template('login_user/shopnumber.html', orders=enumerate(orders, start=1), page=page,
@@ -526,8 +511,13 @@ def shopqiso():
     kd = request.args.get('kd', '')
     # 是否扫描
     sm = request.args.get('sm', '')
+
+    admin = User.query.filter(User.name == 'admin').first()
+    # admin发布的，不在查询结果集中
+    query = Order.query.filter(Order.seller != admin)
+
     # 查询没有卖出的单号　is_sell=0
-    query = Order.query.filter(Order.is_sell == 0)
+    query = query.filter(Order.is_sell == 0)
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
     if sa:
@@ -577,8 +567,8 @@ def shopqiso():
     all_num = query.count()
     page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     orders = pagination.items
 
     sitemap_xml = render_template('login_user/shopqiso.xhtml', orders=enumerate(orders, start=1),
@@ -604,11 +594,10 @@ def lookshopnumber():
         query = query.filter(datetime.strptime(starttime, '%Y-%m-%d') <= Order.buy_time)
     if endtime:
         query = query.filter(datetime.strptime(endtime, '%Y-%m-%d') + timedelta(days=1) >= Order.buy_time)
-    print '-' * 10, query
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     ordershoplists = pagination.items
 
     return render_template('login_user/lookshopnumber.html', ordershoplists=enumerate(ordershoplists, start=1),
@@ -619,14 +608,7 @@ def lookshopnumber():
 @require_user
 @require_seller
 def seller():
-    """发布单号
-    ImmutableMultiDict([('dshenglist', u'\u56db\u5ddd\u7701'),
-     ('csrf_token', u'1451659269.98##820fb0a1ab9ba8accff0e8f00b309b654128e1c1'),
-      ('ashilist', u'\u5317\u4eac\u5e02'), ('scan', u'1'),
-      ('ashenglist', u'\u5317\u4eac'), ('aqulist', u'\u4e1c\u57ce\u533a'),
-      ('dqulist', u'\u9526\u6c5f\u533a'), ('dshilist', u'\u6210\u90fd\u5e02'),
-       ('num', u'123123123123213'),('send_date', u'2016-01-01 21:41:14'), ('com', u'yuantong')])
-    """
+    """发布单号    """
     form = SigninForm()
     user = g.user
 
@@ -634,19 +616,19 @@ def seller():
     if request.method == 'POST':
         seller_id = user.id
         send_timestamp = request.form.get('send_date')
-        send_addr_province = request.form.get('ashenglist')
-        send_addr_city = request.form.get('ashilist')
-        send_addr_county = request.form.get('aqulist')
+        send_addr_province = request.form.get('dshenglist')
+        send_addr_city = request.form.get('dshilist')
+        send_addr_county = request.form.get('dqulist')
         tracking_company = request.form.get('com')
         is_scan = request.form.get('scan', 0, type=int)
 
         tracking_no = request.form.get('num')
-        recv_addr_province = request.form.get('dshenglist')
-        recv_addr_city = request.form.get('dshilist')
-        recv_addr_county = request.form.get('dqulist')
+        recv_addr_province = request.form.get('ashenglist')
+        recv_addr_city = request.form.get('ashilist')
+        recv_addr_county = request.form.get('aqulist')
 
         # 批量发布单号
-        if batch_flag:
+        if batch_flag == 'xzseller':
             send_addr_province = request.form.get('cshenglist')
             send_addr_city = request.form.get('cshilist')
             send_addr_county = request.form.get('cqulist')
@@ -655,7 +637,6 @@ def seller():
             success_count = 0
             failed_count = 0
             contents = request.form.get('r')
-            import re
             content_list = re.split(r'\n', contents)
             for record in content_list:
                 order = Order(seller_id=seller_id, send_timestamp=send_timestamp, send_addr_province=send_addr_province,
@@ -677,8 +658,9 @@ def seller():
                 order.recv_addr_county = record[3]
                 order_list.append(order)
                 success_count += 1
-            # 卖家发布单号 增加10fabu积分
-            user.fabujifen += success_count * 10
+                # 卖家发布单号 增加10fabu积分
+                user.fabujifen += success_count * 10
+
             db.session.add_all(order_list)
             db.session.add(user)
             db.session.commit()
@@ -701,6 +683,108 @@ def seller():
     return render_template('login_user/seller.html', form=form)
 
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in current_app.config['ALLOWED_EXTENSIONS']
+
+
+@bp.route('/Import', methods=['POST'])
+@bp.route('/inc/Import', methods=['POST'])
+@require_user
+@require_seller
+def upload_file():
+    """单号批量导入"""
+    import pyexcel, pyexcel_xls, pyexcel_xlsx
+    form = RegisterForm()
+    user = g.user
+    file = request.files['file']
+    type = request.args.get('type')
+    send_timestamp = request.form.get('send_time1')
+    tracking_company = request.form.get('com1')
+    is_scan = request.form.get('scan')
+    if file and allowed_file(file.filename):
+        extension = file.filename.split('.')[1]
+        sheet = pyexcel.get_sheet(file_type=extension, file_content=file.read())
+        if extension == 'xls':
+            sheet.column.format(0, int)
+        row_num = 0
+        if type == 'kongbao':
+            orderlist = []
+            sheet.delete_named_row_at(0)
+
+            rsp_post = '''
+                <style>body{padding:0;margin:0;font-family:"微软雅黑",Verdana,Arial;font-size:11px}.upfile{cursor:pointer;direction:rtl;height:35px;opacity:0;width:80px;filter:alpha(opacity=0);position:absolute;top:0;left:0}#xxnb2{position:relative;cursor:pointer;display:inline-block;background:url(/static/images/stkb.gif) repeat-x;color:#fff;border:0;padding:5px 15px;width:75px;text-decoration:none}</style>
+                <script>window.parent.document.getElementById("file").value="%s";function Qpost(){var filename=document.getElementById("file").value;var mime=filename.toLowerCase().substr(filename.lastIndexOf("."));if(mime!=".xls"){alert("请选择csv格式的文件上传!");return false}else{document.getElementById("upfrm").submit()}};</script>
+                <form action="Import?type=kongbao" method="post" enctype="multipart/form-data" target="upload" id="upfrm">%s<a href="javascript:void(0);" id="xxnb2"><input type="file" id="file" name="file" class="upfile" onchange="Qpost();"/>导入淘宝文件</a></form>
+            '''
+            for record in sheet:
+                if len(record) < 40:
+                    return '导入失败'
+
+                try:
+                    recv_addr = record[13].split(' ')
+                    if len(recv_addr) > 4:
+                        recv_addr[3] = ''.join(recv_addr[3:])
+
+                    recv_user_name, recv_user_mobile, recv_zipcode = record[12], record[16], \
+                                                                     re.split(r'[)(]', record[13])[1]
+                    orderlist.append(u'，'.join(
+                            [recv_user_name, recv_user_mobile, '',
+                             ' '.join(recv_addr[:4]), recv_zipcode
+                             ]
+                    ))
+                except Exception as e:
+                    print e.args, e.message
+                    return '导入失败'
+            return rsp_post % ('\\n'.join(orderlist), form.csrf_token)
+
+        else:
+            sheet.delete_named_row_at(0)
+            for record in sheet:
+                tracking_no, send_addr_province, send_addr_city, send_addr_county, \
+                recv_addr_province, recv_addr_city, recv_addr_county = record[:7]
+                order = Order(
+                        tracking_no=str(tracking_no), send_addr_province=send_addr_province,
+                        send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                        recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
+                        recv_addr_county=recv_addr_county,
+                        send_timestamp=send_timestamp, tracking_company=tracking_company,
+                        is_scan=is_scan, seller_id=user.id
+                )
+                db.session.add(order)
+                row_num += 1
+        try:
+            db.session.commit()
+        except Exception as e:
+            print e.args, e.message
+            print pyexcel_xls.READERS, pyexcel_xlsx.READERS
+            return '发布失败,文件解析失败,请按表格正确填写。'
+        else:
+            return '发布成功%d条' % (row_num)
+    else:
+        return '发布失败,文件解析失败,请按表格正确填写。'
+
+
+@bp.route('/download/<path:filename>', methods=['GET'])
+@require_user
+def download_file(filename):
+    return send_from_directory(directory=current_app.config['DOWNLOAD_DEFAULT_DEST'],
+                               filename=filename)
+
+
+@bp.route('/inc/upload', methods=['GET', 'POST'])
+@bp.route('/inc/uploada', methods=['GET', 'POST'])
+@require_user
+def upload():
+    form = RegisterForm()
+    rsp = '''
+        <style>body{padding:0;margin:0;font-family:"微软雅黑",Verdana,Arial;font-size:11px}.upfile{cursor:pointer;direction:rtl;height:35px;opacity:0;width:80px;filter:alpha(opacity=0);position:absolute;top:0;left:0}#xxnb2{position:relative;cursor:pointer;display:inline-block;background:url(/static/images/stkb.gif) repeat-x;color:#fff;border:0;padding:5px 15px;width:75px;text-decoration:none}</style>
+        <script>function Qpost(){var filename=document.getElementById("file").value;var mime=filename.toLowerCase().substr(filename.lastIndexOf("."));if(mime!=".xls"){alert("请选择csv格式的文件上传!");return false}else{document.getElementById("upfrm").submit()}};</script>
+        <form action="Import?type=kongbao" method="post" enctype="multipart/form-data" target="upload" id="upfrm">%s<a href="javascript:void(0);" id="xxnb2"><input type="file" id="file" name="file" class="upfile" onchange="Qpost();"/>导入淘宝文件</a></form>
+    ''' % form.csrf_token
+    return rsp
+
+
 @bp.route('/buykongbao', methods=['GET'])
 @require_user
 def buykongbao():
@@ -708,7 +792,6 @@ def buykongbao():
     user = g.user
     form = SigninForm()
     sendaddrs = SendAddr.query.filter(SendAddr.user_id == user.id).all()
-    print '-' * 10, sendaddrs
     express = Express.query.all()
     return render_template('login_user/buykongbao.html', form=form, user=user, sendaddrs=sendaddrs, express=express)
 
@@ -748,8 +831,8 @@ def sendaddress():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(SendAddr.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     sendaddrs = pagination.items
 
     return render_template('login_user/sendaddress.html', sendaddrs=sendaddrs,
@@ -779,8 +862,8 @@ def waitforsend():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(NullPacket.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     nullpackets = pagination.items
 
     return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
@@ -822,8 +905,8 @@ def kbsent():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(NullPacket.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     nullpackets = pagination.items
 
     return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
@@ -913,8 +996,8 @@ def txlog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Txlog.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     txlogs = pagination.items
 
     return render_template('login_user/txlog.html', txlogs=txlogs, page=page, page_all=page_all)
@@ -937,7 +1020,6 @@ def sj():
         except Exception:
             return '生成失败，请稍后再试'
         else:
-            print '>>>', req.status_code, req.content.decode('gb2312').encode('utf-8')
             return req.content.decode('gb2312').encode('utf-8')
 
     return render_template('login_user/sj.html')
@@ -961,8 +1043,8 @@ def paylog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Paylog.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     paylogs = pagination.items
 
     return render_template('login_user/paylog.html', paylogs=paylogs, page=page, page_all=page_all)
@@ -990,8 +1072,8 @@ def fundslog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Fundslog.create_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     fundslogs = pagination.items
 
     return render_template('login_user/fundslog.html', fundslogs=enumerate(fundslogs, start=1), page=page,
@@ -1009,13 +1091,13 @@ def upseller():
         admin_user = User.query.filter(User.name == 'admin').first()
         qq = request.form.get('QQ', '')
         email = request.form.get('Email', '')
-        typ=request.form.get('typ', '')
-        ag1=request.form.get('ag1', '')
-        ag2=request.form.get('ag2', '')
+        typ = request.form.get('typ', '')
+        ag1 = request.form.get('ag1', '')
+        ag2 = request.form.get('ag2', '')
         msg = MailBox(sender_id=g.user.id, recver_id=admin_user.id, msg_type='申请')
         msg.title = '用户[%s]QQ[%s]申请成为卖家' % (user.name, qq)
         msg.body = '每日最低提供单号数[%s], 承诺发布的单号均为真实单号[%s], 承诺发布的单号均为唯一单号[%s]' % (
-           typ,ag1, ag2)
+            typ, ag1, ag2)
         record = ApplySellerRecord(user_id=g.user.id, qq=qq, email=email)
         db.session.add(msg)
         db.session.add(record)
@@ -1140,8 +1222,8 @@ def sellerlist():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     orders = pagination.items
 
     return render_template('login_user/sellerlist.html', orders=enumerate(orders, start=1), page=page,
@@ -1167,8 +1249,8 @@ def sellerout():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     orders = pagination.items
 
     return render_template('login_user/sellerout.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
@@ -1192,8 +1274,8 @@ def shoplog():
                              Order.buy_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     shoplogs = pagination.items
 
     return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs, start=1), page=page,
@@ -1294,8 +1376,8 @@ def msg():
     count_all = query.count()
     page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(MailBox.create_at.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_PER_PAGE'],
-        error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'],
+            error_out=False)
     msgs = pagination.items
 
     return render_template('login_user/msg.html', form=form, msgs=msgs, page=page, page_all=page_all,

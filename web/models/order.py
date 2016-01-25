@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf8
+
 __author__ = 'yueyt'
 
 from datetime import datetime
@@ -30,6 +31,8 @@ class Order(db.Model):
     seller_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     seller = db.relationship('User', primaryjoin='User.id == Order.seller_id',
                              backref=db.backref('sell_orders', lazy='dynamic'))
+    # 佣金余额
+    seller_left_money = db.Column(db.Float, default=0.0, nullable=False)
 
     # 购买单号用户
     buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
@@ -42,7 +45,7 @@ class Order(db.Model):
     create_time = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     # 单号价格
-    price = db.Column(db.Float(10, 2), nullable=False, default=0.5)
+    price = db.Column(db.Float, nullable=False, default=0.5)
 
     @property
     def create_date(self):
@@ -72,6 +75,19 @@ class Order(db.Model):
     def plan_scan_time(self):
         return '%s %s' % (self.create_time.date(), '19:00:00')
 
+    @property
+    def real_price(self):
+        # 非扫描单号价格0.5 ,　扫描价格0.25
+        if self.is_scan == 0:
+            return self.price / 2
+        else:
+            return self.price
+
+    @property
+    def profit(self):
+        # 每个单号卖家能获取0.95的钱
+        return self.real_price * 0.95
+
     def __repr__(self):
         return '<Order %r>' % self.tracking_no
 
@@ -79,7 +95,7 @@ class Order(db.Model):
 class OrderList(db.Model):
     """订单领取"""
     id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.ForeignKey('order.id',ondelete='CASCADE'), nullable=False)
+    order_id = db.Column(db.ForeignKey('order.id', ondelete='CASCADE'), nullable=False)
     order = db.relationship('Order', backref=db.backref('order_list', lazy='dynamic'))
     user_id = db.Column(db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('order_lists', lazy='dynamic'))

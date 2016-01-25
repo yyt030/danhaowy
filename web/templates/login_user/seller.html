@@ -393,9 +393,9 @@
 
                             <div id="3" class="tab-pane">
                                 <Div class="form-horizontal">
-                                    <form action="inc/Import.asp" method="post"
+                                    <form action="Import" method="post"
                                           enctype="multipart/form-data" target="ifm">
-
+                                        {{ form.csrf_token }}
                                         <div class="control-group">
                                             <label for="textarea" class="control-label">发货时间</label>
                                             <div class="controls">
@@ -455,7 +455,7 @@
                                 <iframe id="ifm" name="ifm" style="display:none"/>
                                 </iframe><br>
                                                 <span style="color:#F00; margin-bottom:15px">使用文件导入请先下载导入模版。  <a
-                                                        href="导入模版.zip" target="_blank" style="color:#33C"><b>模版点我下载</b></a></span>
+                                                        href="download/导入模版.zip" target="_blank" style="color:#33C"><b>模版点我下载</b></a></span>
                             </div>
 
 
@@ -468,7 +468,7 @@
             </div>
             <div class="well">
                 <div class="nav" style="color:#F00"> 批量发布格式：单号|省 市 县（区）之间有空格 例子：1234567899|广东省 广州市
-                    越秀区。不允许发布带有详细地址的单号<br/>发布前请下载 卖家教程（条例）： <a href="卖家教程（条例）.docx"
+                    越秀区。不允许发布带有详细地址的单号<br/>发布前请下载 卖家教程（条例）： <a href="download/卖家教程（条例）.docx"
                                                                target="_blank">点我下载</a></div>
                 <hr/>
             </div>

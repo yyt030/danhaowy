@@ -1,0 +1,105 @@
+{% extends 'layout.html' %}
+{% block page_title %}帐号找回 - 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网{% endblock %}
+{% block content %}
+    <SCRIPT language=javascript>
+        <!--
+        function CheckForm1() {
+            if (document.form1.usermail.value.length < 1) {
+                alert("请输入邮箱,邮箱不能留空");
+                document.form1.usermail.focus();
+                return false;
+            } else {
+                if (document.form1.usermob.value.length < 1) {
+                    alert("请输入手机,手机不能留空");
+                    document.form1.usermob.focus();
+                    return false;
+                } else {
+
+                    var temp = document.form1.usermail.value;
+                    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                    if (filter.test(temp)) {
+                        var ns = document.form1.usermob.value;
+                        var pattern = /^(?:13\d|15\d|18\d)\d{5}(\d{3}|\*{3})$/;
+                        if (pattern.test(ns)) return true;
+                        else {
+                            alert('您的手机号码格式不正确');
+                            return false;
+                        }
+                    }
+                    else {
+                        alert('您的电子邮件格式不正确');
+                        return false;
+                    }
+
+
+                }
+
+            }
+
+        }
+
+        //-->
+
+
+    </SCRIPT>
+
+    <body>
+
+    <div id="mm">
+        {% include 'header_nav.html' %}
+        <DIV class=tdmiddle>
+            <TABLE width=950 height="138" border=0 align="center" cellPadding=0 cellSpacing=0>
+                <TBODY>
+                <TR>
+                    <TD height=41 vAlign=center colSpan=3 align=left>当前位置：<a href="index.asp">首页</a> &gt;帐号找回</TD>
+                </TR>
+                <TR>
+                    <TD vAlign=top>
+                        <DIV style="WIDTH: 910px; HEIGHT: 420px">
+                            <DIV style="LINE-HEIGHT: 28px; PADDING-LEFT: 10px; WIDTH: 970px; BACKGROUND: url(/static/images/bbs_bg.JPG) no-repeat left top; HEIGHT: 28px; FONT-SIZE: 14px; FONT-WEIGHT: bold; color: #F00;">
+                                帐号找回
+                            </DIV>
+                            <DIV style="BACKGROUND-COLOR: #fafafa; border:1px #CCC solid; WIDTH: 908px; HEIGHT: 270px">
+
+                                <form name="form1" method="post" action="Getuser?xi=usernn"
+                                      onkeydown="if(event.keyCode==13){return false;}">
+                                    {{ form.csrf_token }}
+                                    <TABLE style="BORDER-BOTTOM: #f3f3f1 1px solid; BORDER-LEFT: #f3f3f1 1px solid; BACKGROUND-COLOR: #ffffff; MARGIN-TOP: 30px; BORDER-TOP: #f3f3f1 1px solid; BORDER-RIGHT: #f3f3f1 1px solid"
+                                           border=0 cellSpacing=0 cellPadding=0 width=500 align=center height=200>
+                                        <TBODY>
+                                        <TR>
+                                            <TD style="LINE-HEIGHT: 30px; PADDING-LEFT: 130px" height=41 vAlign=center
+                                                align=left><B style="COLOR: #002564">
+                                                请填写您要找回的帐号资料：
+                                            </B>
+                                                <p><B style="COLOR: #002564"> 输入您的邮箱：</B>
+                                                    <INPUT name="usermail" class="bs" id="usermail">
+                                                </p>
+                                                <p><B style="COLOR: #002564"> 输入您的手机：</B>
+                                                    <INPUT name="usermob" class="bs" id="usermob">
+                                                </p>
+                                                <div align="center">
+                                                    <INPUT name="Submit" type="submit" class="btnumoff" id="btnSubmit1"
+                                                           onClick="javascript:return CheckForm1();" value="提交找回"></div>
+                                                </p>
+                                            </TD>
+                                        </TR>
+                                        </TBODY>
+                                    </TABLE>
+                                </form>
+                            </DIV>
+                        </DIV>
+                        <SPAN id=js1></SPAN>
+
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </DIV>
+    </div>
+
+    <br/><br/><br/><br/>
+
+
+    </body>
+{% endblock %}

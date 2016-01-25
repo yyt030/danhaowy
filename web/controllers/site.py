@@ -183,7 +183,6 @@ def reg():
         return render_template('tip.html', tip="注册成功，请返回首页登录:%s" % user.name, error=False, url="/")
     return render_template('site/reg.html', form=form)
 
-
 @bp.route('/news_list', methods=['GET', 'POST'])
 @require_visitor
 def news_list():
@@ -193,6 +192,7 @@ def news_list():
             info = Notice.query.filter(Notice.type == type)
         else:
             info = Notice.query.order_by(Notice.visit.desc())
+
     else:
         info = {}
     return render_template('site/news_list.html', info=info)
@@ -214,6 +214,7 @@ def news():
     else:
         info = {}
     return render_template('site/news_detail.html', info=info)
+
 
 
 @bp.route('/signout', methods=['GET', 'POST'])

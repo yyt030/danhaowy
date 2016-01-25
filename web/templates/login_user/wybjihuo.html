@@ -1,4 +1,7 @@
 {% extends 'login_layout.html' %}
+{% block page_title %}
+    <title>无忧币激活帐号- 单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+{% endblock %}
 {% block page_css %}
 
 {% endblock %}
@@ -44,7 +47,7 @@
                                 <li>您剩余的金币：<font color="#ce0907">{{ user.wuyoubi }}</font> 元 <a
                                         href="paywyb">立即充值>></a></li>
                                 <li class="fuwub_a_c"><input id="cbread" type="checkbox" value=""/>我同意激活<a
-                                        href="/News.asp?id=730" target="_blank" style="color:#ff5500;">《激活帐号阅读》</a></li>
+                                        href="{{ request.url_root }}news?id=2" target="_blank" style="color:#ff5500;">《激活帐号阅读》</a></li>
 
                             </ul>
                         {% else %}

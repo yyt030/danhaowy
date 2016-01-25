@@ -10,48 +10,55 @@
             <table width="950" height="138" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                 <tr>
-                    <td height="41" colspan="2">当前位置：<a href="/index">网站首页</a> &gt; <a href="/news_list?type=news">网站公告</a>
+                    <td height="41" colspan="2">当前位置：<a href="/index">网站首页</a> &gt; <a
+                            href="/news_list?type=news">网站公告</a>
                         &gt; 【公告】{{ info.title }}。
                     </td>
-                    <td width="200" rowspan="3" align="right" valign="top">
+                    <td width="200" style="display: none" rowspan="3" align="right" valign="top">
                         <div style="height:41px; ">&nbsp; </div>
-{#                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">#}
-{#                            <tbody>#}
-{#                            <tr>#}
-{#                                <td width="126" height="40" align="left" valign="middle" background="/static/images/T1U.jpg"#}
-{#                                    class="td_08 Stxt14">热门新闻#}
-{#                                </td>#}
-{#                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg" class="td_08">#}
-{#                                    <a href="/news_list?type=1">更多</a></td>#}
-{#                            </tr>#}
-                             {# 热门新闻 #}
-{#                            <tr>#}
-{#                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a#}
-{#                                        href="/news_list?type=news" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告 -#}
-{#                                    网站已于12月1...</a></td>#}
-{#                            </tr>#}
-{##}
-{#                            </tbody>#}
-{#                        </table>#}
+
+                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">
+                            <tbody>
+                            <tr>
+                                <td width="126" height="40" align="left" valign="middle"
+                                    background="/static/images/T1U.jpg"
+                                    class="td_08 Stxt14">热门新闻
+                                </td>
+                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg"
+                                    class="td_08">
+                                    <a href="/news_list?type=1">更多</a></td>
+                            </tr>
+                            {# 热门新闻 #}
+                            <tr>
+                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a
+                                        href="/news_list?type=news" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告
+                                    -
+                                    网站已于12月1...</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                         <br>
-{#                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">#}
-{#                            <tbody>#}
-{#                            <tr>#}
-{#                                <td width="126" height="40" align="left" valign="middle" background="/static/images/T1U.jpg"#}
-{#                                    class="td_08 Stxt14">置顶新闻#}
-{#                                </td>#}
-{#                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg" class="td_08">#}
-{#                                    <a href="/news?id=49?type=0">更多</a></td>#}
-{#                            </tr>#}
+                        <table width="190" border="0" cellspacing="0" cellpadding="0" class="bk_01">
+                            <tbody>
+                            <tr>
+                                <td width="126" height="40" align="left" valign="middle"
+                                    background="/static/images/T1U.jpg"
+                                    class="td_08 Stxt14">置顶新闻
+                                </td>
+                                <td width="62" align="right" valign="middle" background="/static/images/T1U.jpg"
+                                    class="td_08">
+                                    <a href="/news?id=49?type=0">更多</a></td>
+                            </tr>
                             {# 置顶新闻 #}
-{#                             <tr>#}
-{#                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a#}
-{#                                        href="/news?id=49" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告 -#}
-{#                                    网站已于12月1...</a></td>#}
-{#                            </tr>#}
-{##}
-{#                            </tbody>#}
-{#                        </table>#}
+                            <tr>
+                                <td height="22" colspan="2" align="left" valign="middle" class="td_03"><a
+                                        href="/news?id=49" title="重要公告 - 网站已于12月12号关闭注册！" target="_blank">重要公告 -
+                                    网站已于12月1...</a></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
                 <tr>
@@ -72,14 +79,14 @@
                                             <td width="397" align="right" valign="middle" class="td_13">
                                                 <p>单号无忧</p>
 
-                                                <p style="color: #999">阅读量：{{ info.visit  or 0}}</p>
+                                                <p style="color: #999">阅读量：{{ info.visit or 0 }}</p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td align="left" valign="top" height="100" colspan="3" class="td_14">
                                                 <div style=" line-height:25px;">
                                                     <div class="p0">
-                                                       {{ info.desc |safe }}
+                                                        {{ info.desc |safe }}
                                                     </div>
                                                 </div>
                                             </td>

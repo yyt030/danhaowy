@@ -119,15 +119,17 @@
                             </td>
                             <td class="td_08" valign="center" background="/static/images/T1U.jpg"
                                 width="119" align="right"><a
-                                    href="/NewsList?type=2" target="_blank">更多</a></td>
+                                    href="/NewsList?type=help" target="_blank">更多</a></td>
                         </tr>
                         <tr>
                             <td class="td_03" height="32" valign="center" colspan="2" align="left"
                                 id="rawRecruit">
 
                                 <ul>
-                                    <li><a href="/News?id=759" title="【单号教程】单号领取/购买检测操作教程"><font
-                                            color="#FF0000">【单号教程】单号领取/购买检测操作教程</font></a></li>
+                                    {% for help in help_list %}
+                                        <li><a href="/News?id={{ help.id }}" title="{{ help.title }}"><font
+                                                color="#FF0000">{{ help.title }}</font></a></li>
+                                    {% endfor %}
 
                                 </ul>
                             </td>
@@ -144,16 +146,18 @@
                             </td>
                             <td class="td_08" valign="center" background="/static/images/T1U.jpg"
                                 width="119" align="right"><a
-                                    href="/NewsList?type=0" target="_blank">更多</a></td>
+                                    href="/NewsList?type=article" target="_blank">更多</a></td>
                         </tr>
                         <tr>
                             <td class="td_03" height="32" valign="center" colspan="2" align="left"
                                 id="rawRecruit">
 
                                 <ul>
-                                    <li><a href="/News?id=49" title="重要公告 - 网站已于12月12号关闭注册！"><font
-                                            color="#FF0000">重要公告 - 网站已于12月12号关闭注册</font></a></li>
+                                    {% for article in article_list %}
 
+                                        <li><a href="/News?id={{ article.id }}" title="{{ article.title }}"><font
+                                                color="#FF0000">{{ article.title }}</font></a></li>
+                                    {% endfor %}
 
                                 </ul>
                             </td>
@@ -175,12 +179,20 @@
             <tr>
                 <td class="td_03" height="25" valign="center" colspan="2" align="left" id="advice">
                     <ul>
+<<<<<<< HEAD
                         <li><a href="/News?id=766" title="【公告】积分兑换比例调整。"><font color="#FF0000">【公告】积分兑换比例调整。</font></a>
                         </li>
                         <li><a href="/News?id=765" title="【公告】支付宝充值系统异常解决办法！"><font
                                 color="#FF0000">【公告】支付宝充值系统异常解决办法！</font></a></li>
 
 
+=======
+                        {% for news in news_list %}
+                            <li><a href="/News?id={{ news.id }}" title="{{ news.title }}"><font
+                                    color="#FF0000">{{ news.title }}</font></a>
+                            </li>
+                        {% endfor %}
+>>>>>>> 71a6073ec1132d5baa84f153c376211bbd6aede4
                     </ul>
                 </td>
             </tr>

@@ -74,7 +74,7 @@
                 <div class="heiaa">
                     <div style="padding-bottom:10px;">
                         我的推广连接：<input class="bs" style="width:400px;" type="text"
-                                      value="http://www.taodanwy.com/index?code={{ user.name }}" name="tutext"
+                                      value="{{ request.url_root }}index?code={{ user.name }}" name="tutext"
                                       readonly="readonly"/>
                         <input type="button" class="btnumoff" onclick="copyfun('tutext')" value="复制"/></br>
                         <font color="#FF0000" face="Tahoma, Geneva, sans-serif"

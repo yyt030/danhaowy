@@ -8,7 +8,7 @@ from flask import render_template, Blueprint, redirect, url_for, g, request, \
 from web.utils.permissions import require_user, require_active, require_seller
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Order, OrderList, MailBox, SendAddr, Express, NullPacket, Paylog, Fundslog, Txlog, \
-    ApplySellerRecord
+    ApplySellerRecord, Notice
 
 bp = Blueprint('login_user', __name__)
 
@@ -24,8 +24,16 @@ def index():
     # 已售出单号数
     order_selled_num = Order.query.filter(Order.seller_id == user.id, Order.is_sell == 1).count()
 
+    # 新手帮助
+    help_list = Notice.query.filter(Notice.type == 'help').limit(10)
+    # 热门文章
+    article_list = Notice.query.filter(Notice.type == 'article').limit(10)
+    # 最新公告
+    news_list = Notice.query.filter(Notice.type == 'news').order_by(Notice.create_at.desc()).limit(20)
+
     return render_template('login_user/index.html', form=form, user=user, order_num=order_num,
-                           order_selled_num=order_selled_num)
+                           order_selled_num=order_selled_num,
+                           help_list=help_list, article_list=article_list, news_list=news_list)
 
 
 @bp.route('/ornumber', methods=['GET'])

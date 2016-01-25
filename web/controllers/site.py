@@ -198,6 +198,7 @@ def news_list():
     return render_template('site/news_list.html', info=info)
 
 
+@bp.route('/News', methods=['GET', 'POST'])
 @bp.route('/news', methods=['GET', 'POST'])
 @require_visitor
 def news():

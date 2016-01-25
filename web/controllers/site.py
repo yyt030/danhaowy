@@ -199,7 +199,7 @@ def news_list():
         info = Notice.query.filter(Notice.type == type)
     else:
         info = {}
-    return render_template('site/news_list.html', info=info)
+    return render_template('site/news_list.html', info=info, type=type)
 
 
 @bp.route('/signout', methods=['GET', 'POST'])

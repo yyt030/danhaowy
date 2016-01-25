@@ -11,10 +11,10 @@
             <table width="950" height="138" border="0" cellspacing="0" cellpadding="0">
                 <tbody>
                 <tr>
-                    <td height="41" colspan="2">当前位置：<a href="/index">网站首页</a> &gt; 新手帮助</td>
+                    <td height="41" colspan="2">当前位置：<a href="/index">网站首页</a> &gt; {{ news_type.get(type) }}</td>
                     <td width="200" rowspan="3" align="right" valign="top">
                     </td>
-                    <td width="538" height="53" align="left" valign="middle"> </td>
+                    <td width="538" height="53" align="left" valign="middle"></td>
                 </tr>
                 <tr>
                     <td height="500" colspan="3" valign="top">
@@ -35,21 +35,23 @@
                                         </tr>
                                         {# list #}
                                         {% for n in info %}
-                                        <tr>
-                                            <td width="629" height="35" align="left" valign="middle" class="td_08">
-                                                <img src="/static/images/ding.gif" alt="置顶" width="16" height="16">
-                                                <a href="/news?id={{ n.id }}" target="_blank">
+                                            <tr>
+                                                <td width="629" height="35" align="left" valign="middle" class="td_08">
+                                                    <img src="/static/images/ding.gif" alt="置顶" width="16" height="16">
+                                                    <a href="/news?id={{ n.id }}" target="_blank">
                                                   <span style="font-size: 14px; color:Black;">
                                                     <font color="#111111">【公告】{{ n.title }}</font>
                                                   </span>
-                                                </a>
-                                            </td>
-                                            <td width="127" align="left" valign="middle" class="td_08">{{ news_type.get(n.type) }}</td>
-                                            <td width="96" align="left" valign="middle" class="td_08"><span
-                                                    style="color: #CC0000">1720</span></td>
-                                            <td width="96" height="36" align="right" valign="middle" class="td_08">管理员
-                                            </td>
-                                        </tr>
+                                                    </a>
+                                                </td>
+                                                <td width="127" align="left" valign="middle"
+                                                    class="td_08">{{ news_type.get(n.type) }}</td>
+                                                <td width="96" align="left" valign="middle" class="td_08"><span
+                                                        style="color: #CC0000">1720</span></td>
+                                                <td width="96" height="36" align="right" valign="middle" class="td_08">
+                                                    管理员
+                                                </td>
+                                            </tr>
                                         {% endfor %}
 
                                         <tr>
@@ -59,9 +61,10 @@
                                                         class="nest">下一页</span>    <span
                                                         class="nest">尾页</span>
 
-                                                    <form action="NewsList.asp?type=2" method="get">第 1 / 1 页  到 <input
-                                                            type="text" name="page" size="1" format="*N" value="2"> 页<input
-                                                            type="submit" class="submit" value="跳转"></form>
+                                                    <form action="NewsList.asp?type=2" method="get">第 1 / 1 页 到 <input
+                                                            type="text" name="page" size="1" format="*N" value="2">
+                                                        页<input
+                                                                type="submit" class="submit" value="跳转"></form>
                                                 </div>
                                             </td>
                                         </tr>
@@ -70,7 +73,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td height="30" background="images/jl_down.gif"> </td>
+                                <td height="30" background="images/jl_down.gif"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -90,7 +93,7 @@
         <h4><strong>友情链接</strong>LINK</h4>
 
         <div id="link_bg">
-            <a href="http://www.aikuaidi.cn/" target="_blank">快递单号查询</a> | 
+            <a href="http://www.aikuaidi.cn/" target="_blank">快递单号查询</a> |
         </div>
         <span></span>
     </div>

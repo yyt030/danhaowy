@@ -195,7 +195,7 @@ def news_list():
 
     else:
         info = {}
-    return render_template('site/news_list.html', info=info)
+    return render_template('site/news_list.html', type=type,info=info)
 
 
 @bp.route('/News', methods=['GET', 'POST'])

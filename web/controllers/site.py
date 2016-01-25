@@ -1,20 +1,19 @@
 # !/usr/bin/env python
 # -*- coding: UTF-8 -*-
 import StringIO
-import json
-import os
 import hashlib
+import json
+from datetime import datetime
+
 from flask import render_template, Blueprint, redirect, url_for, g, session, request, \
-    make_response, current_app, send_from_directory
+    make_response
 from web import csrf
 from web.utils.account import signin_user, signout_user
-from ..models import db, User, Notice, Paylog
-from ..forms import SigninForm, RegisterForm
-from ..utils.permissions import require_user, require_visitor, require_admin
-from datetime import datetime
-from web.utils.code import create_validate_code
 from web.utils.code2 import getCodePiture
 from web.utils.uploadsets import process_question, images
+from ..forms import SigninForm, RegisterForm
+from ..models import db, User, Notice, Paylog
+from ..utils.permissions import require_visitor, require_admin
 
 bp = Blueprint('site', __name__)
 
@@ -69,10 +68,70 @@ def login():
 
 
 @bp.route('/get_pass', methods=['GET', 'POST'])
-@require_visitor
-def GetPass():
-    """找回密码"""
-    return render_template('site/get_pass.html')
+@bp.route('/getpass', methods=['GET', 'POST'])
+def get_pass():
+    """找回密码: 1"""
+    form = RegisterForm()
+    return render_template('site/get_pass.html', form=form)
+
+
+@bp.route('/GetPasstwo', methods=['GET', 'POST'])
+def get_pass_two():
+    """找回密码: 2"""
+    form = RegisterForm()
+    name = request.form.get('username', '')
+    if name:
+        user = User.query.filter(User.name == name).first()
+        if not user:
+            return render_template('tip.html', error=True, tip="没有该用户!", url="login")
+        else:
+            session['reset_username'] = name
+
+    return render_template('site/get_pass_two.html', form=form)
+
+
+@bp.route('/GetPassthree', methods=['GET', 'POST'])
+def get_pass_three():
+    """找回密码: 3"""
+    form = RegisterForm()
+    email = request.form.get('Email')
+    # 页面传来的是手机号
+    mobile = request.form.get('QQ')
+    query = User.query.filter(User.name == session['reset_username'])
+
+    if email:
+        query = query.filter(User.email == email)
+    if mobile:
+        query = query.filter(User.mobile == mobile)
+    if not email and not mobile:
+        return render_template('tip.html', error=True, tip="邮箱或手机号错误!", url="login")
+
+    if not query.first():
+        return render_template('tip.html', error=True, tip="邮箱或手机号错误!", url="login")
+    else:
+        return render_template('tip.html', error=False, tip="重置成功，请检查邮件!", url="login")
+
+    return redirect(url_for('.login'))
+
+
+@bp.route('/Getuser', methods=['GET', 'POST'])
+@bp.route('/get_user')
+def get_user():
+    """找回密码: 3"""
+    form = RegisterForm()
+    if request.method == 'POST':
+        email = request.form.get('usermail')
+        mobile = request.form.get('usermob')
+        if email and mobile:
+            user = User.query.filter(User.email == email, User.mobile == mobile).first()
+            if user:
+                return render_template('tip.html', error=False, tip="账户[%s],请牢记！" % user.name, url="login")
+            else:
+                return render_template('tip.html', error=True, tip="输入错误!", url="login")
+        else:
+            return render_template('tip.html', error=True, tip="输入错误!", url="login")
+
+    return render_template('site/get_user.html', form=form)
 
 
 @bp.route('/reg', methods=['GET', 'POST'])

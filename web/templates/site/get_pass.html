@@ -14,7 +14,7 @@
 
 
         function open2() {
-            location.href = 'get_pass';
+            location.href = 'getpass';
 
         }
 
@@ -29,7 +29,7 @@
             <TABLE width=950 height="138" border=0 align="center" cellPadding=0 cellSpacing=0>
                 <TBODY>
                 <TR>
-                    <TD height=41 vAlign=center colSpan=3 align=left>当前位置：<a href="index.asp">首页</a> &gt; 找回密码</TD>
+                    <TD height=41 vAlign=center colSpan=3 align=left>当前位置：<a href="index">首页</a> &gt; 找回密码</TD>
                 </TR>
                 <TR>
                     <TD vAlign=top>
@@ -39,8 +39,9 @@
                                 (第一步填写用户名)
                             </DIV>
                             <DIV style="BACKGROUND-COLOR: #fafafa; border:1px #CCC solid; WIDTH: 908px; HEIGHT: 270px">
-                                <form name="form1" method="post" action="GetPasstwo.asp"
+                                <form name="form1" method="post" action="GetPasstwo"
                                       onkeydown="if(event.keyCode==13){return false;}">
+                                    {{ form.csrf_token }}
                                     <TABLE style="BORDER-BOTTOM: #f3f3f1 1px solid; BORDER-LEFT: #f3f3f1 1px solid; BACKGROUND-COLOR: #ffffff; MARGIN-TOP: 30px; BORDER-TOP: #f3f3f1 1px solid; BORDER-RIGHT: #f3f3f1 1px solid"
                                            border=0 cellSpacing=0 cellPadding=0 width=500 align=center height=200>
                                         <TBODY>
@@ -77,7 +78,6 @@
         </DIV>
 
         <br/><br/><br/><br/>
-
 
 
     </div>

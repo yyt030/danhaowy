@@ -15,7 +15,7 @@
                     return false;
                 }
                 if (userMoney < needMoney) {
-                    alert("对不起，您当前的无忧币不足,请先充值!\n\n如您已充值,请刷新本页面！");
+                    alert("对不起，您当前的金币不足,请先充值!\n\n如您已充值,请刷新本页面！");
                     return false;
                 }
                 $(CPH + "btnIn").click();
@@ -26,22 +26,22 @@
     </script>
 
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无忧币激活帐号　{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 金币激活帐号　{% endblock %}
 {% block content %}
     <td valign="top" width="756">
         <form name="Form" method="post" action="wybjihuo?action=jihuo" id="Form">
             {{ form.csrf_token }}
             <div class="midmess">
-                <div class="bt01"><span class="fuwua">无忧币激活</span></div>
+                <div class="bt01"><span class="fuwua">金币激活</span></div>
                 <div class="fuwub">
                     <div class="fuwub_a">
-                        <h5 class="fuwub_a_a">消费无忧币激活帐号,消费前请检查当前余额是否充足,激活金额为：<font color=red>50元</font></h5>
+                        <h5 class="fuwub_a_a">消费金币激活帐号,消费前请检查当前余额是否充足,激活金额为：<font color=red>50元</font></h5>
                         <h5 class="fuwub_a_b">无优币激活帐号</h5>
                         {% if user.is_active == False %}
                             <ul>
 
-                                <li><strong>本次激活需要缴纳：<font color="#ce0907">50</font> 元无忧币</strong></li>
-                                <li>您剩余的无忧币：<font color="#ce0907">{{ user.wuyoubi }}</font> 元 <a
+                                <li><strong>本次激活需要缴纳：<font color="#ce0907">50</font> 元金币</strong></li>
+                                <li>您剩余的金币：<font color="#ce0907">{{ user.wuyoubi }}</font> 元 <a
                                         href="paywyb">立即充值>></a></li>
                                 <li class="fuwub_a_c"><input id="cbread" type="checkbox" value=""/>我同意激活<a
                                         href="/News.asp?id=730" target="_blank" style="color:#ff5500;">《激活帐号阅读》</a></li>
@@ -54,7 +54,7 @@
                         {% endif %}
                     </div>
                     <div class="fuwub_b"><em>图标 i</em>
-                        <p>提示：缴纳成功后将扣除您50元无忧币。</p>
+                        <p>提示：缴纳成功后将扣除您50元金币。</p>
                     </div>
 
                     <div class="clear"></div>

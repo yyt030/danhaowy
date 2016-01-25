@@ -94,7 +94,7 @@
                                     <tr>
                                         <td height="31" align="center" valign="middle"
                                             background="/static/images/mainright_04.gif"
-                                            class="Menutext" style="padding-left: 10px;">无忧币：
+                                            class="Menutext" style="padding-left: 10px;">金币：
                                         </td>
                                         <td height="31" align="center" colspan="2" valign="middle"><font
                                                 color="#FF3300">{{ g.user.wuyoubi|float }}</font>&nbsp;元&nbsp;<a
@@ -105,7 +105,7 @@
                                     <tr>
                                         <td height="31" align="center" valign="middle"
                                             background="/static/images/mainright_04.gif"
-                                            class="Menutext" style="padding-left: 10px;">无忧积分：
+                                            class="Menutext" style="padding-left: 10px;">积分：
                                         </td>
                                         <td height="31" align="center" colspan="2" valign="middle"><font
                                                 color="#FF0000">{{ g.user.wuyoujifen }}</font>&nbsp;分&nbsp;<a
@@ -142,7 +142,7 @@
                                             background="/static/images/mainright_04.gif"
                                             class="Menutext">会员登陆ip：
                                         </td>
-                                        <td height="15" align="left" colspan="2">116.25.67.15
+                                        <td height="15" align="left" colspan="2">{{ user.address }}
                                         </td>
                                         <td background="/static/images/mainright_06.gif">&nbsp;</td>
                                     </tr>
@@ -151,7 +151,7 @@
                                             background="/static/images/mainright_04.gif"
                                             class="Menutext">会员登录时间：
                                         </td>
-                                        <td height="15" align="left" colspan="2">2015/12/27</td>
+                                        <td height="15" align="left" colspan="2">{{ user.login_time }}</td>
                                         <td background="/static/images/mainright_06.gif">&nbsp;</td>
                                     </tr>
                                     <tr>
@@ -199,9 +199,11 @@
                                             <td width="230">
                                                 <div class="ul-td">
                                                     <ul>
+                                                         {% for o in orders[0:10] %}
                                                         <li>
-                                                            <a href="login_user/shopnumber">发货地址：北京市<span> 12-26 今日已更新</span></a>
+                                                            <a href="login_user/shopnumber">发货地址：{{ o.send_addr_province }}<span> {{ o.create_time}} 今日已更新</span></a>
                                                         </li>
+                                                        {% endfor %}
 
 
                                                         <li><a href="login_user/shopnumber">更多详细发货地址请到 单号大厅 搜索</a>
@@ -214,11 +216,11 @@
 
                                                 <div class="ul-td">
                                                     <ul>
-
+                                                        {% for o in orders[10:20] %}
                                                         <li>
-                                                            <a href="login_user/shopnumber">发货地址：浙江省<span> 12-26 今日已更新</span></a>
+                                                            <a href="login_user/shopnumber">发货地址：{{ o.send_addr_province }}<span> {{ o.create_time}} 今日已更新</span></a>
                                                         </li>
-
+                                                        {% endfor %}
 
                                                         <li><a href="login_user/shopnumber">更多发货地址请到 单号大厅 搜索</a>
                                                         </li>
@@ -231,10 +233,11 @@
                                                 <div class="ul-td">
                                                     <ul>
 
+                                                         {% for o in orders[20:30] %}
                                                         <li>
-                                                            <a href="login_user/shopnumber">发货地址：湖南省<span> 12-26 今日已更新</span></a>
+                                                            <a href="login_user/shopnumber">发货地址：{{ o.send_addr_province }}<span> {{ o.create_time}} 今日已更新</span></a>
                                                         </li>
-
+                                                        {% endfor %}
 
                                                         <li><a href="login_user/shopnumber">更多发货地址请到 单号大厅 搜索</a>
                                                         </li>
@@ -268,41 +271,46 @@
                         <table width="920" height="308" border="0" cellpadding="0" cellspacing="0" align="center">
                             <tr>
                                 <td width="290" height="103" valign="top" align="left">
-                                    <a href="NewsList?type=2">
+                                    <a href="news_list?type=help">
                                         <img src="/static/images/iconcs_002.png" alt="新手帮助"
                                              width="200"
                                              height="70" border="0" align="middle"/></a>
                                     <ul>
-                                        <li><a href="News?id=759" title="【单号教程】单号领取/购买检测操作教程"><font color="#FF0000">【单号教程】单号领取/购买检测操作教程</font></a>
+                                        {% for h in helps %}
+                                        <li><a href="news?id={{ h.id }}" title="【单号教程】{{ h.title }}"><font color="#FF0000">【单号教程】{{ h.title }}</font></a>
                                         </li>
+                                        {% endfor %}
 
 
                                     </ul>
                                 </td>
                                 <td width="25" align="left" class="tdli">&nbsp;</td>
                                 <td width="290" align="left" valign="top">
-                                    <a href="NewsList?type=1">
+                                    <a href="news_list?type=notice">
                                         <img src="/static/images/iconcs_005.png" alt="网站公告"
                                              width="200"
                                              height="70" border="0" align="middle"/></a>
                                     <ul>
-                                        <li><a href="News?id=766" title="【公告】无忧积分兑换比例调整。"><font color="#FF0000">【公告】无忧积分兑换比例调整。</font></a>
+                                         {% for n in notices %}
+                                        <li><a href="news?id={{ n.id }}" title="【公告】{{ n.title }}。"><font color="#FF0000">【公告】{{ n.title }}</font></a>
                                         </li>
-
+                                        {% endfor %}
 
                                     </ul>
                                 </td>
                                 <td width="25" align="left" class="tdli">&nbsp;</td>
                                 <td width="290" align="left" valign="top">
-                                    <a href="NewsList?type=0">
+                                    <a href="news_list?type=hot">
                                         <img src="/static/images/iconcs_006.png" alt="新闻排行"
                                              width="200"
                                              height="70" border="0" align="middle"/>
                                     </a>
                                     <ul>
-                                        <li><a href="News?id=49" title="重要公告 - 网站已于12月12号关闭注册！"><font
-                                                color="#FF0000">重要公告
-                                            - 网站已于12月12号关闭注册！</font></a></li>
+                                        {% for n in hot_articles %}
+                                        <li><a href="news?id={{ n.id }}" title="{{ n.title }}"><font
+                                                color="#FF0000">
+                                            {{ n.title }}</font></a></li>
+                                        {% endfor %}
 
 
                                     </ul>

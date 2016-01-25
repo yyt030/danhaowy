@@ -263,8 +263,8 @@
                     <h1>温馨提示：</h1>
                     <ul>
                         <li>无优币最低充值1元,最高无限制！</li>
-                        <li>官方唯一无忧币充值支付宝：{{ website.alipay }} ，其他一律为骗子,请勿充值！</li>
-                        <li><font color=red>温馨提醒：充值金额低于10元,不赠送无忧积分。</font></li>
+                        <li>官方唯一金币充值支付宝：{{ website.alipay }} ，其他一律为骗子,请勿充值！</li>
+                        <li><font color=red>温馨提醒：充值金额低于10元,不赠送积分。</font></li>
 
                     </ul>
                 </div>
@@ -278,7 +278,7 @@
                 <div class="chongzhi">
                     <ul class="chong">
                         <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(1)">PC网页充值</a></li>
-{#                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(2)">二维码手机充值</a></li>#}
+                        {#                        <li class="fubao"><a id="lbankpay" href="javascript:void(0)" onclick="Change(2)">二维码手机充值</a></li>#}
                         <li class="fubao"><a id="lbankpay" href="/news?id=729" target="_blank">无优币充值流程</a></li>
                     </ul>
 
@@ -305,11 +305,12 @@
                                             <p style="position:relative;margin-top:15px;_margin-top:10px;_height:15px;_line-height:15px;">
                                                 充值金额： <span
                                                     style=" position:absolute;left:65px;width:180px;overflow:hidden;">
-                  <input name="payAmount" type="text" id="payAmount" size="5" value="50"
+                  <input name="payAmount" type="text" id="payAmount" size="5" value=""
                          style="_height:15px;_line-height:15px; overflow:hidden; border:1px solid #CBCBCB;"/>
                   元 <font color="red">*最低充值1元</font> </span></p>
                                         </div>
                                         <input type="hidden" name="title" id="title" value="{{ g.user.name }}"/>
+
                                         <div class="zdcz_05 fl"><a id="aPayAlipay" href="#" target="_blank">
                                             <input type="submit" class="zdcz_06" value=""/>
                                         </a></div>
@@ -324,8 +325,10 @@
                                     <div class="zdcz_05_1 fl">
 
                                         <p style="font-size:13px; font-weight:bold">1、请先打开手机“支付宝钱包”,点击扫一扫,扫描左侧二维码图片。</p>
+
                                         <p style="font-size:13px; font-weight:bold">2、扫描完毕后,点击转账,付款金额任意填写,备注填写<font
                                                 color=red>“{{ g.user.name }}”</font>,点击确认转账。</p>
+
                                         <p style="font-size:13px; font-weight:bold">
                                             3、转账完毕后,已备注的30内自动到账,未备注的请在第二步提交交易号！</p>
 
@@ -338,13 +341,16 @@
                                     <div class="aspNetHidden"></div>
                                     <div class="zdcz_10 fl">
                                         <p style="position:relative; margin-top:8px;*margin-top:20px;">
-                                            1、如您已付款成功了,款项会在10秒-30秒内自动充值的您的账户,请届时刷新本网址！</p>
+                                            1、如您已付款成功了,款项会在10秒-30秒内自动充值的您的账户！</p>
+
                                         <p style="position:relative; margin-top:8px;*margin-top:20px;"><font
-                                                color="#3333FF">2、如您付款时"付款说明"未填写网站账户名,请在下面手动提交交易号！</font></p>
+                                                color="#3333FF">2、付款成功后,请在下面手动提交交易号！</font></p>
                                     </div>
                                     <form name="Form1" id="Form1" method="post" action="paywyb?idkey=trading"
                                           onSubmit="return CheckForm();">
                                         {{ form.csrf_token }}
+                                        <input id="pay" name="pay" type="hidden">
+
                                         <div class="zdcz_10 fl" style="padding:1px 0">
                                             <p style="position:relative; margin-top:8px;*margin-top:20px;">支付宝交易号：
                                                 <input name="MainC_TextBox" type="text" id="MainC_TextBox"
@@ -357,8 +363,8 @@
 
                                         <div class="zdcz_051 fl" style=" margin-top:5px;">
                                             <input
-                                                   style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"
-                                                   type="image" src="/static/images/chongzhi.gif"/></div>
+                                                    style="border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px;"
+                                                    type="image" src="/static/images/chongzhi.gif"/></div>
                                     </form>
 
                                 </div>
@@ -387,4 +393,9 @@
     </div></div>
     <div class="clear"></div>
     <div style="height:40px;"></div>
+    <script type="text/javascript">
+    $("#payAmount").change(function(){
+        $("#pay").val($(this).val())
+    })
+    </script>
 {% endblock %}

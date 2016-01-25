@@ -3,7 +3,7 @@
 import sys
 
 import os
-from .models import MailBox, Site
+from .models import MailBox, Site, qqKefu
 
 # 将project目录加入sys.path
 from flask.ext.cache import Cache
@@ -73,6 +73,7 @@ def register_jinja(app):
     def inject_vars():
 
         site_info = Site.query.first()
+        qq_info = qqKefu.query.first()
         if not site_info:
             site_info = {
                 "url": "http://localhost:5000",
@@ -81,7 +82,8 @@ def register_jinja(app):
                 "alipay": "888888@163.com",
             }
         return dict(
-                website=site_info,
+            website=site_info,
+            qq=qq_info
         )
 
     def url_for_other_page(page, key='page', params=None):
@@ -168,7 +170,7 @@ def register_logger(app):
 
         # 定义handler的输出格式
         formatter = logging.Formatter(
-                '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
         rfh.setFormatter(formatter)
 
         # 给logger添加handler

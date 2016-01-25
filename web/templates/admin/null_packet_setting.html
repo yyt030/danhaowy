@@ -1,7 +1,8 @@
 {% extends "admin/base.html" %}
 {% from 'macro/form.html' import form_field %}
-{% block title %}网站信息{% endblock %}
+{% block title %}空包发货{% endblock %}
 {% block content %}
+    <script type="text/javascript" src="{{ static('WdatePicker/WdatePicker.js') }}"></script>
     <div class="pace  pace-inactive">
         <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
             <div class="pace-progress-inner"></div>
@@ -32,77 +33,46 @@
                         <div class="col-sm-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <h5>网站信息</h5>
-
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="form_basic.html#">选项1</a>
-                                            </li>
-                                            <li><a href="form_basic.html#">选项2</a>
-                                            </li>
-                                        </ul>
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </div>
+                                    <h5>空包发货</h5>
                                 </div>
                                 <div class="ibox-content">
                                     <form class="form-horizontal m-t" method="post" id="commentForm"
                                           novalidate="novalidate">
                                         {{ form.csrf_token }}
-                                        <input type="hidden" name="logo" id="logo" value="{{ form.logo.data }}">
+
 
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">网站名称：</label>
+                                            <label class="col-sm-3 control-label">空包ID：</label>
 
                                             <div class="col-sm-8">
 
-                                                <input id="name" name="name" minlength="2" type="text"
-                                                       class="form-control" value="{{ form.name.data }}" required=""
-                                                       aria-required="true">
+                                               <input id="id" name="packet_id" class="form-control"  value="{{ form.packet_id.data }}" disabled>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">网站域名：</label>
-
-                                            <div class="col-sm-8">
-                                                <input id="url" type="url" class="form-control" name="url"
-                                                       required="" aria-required="true" value="{{ form.url.data }}">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">支付宝账号：</label>
-
-                                            <div class="col-sm-8">
-                                                <input id="alipay" type="text" class="form-control" name="alipay"
-                                                       value="{{ form.alipay.data }}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">logo：</label>
+                                         <div class="form-group">
+                                            <label class="col-sm-3 control-label">快递类型：</label>
 
                                             <div class="col-sm-8">
 
-                                                {% set image_url="/static/images/"+  form.logo.data %}
-
-                                                <img src="{{ image_url }}"
-                                                     style="margin-top: 10px;max-width: 400px;width: 100%;"
-                                                     class="{% if form.logo.data =="" %} hide {% endif %} imageview">
-
-                                                <input type="file" name="" class="form-control " id="index_image">
-                                                <input type="text" name="image" id="image" style="display: none"
-                                                       value="{{ form.logo.data }}">
+                                                <span id="type" class="form-control" >{{ nullpacket.express.type}}</span>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">单号：</label>
 
-
+                                            <div class="col-sm-8">
+                                                <input id="tracking_no" type="text" class="form-control" name="tracking_no"
+                                                       required="" aria-required="true" value="{{ form.tracking_no.data or '' }}">
+                                            </div>
+                                        </div>
+{#                                        <div class="form-group">#}
+{#                                            <label class="col-sm-3 control-label">发货时间：</label>#}
+{##}
+{#                                            <div class="col-sm-8">#}
+{#                                                <input id="send_time" type="text" class="form-control" name="send_time" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:00'})"#}
+{#                                                       required="" aria-required="true" value="{{ form.send_time.data }}">#}
+{#                                            </div>#}
+{#                                        </div>#}
                                         <div class="form-group">
                                             <div class="col-sm-4 col-sm-offset-3">
                                                 <button class="btn btn-primary" type="submit">提交</button>

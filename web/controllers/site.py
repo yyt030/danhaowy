@@ -12,7 +12,7 @@ from web.utils.account import signin_user, signout_user
 from web.utils.code2 import getCodePiture
 from web.utils.uploadsets import process_question, images
 from ..forms import SigninForm, RegisterForm
-from ..models import db, User, Notice, Paylog
+from ..models import db, User, Notice, Paylog, Order
 from ..utils.permissions import require_visitor, require_admin
 
 bp = Blueprint('site', __name__)
@@ -23,7 +23,13 @@ bp = Blueprint('site', __name__)
 def index():
     form = SigninForm()
     user = g.user
-    return render_template('site/index.html', form=form, user=user)
+    orders = Order.query.limit(30)
+    helps = Notice.query.filter(Notice.type == 'help').limit(10)
+    notices = Notice.query.filter(Notice.type == 'news').limit(10)
+    hot_articles = Notice.query.order_by(Notice.visit.desc()).limit(10)
+    return render_template('site/index.html', form=form, orders=orders, helps=helps, notices=notices,
+                           hot_articles=hot_articles,
+                           user=user)
 
 
 @bp.route('/banner', methods=['GET'])
@@ -178,6 +184,20 @@ def reg():
     return render_template('site/reg.html', form=form)
 
 
+@bp.route('/news_list', methods=['GET', 'POST'])
+@require_visitor
+def news_list():
+    type = request.args.get("type", "news")
+    if type:
+        if type != 'hot':
+            info = Notice.query.filter(Notice.type == type)
+        else:
+            info = Notice.query.order_by(Notice.visit.desc())
+    else:
+        info = {}
+    return render_template('site/news_list.html', info=info)
+
+
 @bp.route('/news', methods=['GET', 'POST'])
 @require_visitor
 def news():
@@ -185,20 +205,15 @@ def news():
     type = request.args.get("type", "news")
     if id:
         info = Notice.query.get_or_404(id)
+        if info.visit ==None:
+            info.visit=1
+        else:
+            info.visit+=1
+        db.session.add(info)
+        db.session.commit()
     else:
         info = {}
     return render_template('site/news_detail.html', info=info)
-
-
-@bp.route('/news_list', methods=['GET', 'POST'])
-@require_visitor
-def news_list():
-    type = request.args.get("type", "news")
-    if type:
-        info = Notice.query.filter(Notice.type == type)
-    else:
-        info = {}
-    return render_template('site/news_list.html', info=info)
 
 
 @bp.route('/signout', methods=['GET', 'POST'])

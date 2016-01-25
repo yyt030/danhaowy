@@ -1,0 +1,194 @@
+{% extends "admin/base.html" %}
+{% block title %}充值记录管理{% endblock %}
+{% block content %}
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div>
+<div id="wrapper">
+    {% include 'admin/admin_nav.html' %}
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+            {% include 'admin/header_nav.html' %}
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>充值记录管理</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/admin/home">主页</a>
+                    </li>
+                    <li>
+                        <a>充值记录管理</a>
+                    </li>
+                    <li>
+                        <strong>{% if type=='waiting' %}未到账{% else %}已到账{% endif %}的充值记录</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>基本
+                                <small>分类，查找</small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown"
+                                   href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">选项1</a>
+                                    </li>
+                                    <li><a href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">选项2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <style>
+                                th:first-child,
+                                .gradeX td:first-child {
+                                    width: 20px;
+                                    cursor: pointer;
+                                }
+
+                                th:first-child input,
+                                .gradeX td:first-child input {
+                                    cursor: pointer;
+                                }
+                            </style>
+
+                             {% set roles={"member":'普通会员',"seller":"超级卖家"} %}
+                            <form action="javascript:;" method="post" name="login_form" id="login_form">
+
+                                <table class="table table-striped table-bordered table-hover dataTables-example">
+                                    <thead>
+                                    <tr>
+                                        <th><input type="checkbox" class="i-checks" id="userListCheck"/></th>
+                                        <th>订单号</th>
+                                        <th>充值金额</th>
+                                        <th>用户名</th>
+                                        <th>充值时间</th>
+                                        <th>支付状态</th>
+                                        <th>金币是否到账</th>
+                                        <th>支付宝交易号</th>
+                                        <th>交易名称</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for p in paylogs %}
+                                    <tr class="gradeX">
+                                        <td><input type="checkbox" class="i-checks"></td>
+                                        <td class="userListId">{{ p.id }}</td>
+                                        <td>{{ p.money }}</td>
+                                        <td>{{ p.user.name }}</td>
+                                        <td>{{ p.create_time }}</td>
+                                        <td>{{ p.status }}</td>
+                                        <td>{% if p.money_status %}是{% else %}否{% endif %}</td>
+                                        <td>{{ p.alipay_no }}</td>
+                                        <td>{{ p.action }}</td>
+                                        <td>
+                                            {% if p.status =='待确认' %}<a href="/admin/confirm_pay_log?id={{ p.id }}" onclick="javascript:if (!confirm('确认该充值订单已到账吗')) return false">确认到账</a>{% endif %}</td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                             <div class="col-sm-12">
+                                        <div class="dataTables_paginate paging_simple_numbers"
+                                             id="DataTables_Table_0_paginate">
+                                            <ul class="pagination">
+
+                                                {% if page_all>1 %}
+                                                {% for p in range(1,page_all+1) %}
+                                                <li class="paginate_button {% if page==p %}active{% endif %}"
+                                                    aria-controls="DataTables_Table_0"
+                                                    tabindex="0"><a href="?page={{ p }}">{{ p }}</a></li>
+                                                {% endfor %}
+                                                {% endif %}
+
+
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                <input type="button" class="btn btn-w-m btn-primary delete1" value="删除选中"
+                                       data-toggle="modal" data-target="#myModal5" disabled/>
+                               
+
+                                <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span
+                                                        aria-hidden="true">&times;</span><span
+                                                        class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">删除充值订单</h4>
+                                                {#                                            <small class="font-bold">删除创意</small>#}
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="delete1Content"></p>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-white deleteUserId"
+                                                        data-dismiss="modal">确定
+                                                </button>
+                                                <button type="button" class="btn btn-primary" data-dismiss="modal">取消
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        function getCookie(name) {
+            var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return r ? r[1] : undefined;
+        }
+       $(function () {
+            var json1 = _alert('.btn.btn-w-m.delete1', '.modal-body .delete1Content', '您要删除的充值ID为');
+
+            $('.deleteUserId').click(function () {
+                $.ajax({
+                    url: '/admin/pay_log/delete',
+                    type: 'post',
+                    data: json1,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        //  alert('error');
+                    }
+                });
+            });
+        })
+    </script>
+
+{% endblock %}

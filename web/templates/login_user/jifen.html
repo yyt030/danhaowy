@@ -1,6 +1,6 @@
 {% extends 'login_layout.html' %}
 {% block page_title %}
-    <title>无忧积分兑换 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
+    <title>积分兑换 -单号无忧_真实免费当天快递单号网 - 全网唯一免费单号提供网</title>
 {% endblock %}
 {% block page_css %}
     <liNK rel="stylesheet" type="text/css" href="/static/css/public.css"/>
@@ -105,7 +105,7 @@
     </script>
 
 {% endblock %}
-{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 无忧积分兑换{% endblock %}
+{% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 积分兑换{% endblock %}
 {% block content %}
     <td valign="top" width="624">
         <div class="midmess">
@@ -113,7 +113,7 @@
             <div class="mess_all">
                 <h1>温馨提示：</h1>
                 <ul>
-                    <li>1. 每次充值100无忧币=10无忧积分,10无忧积分可兑换1无忧币</li>
+                    <li>1. 每次充值100金币=10积分,10积分可兑换1金币</li>
                 </ul>
             </div>
             <!--温馨提示框结束-->
@@ -122,14 +122,14 @@
                 <p></p>
                 <ul>
                     <li class="c01">亲爱的 <span>{{ user.name }}</span> 欢迎您！</li>
-                    <li class="c02">无忧币：<span>{{ user.wuyoubi }}</span>
-                        无忧积分：<span>{{ user.wuyoujifen }}</span></li>
+                    <li class="c02">金币：<span>{{ user.wuyoubi }}</span>
+                        积分：<span>{{ user.wuyoujifen }}</span></li>
                     <li class="c03">兑换无忧比例：<span>10积分=1元</span>，请在有足够的积分，完成兑换。</li>
                 </ul>
             </div>
 
             <div class="hei">
-                <H1>无忧积分兑换</H1>
+                <H1>积分兑换</H1>
             </div>
             <div class="bdbox">
                 <ul>
@@ -143,7 +143,7 @@
                           onSubmit="document.charset='gbk';" onKeyDown="if(event.keyCode==13){return false;}">
                         {{ form.csrf_token }}
                         <!--订单编号-->
-                        <li><span class="bdl">无忧积分</span>
+                        <li><span class="bdl">积分</span>
                             <span class="bdr"><font id="bmoney" color="#FF0000">{{ user.wuyoujifen }}</font>&nbsp;分</span>
 
                         </li>
@@ -159,11 +159,11 @@
                         </li>
 
                         <!--快递类型--><!--数量-->
-                        <li><span class="bdl">无忧币</span> <span class="bdr"><font id="money"
+                        <li><span class="bdl">金币</span> <span class="bdr"><font id="money"
                                                                                  color="#FF0000"></font></span></li>
                         <!--发货地址--><!--收货地址-->
                         <li class="next">
-                            <input name="wfsubmit" type="submit" class="suba" value="兑换无忧币"/>&nbsp;
+                            <input name="wfsubmit" type="submit" class="suba" value="兑换金币"/>&nbsp;
                             <input name="wfreset" class="subb" type="reset" value="重置"/>
                         </li>
                     </form>

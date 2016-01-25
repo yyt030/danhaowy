@@ -362,7 +362,7 @@ def file():
             db.session.commit()
             return redirect(url_for('.sendaddress'))
 
-        # 空包中心　空包发货
+        # TODO 空包中心　空包发货
         if action == 'buykongbao':
             sendaddr = SendAddr.query.get_or_404(request.form.get('address', 0, type=int))
             express = Express.query.get_or_404(request.form.get('typ', 0, type=int))
@@ -930,12 +930,14 @@ def paywyb():
     user = g.user
     if request.method == 'POST':
         trade_no = request.form.get("MainC_TextBox")
+        pay = request.form.get("pay",type=int)
+        print request.form
         log = Paylog.query.filter(Paylog.alipay_no == trade_no).first()
         if log:
             tip = '该交易号已经提交，请勿重复提交!'
             return render_template('error.html', error=tip, url="")
         else:
-            pay_log = Paylog(alipay_no=trade_no, money=0, user_id=g.user.id, action="")
+            pay_log = Paylog(alipay_no=trade_no, money=pay, user_id=g.user.id, action="")
             db.session.add(pay_log)
             db.session.commit()
 
@@ -1028,7 +1030,7 @@ def sj():
 @bp.route('/paylog', methods=['GET', 'POST'])
 @require_user
 def paylog():
-    """提现记录"""
+    """充值记录"""
     user = g.user
 
     startdate = request.args.get('startdate', '')

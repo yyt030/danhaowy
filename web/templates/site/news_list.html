@@ -46,25 +46,25 @@
                                             </td>
                                             <td width="127" align="left" valign="middle" class="td_08">{{ news_type.get(n.type) }}</td>
                                             <td width="96" align="left" valign="middle" class="td_08"><span
-                                                    style="color: #CC0000">1720</span></td>
+                                                    style="color: #CC0000">{{ n.visit or 0 }}</span></td>
                                             <td width="96" height="36" align="right" valign="middle" class="td_08">管理员
                                             </td>
                                         </tr>
                                         {% endfor %}
 
-                                        <tr>
-                                            <td height="55" colspan="4" align="center">
-                                                <div class="TPages"><span class="prev">首页</span>    <span
-                                                        class="prev">上一页</span>    <span
-                                                        class="nest">下一页</span>    <span
-                                                        class="nest">尾页</span>
-
-                                                    <form action="NewsList.asp?type=2" method="get">第 1 / 1 页  到 <input
-                                                            type="text" name="page" size="1" format="*N" value="2"> 页<input
-                                                            type="submit" class="submit" value="跳转"></form>
-                                                </div>
-                                            </td>
-                                        </tr>
+{#                                        <tr>#}
+{#                                            <td height="55" colspan="4" align="center">#}
+{#                                                <div class="TPages"><span class="prev">首页</span>    <span#}
+{#                                                        class="prev">上一页</span>    <span#}
+{#                                                        class="nest">下一页</span>    <span#}
+{#                                                        class="nest">尾页</span>#}
+{##}
+{#                                                    <form action="NewsList.asp?type=2" method="get">第 1 / 1 页  到 <input#}
+{#                                                            type="text" name="page" size="1" format="*N" value="2"> 页<input#}
+{#                                                            type="submit" class="submit" value="跳转"></form>#}
+{#                                                </div>#}
+{#                                            </td>#}
+{#                                        </tr>#}
                                         </tbody>
                                     </table>
                                 </td>

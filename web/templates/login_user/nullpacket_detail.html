@@ -165,11 +165,11 @@
                         </tr>
                         <tr>
                             <td>单号：</td>
-                            <td>{{ nullpacket.tracking_no }}</td>
+                            <td>{{ nullpacket.tracking_no or '无' }}</td>
                         </tr>
                         <tr>
                             <td>单价：</td>
-                            <td>{{ nullpacket.price }}元</td>
+                            <td>{{ nullpacket.express.price }}元</td>
                         </tr>
                         <tr>
                             <td>发货地址：</td>

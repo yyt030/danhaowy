@@ -120,11 +120,11 @@
                     {{ form.csrf_token }}
                     <tr>
                         <td height="40" align="right" class="tbtr">当前可提现金额：</td>
-                        <td class="tbtr"><font color="red">{{ user.money|float }}</font></td>
+                        <td class="tbtr"><font color="red">{{ user.money|float  }}</font></td>
                     </tr>
                     <tr>
                         <td height="40" align="right" class="tbtr">提现冻结金额：</td>
-                        <td class="tbtr"><font color="red">{{ pending_money }}</font></td>
+                        <td class="tbtr"><font color="red">{{ pending_money or '' }}</font></td>
                     </tr>
                     <tr></tr>
                     <tr>
@@ -142,14 +142,14 @@
                     <tr>
                         <td height="40" align="right" class="tbtr">支付宝姓名：</td>
                         <td class="tbtr"><label>
-                            <input type="text" name="txtpayid" value="{{ user.alipay_name }}" id="txtpayid"
+                            <input type="text" name="txtpayid" value="{{ user.alipay_name or ''}}" id="txtpayid"
                                    class="input-medium"
                                    disabled="disabled"/>
                             <font color="red">（已绑定支付宝的姓名）</font></label></td>
                     </tr>
                     <tr>
                         <td height="40" align="right" class="tbtr">支付宝帐号：</td>
-                        <td class="tbtr"><input type="text" name="txtname" value="{{ user.alipay_account }}"
+                        <td class="tbtr"><input type="text" name="txtname" value="{{ user.alipay_account or ''}}"
                                                 id="txtname"
                                                 class="input-medium" disabled="disabled"/>
                             <font color="red">（已绑定支付宝的帐号）</font></td>

@@ -40,7 +40,7 @@
                 return false;
             }
             if (document.orderform.Count.value * 5 > {{ user.wuyoubi }}) {
-                alert("你的无忧币不足,请检查!");
+                alert("你的金币不足,请检查!");
                 document.orderform.Count.focus();
                 return false;
             }
@@ -58,7 +58,6 @@
         setInterval('AutoScroll()', 5000);
     </script>
     <script src="/static/js/totop.js"></script>
-    <script src="/static/js/ContactIndex.js"></script>
 {% endblock %}
 {% block site_map %} 当前位置：<a href="/">网站首页</a> > <a href="/login_user/user">会员中心</a> > 领取次数增加 {% endblock %}
 {% block content %}

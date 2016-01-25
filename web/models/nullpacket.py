@@ -40,7 +40,7 @@ class NullPacket(db.Model):
     # 空包状态
     status = db.Column(db.SmallInteger, default=0)
     # 发货时间
-    send_time = db.Column(db.DateTime, default=datetime.now)
+    send_time = db.Column(db.DateTime)
 
     @property
     def curr_status(self):

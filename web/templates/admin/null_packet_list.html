@@ -1,0 +1,197 @@
+{% extends "admin/base.html" %}
+{% block title %}单号管理{% endblock %}
+{% block content %}
+    <div class="pace  pace-inactive">
+        <div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+            <div class="pace-progress-inner"></div>
+        </div>
+        <div class="pace-activity"></div>
+    </div>
+    <div id="wrapper">
+        {% include 'admin/admin_nav.html' %}
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                {% include 'admin/header_nav.html' %}
+            </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>空包管理</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="/admin/home">主页</a>
+                        </li>
+                        <li>
+                            <a>空包管理</a>
+                        </li>
+                        <li>
+                            <strong>{% if status==0 %}待发货{% else %}已发货{% endif %}的空包列表</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>基本
+                                    <small>分类，查找</small>
+                                </h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"
+                                       href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">选项1</a>
+                                        </li>
+                                        <li><a href="http://www.zi-han.net/theme/hplus/table_data_tables.html#">选项2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <style>
+                                    th:first-child,
+                                    .gradeX td:first-child {
+                                        width: 20px;
+                                        cursor: pointer;
+                                    }
+
+                                    th:first-child input,
+                                    .gradeX td:first-child input {
+                                        cursor: pointer;
+                                    }
+                                </style>
+
+
+                                <form action="javascript:;" method="post" name="login_form" id="login_form">
+
+                                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th><input type="checkbox" class="i-checks" id="userListCheck"/></th>
+                                            <th>ID</th>
+                                            <th>快递类型</th>
+                                            <th>下单时间</th>
+                                            <th>单号</th>
+                                            <th>单价</th>
+                                            <th>发货人</th>
+                                            <th>发货地址</th>
+                                            <th>收货人</th>
+                                            <th>收货地址</th>
+                                            <th>发货时间</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for n in nullpackets %}
+                                            <tr class="gradeX">
+                                                <td><input type="checkbox" class="i-checks"></td>
+                                                <td class="userListId">{{ n.id }}</td>
+                                                <td>{{ n.express.type }}</td>
+                                                <td>{{ n.create_time }}</td>
+                                                <td>{{ n.tracking_no or '无'}}</td>
+                                                <td>{{ n.express.price}}</td>
+                                                <td>{{ n.send_user_name }}</td>
+                                                <td>{{ n.send_user_name }}， {{ n.send_user_mobile }}，，{{ n.send_addr_province }} {{ n.send_addr_city }} {{ n.send_addr_county }} {{ n.send_addr_detail }}</td>
+                                                <td>{{ n.recv_user_name }}</td>
+                                                <td>{{ n.recv_user_name }}， {{ n.recv_user_mobile }}，，{{ n.recv_addr_province }} {{ n.recv_addr_city }} {{ n.recv_addr_county }} {{ n.recv_addr_detail }} {{ n.recv_addr_postcode }}</td>
+                                                <td>{{ n.send_time or '无' }}</td>
+                                                <td><a href="/admin/send_packet?id={{ n.id }}">发货</a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    <div class="col-sm-12">
+                                        <div class="dataTables_paginate paging_simple_numbers"
+                                             id="DataTables_Table_0_paginate">
+                                            <ul class="pagination">
+
+                                                {% if pages>1 %}
+                                                {% for p in range(1,pages+1) %}
+                                                <li class="paginate_button {% if page==p %}active{% endif %}"
+                                                    aria-controls="DataTables_Table_0"
+                                                    tabindex="0"><a href="?page={{ p }}">{{ p }}</a></li>
+                                                {% endfor %}
+                                                {% endif %}
+
+                                                
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <input type="button" class="btn btn-w-m btn-primary delete1" value="删除选中"
+                                           data-toggle="modal" data-target="#myModal5" disabled/>
+
+
+                                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span
+                                                            aria-hidden="true">&times;</span><span
+                                                            class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">删除空包</h4>
+                                                    {#                                            <small class="font-bold">删除创意</small>#}
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="delete1Content"></p>
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white deleteUserId"
+                                                            data-dismiss="modal">确定
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                                        取消
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getCookie(name) {
+            var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return r ? r[1] : undefined;
+        }
+        $(function () {
+            var json1 = _alert('.btn.btn-w-m.delete1', '.modal-body .delete1Content', '您要删除的空包ID为');
+
+            $('.deleteUserId').click(function () {
+                $.ajax({
+                    url: '/admin/delete_packet',
+                    type: 'post',
+                    data: json1,
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function () {
+                        //  alert('error');
+                    }
+                });
+            });
+        })
+    </script>
+
+{% endblock %}

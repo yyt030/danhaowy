@@ -35,14 +35,14 @@
                             <td height="37" align="right" valign="middle"><p>支付宝姓名：</p></td>
                             <TD colspan="2"><p>
                                 <INPUT class="bs" size=16 type="text" name="alipayxm"
-                                       value="{{ user.alipay_name |trim }}"
+                                       value="{{ user.alipay_name or ''|trim }}"
                                        {% if done == 1 %}readonly="readonly" {% endif %}>
                             </p></TD>
                         </TR>
                         <TR>
                             <td height="40" align="right" valign="middle">支付宝帐号：</td>
                             <TD colspan="2"><INPUT class="bs" size="16" type="text" name="alipayuser"
-                                                   value="{{ user.alipay_account }}"
+                                                   value="{{ user.alipay_account or '' }}"
                                                    {% if done == 1 %}readonly="readonly" {% endif %}></TD>
 
                         </TR>

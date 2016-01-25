@@ -25,6 +25,7 @@
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                     <li><a href="/admin/site_info">站点设置</a></li>
+                    <li><a href="/admin/qq_kefu">客服设置</a></li>
                 </ul>
             </li>
             <li class="{% if admin_nav==2 %}active{% endif %}">
@@ -73,8 +74,8 @@
                 <a href="#"><i class="fa fa-male"></i> <span class="nav-label">空包管理</span> <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                    <li><a href="/admin/seller_list?type=not_authed">待发货的空包</a></li>
-                    <li><a href="/admin/seller_list?type=authed">已发货的空包</a></li>
+                    <li><a href="/admin/null_packet?status=0">待发货的空包</a></li>
+                    <li><a href="/admin/null_packet?status=1">已发货的空包</a></li>
                 </ul>
             </li>
 
@@ -90,8 +91,9 @@
                 <a href="#"><i class="fa fa-male"></i> <span class="nav-label">提现管理</span> <span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
-                    <li><a href="/admin/pay_log?type=waiting">待处理的提现记录</a></li>
-                    <li><a href="/admin/pay_log?type=ok">已处理的提现记录</a></li>
+                    <li><a href="/admin/get_crash_log?status=0">待处理的提现记录</a></li>
+                    <li><a href="/admin/get_crash_log?status=1">已处理的提现记录</a></li>
+                    <li><a href="/admin/get_crash_log?status=2">已拒绝的提现记录</a></li>
                 </ul>
             </li>
 

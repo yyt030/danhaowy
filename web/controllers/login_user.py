@@ -1114,13 +1114,6 @@ def upseller():
     return render_template('login_user/upseller.html', form=form, user=user)
 
 
-@bp.route('/woyaojihuo', methods=['GET'])
-@require_user
-def woyaojihuo():
-    """激活账号"""
-    return render_template('login_user/woyaojihuo.html')
-
-
 @bp.route('/chgpwd', methods=['GET', 'POST'])
 @require_user
 def chgpwd():

@@ -186,6 +186,9 @@ def news():
     type = request.args.get("type", "news")
     if id:
         info = Notice.query.get_or_404(id)
+        info.visit += 1
+        db.session.add(info)
+        db.session.commit()
     else:
         info = {}
     return render_template('site/news_detail.html', info=info)
@@ -196,7 +199,7 @@ def news():
 def news_list():
     type = request.args.get("type", "news")
     if type:
-        info = Notice.query.filter(Notice.type == type)
+        info = Notice.query.filter(Notice.type == type).order_by(Notice.create_at.desc())
     else:
         info = {}
     return render_template('site/news_list.html', info=info, type=type)

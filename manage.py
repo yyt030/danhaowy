@@ -31,6 +31,7 @@ def run_80():
 def create_admin():
     """Create admin."""
 
+
     user = User(name="admin", role="admin",qq=123456789, email="admin@qq.com", mobile="18812345678", address='localhost')
 
     user.password = "admin"

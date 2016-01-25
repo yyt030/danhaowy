@@ -178,6 +178,7 @@ def reg():
     return render_template('site/reg.html', form=form)
 
 
+@bp.route('/News', methods=['GET', 'POST'])
 @bp.route('/news', methods=['GET', 'POST'])
 @require_visitor
 def news():

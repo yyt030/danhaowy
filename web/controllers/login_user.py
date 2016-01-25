@@ -32,7 +32,6 @@ def index():
 @require_user
 def ornumber():
     """单号领取"""
-
     return render_template('login_user/ornumber.html')
 
 

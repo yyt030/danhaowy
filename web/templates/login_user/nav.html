@@ -1,65 +1,61 @@
 <style>
-        a {
-            text-decoration: none;
-        }
+    a {
+        text-decoration: none;
+    }
 
-        a:link {
-            text-decoration: none;
-        }
+    a:link {
+        text-decoration: none;
+    }
 
-        a:visited {
-            text-decoration: none;
-        }
+    a:visited {
+        text-decoration: none;
+    }
 
-        a:hover {
-            text-decoration: none;
-        }
+    a:hover {
+        text-decoration: none;
+    }
 
-        a:active {
-            text-decoration: none;
-        }
+    a:active {
+        text-decoration: none;
+    }
 
-        a:focus {
-            outline: none;
-            -moz-outline: none;
-        }
+    a:focus {
+        outline: none;
+        -moz-outline: none;
+    }
 
-        .bs {
-            height: 20px;
-            width: 180px;
-            overflow: hidden;
-            border: 1px solid #CBCBCB;
-        }
+    .bs {
+        height: 20px;
+        width: 180px;
+        overflow: hidden;
+        border: 1px solid #CBCBCB;
+    }
 
-        .btnumoff {
-            background: url(/static/images/stkb.gif) repeat-x;
-            color: #fff;
-            border: 0;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
+    .btnumoff {
+        background: url(/static/images/stkb.gif) repeat-x;
+        color: #fff;
+        border: 0;
+        padding: 5px 15px;
+        cursor: pointer;
+    }
 
-        .btnumon {
-            background: url(/static/images/stkb1.gif) repeat-x;
-            color: #fff;
-            border: 0;
-            padding: 5px 15px;
-            cursor: pointer;
-        }
-    </style>
+    .btnumon {
+        background: url(/static/images/stkb1.gif) repeat-x;
+        color: #fff;
+        border: 0;
+        padding: 5px 15px;
+        cursor: pointer;
+    }
+</style>
 <div class="ding">
     <div class="ding_con">
         <div class="ding_l">
             <ol class="ann" id="divPost" style="height:28px;line-height:25px;overflow:hidden;">
-                <li><a href="/News?id=766" title="【公告】无忧积分兑换比例调整。" target="_blank">【公告】无忧积分兑换比例调整。</a><span>2015/12/8 11:10:24</span>
+                <li><a href="/news?id=1" title="【单号教程】单号领取/购买检测操作教程" target="_blank">【单号教程】单号领取/购买检测操作教程</a><span>2015/12/8 11:10:24</span>
                 </li>
-                <li><a href="/News?id=764" title="【公告】关于全一快递淘宝无物流。" target="_blank">【公告】关于全一快递淘宝无物流。</a><span>2015/11/17 22:13:11</span>
+                <li><a href="/news?id=2" title="【激活帐号说明】为什么要激活帐号！" target="_blank">【激活帐号说明】为什么要激活帐号！</a><span>2015/11/17 22:13:11</span>
                 </li>
-                <li><a href="/News?id=763" title="【公告】“龙邦 飞远”接口修复淘宝暂无物流！" target="_blank">【公告】“龙邦
-                    飞远”接口修复淘宝暂无物流！</a><span>2015/11/11 22:34:29</span></li>
-                <li><a href="/News?id=762" title="【公告】发布虚假单号规则及处理方法"
-                       target="_blank">【公告】发布虚假单号规则及处理方法</a><span>2015/9/18 21:58:47</span></li>
-                <li><a href="/News?id=761" title="【公告】帐号充值系统正式更新" target="_blank">【公告】帐号充值系统正式更新</a><span>2015/9/3 17:49:06</span>
+                <li><a href="/news?id=3" title="【公告】无忧积分兑换比例调整" target="_blank">【公告】无忧积分兑换比例调整</a><span>2015/11/17 22:13:11</span>
                 </li>
             </ol>
             <script type="text/javascript">
@@ -78,8 +74,8 @@
 
 
         <div class="ding_r"><a href="javascript:void(0);"
-                               onclick="SetHome(this,'http://www.taodanwy.com/');">设为首页</a> | <a
-                href="javascript:void(0);" onclick="AddFavorite('www.taodanwy.com',location.href)">加入收藏</a></div>
+                               onclick="SetHome(this,'{{ request.url_root }}');">设为首页</a> | <a
+                href="javascript:void(0);" onclick="AddFavorite('{{ request.url_root }}',location.href)">加入收藏</a></div>
     </div>
 </div>
 <div class="pic">

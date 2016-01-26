@@ -16,7 +16,7 @@ class Notice(db.Model):
 
     desc = db.Column(db.Text)
     visit = db.Column(db.Integer, default=0)
-    create_at = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    create_at = db.Column(db.DateTime, index=True, default=datetime.now)
 
     def __repr__(self):
         print '<%r>' % self.__class__.__name__

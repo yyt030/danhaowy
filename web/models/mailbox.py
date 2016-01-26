@@ -22,7 +22,7 @@ class MailBox(db.Model):
     recver = db.relationship('User', primaryjoin='User.id == MailBox.recver_id',
                              backref=db.backref('mailboxs_recver', lazy='dynamic'))
 
-    create_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    create_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     result = db.Column(db.String(10))
     msg_type = db.Column(db.String(10), nullable=False, default='通知')
 
@@ -40,6 +40,6 @@ class ApplySellerRecord(db.Model):
     typ = db.Column(db.Integer,default=500)
     processed = db.Column(db.Float, default=False)
     passed=db.Column(db.Float, default=False)
-    create_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    create_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     def __repr__(self):
         return '<ApplySellerRecord %r>' % self.id

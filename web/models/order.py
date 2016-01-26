@@ -12,7 +12,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     tracking_no = db.Column(db.String(100), unique=True, index=True, nullable=False)
     # 发货时间
-    send_timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    send_timestamp = db.Column(db.DateTime, default=datetime.now)
     # 发收货地址
     send_addr_province = db.Column(db.String(20))
     send_addr_city = db.Column(db.String(20))

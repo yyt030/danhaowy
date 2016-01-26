@@ -17,7 +17,7 @@ class NullPacket(db.Model):
     price = db.Column(db.Float)
 
     # 下单时间
-    create_time = db.Column(db.DateTime, default=datetime.utcnow)
+    create_time = db.Column(db.DateTime, default=datetime.now)
     create_user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     create_user = db.relationship('User', backref=db.backref('nullpackets', lazy='dynamic'))
 

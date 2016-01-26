@@ -170,14 +170,11 @@ def refund():
                 order.seller.fabujifen += 10
 
                 # 购买动作消息发送
-                msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+                msg = MailBox(sender_id=1, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
 
-                if order.is_scan == 0:
-                    msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (
-                        order.tracking_no, float(order.price) * 0.95 / 2.0)
-                else:
-                    msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95)
+                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%f,请注意查收' % (
+                    order.tracking_no, order.real_price * 0.95)
 
                 db.session.add(order)
                 db.session.add(user)
@@ -206,12 +203,11 @@ def refund():
         order.seller.fabujifen += 10
 
         # 购买动作消息发送
-        msg = MailBox(sender_id=user.id, recver_id=order.seller_id)
+        msg = MailBox(sender_id=1, recver_id=order.seller_id)
         msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
-        if order.is_scan == 0:
-            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95 / 2.0)
-        else:
-            msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2u,请注意查收' % (order.tracking_no, float(order.price) * 0.95)
+
+        msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%f,请注意查收' % (
+            order.tracking_no, order.real_price * 0.95)
 
         db.session.add(order)
         db.session.add(user)
@@ -937,7 +933,7 @@ def paywyb():
     user = g.user
     if request.method == 'POST':
         trade_no = request.form.get("MainC_TextBox")
-        pay = request.form.get("pay",type=int)
+        pay = request.form.get("pay", type=int)
         print request.form
         log = Paylog.query.filter(Paylog.alipay_no == trade_no).first()
         if log:

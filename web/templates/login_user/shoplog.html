@@ -167,8 +167,8 @@
                             <td align="center">{{ count}}</td>
                             <td align="center">{{ shoplog.tracking_company_cn }}</td>
                             <td align="center">快递单号：{{ shoplog.tracking_no }} ,已成功售出。</td>
-                            <td align="center">+{{ shoplog.real_price }}</td>
-                            <td align="center">{{ shoplog.seller_left_money }}</td>
+                            <td align="center">+{{ shoplog.real_price |float}}</td>
+                            <td align="center">{{ shoplog.seller_left_money |float}}</td>
                             <td align="center">{{ shoplog.buy_time }}</td>
                         </tr>
                     {% endfor %}

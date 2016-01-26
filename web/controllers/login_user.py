@@ -164,8 +164,8 @@ def refund():
 
                 # wuyoubi
                 user.wuyoubi -= order.real_price
-                order.seller.wuyoubi += order.profit
-                order.seller_left_money = order.seller.wuyoubi
+                order.seller.money += order.profit
+                order.seller_left_money = order.seller.money
 
                 # fabujifen
                 order.seller.fabujifen += 10
@@ -174,7 +174,7 @@ def refund():
                 msg = MailBox(sender_id=user_admin.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
 
-                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%f,请注意查收' % (
+                msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%.2f,请注意查收' % (
                     order.tracking_no, order.real_price * 0.95)
 
                 db.session.add(order)
@@ -197,8 +197,8 @@ def refund():
 
         # wuyoubi
         user.wuyoubi -= order.real_price
-        order.seller.wuyoubi += order.profit
-        order.seller_left_money = order.seller.wuyoubi
+        order.seller.money += order.profit
+        order.seller_left_money = order.seller.money
 
         # fabujifen
         order.seller.fabujifen += 10
@@ -964,7 +964,7 @@ def payskip():
 @bp.route('/jifen', methods=['GET', 'POST'])
 @require_user
 def jifen():
-    """充值无忧币"""
+    """积分兑换"""
     user = g.user
     form = RegisterForm()
     if request.method == 'POST':
@@ -1272,7 +1272,7 @@ def shoplog():
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.buy_time,
                              Order.buy_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
-    pagination = query.order_by(Order.buy_time.desc()).paginate(
+    pagination = query.order_by(Order.buy_time.desc(),Order.seller_left_money.desc()).paginate(
             page, per_page=current_app.config['FLASKY_PER_PAGE'],
             error_out=False)
     shoplogs = pagination.items

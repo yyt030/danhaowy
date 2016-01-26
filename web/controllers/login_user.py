@@ -150,6 +150,7 @@ def refund():
     qi = request.args.get('qi')
     ord = request.args.get('ord')
     ordlx1 = request.args.get('ordlx1')
+    user_admin = User.query.filter(User.name == 'admin').first()
     # 批量购买
     if qi == 'Shopism':
         # 单号购买
@@ -170,7 +171,7 @@ def refund():
                 order.seller.fabujifen += 10
 
                 # 购买动作消息发送
-                msg = MailBox(sender_id=1, recver_id=order.seller_id)
+                msg = MailBox(sender_id=user_admin.id, recver_id=order.seller_id)
                 msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
 
                 msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%f,请注意查收' % (
@@ -203,7 +204,7 @@ def refund():
         order.seller.fabujifen += 10
 
         # 购买动作消息发送
-        msg = MailBox(sender_id=1, recver_id=order.seller_id)
+        msg = MailBox(sender_id=user_admin.id, recver_id=order.seller_id)
         msg.title = u'您发布的单号：%s 已成功售出' % order.tracking_no
 
         msg.body = u'您发布的单号：%s 已成功售出, 佣金增加：%f,请注意查收' % (

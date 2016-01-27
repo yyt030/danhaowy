@@ -1272,7 +1272,7 @@ def shoplog():
         query = query.filter(datetime.strptime(startdate, '%Y-%m-%d') <= Order.buy_time,
                              Order.buy_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
-    pagination = query.order_by(Order.buy_time.desc(),Order.seller_left_money.desc()).paginate(
+    pagination = query.order_by(Order.buy_time.desc(), Order.seller_left_money.desc()).paginate(
             page, per_page=current_app.config['FLASKY_PER_PAGE'],
             error_out=False)
     shoplogs = pagination.items
@@ -1333,9 +1333,10 @@ def msg():
 
     if msg_id and not action:
         msg = MailBox.query.get_or_404(msg_id)
-        msg.result = u'已读'
-        db.session.add(msg)
-        db.session.commit()
+        if msg.title == u'通知':
+            msg.result = u'已读'
+            db.session.add(msg)
+            db.session.commit()
         return render_template('login_user/msg_show.html', msg=msg)
     if action:
         if action == 'del':

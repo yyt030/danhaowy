@@ -88,6 +88,14 @@ class Order(db.Model):
         # 每个单号卖家能获取0.95的钱
         return self.real_price * 0.95
 
+    @property
+    def tracking_no_sub(self):
+        return '%s**' % (str(self.tracking_no)[:2])
+
+    @property
+    def seller_id_sub(self):
+        return '%s**' % (str(self.seller_id)[:2])
+
     def __repr__(self):
         return '<Order %r>' % self.tracking_no
 

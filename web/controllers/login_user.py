@@ -1358,6 +1358,7 @@ def msg():
             msg.result = u'已同意'
             seller = User.query.get_or_404(msg.sender_id)
             seller.is_seller = True
+            seller.role = 'seller'
 
             db.session.add(msg)
             db.session.add(seller)

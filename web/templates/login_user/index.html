@@ -46,7 +46,7 @@
             </tr>
             <tr>
                 <td>&nbsp;</td>
-                <td height="25" valign="center" align="left">当前等级：{{ user.role }}</td>
+                <td height="25" valign="center" align="left">当前等级：<font color="#FF0000">{{ user.role_name }}</font></td>
                 <td height="25" valign="center" align="left">会员激活状态：
                     {% if user.is_active == False %}
                         <font color="#FF0000"

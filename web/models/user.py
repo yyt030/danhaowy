@@ -100,6 +100,11 @@ class User(db.Model):
         else:
             return 0
 
+    @property
+    def role_name(self):
+        roles = {"admin": '管理员', "member": '普通会员', "seller": "超级卖家"}
+        return roles.get(self.role)
+
     def __repr__(self):
         return '<User %r %r>' % (self.name, self.id)
 

@@ -205,7 +205,9 @@ def news():
     id = request.args.get("id", type=int)
     type = request.args.get("type", "news")
     if id:
-        info = Notice.query.get_or_404(id)
+        info = Notice.query.get(id)
+        if not info:
+            return redirect(url_for('.news_list'))
         if info.visit ==None:
             info.visit=1
         else:

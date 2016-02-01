@@ -79,9 +79,9 @@ class Order(db.Model):
     def real_price(self):
         # 非扫描单号价格0.5 ,　扫描价格0.25
         if self.is_scan == 0:
-            return self.price / 2
-        else:
             return self.price
+        else:
+            return self.price / 2
 
     @property
     def profit(self):

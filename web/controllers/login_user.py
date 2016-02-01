@@ -743,6 +743,7 @@ def upload_file():
             return rsp_post % ('\\n'.join(orderlist), form.csrf_token)
 
         else:
+            # 批量发布单号
             sheet.delete_named_row_at(0)
             for record in sheet:
                 tracking_no, send_addr_province, send_addr_city, send_addr_county, \
@@ -755,6 +756,9 @@ def upload_file():
                         send_timestamp=send_timestamp, tracking_company=tracking_company,
                         is_scan=is_scan, seller_id=user.id
                 )
+
+                user.fabujifen += 10
+                db.session.add(user)
                 db.session.add(order)
                 row_num += 1
         try:

@@ -40,7 +40,7 @@ def index():
 @require_user
 def ornumber():
     """单号领取"""
-    return render_template('login_user/ornumber.html')
+    return render_template('login_user/ornumber.html', current_date=datetime.now().date())
 
 
 @bp.route('/Qiso', methods=['GET', 'POST'])
@@ -497,7 +497,7 @@ def shopnumber():
     orders = pagination.items
 
     return render_template('login_user/shopnumber.html', orders=enumerate(orders, start=1), page=page,
-                           page_all=page_all)
+                           page_all=page_all, current_date=datetime.now().date())
 
 
 @bp.route('/ShopQiso', methods=['GET', 'POST'])

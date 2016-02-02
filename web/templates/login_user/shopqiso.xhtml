@@ -13,5 +13,7 @@
                saomiaotxt="0" cc="ZTO"><![CDATA[ {{ order.tracking_company_cn }} ]]></title>
         <fh><![CDATA[{{ order.send_addr_province }} {{ order.send_addr_city }} {{ order.send_addr_county }}]]></fh>
         <sh><![CDATA[{{ order.recv_addr_province }} {{ order.recv_addr_city }} {{ order.recv_addr_county }}]]></sh>
+    {% else %}
+        <title>没有</title>
     {% endfor %}
 </data>

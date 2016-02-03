@@ -115,8 +115,11 @@ def qiso():
             query = query.filter(Order.recv_addr_county == recv_addr_county)
     if kd and kd != '0':
         query = query.filter(Order.tracking_company == kd)
-    if sm and kd != '0':
-        query = query.filter(Order.is_scan == sm)
+    if sm and sm != '0':
+        if sm == '1':  # 扫描
+            query = query.filter(Order.is_scan == True)
+        if sm == '2':  # 非扫描
+            query = query.filter(Order.is_scan == False)
 
     if not user.is_active:
         all_num = 10
@@ -233,23 +236,46 @@ def qikd():
     qid = request.form.get('qid')
     q = request.form.get('q')
     order = Order.query.get_or_404(qid)
-    import requests, json
+    import requests, json, random
     url = 'http://www.kuaidi100.com/query'
-    params = {'type': com, 'postid': order.tracking_no}
+    params = {'type': '%s' % (com), 'postid': '%s' % (order.tracking_no), 'id': '1', 'valicode': '',
+              'temp': '%s' % (random.random())}
+    headers = {'User-Agent': "Mozilla/5.0 (X11; Linux x86_64; rv:44.0) Gecko/20100101 Firefox/44.0",
+               'X-Requested-With': "XMLHttpRequest", 'Host': "www.kuaidi100.com",
+               'Referer': "http://www.kuaidi100.com/", 'Accept-Encoding': "gzip, deflate",
+               'Connection': "keep-alive", 'Accept': "*/*",
+               'Cache-Control': "no-cache", 'Pragma': "no-cache"}
     try:
-        req = requests.get(url, params=params, timeout=3)
-
+        req = requests.get(url, params=params, headers=headers)
     except:
-        return '查询失败:status[%s], messages[%s]' % (req.content.get('status'),
-                                                  req.content.get('message'))
+        print '>>>1', req.content.get('status').encode('utf8'), req.content.get('message').encode('utf8')
+        return '查询失败,服务器忙，请稍后再试'
     else:
         rsp = json.loads(req.content)
         if rsp.get('status') == '200':
-            return '%s,%s' % (rsp.get('data')[0].get('time'),
-                              rsp.get('data')[0].get('context'))
+            rsp_data = rsp.get('data', '')
+            if rsp_data:
+                scan_time = rsp_data[-1].get('time')
+                if scan_time:
+                    # 该单号已扫描,请仔细比对时间
+                    saomiaotxt = '%s 已收取快件' % (order.tracking_company_cn)
+                    order.scan_time = scan_time
+                    order.is_scan = True
+                    db.session.add(order)
+                    db.session.commit()
+                return '%s, %s' % (scan_time, saomiaotxt)
+
+            else:
+                if order.create_time + timedelta(hours=32) > datetime.now():
+                    # 该单号未在规定的32小时内扫描,请您谨慎领取。 str == 2
+                    return '2'
+                else:
+                    # 该单号安全暂未扫描,请放心使用。 str == 0
+                    return '0'
         else:
-            return '查询失败:status[%s], messages[%s]' % (rsp.get('status'),
-                                                      rsp.get('message'))
+            print '>>>2', params, rsp.get('status').encode('utf8'), rsp.get('message').encode('utf8')
+            print req.url
+            return '查询失败,服务器忙，请稍后再试'
 
 
 @bp.route('/GetNumber', methods=['GET', 'POST'])
@@ -562,8 +588,11 @@ def shopqiso():
             query = query.filter(Order.recv_addr_county == recv_addr_county)
     if kd and kd != '0':
         query = query.filter(Order.tracking_company == kd)
-    if sm and kd != '0':
-        query = query.filter(Order.is_scan == sm)
+    if sm and sm != '0':
+        if sm == '1':  # 扫描
+            query = query.filter(Order.is_scan == True)
+        if sm == '2':  # 非扫描
+            query = query.filter(Order.is_scan == False)
 
     page = request.args.get('p', 1, type=int)
     if page == 0:

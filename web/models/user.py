@@ -102,7 +102,7 @@ class User(db.Model):
 
     @property
     def role_name(self):
-        roles = {"admin": '管理员', "member": '普通会员', "seller": "超级卖家"}
+        roles = {"admin": u'管理员', "member": u'普通会员', "seller": u"普通卖家", "super_seller": u"超级卖家"}
         return roles.get(self.role)
 
     def __repr__(self):

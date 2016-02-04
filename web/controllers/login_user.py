@@ -1391,7 +1391,16 @@ def msg():
             msg.result = u'已同意'
             seller = User.query.get_or_404(msg.sender_id)
             seller.is_seller = True
-            seller.role = 'seller'
+            try:
+                num_list = re.findall(r'\w+', msg.body)
+                num = int(num_list[0])
+            except ValueError:
+                num = 0
+
+            if num > 500:
+                seller.role = 'super_seller'
+            else:
+                seller.role = 'seller'
 
             db.session.add(msg)
             db.session.add(seller)

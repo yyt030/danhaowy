@@ -691,8 +691,9 @@ def seller():
                 order.recv_addr_county = record[3]
                 order_list.append(order)
                 success_count += 1
-                # 卖家发布单号 增加10fabu积分
-                user.fabujifen += success_count * 10
+
+            # 卖家发布单号 增加10fabu积分
+            user.fabujifen += success_count * 10
 
             db.session.add_all(order_list)
             db.session.add(user)

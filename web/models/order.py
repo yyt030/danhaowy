@@ -97,6 +97,10 @@ class Order(db.Model):
     def seller_id_sub(self):
         return '%s**' % (str(self.seller_id)[:2])
 
+    @property
+    def seller_name_sub(self):
+        return '%s**' % (str(self.seller.name)[:2])
+
     def __repr__(self):
         return '<Order %r>' % self.tracking_no
 

@@ -251,7 +251,12 @@ function shopshowre(p, x) {
 
 function shopshowhtml() {
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-        var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
+        var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0]
+        if(Nums!=null) {
+            Nums=Nums.getAttribute('Nums')}
+        else{
+            Nums=0;
+        }
         xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
         xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
         xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")

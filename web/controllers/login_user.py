@@ -533,14 +533,19 @@ def shopqiso():
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')
+    print "sja,",sja
     # 发货地址
     sa = request.args.get('sa', '')
+    print "sa,",sa
     # 收货地址
     sb = request.args.get('sb', '')
+    print "sa,",sb
     # 快递类型
     kd = request.args.get('kd', '')
+    print "kd,",kd
     # 是否扫描
     sm = request.args.get('sm', '')
+    print "sm,",sm
 
     admin = User.query.filter(User.name == 'admin').first()
     # admin发布的，不在查询结果集中

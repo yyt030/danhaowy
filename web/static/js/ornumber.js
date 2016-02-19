@@ -108,7 +108,7 @@ function showhtml() {
                 gethtml("jhs", "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'>您好，您当前帐号没有激活,查询只显示10条单号。帐号激活后,查询显示所有单号。<a href='wybjihuo'><img src='/static/images/jihuo.gif'  border='0' align='top' title='点击此按钮激活帐号' /></a></div>");
             }
             if (title == "没有") {
-                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='/static/images/error_01.png'/>未查找到,请扩大查找范围1! <br /><br />未查找到? 建议您尝试发空包！<a href='buykongbao' target='_blank' class='btn'>我要发空包</a></div>";
+                imglist = "<div style='color:red;text-align:center;margin-top: 10px;margin-bottom: 15px;'><img src='/static/images/error_01.png'/>未查找到,请扩大查找范围! <br /><br />未查找到? 建议您尝试发空包！<a href='buykongbao' target='_blank' class='btn'>我要发空包</a></div>";
                 gethtml("imglist");
             } else if (title == "timererror") {
                 imglist = "<div style='color:red;text-align:center;'><img src='/static/face/018.gif'/>压力山大，由于您查询过于频繁,请歇歇,预计3秒内可再次查询！</div>";
@@ -252,7 +252,8 @@ function shopshowre(p, x) {
 function shopshowhtml() {
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
         var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
-        xmltitle = xmlHttp.responseXML.getElementsByTagName("title")
+        xmltitle = xmlHttp.responseXML.getElementsByTagName("title");
+        alert (xmltitle[0].firstChild.data);
         xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
         xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
         var imglist = "<TABLE class='table table-bordered table-condensed table-striped'style='font-size: 12px;'><THEAD><TR><TH align='center'style='text-align:center;'width='7%'>序号</TH><TH align='center'style='text-align:center;'width='12%'>快递单号</TH><TH align='center'style='text-align:center;'width='9%'>快递类型</TH><TH align='center'style='text-align:center;'width='29%'>发货地址/收货地址</TH><TH align='center'style='text-align:center;'width='8%'>单价</TH><TH align='center'style='text-align:center;'width='17%'>扫描时间</TH><TH align='center'style='text-align:center;'width='7%'>发布方</TH><TH align='center'style='text-align:center;'width='12%'>全选/反选<input type='checkbox'id='chkAll'value='checkbox'style='border:0'onClick='shopcheckAll()'><input id='qindex'type='hidden'value='0'/></TH></TR></THEAD><TBODY>";

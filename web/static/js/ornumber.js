@@ -253,7 +253,7 @@ function shopshowhtml() {
     if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
         var Nums = xmlHttp.responseXML.getElementsByTagName("data")[0].getAttribute('Nums');
         xmltitle = xmlHttp.responseXML.getElementsByTagName("title");
-        alert (xmltitle[0].firstChild.data);
+        console.log(xmltitle[0].firstChild.data);
         xmlfh = xmlHttp.responseXML.getElementsByTagName("fh")
         xmlsh = xmlHttp.responseXML.getElementsByTagName("sh")
         var imglist = "<TABLE class='table table-bordered table-condensed table-striped'style='font-size: 12px;'><THEAD><TR><TH align='center'style='text-align:center;'width='7%'>序号</TH><TH align='center'style='text-align:center;'width='12%'>快递单号</TH><TH align='center'style='text-align:center;'width='9%'>快递类型</TH><TH align='center'style='text-align:center;'width='29%'>发货地址/收货地址</TH><TH align='center'style='text-align:center;'width='8%'>单价</TH><TH align='center'style='text-align:center;'width='17%'>扫描时间</TH><TH align='center'style='text-align:center;'width='7%'>发布方</TH><TH align='center'style='text-align:center;'width='12%'>全选/反选<input type='checkbox'id='chkAll'value='checkbox'style='border:0'onClick='shopcheckAll()'><input id='qindex'type='hidden'value='0'/></TH></TR></THEAD><TBODY>";

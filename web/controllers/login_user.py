@@ -69,11 +69,11 @@ def qiso():
     from sqlalchemy import func
     query = query.filter(~
                          Order.id.in_(
-                                 db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
+                             db.session.query(OrderList.order_id).filter(OrderList.user_id == user.id)))
     # 限定单号最多领取10次
     query = query.filter(~
                          Order.id.in_(db.session.query(OrderList.order_id).group_by(OrderList.order_id).having(
-                                 func.count(OrderList.order_id) >= 10)))
+                             func.count(OrderList.order_id) >= 10)))
 
     if sja:
         query = query.filter(Order.create_time >= datetime.strptime(sja, '%Y-%m-%d'))
@@ -132,8 +132,8 @@ def qiso():
         all_num = query.count()
         page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
         pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-                page, per_page=current_app.config['FLASKY_PER_PAGE'] or 40,
-                error_out=False)
+            page, per_page=current_app.config['FLASKY_PER_PAGE'] or 40,
+            error_out=False)
         orders = pagination.items
 
     sitemap_xml = render_template('login_user/qiso.xhtml', orders=enumerate(orders, start=1),
@@ -402,13 +402,13 @@ def file():
                 recv_addr_province, recv_addr_city, recv_addr_county, recv_addr_detail = recv_addr.split(' ')
 
                 null_packet = NullPacket(
-                        send_user_name=sendaddr.send_user_name, send_user_mobile=sendaddr.send_user_mobile,
-                        send_addr_province=sendaddr.send_addr_province, send_addr_city=sendaddr.send_addr_city,
-                        send_addr_county=sendaddr.send_addr_county, send_addr_detail=sendaddr.send_addr_detail,
-                        express_id=express.id, create_user_id=user.id, recv_user_name=recv_user_name,
-                        recv_user_mobile=recv_user_mobile, recv_addr_province=recv_addr_province,
-                        recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county,
-                        recv_addr_detail=recv_addr_detail, recv_addr_postcode=recv_addr_postcode
+                    send_user_name=sendaddr.send_user_name, send_user_mobile=sendaddr.send_user_mobile,
+                    send_addr_province=sendaddr.send_addr_province, send_addr_city=sendaddr.send_addr_city,
+                    send_addr_county=sendaddr.send_addr_county, send_addr_detail=sendaddr.send_addr_detail,
+                    express_id=express.id, create_user_id=user.id, recv_user_name=recv_user_name,
+                    recv_user_mobile=recv_user_mobile, recv_addr_province=recv_addr_province,
+                    recv_addr_city=recv_addr_city, recv_addr_county=recv_addr_county,
+                    recv_addr_detail=recv_addr_detail, recv_addr_postcode=recv_addr_postcode
 
                 )
                 db.session.add(null_packet)
@@ -473,8 +473,8 @@ def looknumber():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(OrderList.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     orderlists = pagination.items
 
     return render_template('login_user/looknumber.html', orderlists=enumerate(orderlists, start=1),
@@ -518,8 +518,8 @@ def shopnumber():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     orders = pagination.items
 
     return render_template('login_user/shopnumber.html', orders=enumerate(orders, start=1), page=page,
@@ -533,19 +533,19 @@ def shopqiso():
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')
-    print "sja,",sja
+    print "sja,", sja
     # 发货地址
     sa = request.args.get('sa', '')
-    print "sa,",sa
+    print "sa,", sa
     # 收货地址
     sb = request.args.get('sb', '')
-    print "sa,",sb
+    print "sb,", sb
     # 快递类型
     kd = request.args.get('kd', '')
-    print "kd,",kd
+    print "kd,", kd
     # 是否扫描
     sm = request.args.get('sm', '')
-    print "sm,",sm
+    print "sm,", sm
 
     admin = User.query.filter(User.name == 'admin').first()
     # admin发布的，不在查询结果集中
@@ -605,8 +605,8 @@ def shopqiso():
     all_num = query.count()
     page_all = all_num / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     orders = pagination.items
 
     sitemap_xml = render_template('login_user/shopqiso.xhtml', orders=enumerate(orders, start=1),
@@ -634,8 +634,8 @@ def lookshopnumber():
         query = query.filter(datetime.strptime(endtime, '%Y-%m-%d') + timedelta(days=1) >= Order.buy_time)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     ordershoplists = pagination.items
 
     return render_template('login_user/lookshopnumber.html', ordershoplists=enumerate(ordershoplists, start=1),
@@ -768,9 +768,9 @@ def upload_file():
                     recv_user_name, recv_user_mobile, recv_zipcode = record[12], record[16], \
                                                                      re.split(r'[)(]', record[13])[1]
                     orderlist.append(u'，'.join(
-                            [recv_user_name, recv_user_mobile, '',
-                             ' '.join(recv_addr[:4]), recv_zipcode
-                             ]
+                        [recv_user_name, recv_user_mobile, '',
+                         ' '.join(recv_addr[:4]), recv_zipcode
+                         ]
                     ))
                 except Exception as e:
                     print e.args, e.message
@@ -784,12 +784,12 @@ def upload_file():
                 tracking_no, send_addr_province, send_addr_city, send_addr_county, \
                 recv_addr_province, recv_addr_city, recv_addr_county = record[:7]
                 order = Order(
-                        tracking_no=str(tracking_no), send_addr_province=send_addr_province,
-                        send_addr_city=send_addr_city, send_addr_county=send_addr_county,
-                        recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
-                        recv_addr_county=recv_addr_county,
-                        send_timestamp=send_timestamp, tracking_company=tracking_company,
-                        is_scan=is_scan, seller_id=user.id
+                    tracking_no=str(tracking_no), send_addr_province=send_addr_province,
+                    send_addr_city=send_addr_city, send_addr_county=send_addr_county,
+                    recv_addr_province=recv_addr_province, recv_addr_city=recv_addr_city,
+                    recv_addr_county=recv_addr_county,
+                    send_timestamp=send_timestamp, tracking_company=tracking_company,
+                    is_scan=is_scan, seller_id=user.id
                 )
 
                 user.fabujifen += 10
@@ -874,8 +874,8 @@ def sendaddress():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(SendAddr.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     sendaddrs = pagination.items
 
     return render_template('login_user/sendaddress.html', sendaddrs=sendaddrs,
@@ -905,8 +905,8 @@ def waitforsend():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(NullPacket.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     nullpackets = pagination.items
 
     return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
@@ -948,8 +948,8 @@ def kbsent():
     page = request.form.get('page', 1, type=int)
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(NullPacket.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     nullpackets = pagination.items
 
     return render_template('login_user/nullpacket_list.html', nullpackets=nullpackets,
@@ -1041,8 +1041,8 @@ def txlog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Txlog.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     txlogs = pagination.items
 
     return render_template('login_user/txlog.html', txlogs=txlogs, page=page, page_all=page_all)
@@ -1088,8 +1088,8 @@ def paylog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Paylog.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     paylogs = pagination.items
 
     return render_template('login_user/paylog.html', paylogs=paylogs, page=page, page_all=page_all)
@@ -1117,8 +1117,8 @@ def fundslog():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Fundslog.create_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     fundslogs = pagination.items
 
     return render_template('login_user/fundslog.html', fundslogs=enumerate(fundslogs, start=1), page=page,
@@ -1260,8 +1260,8 @@ def sellerlist():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.send_timestamp.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     orders = pagination.items
 
     return render_template('login_user/sellerlist.html', orders=enumerate(orders, start=1), page=page,
@@ -1287,8 +1287,8 @@ def sellerout():
 
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     orders = pagination.items
 
     return render_template('login_user/sellerout.html', orders=enumerate(orders, start=1), page=page, page_all=page_all)
@@ -1312,8 +1312,8 @@ def shoplog():
                              Order.buy_time <= datetime.strptime(enddate, '%Y-%m-%d') + timedelta(days=1))
     page_all = query.count() / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(Order.buy_time.desc(), Order.seller_left_money.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     shoplogs = pagination.items
 
     return render_template('login_user/shoplog.html', shoplogs=enumerate(shoplogs, start=1), page=page,
@@ -1425,8 +1425,8 @@ def msg():
     count_all = query.count()
     page_all = count_all / current_app.config['FLASKY_PER_PAGE'] + 1
     pagination = query.order_by(MailBox.create_at.desc()).paginate(
-            page, per_page=current_app.config['FLASKY_PER_PAGE'],
-            error_out=False)
+        page, per_page=current_app.config['FLASKY_PER_PAGE'],
+        error_out=False)
     msgs = pagination.items
 
     return render_template('login_user/msg.html', form=form, msgs=msgs, page=page, page_all=page_all,

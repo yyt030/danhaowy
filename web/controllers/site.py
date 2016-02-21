@@ -15,6 +15,7 @@ from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Notice, Paylog, Order
 from ..utils.permissions import require_visitor, require_admin
 import pprint
+
 bp = Blueprint('site', __name__)
 
 
@@ -292,6 +293,7 @@ def test():
                 if query_log.money >= 10:
                     g.user.wuyoujifen += query_log.money
                 db.session.add(query_log)
+                db.session.add(g.user)
                 db.session.commit()
     print sig
     print md5_str

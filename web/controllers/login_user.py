@@ -533,7 +533,6 @@ def shopqiso():
     user = g.user
     # 录单时间
     sja = request.args.get('sja', '')
-    print "sja,", sja
     # 发货地址
     sa = request.args.get('sa', '')
     sa = sa.replace('%u', '\\u').decode('unicode-escape')

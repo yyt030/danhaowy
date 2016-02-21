@@ -284,7 +284,7 @@ def test():
     # md5 校验
     if sig == md5_str:
         print "check ok"
-        query_log = Paylog.query.filter(Paylog.alipay_no == tradeNo, status == "待确认").first()
+        query_log = Paylog.query.filter(Paylog.alipay_no == tradeNo, Paylog.status == "待确认").first()
         if query_log:
             print "exist query_log"
             if status == "交易成功":

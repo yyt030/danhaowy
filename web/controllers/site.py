@@ -264,10 +264,10 @@ def upload_image():
 
 
 @csrf.exempt
-@bp.route('/test', methods=['GET', 'POST'])
+@bp.route('/alipay_notify', methods=['GET', 'POST'])
 def test():
     args = dict(request.form)
-    key = "123456"
+    key = "ga25hvka2g"
     sig = request.form['sig']  # 签名
     tradeNo = request.form['tradeNo']  # 交易号
     desc = request.form['desc']  # 交易名称（付款说明）

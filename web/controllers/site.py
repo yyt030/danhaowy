@@ -288,14 +288,18 @@ def test():
         if query_log:
             print "exist query_log"
             if status == "交易成功":
-                query_log.status = "已支付"
-                query_log.action = desc
-                g.user.wuyoubi += query_log.money
-                if query_log.money >= 10:
-                    g.user.wuyoujifen += query_log.money
-                db.session.add(query_log)
-                db.session.add(g.user)
-                db.session.commit()
+                try:
+                    query_log.status = "已支付"
+                    query_log.action = desc
+                    g.user.wuyoubi += query_log.money
+                    if query_log.money >= 10:
+                        g.user.wuyoujifen += query_log.money
+                    db.session.add(query_log)
+                    db.session.add(g.user)
+                    db.session.commit()
+                except Exception,e:
+                    print e
+
     # print sig
     # print md5_str
 

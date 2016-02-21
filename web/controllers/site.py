@@ -14,7 +14,7 @@ from web.utils.uploadsets import process_question, images
 from ..forms import SigninForm, RegisterForm
 from ..models import db, User, Notice, Paylog, Order
 from ..utils.permissions import require_visitor, require_admin
-
+import pprint
 bp = Blueprint('site', __name__)
 
 
@@ -183,6 +183,7 @@ def reg():
         return render_template('tip.html', tip="注册成功，请返回首页登录:%s" % user.name, error=False, url="/")
     return render_template('site/reg.html', form=form)
 
+
 @bp.route('/news_list', methods=['GET', 'POST'])
 @require_visitor
 def news_list():
@@ -195,7 +196,7 @@ def news_list():
 
     else:
         info = {}
-    return render_template('site/news_list.html', type=type,info=info)
+    return render_template('site/news_list.html', type=type, info=info)
 
 
 @bp.route('/News', methods=['GET', 'POST'])
@@ -208,16 +209,15 @@ def news():
         info = Notice.query.get(id)
         if not info:
             return redirect(url_for('.news_list'))
-        if info.visit ==None:
-            info.visit=1
+        if info.visit == None:
+            info.visit = 1
         else:
-            info.visit+=1
+            info.visit += 1
         db.session.add(info)
         db.session.commit()
     else:
         info = {}
     return render_template('site/news_detail.html', info=info)
-
 
 
 @bp.route('/signout', methods=['GET', 'POST'])
@@ -288,10 +288,13 @@ def test():
             if status == "交易成功":
                 query_log.status = "已支付"
                 query_log.action = desc
+                g.user.wuyoubi += query_log.money
+                if query_log.money >= 10:
+                    g.user.wuyoujifen += query_log.money
                 db.session.add(query_log)
                 db.session.commit()
     print sig
     print md5_str
-    import pprint
+
     pprint.pprint(args)
     return json.dumps({"status": 'ok'})

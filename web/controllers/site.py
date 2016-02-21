@@ -277,15 +277,16 @@ def test():
     userid = request.form['userid']  # 客户id
     amount = request.form['amount']  # 交易额
     status = request.form['status']  # 交易状态
-    print "status,", status
+    print "trade_no,",tradeNo
     tmp_list = [tradeNo, desc, time, username, userid, amount, status, key]
     tmp_str = '|'.join(tmp_list)
     md5_str = (hashlib.md5(tmp_str.encode('utf-8')).hexdigest()).upper()
     # md5 校验
     if sig == md5_str:
-        print "ok"
+        print "check ok"
         query_log = Paylog.query.filter(Paylog.alipay_no == tradeNo, status == "待确认").first()
         if query_log:
+            print "exist query_log"
             if status == "交易成功":
                 query_log.status = "已支付"
                 query_log.action = desc
@@ -295,8 +296,8 @@ def test():
                 db.session.add(query_log)
                 db.session.add(g.user)
                 db.session.commit()
-    print sig
-    print md5_str
+    # print sig
+    # print md5_str
 
     pprint.pprint(args)
     return json.dumps({"status": 'ok'})

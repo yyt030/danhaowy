@@ -535,8 +535,10 @@ def shopqiso():
     sja = request.args.get('sja', '')
     # 发货地址
     sa = request.args.get('sa', '')
+    sa = sa.replace('%u', '\\u').decode('unicode-escape')
     # 收货地址
     sb = request.args.get('sb', '')
+    sb = sb.replace('%u', '\\u').decode('unicode-escape')
     # 快递类型
     kd = request.args.get('kd', '')
     # 是否扫描

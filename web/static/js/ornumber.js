@@ -242,7 +242,7 @@ function shopshowre(p, x) {
     writeCookie("seller", seller, "30");
     writeCookie("p", p, "30");
     gethtml("imglist", "<div style='color:red;text-align:center;'><img src='/static/images/wait.gif'/>正在查询中。。。</div>");
-    var url = "ShopQiso?sja=" + sja + "&sa=" + sa + "&sb=" + sb + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
+    var url = "ShopQiso?sja=" + sja + "&sa=" + escape(sa) + "&sb=" + escape(sb) + "&kd=" + com + "&sm=" + sm + "&p=" + p + "&seller=" + seller + "&token=" + token + "&radios=" + radios + "&code=" + code;
     var lx = shopshowhtml;
     xmlHttp = GetXmlHttpObject(lx)
     xmlHttp.open("GET", url, true)

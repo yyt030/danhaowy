@@ -286,16 +286,17 @@ def test():
         print "check ok"
         query_log = Paylog.query.filter(Paylog.alipay_no == tradeNo, Paylog.status == "待确认").first()
         if query_log:
+            user=User.query.get(query_log.user_id)
             print "exist query_log"
             if status == "交易成功":
                 try:
                     query_log.status = "已支付"
                     query_log.action = desc
-                    g.user.wuyoubi += query_log.money
+                    user.wuyoubi += query_log.money
                     if query_log.money >= 10:
-                        g.user.wuyoujifen += query_log.money
+                        user.wuyoujifen += query_log.money
                     db.session.add(query_log)
-                    db.session.add(g.user)
+                    db.session.add(user)
                     db.session.commit()
                 except Exception,e:
                     print e
